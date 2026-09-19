@@ -4,7 +4,7 @@
 
 import { saveSettingsDebounced } from '../../../../script.js';
 import { THEMES, LIMITS, STAT_COLORS, normalizeTheme } from './config.js';
-import { getSettings, getChat, getContextSafe, setOverride, clearOverride, getActiveOverride } from './state.js';
+import { getSettings, getChat, setOverride, clearOverride, getActiveOverride } from './state.js';
 import { collectHistory, lastBoardIndex, dataOf } from './history.js';
 import { escapeHtml } from './render.js';
 import { updatePromptInjection } from './prompts.js';
@@ -30,7 +30,6 @@ export function syncUI() {
     $('#hst-enabled').prop('checked', !!s.isEnabled);
     $('#hst-notify').prop('checked', !!s.showNotifications);
     $('#hst-threshold').val(s.notifyThreshold);
-    $('#hst-display').val(s.displayMode);
     $('#hst-theme').val(normalizeTheme(s.theme));
     $('#hst-collapse').prop('checked', !!s.collapseOlder);
     $('#hst-arousal').prop('checked', s.showArousal !== false);
@@ -184,13 +183,6 @@ export function setupUI() {
             </div>
             <hr>
             <div class="hst-row">
-                <label for="hst-display">Display</label>
-                <select id="hst-display" class="text_pole">
-                    <option value="card">Status card</option>
-                    <option value="raw">Raw text (no card)</option>
-                </select>
-            </div>
-            <div class="hst-row">
                 <label for="hst-theme">Theme</label>
                 <select id="hst-theme" class="text_pole">${themeOptions}</select>
             </div>
@@ -236,18 +228,6 @@ export function setupUI() {
             getSettings().notifyThreshold = Number.isFinite(v) ? Math.min(100, Math.max(1, v)) : 15;
             this.value = getSettings().notifyThreshold;
             save();
-        });
-        $('#hst-display').on('change', async function () {
-            const s = getSettings();
-            const wasCard = s.displayMode === 'card';
-            s.displayMode = this.value === 'raw' ? 'raw' : 'card';
-            save();
-            if (s.displayMode === 'raw' && wasCard) {
-                // The raw text was replaced in the DOM, so the chat has to be redrawn to bring it back.
-                try { await getContextSafe()?.reloadCurrentChat?.(); } catch (e) { /* ignore */ }
-            } else {
-                renderAll();
-            }
         });
         $('#hst-theme').on('change', function () { setTheme(this.value); });
         $('#hst-collapse').on('change', function () { getSettings().collapseOlder = this.checked; save(); renderAll(); });
