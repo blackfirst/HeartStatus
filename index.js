@@ -10,7 +10,7 @@ import { updatePromptInjection } from './prompts.js';
 import { setupUI, syncUI } from './ui.js';
 import {
     renderMessage, renderAll, scheduleRenderAll, checkNotify, resetNotified,
-    filterContext, setMutationDiscarder,
+    filterContext, setMutationDiscarder, captureAll,
 } from './message-handler.js';
 import { setThemeEverywhere } from './dom.js';
 
@@ -38,6 +38,7 @@ function afterChatChange() {
     resetNotified();
     syncUI();
     updatePromptInjection();
+    captureAll();
     // Messages are drawn a moment after the event; try twice for slow/large chats.
     setTimeout(renderAll, 400);
     setTimeout(renderAll, 1500);
@@ -65,6 +66,9 @@ jQuery(async () => {
         if (event_types.GENERATION_ENDED) {
             eventSource.on(event_types.GENERATION_ENDED, () => {
                 updatePromptInjection();
+                // The reply is finalized now, so it's safe to pull its board into
+                // msg.extra and erase it from the saved text.
+                captureAll().then(() => scheduleRenderAll(300));
                 scheduleRenderAll(300);
             });
         }
@@ -72,6 +76,7 @@ jQuery(async () => {
             if (event_types[name]) {
                 eventSource.on(event_types[name], () => {
                     updatePromptInjection();
+                    captureAll().then(() => scheduleRenderAll(300));
                     scheduleRenderAll(300);
                 });
             }
@@ -104,6 +109,7 @@ jQuery(async () => {
 
         // Apply the saved theme to any card already on screen.
         setThemeEverywhere(extension_settings[extensionName].theme);
+        captureAll().then(() => setTimeout(renderAll, 800));
         setTimeout(renderAll, 800);
     } catch (error) {
         reportError('[Heart Status] FATAL ERROR:', error);

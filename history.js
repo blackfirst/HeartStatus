@@ -2,16 +2,21 @@
 // HISTORY — board data derived from the chat itself
 // ═══════════════════════════════════════════
 //
-// Nothing is stored per message: every board is re-read from the message text,
-// so swipes, edits and deleted messages can never leave stale data behind.
+// The board is captured once (message-handler.js) into msg.extra.heartStatus and
+// wiped out of msg.mes, so it's read from there first. Older messages that still
+// have the raw tag in their text (saved before this existed, or not yet captured
+// this session) fall back to parsing it live.
 
 import { parseInfoBoard, derivePct } from './parser.js';
 
 const cache = new WeakMap();
 
-// Parsed board of a bot message (cached until its text changes), or null.
+// Parsed board of a bot message, or null. Prefers the captured copy in
+// msg.extra so nothing has to remain in the visible/saved message text.
 export function dataOf(msg) {
-    if (!msg || msg.is_user || typeof msg.mes !== 'string') return null;
+    if (!msg || msg.is_user) return null;
+    if (msg.extra && msg.extra.heartStatus) return msg.extra.heartStatus;
+    if (typeof msg.mes !== 'string') return null;
     const hit = cache.get(msg);
     if (hit && hit.mes === msg.mes) return hit.data;
     const data = parseInfoBoard(msg.mes);

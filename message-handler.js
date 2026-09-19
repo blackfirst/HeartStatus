@@ -5,7 +5,7 @@
 import { reportError } from './diagnostics.js';
 import { getSettings, getChat, getContextSafe } from './state.js';
 import { dataOf, lastBoardIndex, previousData, computeDeltas } from './history.js';
-import { hashData, hasBoardTag, stripInfoBoards } from './parser.js';
+import { hashData, hasBoardTag, stripInfoBoards, parseInfoBoard } from './parser.js';
 import { buildCardHtml } from './render.js';
 import { mountCard, removeCards, hasLegacyCard } from './dom.js';
 import { updatePromptInjection } from './prompts.js';
@@ -164,16 +164,55 @@ export function filterContext(chat) {
 
 // ─── Maintenance ───
 
+// Reads the board out of a message's raw text into msg.extra.heartStatus, then
+// erases it from the visible/saved text (and the active swipe) so it never sits
+// in the message itself — not in the chat log, not while editing, not in swipes.
+// Only call this once a message is finalized (never mid-stream: it mutates
+// msg.mes, which an in-progress generation is still appending to).
+async function captureOne(msg) {
+    if (!msg || msg.is_user || typeof msg.mes !== 'string' || !hasBoardTag(msg.mes)) return false;
+    const data = parseInfoBoard(msg.mes);
+    if (!data) return false;
+    const clean = stripInfoBoards(msg.mes);
+    msg.extra = msg.extra || {};
+    msg.extra.heartStatus = data;
+    msg.mes = clean;
+    if (Array.isArray(msg.swipes) && typeof msg.swipe_id === 'number' && typeof msg.swipes[msg.swipe_id] === 'string') {
+        msg.swipes[msg.swipe_id] = stripInfoBoards(msg.swipes[msg.swipe_id]);
+    }
+    return true;
+}
+
+// Sweeps the whole chat (cheap: hasBoardTag skips anything already captured).
+export async function captureAll() {
+    try {
+        const ctx = getContextSafe();
+        const chat = ctx?.chat;
+        if (!Array.isArray(chat)) return false;
+        let changed = false;
+        for (const msg of chat) {
+            if (await captureOne(msg)) changed = true;
+        }
+        if (changed) {
+            try { await ctx.saveChat?.(); } catch (e) { /* ignore */ }
+        }
+        return changed;
+    } catch (error) {
+        reportError('[Heart Status] captureAll error:', error);
+        return false;
+    }
+}
+
 // Removes every board from the chat text (and its swipes). Returns how many messages changed.
 export async function purgeBoards() {
     const ctx = getContextSafe();
     if (!ctx || !Array.isArray(ctx.chat)) return 0;
     let changed = 0;
     for (const msg of ctx.chat) {
-        if (!msg || msg.is_user || !hasBoardTag(msg.mes)) continue;
-        const clean = stripInfoBoards(msg.mes);
-        if (!clean || clean === msg.mes) continue;
-        msg.mes = clean;
+        if (!msg?.extra?.heartStatus && !hasBoardTag(msg?.mes)) continue;
+        if (msg.extra) delete msg.extra.heartStatus;
+        const clean = hasBoardTag(msg.mes) ? stripInfoBoards(msg.mes) : msg.mes;
+        if (clean !== msg.mes) msg.mes = clean;
         if (Array.isArray(msg.swipes)) {
             msg.swipes = msg.swipes.map(t => (typeof t === 'string' ? (stripInfoBoards(t) || t) : t));
         }
