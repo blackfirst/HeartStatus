@@ -8,7 +8,7 @@ import { getSettings, getChat, getContextSafe, setOverride, clearOverride, getAc
 import { collectHistory, lastBoardIndex, dataOf } from './history.js';
 import { escapeHtml } from './render.js';
 import { updatePromptInjection } from './prompts.js';
-import { renderAll, purgeBoards } from './message-handler.js';
+import { renderAll } from './message-handler.js';
 import { setThemeEverywhere, removeCards } from './dom.js';
 import { notify } from './notifications.js';
 
@@ -35,7 +35,6 @@ export function syncUI() {
     $('#hst-collapse').prop('checked', !!s.collapseOlder);
     $('#hst-arousal').prop('checked', s.showArousal !== false);
     $('#hst-jealousy').prop('checked', s.showJealousy !== false);
-    $('#hst-trim').prop('checked', !!s.trimOldBoards);
 }
 
 // Called after any setting that changes what the model is told or what the card shows.
@@ -199,13 +198,6 @@ export function setupUI() {
             <hr>
             <label class="checkbox_label"><input type="checkbox" id="hst-arousal"><span>Track Arousal</span></label>
             <label class="checkbox_label"><input type="checkbox" id="hst-jealousy"><span>Track Jealousy</span></label>
-            <label class="checkbox_label" title="Older boards are removed from the prompt to save tokens. The latest board is always kept."><input type="checkbox" id="hst-trim"><span>Remove older boards from the prompt</span></label>
-            <hr>
-            <div class="hst-buttons">
-                <button id="hst-open-panel" class="menu_button">Open panel</button>
-                <button id="hst-rerender" class="menu_button">Re-render cards</button>
-                <button id="hst-purge" class="menu_button" title="Deletes every board from this chat’s messages">Remove boards from chat</button>
-            </div>
         </div>
     </div>
 </div>`;
@@ -261,16 +253,6 @@ export function setupUI() {
         $('#hst-collapse').on('change', function () { getSettings().collapseOlder = this.checked; save(); renderAll(); });
         $('#hst-arousal').on('change', function () { getSettings().showArousal = this.checked; save(); refreshAll(); });
         $('#hst-jealousy').on('change', function () { getSettings().showJealousy = this.checked; save(); refreshAll(); });
-        $('#hst-trim').on('change', function () { getSettings().trimOldBoards = this.checked; save(); });
-
-        $('#hst-open-panel').on('click', showPanel);
-        $('#hst-rerender').on('click', () => { removeCards(); renderAll(); notify('Cards re-rendered.', 'info'); });
-        $('#hst-purge').on('click', async () => {
-            if (!confirm('Remove every info board from this chat’s messages? This edits the saved chat and cannot be undone.')) return;
-            const n = await purgeBoards();
-            notify(n ? `Removed boards from ${n} message(s).` : 'No boards found in this chat.', n ? 'success' : 'info');
-            updatePromptInjection();
-        });
 
         // Theme swatches on the cards (event delegation: cards are created dynamically).
         $(document).on('click', '.hst-swatch', function (e) {
