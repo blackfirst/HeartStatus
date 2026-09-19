@@ -28,6 +28,12 @@ function locateBoard(root, rawLength) {
     wrappers.forEach(w => { if (w !== holder && isEmptyShell(w)) w.remove(); });
     if (holder) {
         wrappers.filter(w => w !== holder && isBoardText(w.textContent)).forEach(w => w.remove());
+        // If the model forgot the closing </info_board> tag, the browser may have
+        // folded the following roleplay text into this element too (unknown tags
+        // don't auto-close). Prefer the fenced code block inside it, if there is
+        // one, so we only ever swap out the board and never eat trailing story text.
+        const innerPre = Array.from(holder.querySelectorAll('pre')).find(p => isBoardText(p.textContent));
+        if (innerPre) return innerPre;
         const parent = holder.parentElement;
         if (parent && parent !== root && parent.tagName === 'P'
             && parent.textContent.trim() === holder.textContent.trim()) return parent;

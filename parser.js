@@ -10,6 +10,10 @@ import { LIMITS } from './config.js';
 
 // Fresh RegExp each time: a shared /g regex keeps lastIndex between calls.
 const boardRe = (flags = 'i') => new RegExp('<info_board>([\\s\\S]*?)<\\/info_board>', flags);
+// Fallback when the closing tag is missing: the model still wraps fields in a
+// ``` fence (the instructed format), so grab that fence right after the tag.
+const fenceAfterTagRe = (flags = 'i') => new RegExp('<info_board>\\s*```(?:[a-zA-Z0-9_-]*\\n)?([\\s\\S]*?)```', flags);
+const openTagRe = (flags = 'gi') => new RegExp('<info_board>', flags);
 
 // "⏰ Time: ..." / "**🤝 Trust:** 62" / "Trust: 62" -> [label, value]
 const FIELD_RE = /^[^A-Za-z]*?(Time|Date|Location|Trust|Arousal|Jealousy|Heart\s*Score|Relationship|Thought|Goal)\s*\**\s*:\s*\**\s*(.*?)\s*$/i;
@@ -144,22 +148,56 @@ export function hasBoardTag(text) {
 // Returns the parsed LAST board in the text, or null.
 export function parseInfoBoard(text) {
     if (!hasBoardTag(text)) return null;
-    const re = boardRe('gi');
+
+    // 1) The well-formed case: a closed <info_board>...</info_board>.
+    let re = boardRe('gi');
     let match;
     let last = null;
     while ((match = re.exec(text)) !== null) last = match;
-    if (!last) return null;
-    try {
-        return parseBody(last[1], last[0]);
-    } catch (e) {
-        return null;
+    if (last) {
+        try {
+            const data = parseBody(last[1], last[0]);
+            if (data) return data;
+        } catch (e) { /* fall through to the more forgiving passes below */ }
     }
+
+    // 2) No closing tag, but the fields are still wrapped in a ``` fence (the
+    //    format the model is instructed to use) — read that instead.
+    re = fenceAfterTagRe('gi');
+    match = null;
+    last = null;
+    while ((match = re.exec(text)) !== null) last = match;
+    if (last) {
+        try {
+            const data = parseBody(last[1], last[0]);
+            if (data) return data;
+        } catch (e) { /* fall through */ }
+    }
+
+    // 3) No closing tag and no fence either. Read a bounded run of lines after
+    //    the last opening tag — capped so a missing close can never swallow the
+    //    rest of the reply (story text, next board, etc.).
+    const openRe = openTagRe();
+    let openMatch;
+    let lastOpen = null;
+    while ((openMatch = openRe.exec(text)) !== null) lastOpen = openMatch;
+    if (lastOpen) {
+        const after = text.slice(lastOpen.index + lastOpen[0].length);
+        const slice = after.split(/\r?\n/).slice(0, 25).join('\n');
+        try {
+            return parseBody(slice, lastOpen[0] + slice);
+        } catch (e) { return null; }
+    }
+    return null;
 }
 
 // Removes every complete board from the text.
 export function stripInfoBoards(text) {
     if (!hasBoardTag(text)) return text;
-    return text.replace(boardRe('gi'), '').replace(/^\s+/, '').replace(/\n{3,}/g, '\n\n');
+    let out = text.replace(boardRe('gi'), '');
+    // Also drop an unclosed board (tag + its fence) so it doesn't linger in the prompt.
+    out = out.replace(new RegExp('<info_board>\\s*```(?:[a-zA-Z0-9_-]*\\n)?[\\s\\S]*?```', 'gi'), '');
+    return out.replace(/^\s+/, '').replace(/\n{3,}/g, '\n\n');
 }
 
 // Short fingerprint used to decide whether a rendered card is still up to date.

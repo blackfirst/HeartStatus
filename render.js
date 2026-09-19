@@ -2,7 +2,7 @@
 // RENDER — builds the status card HTML
 // ═══════════════════════════════════════════
 
-import { THEMES, STAT_COLORS, normalizeTheme } from './config.js';
+import { STAT_COLORS, normalizeTheme } from './config.js';
 
 const RING_LENGTH = 603; // circumference of the r=96 ring
 
@@ -50,11 +50,6 @@ function infoRow(cls, label, value) {
     return `<div class="hst-info ${cls}"><div class="hst-info-label">${label}</div><div class="hst-info-value">${value}</div></div>`;
 }
 
-function swatches(theme) {
-    return THEMES.map(t =>
-        `<span class="hst-swatch${t.id === theme ? ' active' : ''}" data-hst-theme-id="${t.id}" title="${t.label}" style="background:${t.color};"></span>`,
-    ).join('');
-}
 
 /**
  * @param {object} data   parsed board (see parser.js)
@@ -80,7 +75,7 @@ export function buildCardHtml(data, opts = {}) {
 <summary>💗 ${name ? `${name}'s Status` : 'Status'}</summary>
 <div class="hst-card">
   <div>
-    <div class="hst-eyebrow"><span>✦ Status Monitor</span><span class="hst-theme-picker">${swatches(theme)}</span></div>
+    <div class="hst-eyebrow"><span>✦ Status Monitor</span></div>
     <div class="hst-namerow">
       <b class="hst-name">${name || 'Status'}</b>
       ${data.relationship ? `<span class="hst-pill">${escapeHtml(data.relationship)}</span>` : ''}

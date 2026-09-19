@@ -254,13 +254,6 @@ export function setupUI() {
         $('#hst-arousal').on('change', function () { getSettings().showArousal = this.checked; save(); refreshAll(); });
         $('#hst-jealousy').on('change', function () { getSettings().showJealousy = this.checked; save(); refreshAll(); });
 
-        // Theme swatches on the cards (event delegation: cards are created dynamically).
-        $(document).on('click', '.hst-swatch', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            setTheme(this.getAttribute('data-hst-theme-id'));
-        });
-
         syncUI();
     } catch (error) {
         console.error('[Heart Status] setupUI error:', error);
