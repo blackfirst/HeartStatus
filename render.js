@@ -21,12 +21,9 @@ function fmt(n) {
     return Number.isInteger(n) ? String(n) : n.toFixed(1);
 }
 
-function deltaHtml(d) {
-    if (d === null || d === undefined || !Number.isFinite(d)) return '';
-    const rounded = Math.round(d * 10) / 10;
-    if (rounded === 0) return '';
-    const up = rounded > 0;
-    return `<span class="hst-delta ${up ? 'up' : 'down'}" title="Change since the previous board">${up ? '▲' : '▼'}${fmt(Math.abs(rounded))}</span>`;
+// Change indicators (▲/▼) are turned off — always render nothing.
+function deltaHtml() {
+    return '';
 }
 
 function statTile(key, icon, label, value, delta) {
