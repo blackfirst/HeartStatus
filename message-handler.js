@@ -29,7 +29,7 @@ export function renderMessage(mesId) {
     const mesText = document.querySelector(`#chat .mes[mesid="${idx}"] .mes_text`);
     if (!mesText) return;
 
-    if (!s?.isEnabled || s.displayMode === 'raw') {
+    if (!s?.isEnabled) {
         removeCards(mesText);
         return;
     }
@@ -38,6 +38,8 @@ export function renderMessage(mesId) {
     const msg = chat[idx];
     const data = dataOf(msg);
     if (!data) {
+        // Nothing parsed: still wipe any raw board text out of view rather than
+        // leaving it printed in the chat.
         removeCards(mesText);
         return;
     }
@@ -50,10 +52,10 @@ export function renderMessage(mesId) {
         return;
     }
 
-    const open = !(s.collapseOlder && idx !== lastBoardIndex(chat));
+    // Only the newest board stays open; older ones collapse automatically.
+    const open = idx === lastBoardIndex(chat);
     const previous = previousData(chat, idx);
     const deltas = computeDeltas(data, previous ? previous.data : null);
-    // The theme is not part of the key: theme changes are applied in place.
     const key = [idx, hashData(data), open ? 1 : 0, s.showArousal ? 1 : 0, s.showJealousy ? 1 : 0, msg.name || ''].join('|');
 
     const html = buildCardHtml(data, {
