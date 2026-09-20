@@ -72,15 +72,6 @@ export function derivePct(heart) {
     return Math.min(100, Math.max(0, Math.round((heart + 1000) / 20)));
 }
 
-function readPct(lastPart) {
-    const group = lastPart.match(/\(([^)]*)\)/);
-    if (!group) return null;
-    const nums = [...group[1].matchAll(/([+-]?\d+(?:\.\d+)?)\s*%/g)];
-    if (!nums.length) return null;
-    const v = parseFloat(nums[nums.length - 1][1]);
-    return v >= 0 && v <= 100 ? v : null;
-}
-
 function cleanQuotes(text) {
     return String(text).replace(/^["“”„'‘’「『«]+\s*/, '').replace(/\s*["“”„'‘’」』»]+$/, '').trim();
 }
@@ -108,11 +99,9 @@ function parseBody(body, raw) {
     const jealousy = fields.jealousy !== undefined ? parseStat(fields.jealousy, 'jealousy') : null;
     const heartStat = fields.heartscore !== undefined ? parseStat(fields.heartscore, 'heart') : null;
 
-    let pct = null;
-    if (heartStat) {
-        pct = readPct(heartStat.last);
-        if (pct === null) pct = derivePct(heartStat.value);
-    }
+    // Always derived from the Heart Score itself. The model sometimes writes its own
+    // "(61%)" that disagrees with the score, and the ring/label must match the number.
+    const pct = heartStat ? derivePct(heartStat.value) : null;
 
     const fieldCount = Object.keys(fields).length;
     // Needs to look like a real board, not a stray mention of the tag.

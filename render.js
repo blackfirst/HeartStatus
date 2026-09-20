@@ -2,7 +2,8 @@
 // RENDER — builds the status card HTML
 // ═══════════════════════════════════════════
 
-import { STAT_COLORS, normalizeTheme } from './config.js';
+import { STAT_COLORS, normalizeTheme, heartColor } from './config.js';
+import { derivePct } from './parser.js';
 
 const RING_LENGTH = 603; // circumference of the r=96 ring
 
@@ -66,7 +67,12 @@ export function buildCardHtml(data, opts = {}) {
     const theme = normalizeTheme(opts.theme);
     const name = escapeHtml(opts.name || '');
 
-    const ringPct = data.pct === null ? 0 : clamp(data.pct, 0, 100);
+    // Ring, label and colour all come from the Heart Score shown in the middle, so they
+    // can never disagree with it (a percentage the model wrote itself is ignored).
+    const shownPct = data.heart === null ? data.pct : derivePct(data.heart);
+    const ringPct = shownPct === null ? 0 : clamp(shownPct, 0, 100);
+    const ringColor = shownPct === null ? null : heartColor(shownPct);
+    const ringStyle = ringColor ? ` style="--hst-ring-c:${ringColor.hex};--hst-ring-rgb:${ringColor.rgb};"` : '';
     const dashOffset = (RING_LENGTH - (RING_LENGTH * ringPct) / 100).toFixed(1);
 
     const tiles = [statTile('trust', '🤝', 'Trust', data.trust)];
@@ -118,7 +124,7 @@ export function buildCardHtml(data, opts = {}) {
       </div>
     </div>
     <div class="hst-affbar"><div class="hst-affbar-fill" style="width:${ringPct}%;"></div></div>
-    <div class="hst-affbar-label">Affection ${fmt(data.pct)}%</div>
+    <div class="hst-affbar-label">Affection ${fmt(shownPct)}%</div>
   </div>
   <div class="hst-divider"></div>
   <div class="hst-dt-grid">
@@ -127,7 +133,7 @@ export function buildCardHtml(data, opts = {}) {
   </div>
   ${statsAndInfoHtml(tiles, data, thought)}`;
 
-    return `<details class="hst-wrap" data-hst-theme="${theme}"${opts.open === false ? '' : ' open'}>
+    return `<details class="hst-wrap" data-hst-theme="${theme}"${ringStyle}${opts.open === false ? '' : ' open'}>
 <summary>💗 ${name ? `${name}'s Status` : 'Status'}</summary>
 <div class="hst-card${opts.compact ? ' hst-compact' : ''}">
   ${body}

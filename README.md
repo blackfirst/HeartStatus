@@ -88,7 +88,7 @@ Open it from the **wand menu → Heart Status**.
   or collapsed is set by **Card open state**.
 - Missing fields are shown as “—” instead of breaking the card.
 - Ranges: Trust / Arousal / Jealousy `0–100`, Heart Score `-1000–1000`. The percentage is
-  `(score + 1000) / 20` unless the model writes its own.
+  always `(score + 1000) / 20`, worked out from the Heart Score itself — a percentage the model writes in the board is ignored, so the ring and the “Affection” label always match the number in the middle. The ring color also follows the score: cold blue-grey when it's low, through violet and pink to red, and gold at the very top.
 
 ## Board format
 

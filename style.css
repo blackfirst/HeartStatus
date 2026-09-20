@@ -81,8 +81,8 @@ details.hst-wrap > summary {
 .hst-ringsvg { position: absolute; inset: 0; transform: rotate(-90deg); }
 .hst-ring-track { stroke: var(--hst-ring-track); }
 .hst-ring-rotate {
-  stroke: var(--hst-c1);
-  filter: drop-shadow(0 0 5px rgba(var(--hst-rgb),0.45));
+  stroke: var(--hst-ring-c, var(--hst-c1));
+  filter: drop-shadow(0 0 5px rgba(var(--hst-ring-rgb, var(--hst-rgb)),0.45));
   animation: hst-glow-slow 3.5s ease-in-out infinite;
 }
 .hst-pulse-wrap {

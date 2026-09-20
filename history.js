@@ -11,11 +11,21 @@ import { parseInfoBoard, derivePct } from './parser.js';
 
 const cache = new WeakMap();
 
+// Boards captured before the percentage was always derived may carry a model-written
+// percentage that disagrees with the score. Make it match the Heart Score.
+function withDerivedPct(data) {
+    if (data && typeof data.heart === 'number') {
+        const pct = derivePct(data.heart);
+        if (data.pct !== pct) data.pct = pct;
+    }
+    return data;
+}
+
 // Parsed board of a bot message, or null. Prefers the captured copy in
 // msg.extra so nothing has to remain in the visible message text.
 export function dataOf(msg) {
     if (!msg || msg.is_user) return null;
-    if (msg.extra && msg.extra.heartStatus) return msg.extra.heartStatus;
+    if (msg.extra && msg.extra.heartStatus) return withDerivedPct(msg.extra.heartStatus);
     if (typeof msg.mes !== 'string') return null;
     const hit = cache.get(msg);
     if (hit && hit.mes === msg.mes) return hit.data;
