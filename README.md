@@ -21,9 +21,7 @@ panel and manual control — and keeps the raw board text out of your chat.
    message, but you can turn that off and have the values tracked silently instead (still visible
    any time from the quick panel).
 
-The card has 6 themes (Dark, Light, Racing Dark, Racing Light, Idol Stage Night, Idol Stage Day), set from the Theme dropdown in
-settings. It also colors the quick panel (opened from the wand menu); Racing and Idol Stage give the panel
-their own layout too (ring plus stat bars / light sticks, themed inputs and buttons).
+Themes: Dark, Light, Racing Dark, Racing Light, Idol Stage Night, Idol Stage Day.
 
 ## Install
 
@@ -67,14 +65,7 @@ is on.
 
 ### Card details
 
-- **Compact mode**: the row shows the Heart Score inside a small ring, the character's
-  name, their relationship label, and Trust/Arousal/Jealousy inline. Tap anywhere on the
-  row to expand it (no page reload, no re-generation) and see Location/Thoughts/Goal —
-  tap again to collapse. Compact mode only changes what the *expanded* card looks like; whether cards start open
-  or collapsed is set by **Card open state**. The mini row and its expanded panel follow the
-  current theme too — Racing gives the name and score its italic look, Idol Stage draws the mini
-  ring as a spinning rainbow, recolors Trust/Arousal/Jealousy to its neon palette, and frames
-  Location/Thoughts/Goal the same way the full card does.
+- **Compact mode**: collapses the card to a one-row summary (ring, name, inline stats); tap to expand/collapse.
 - Missing fields are shown as “—” instead of breaking the card.
 - Ranges: Trust / Arousal / Jealousy `0–100`, Heart Score `-1000–1000`. The percentage is
   always `(score + 1000) / 20`, worked out from the Heart Score itself — a percentage the model writes in the board is ignored, so the “Affection” bar and label always match the number in the middle. The Heart Score ring itself is always drawn as a full circle.
