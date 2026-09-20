@@ -30,19 +30,26 @@ settings. It also colors the quick panel (see below).
 
 ## Install
 
-Copy the `heart-status` folder to:
+**Repository:** https://github.com/blackfirst/HeartStatus.git — this one package includes
+everything (prompt injection, parser, card, settings); you don't need anything else alongside it.
+
+In SillyTavern, go to **Extensions → Install extension**, paste that URL, and reload. Or clone/
+download it and copy the `heart-status` folder to:
 
 ```
 SillyTavern/data/<your-user>/extensions/heart-status          (per user)
 SillyTavern/public/scripts/extensions/third-party/heart-status (all users)
 ```
 
-Or host it on GitHub and use **Extensions → Install extension** with the repository URL.
 Reload SillyTavern, then open **Extensions** and find **Heart Status** in the settings list.
 
-> ⚠️ If you used the old kit, **turn both parts off** or you will get double instructions and
-> double cards: disable the `info-board` prompt in your preset / author's note, and disable the
-> `💗 [Heart Status] FIX` script in **Extensions → Regex**.
+> ⚠️ **Already using the old separate "Heart Status" kit (prompt + regex script)?** This
+> extension replaces both, so leaving the old ones on gives you double instructions and double
+> cards. The first time this extension loads it **automatically disables the old regex script**
+> for you (Extensions → Regex — you'll get a toast confirming it, if one was found). The old
+> `info-board` prompt instruction, though, lives inside your own preset or author's note, and
+> this extension can't safely edit arbitrary prompt text on its own — you'll get a one-time
+> reminder toast to remove that part by hand.
 
 ## Settings
 
@@ -124,6 +131,7 @@ heart-status/
 ├── parser.js            <info_board> parser (tolerant of a missing closing tag)
 ├── history.js           reads boards (from extra.heartStatus, or the raw text as a fallback)
 ├── prompts.js           prompt injection (instruction + current values)
+├── migrate.js           one-time cleanup of the old regex script for upgraders
 ├── render.js            card HTML
 ├── dom.js               swaps the raw board for the card
 ├── message-handler.js   rendering, notifications, prompt filter, capture-and-strip, cleanup
@@ -142,7 +150,9 @@ heart-status/
   saved message" is off. If it's on and you still see raw text after generation is clearly
   finished, something failed to parse it — check the board has at least Trust or Heart Score plus
   two other fields.
-- **Two cards** — the old regex script is still enabled; disable it in Extensions → Regex.
+- **Two cards** — this extension auto-disables the old regex script on first load, but if it
+  didn't find it (different name, character-scoped script it can't see, etc.), disable it
+  yourself under Extensions → Regex.
 - **The model ignores the board** — check that the old `info-board` prompt is not also active and
   that nothing else in your preset tells it to skip extra headers.
 
