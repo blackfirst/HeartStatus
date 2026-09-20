@@ -21,7 +21,11 @@ panel and manual control — and keeps the raw board text out of your chat.
    message, but you can turn that off and have the values tracked silently instead (still visible
    any time from the quick panel).
 
-Themes: Dark, Light, Racing Dark, Racing Light, Idol Stage Night, Idol Stage Day, Library Night, Library Day.
+Themes:
+- 🌑🌕 Dark / Light
+- 🏁 Racing Dark / Racing Light
+- 🎤 Idol Stage Night / Idol Stage Day
+- 📖 Library Night / Library Day
 
 ## Install
 
