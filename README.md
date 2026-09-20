@@ -20,13 +20,9 @@ panel, notifications and manual control — and keeps the raw board text out of 
 4. **Showing the card is optional too.** By default the board renders as a card under the
    message, but you can turn that off and have the values tracked silently instead (still visible
    any time from the quick panel).
-5. **Keeps the prompt small.** Once a board's text is captured/erased there's nothing left in the
-   chat to trim; if you turn erasing off, older raw boards are automatically stripped from
-   what's *sent to the model* (not your chat) to save tokens, with the latest one kept as a
-   format example.
 
 The card has 6 themes (Dark, Light, Racing Dark, Racing Light, Idol Stage Night, Idol Stage Day), set from the Theme dropdown in
-settings. It also colors the quick panel (see below); Racing and Idol Stage give the panel
+settings. It also colors the quick panel (opened from the wand menu); Racing and Idol Stage give the panel
 their own layout too (ring plus stat bars / light sticks, themed inputs and buttons).
 
 ## Install
@@ -59,7 +55,7 @@ Reload SillyTavern, then open **Extensions** and find **Heart Status** in the se
 | Enable | Master switch. Off = no prompt, no cards. |
 | Notify on big changes / threshold | Toast when Trust, Arousal, Jealousy or the Heart Score percentage moves by at least this many points in one reply. |
 | **Show in chat (as a card)** | On = the board renders as a card under the message (default). Off = nothing is shown in the chat at all — stats are still tracked and readable from the quick panel. |
-| **Remove board from message** | On = the raw `<info_board>` text is erased from the message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
+| **Remove board format from message** | On = the raw `<info_board>` text is erased from the message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
 | Theme | Dark / Light / Racing (Dark) / Racing (Light) / Idol Stage (Night) / Idol Stage (Day). Applies to every card and the quick panel, and is remembered. |
 | **Card open state** | Always open (default) / Always collapsed. This only sets the *starting* state each time a card is drawn — you can still click any card's `💗 Name's Status` line to open or close it by hand regardless of this setting. |
 | **Compact card** | On = each card collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full card. Off = the full card shows every time (default). See "Card details" below for how this looks per theme. |
@@ -67,18 +63,8 @@ Reload SillyTavern, then open **Extensions** and find **Heart Status** in the se
 These two switches are independent, so all four combinations work: card + keep raw text
 (default), card + erased, hidden + keep raw text, or hidden + erased. Older messages that
 still have a raw board embedded in their text (from before this version, or loaded from an older
-backup) get swept and captured automatically when the chat opens, if "Remove board from message"
+backup) get swept and captured automatically when the chat opens, if "Remove board format from message"
 is on.
-
-### Quick panel
-
-Open it from the **wand menu → Heart Status**.
-
-- Current stats and relationship label.
-- Heart Score history over the last 60 boards.
-- **Adjust values for the next reply**: type new numbers for any stat and the model is told to
-  start the next board from them. The adjustment is used once and expires as soon as the next
-  board appears. Useful when the model's numbers drift.
 
 ### Card details
 
@@ -156,8 +142,8 @@ heart-status/
 
 - **Nothing shows in the chat** — first check "Show in chat" is on; if it is, the reply likely had
   no parseable board at all (no `<info_board>` tag, or fewer than three recognised fields).
-- **Raw `<info_board>` text visible while editing a message** — expected if "Remove board from
-  message" is off. If it's on and you still see raw text after generation is clearly
+- **Raw `<info_board>` text visible while editing a message** — expected if "Remove board format
+  from message" is off. If it's on and you still see raw text after generation is clearly
   finished, something failed to parse it — check the board has at least Trust or Heart Score plus
   two other fields.
 - **Two cards** — this extension auto-disables the old regex script on first load, but if it
