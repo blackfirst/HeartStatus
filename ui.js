@@ -59,8 +59,12 @@ function sparkline(values) {
     </svg>`;
 }
 
-function chip(label, value, color) {
-    return `<div class="hst-chip" style="--sc:${color};"><small>${label}</small><b>${value === null || value === undefined ? '—' : value}</b></div>`;
+// `pct` (0–100) is optional: when given, the chip also carries a small bar that themed
+// panels (Racing, Idol Stage) draw as a stat bar / light stick. Other themes hide it.
+function chip(key, label, value, color, pct = null) {
+    const p = pct === null || pct === undefined ? null : Math.min(100, Math.max(0, pct));
+    const bar = p === null ? '' : '<span class="hst-chip-bar"><i></i></span>';
+    return `<div class="hst-chip" data-stat="${key}" style="--sc:${color};${p === null ? '' : `--p:${p};`}"><small>${label}</small><b>${value === null || value === undefined ? '—' : value}</b>${bar}</div>`;
 }
 
 function inputRow(id, label, value, [min, max]) {
@@ -92,10 +96,10 @@ function showPanel() {
 
     const chips = latest
         ? [
-            chip('Trust', latest.trust, STAT_COLORS.trust),
-            chip('Arousal', latest.arousal, STAT_COLORS.arousal),
-            chip('Jealousy', latest.jealousy, STAT_COLORS.jealousy),
-            chip('Heart', latest.heart === null ? null : `${latest.heart} (${latest.pct}%)`, 'var(--hst-accent, #ff4d6d)'),
+            chip('trust', 'Trust', latest.trust, STAT_COLORS.trust, latest.trust ?? 0),
+            chip('arousal', 'Arousal', latest.arousal, STAT_COLORS.arousal, latest.arousal ?? 0),
+            chip('jealousy', 'Jealousy', latest.jealousy, STAT_COLORS.jealousy, latest.jealousy ?? 0),
+            chip('heart', 'Heart', latest.heart === null ? null : `${latest.heart} (${latest.pct}%)`, 'var(--hst-accent, #ff4d6d)'),
         ].join('')
         : '';
 
@@ -104,7 +108,10 @@ function showPanel() {
   <div class="hst-modal-box">
     <div class="hst-modal-head"><b>💗 Heart Status</b><span class="hst-modal-close" title="Close">✕</span></div>
     ${latest ? `<div class="hst-modal-rel">${escapeHtml(latest.relationship) || '—'}</div>` : ''}
-    <div class="hst-chips">${chips}</div>
+    <div class="hst-hero">
+      <div class="hst-hero-ring" aria-hidden="true"><div class="hst-hero-core"><b>${latest && latest.heart !== null ? latest.heart : '—'}</b><small>Heart score</small></div></div>
+      <div class="hst-chips">${chips}</div>
+    </div>
     <div class="hst-section">Heart Score history${history.length ? ` (last ${history.length})` : ''}</div>
     ${sparkline(history.map(h => h.data.heart).filter(v => v !== null))}
     <div class="hst-section">Adjust values for the next reply

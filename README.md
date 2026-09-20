@@ -26,7 +26,8 @@ panel, notifications and manual control — and keeps the raw board text out of 
    format example.
 
 The card has 6 themes (Dark, Light, Racing Dark, Racing Light, Idol Stage Night, Idol Stage Day), set from the Theme dropdown in
-settings. It also colors the quick panel (see below).
+settings. It also colors the quick panel (see below); Racing and Idol Stage give the panel
+their own layout too (ring plus stat bars / light sticks, themed inputs and buttons).
 
 ## Install
 

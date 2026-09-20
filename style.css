@@ -272,6 +272,10 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin-bottom: 12px; }
 .hst-chip { background: var(--hst-stat-bg); border-top: 3px solid var(--sc); border-radius: 10px; padding: 8px 6px; text-align: center; display: flex; flex-direction: column; gap: 2px; }
 .hst-chip small { color: var(--hst-stat-small); letter-spacing: 0.5px; }
+/* Hero wrapper, ring and chip bars only appear in themed panels (Racing, Idol Stage). */
+.hst-hero { display: contents; }
+.hst-hero-ring { display: none; }
+.hst-chip-bar { display: none; }
 .hst-section { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--hst-eyebrow); margin: 14px 0 6px; }
 .hst-hint { font-size: 0.8em; color: var(--hst-muted); margin-bottom: 8px; line-height: 1.35; }
 .hst-empty { color: var(--hst-muted); font-size: 0.85em; padding: 10px 0; }
@@ -495,6 +499,171 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-inf
   details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::before,
   details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::after,
   details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i { animation: none; }
+}
+
+/* ═══════════════════════════════════════════
+   QUICK PANEL — themed layouts
+   Racing: ring on top, timing-tower rows.   Idol Stage: ring beside light sticks.
+   Both rings are complete 360° circles.
+   ═══════════════════════════════════════════ */
+
+.hst-modal[data-hst-theme="idol-night"] { background: rgba(12,6,24,0.72); }
+.hst-modal[data-hst-theme="idol-day"] { background: rgba(59,31,74,0.35); }
+.hst-modal[data-hst-theme^="racing-"] { background: rgba(0,0,0,0.66); }
+
+/* Close button: a full circle in both themes */
+.hst-modal[data-hst-theme^="idol-"] .hst-modal-close, .hst-modal[data-hst-theme^="racing-"] .hst-modal-close {
+  width: 28px; height: 28px; padding: 0; opacity: 1; border-radius: 50%; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center; font-size: 12px;
+  border: 1px solid rgba(var(--hst-rgb),0.4); color: var(--hst-c1); background: rgba(var(--hst-rgb),0.08);
+}
+.hst-modal[data-hst-theme^="idol-"] .hst-modal-close:hover, .hst-modal[data-hst-theme^="racing-"] .hst-modal-close:hover { background: rgba(var(--hst-rgb),0.2); }
+
+/* Inputs and buttons */
+.hst-modal[data-hst-theme^="idol-"] .hst-ov-row .text_pole, .hst-modal[data-hst-theme^="racing-"] .hst-ov-row .text_pole {
+  color: var(--hst-text); box-shadow: none; outline: none;
+}
+.hst-modal[data-hst-theme^="idol-"] .hst-ov-row .text_pole { background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line); border-radius: 10px; }
+.hst-modal[data-hst-theme^="racing-"] .hst-ov-row .text_pole { background: var(--hst-info-bg); border: 1px solid rgba(var(--hst-rgb),0.3); border-radius: 6px; }
+.hst-modal[data-hst-theme^="idol-"] .hst-ov-row .text_pole:focus, .hst-modal[data-hst-theme^="racing-"] .hst-ov-row .text_pole:focus {
+  border-color: var(--hst-c1); box-shadow: 0 0 0 2px rgba(var(--hst-rgb),0.25);
+}
+.hst-modal[data-hst-theme^="idol-"] .hst-buttons .menu_button, .hst-modal[data-hst-theme^="racing-"] .hst-buttons .menu_button { font-weight: 600; margin: 0; }
+.hst-modal[data-hst-theme^="idol-"] .hst-buttons .menu_button:disabled, .hst-modal[data-hst-theme^="racing-"] .hst-buttons .menu_button:disabled { opacity: 0.45; cursor: default; }
+
+/* ---- Idol Stage panel ---- */
+.hst-modal[data-hst-theme^="idol-"] .hst-modal-box { border-radius: 20px; padding: 18px; }
+.hst-modal[data-hst-theme="idol-day"] .hst-modal-box { box-shadow: 0 20px 50px rgba(59,31,74,0.3); }
+.hst-modal[data-hst-theme^="idol-"] .hst-modal-head { font-size: 1.1em; margin-bottom: 8px; }
+.hst-modal[data-hst-theme^="idol-"] .hst-modal-rel {
+  display: inline-block; margin-bottom: 12px; padding: 3px 12px; border-radius: 999px; font-size: 0.85em; font-weight: 600;
+  border: 1px solid var(--hst-c1); background: var(--hst-idol-panel);
+}
+.hst-modal[data-hst-theme^="idol-"] .hst-modal-rel::before { content: '★ '; }
+
+.hst-modal[data-hst-theme^="idol-"] .hst-hero { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 22px; margin: 6px 0 18px; }
+.hst-modal[data-hst-theme^="idol-"] .hst-hero-ring { display: block; position: relative; width: 128px; height: 128px; margin: 9px; flex-shrink: 0; }
+.hst-modal[data-hst-theme^="idol-"] .hst-hero-ring::before {
+  content: ''; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: conic-gradient(from 0deg, #ff4fa3, #ffd84d, #3ee0ff, #a66bff, #ff4fa3);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 11px), #000 calc(100% - 9.5px), #000 calc(100% - 1.5px), transparent 100%);
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 11px), #000 calc(100% - 9.5px), #000 calc(100% - 1.5px), transparent 100%);
+  animation: hst-id-spin 10s linear infinite;
+}
+.hst-modal[data-hst-theme^="idol-"] .hst-hero-ring::after {
+  content: ''; position: absolute; inset: -8px; border-radius: 50%; pointer-events: none;
+  background: repeating-conic-gradient(from -1.5deg, var(--hst-c2) 0 3deg, transparent 3deg 15deg);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+  animation: hst-id-twinkle 2.4s ease-in-out infinite;
+}
+.hst-modal[data-hst-theme^="idol-"] .hst-hero-core {
+  position: absolute; inset: 15px; border-radius: 50%; box-sizing: border-box;
+  background: radial-gradient(circle at 35% 30%, var(--hst-pulse-bg1) 0%, var(--hst-pulse-bg2) 75%);
+  border: 1px solid var(--hst-idol-line); display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.hst-modal[data-hst-theme^="idol-"] .hst-hero-core b { font-size: 30px; line-height: 1; font-weight: 500; }
+.hst-modal[data-hst-theme^="idol-"] .hst-hero-core small { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--hst-muted); margin-top: 4px; }
+
+.hst-modal[data-hst-theme^="idol-"] .hst-chips { display: flex; gap: 16px; margin: 0; }
+.hst-modal[data-hst-theme^="idol-"] .hst-chip[data-stat="heart"] { display: none; }
+.hst-modal[data-hst-theme^="idol-"] .hst-chip[data-stat="trust"] { --sc: var(--hst-idol-trust) !important; }
+.hst-modal[data-hst-theme^="idol-"] .hst-chip[data-stat="arousal"] { --sc: var(--hst-idol-arousal) !important; }
+.hst-modal[data-hst-theme^="idol-"] .hst-chip[data-stat="jealousy"] { --sc: var(--hst-idol-jealousy) !important; }
+.hst-modal[data-hst-theme^="idol-"] .hst-chip {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 46px;
+  background: none; border: none; border-radius: 0; padding: 0;
+}
+.hst-modal[data-hst-theme^="idol-"] .hst-chip b { order: 1; font-size: 15px; }
+.hst-modal[data-hst-theme^="idol-"] .hst-chip-bar {
+  display: block; order: 2; position: relative; width: 26px; height: 84px; overflow: hidden; border-radius: 13px;
+  background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--sc) calc(var(--hst-idol-glow) * 100%), transparent));
+}
+.hst-modal[data-hst-theme^="idol-"] .hst-chip-bar i { position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--p, 0) * 1%); background: var(--sc); }
+.hst-modal[data-hst-theme^="idol-"] .hst-chip small { order: 3; font-size: 11px; letter-spacing: 0.3px; }
+
+.hst-modal[data-hst-theme^="idol-"] .hst-section { color: var(--hst-c1); letter-spacing: 1.5px; }
+.hst-modal[data-hst-theme^="idol-"] .hst-section::before { content: '✦ '; }
+.hst-modal[data-hst-theme^="idol-"] .hst-spark { background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line); border-radius: 14px; box-sizing: border-box; }
+.hst-modal[data-hst-theme^="idol-"] .hst-spark-dot { fill: var(--hst-c2); }
+
+.hst-modal[data-hst-theme^="idol-"] #hst-ov-apply {
+  background: linear-gradient(90deg, var(--hst-c1), var(--hst-c2)); color: #2a1030;
+  border: none; border-radius: 999px; padding: 8px 18px;
+}
+.hst-modal[data-hst-theme^="idol-"] #hst-ov-clear {
+  background: transparent; color: var(--hst-c1); border: 1px solid var(--hst-c1); border-radius: 999px; padding: 8px 18px;
+}
+
+/* ---- Racing panel ---- */
+.hst-modal[data-hst-theme^="racing-"] .hst-modal-head b { font-style: italic; }
+.hst-modal[data-hst-theme^="racing-"] .hst-modal-rel {
+  display: inline-block; margin: 2px 0 14px; padding: 3px 12px; border-radius: 5px; font-size: 0.85em; font-weight: 700; white-space: nowrap;
+  background: linear-gradient(135deg, var(--hst-c1), #a30400); color: #fff; border: 1px solid rgba(255,255,255,0.25);
+  transform: skewX(-10deg); box-shadow: 0 0 10px rgba(var(--hst-rgb),0.45);
+}
+.hst-modal[data-hst-theme^="racing-"] .hst-modal-rel::before { content: '🏁 '; }
+
+.hst-modal[data-hst-theme^="racing-"] .hst-hero { display: flex; flex-direction: column; align-items: center; gap: 18px; margin: 4px 0 16px; }
+.hst-modal[data-hst-theme^="racing-"] .hst-hero-ring { display: block; position: relative; width: 150px; height: 150px; margin: 9px; flex-shrink: 0; }
+.hst-modal[data-hst-theme^="racing-"] .hst-hero-ring::before {
+  content: ''; position: absolute; inset: 0; border-radius: 50%; pointer-events: none; background: var(--hst-c1);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 12px), #000 calc(100% - 11px));
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 12px), #000 calc(100% - 11px));
+  filter: drop-shadow(0 0 5px rgba(var(--hst-rgb),0.45)); animation: hst-glow-slow 2.2s ease-in-out infinite;
+}
+.hst-modal[data-hst-theme^="racing-"] .hst-hero-ring::after {
+  content: ''; position: absolute; inset: -9px; border-radius: 50%; pointer-events: none;
+  background:
+    repeating-conic-gradient(from -1deg, var(--hst-c1) 0 2deg, transparent 2deg 30deg),
+    repeating-conic-gradient(from -0.5deg, rgba(var(--hst-rgb),0.35) 0 1deg, transparent 1deg 6deg);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
+}
+.hst-modal[data-hst-theme^="racing-"] .hst-hero-core {
+  position: absolute; inset: 20px; border-radius: 50%; box-sizing: border-box;
+  background: radial-gradient(circle at 35% 30%, var(--hst-pulse-bg1) 0%, var(--hst-pulse-bg2) 75%);
+  border: 1px solid rgba(var(--hst-rgb),0.3); display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.hst-modal[data-hst-theme^="racing-"] .hst-hero-core b { font-size: 34px; line-height: 1; font-weight: 500; font-style: italic; font-variant-numeric: tabular-nums; }
+.hst-modal[data-hst-theme^="racing-"] .hst-hero-core small { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--hst-muted); margin-top: 4px; }
+
+.hst-modal[data-hst-theme^="racing-"] .hst-chips { display: flex; flex-direction: column; gap: 8px; width: 100%; margin: 0; }
+.hst-modal[data-hst-theme^="racing-"] .hst-chip[data-stat="heart"] { display: none; }
+.hst-modal[data-hst-theme^="racing-"] .hst-chip {
+  display: grid; grid-template-columns: 76px 1fr 34px; align-items: center; gap: 10px; text-align: left;
+  padding: 8px 12px; border-top: none; border-left: 3px solid var(--sc); border-radius: 4px 10px 10px 4px;
+}
+.hst-modal[data-hst-theme^="racing-"] .hst-chip small { grid-column: 1; grid-row: 1; }
+.hst-modal[data-hst-theme^="racing-"] .hst-chip b { grid-column: 3; grid-row: 1; text-align: right; }
+.hst-modal[data-hst-theme^="racing-"] .hst-chip-bar {
+  display: block; grid-column: 2; grid-row: 1; position: relative; height: 7px; border-radius: 4px; overflow: hidden;
+  background: var(--hst-track);
+}
+.hst-modal[data-hst-theme^="racing-"] .hst-chip-bar::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.25) 0 2px, transparent 2px 10px);
+}
+.hst-modal[data-hst-theme^="racing-"] .hst-chip-bar i { display: block; height: 100%; width: calc(var(--p, 0) * 1%); background: var(--sc); }
+
+.hst-modal[data-hst-theme^="racing-"] .hst-section { padding-left: 10px; border-left: 3px solid var(--hst-c1); }
+.hst-modal[data-hst-theme^="racing-"] .hst-spark {
+  background: linear-gradient(var(--hst-track) 1px, transparent 1px) 0 0 / 100% 21px, var(--hst-info-bg);
+  border: 1px solid rgba(var(--hst-rgb),0.25); border-radius: 8px; box-sizing: border-box;
+}
+.hst-modal[data-hst-theme^="racing-"] .hst-spark-line { stroke: var(--hst-c2); }
+
+.hst-modal[data-hst-theme^="racing-"] #hst-ov-apply {
+  background: linear-gradient(135deg, var(--hst-c1), #a30400); color: #fff; border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px; padding: 8px 18px; transform: skewX(-8deg); box-shadow: 0 0 10px rgba(var(--hst-rgb),0.4);
+}
+.hst-modal[data-hst-theme^="racing-"] #hst-ov-clear {
+  background: transparent; color: var(--hst-c1); border: 1px solid var(--hst-c1); border-radius: 6px; padding: 8px 18px; transform: skewX(-8deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hst-modal[data-hst-theme^="idol-"] .hst-hero-ring::before, .hst-modal[data-hst-theme^="idol-"] .hst-hero-ring::after, .hst-modal[data-hst-theme^="racing-"] .hst-hero-ring::before { animation: none; }
 }
 
 @media (max-width: 480px) {
