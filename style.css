@@ -646,13 +646,14 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card,
   font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
-/* Grid layout of the full card: 4 real columns — left page, spine gutter, right page,
-   and a dedicated tab rail. Because the tab rail is its own column (not an overlay),
-   it reserves its own space and can never cover the Location/Thought/Goal cards. */
+/* Grid layout of the full card: 3 real columns — left page, spine gutter, right page.
+   Left page stacks the ring, the date/time ticket, then the three stat notes right
+   underneath it; right page holds Location/Thought/Goal as ruled library-card-catalog
+   entries, one per row so nothing overlaps regardless of content length. */
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
   display: grid;
-  grid-template-columns: 1fr 22px 1fr 104px; column-gap: 14px; row-gap: 16px;
-  grid-template-areas: "head head head head" "ring gutter loc tabs" "date gutter thought tabs" "date gutter goal tabs";
+  grid-template-columns: 1fr 22px 1fr; column-gap: 14px; row-gap: 16px;
+  grid-template-areas: "head head head" "ring gutter loc" "date gutter thought" "sticks gutter goal";
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-divider { display: none; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; }
@@ -680,32 +681,31 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-pill {
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-pill::before { content: '§ '; }
 
-/* Index tabs: horizontal sticky-note flags in their own rail down the fore-edge (outer
-   right side) of the card. A real grid column, so they never overlap the page cards —
-   they only bleed a few px past the card's own padding to look attached to the edge. */
+/* Stat notes: three square sticky notes sitting under the date ticket on the left
+   page, all in the same muted paper/tab tone (no separate bright colour per stat). */
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
-  grid-area: tabs; display: flex; flex-direction: column; align-items: stretch; gap: 8px; margin: 0;
+  grid-area: sticks; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0; align-self: start;
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"] { --sc: var(--hst-lib-ribbon-trust) !important; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"] { --sc: var(--hst-lib-ribbon-arousal) !important; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-lib-ribbon-jealousy) !important; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"],
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"],
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
+  --sc: var(--hst-c1) !important;
+}
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
-  display: flex; flex-direction: row; align-items: center; gap: 6px;
-  margin-right: -20px; padding: 6px 14px 6px 10px; background: var(--sc); color: #fff9ec;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
+  position: relative; aspect-ratio: 1; margin-right: 0; clip-path: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 4px;
+  box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
+  transform: rotate(var(--hst-lib-tilt, 0deg));
 }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat::before {
+  content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+  width: 7px; height: 7px; border-radius: 50%; background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat br { display: none; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-badge {
-  width: 20px; height: 20px; margin: 0; font-size: 10px; order: 1; flex-shrink: 0;
-  background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.55); color: #fff9ec;
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small {
-  order: 2; color: rgba(255,249,236,0.85); font-size: 9px; letter-spacing: 0.3px; white-space: nowrap;
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b {
-  order: 3; margin-left: auto; font-style: italic; font-variant-numeric: oldstyle-nums; font-size: 13px; white-space: nowrap;
-}
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat-bar { display: none; }
 
 /* Ring: a dashed ink-stamp ring around the gauge, italic old-style score */
