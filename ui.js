@@ -35,6 +35,7 @@ export function syncUI() {
     $('#hst-strip').prop('checked', s.stripFromMessage !== false);
     $('#hst-arousal').prop('checked', s.showArousal !== false);
     $('#hst-jealousy').prop('checked', s.showJealousy !== false);
+    $('#hst-compact').prop('checked', !!s.compactMode);
 }
 
 // Called after any setting that changes what the model is told or what the card shows.
@@ -190,6 +191,7 @@ export function setupUI() {
                 <label for="hst-theme">Theme</label>
                 <select id="hst-theme" class="text_pole">${themeOptions}</select>
             </div>
+            <label class="checkbox_label" title="Show a one-row mini card (small ring, name, inline stats) — tap it to expand location/thought/goal."><input type="checkbox" id="hst-compact"><span>Compact card (mini row, tap to expand)</span></label>
             <hr>
             <label class="checkbox_label"><input type="checkbox" id="hst-arousal"><span>Track Arousal</span></label>
             <label class="checkbox_label"><input type="checkbox" id="hst-jealousy"><span>Track Jealousy</span></label>
@@ -241,6 +243,7 @@ export function setupUI() {
         });
         $('#hst-arousal').on('change', function () { getSettings().showArousal = this.checked; save(); refreshAll(); });
         $('#hst-jealousy').on('change', function () { getSettings().showJealousy = this.checked; save(); refreshAll(); });
+        $('#hst-compact').on('change', function () { getSettings().compactMode = this.checked; save(); refreshAll(); });
 
         syncUI();
     } catch (error) {

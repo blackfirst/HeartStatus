@@ -25,6 +25,9 @@ export const defaultSettings = {
     // SFW switches: hide a stat everywhere (prompt, parser output and card).
     showArousal: true,
     showJealousy: true,
+    // Show a one-row mini card (small ring, name, inline stats) with a tap-to-expand
+    // detail panel for location/thought/goal, instead of the full card every time.
+    compactMode: false,
     // Remove older boards from the prompt sent to the model (the latest one stays as a format example).
     trimOldBoards: true,
 };

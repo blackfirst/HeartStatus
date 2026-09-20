@@ -47,10 +47,25 @@ function infoRow(cls, label, value) {
     return `<div class="hst-info ${cls}"><div class="hst-info-label">${label}</div><div class="hst-info-value">${value}</div></div>`;
 }
 
+// Shared by both layouts: the stat tiles grid + the three info rows.
+function statsAndInfoHtml(tiles, data, thought) {
+    return `<div class="hst-stats" style="--cols:${tiles.length};">${tiles.join('')}</div>
+  ${infoRow('loc', '📍 Location', escapeHtml(data.location) || '—')}
+  ${infoRow('thought', '💭 Thoughts', thought)}
+  ${infoRow('goal', '🏆 Goal', escapeHtml(data.goal) || '—')}`;
+}
+
+// One-line inline readout used in the compact row, e.g. "🤝 62 · 💓 40 · 🔥 12".
+function miniStatsInline(data, showArousal, showJealousy) {
+    const parts = [`🤝 ${fmt(data.trust)}`];
+    if (showArousal) parts.push(`💓 ${fmt(data.arousal)}`);
+    if (showJealousy) parts.push(`🔥 ${fmt(data.jealousy)}`);
+    return parts.join(' · ');
+}
 
 /**
  * @param {object} data   parsed board (see parser.js)
- * @param {object} opts   { name, theme, open, showArousal, showJealousy, deltas }
+ * @param {object} opts   { name, theme, open, compact, showArousal, showJealousy, deltas }
  */
 export function buildCardHtml(data, opts = {}) {
     const theme = normalizeTheme(opts.theme);
@@ -68,10 +83,27 @@ export function buildCardHtml(data, opts = {}) {
 
     const thought = data.thought ? `“${escapeHtml(data.thought)}”` : '—';
 
-    return `<details class="hst-wrap" data-hst-theme="${theme}"${opts.open === false ? '' : ' open'}>
-<summary>💗 ${name ? `${name}'s Status` : 'Status'}</summary>
-<div class="hst-card">
-  <div>
+    const body = opts.compact
+        ? `<details class="hst-mini">
+    <summary class="hst-mini-row">
+      <span class="hst-mini-ring">
+        <svg viewBox="0 0 220 220">
+          <circle cx="110" cy="110" r="96" fill="none" class="hst-ring-track" stroke-width="20"/>
+          <circle class="hst-ring-rotate" cx="110" cy="110" r="96" fill="none" stroke-width="20" stroke-linecap="round" stroke-dasharray="${RING_LENGTH}" stroke-dashoffset="${dashOffset}"/>
+        </svg>
+        <span class="hst-mini-score">${fmt(data.heart)}</span>
+      </span>
+      <span class="hst-mini-mid">
+        <b class="hst-mini-name">${name || 'Status'}</b>
+        <span class="hst-mini-rel">${data.relationship ? `${escapeHtml(data.relationship)} · ` : ''}${miniStatsInline(data, showArousal, showJealousy)}</span>
+      </span>
+      <span class="hst-mini-chev" aria-hidden="true">▾</span>
+    </summary>
+    <div class="hst-mini-body">
+      ${statsAndInfoHtml(tiles, data, thought)}
+    </div>
+  </details>`
+        : `<div>
     <div class="hst-eyebrow"><span>✦ Status Monitor</span></div>
     <div class="hst-namerow">
       <b class="hst-name">${name || 'Status'}</b>
@@ -101,10 +133,12 @@ export function buildCardHtml(data, opts = {}) {
     ${dtTile('🗓️', 'Date', data.date)}
     ${dtTile('⏰', 'Time', data.time)}
   </div>
-  <div class="hst-stats" style="--cols:${tiles.length};">${tiles.join('')}</div>
-  ${infoRow('loc', '📍 Location', escapeHtml(data.location) || '—')}
-  ${infoRow('thought', '💭 Thoughts', thought)}
-  ${infoRow('goal', '🏆 Goal', escapeHtml(data.goal) || '—')}
+  ${statsAndInfoHtml(tiles, data, thought)}`;
+
+    return `<details class="hst-wrap" data-hst-theme="${theme}"${opts.open === false ? '' : ' open'}>
+<summary>💗 ${name ? `${name}'s Status` : 'Status'}</summary>
+<div class="hst-card${opts.compact ? ' hst-compact' : ''}">
+  ${body}
 </div>
 </details>`;
 }

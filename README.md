@@ -60,6 +60,7 @@ Reload SillyTavern, then open **Extensions** and find **Heart Status** in the se
 | **Show in chat (as a card)** | On = the board renders as a card under the message (default). Off = nothing is shown in the chat at all — stats are still tracked and readable from the quick panel. |
 | **Remove board from saved message** | On = the raw `<info_board>` text is erased from the saved message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
 | Theme | Dark Red / White Pink / White Gold. Applies to every card and the quick panel, and is remembered. |
+| **Compact card (mini row, tap to expand)** | On = each card collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full card. Off = the full card shows every time (default). |
 | Track Arousal / Track Jealousy | Turn a stat off everywhere: the prompt stops asking for it and the card hides it. |
 
 These two switches are independent, so all four combinations work: card + keep raw text
@@ -80,6 +81,12 @@ Open it from the **wand menu → Heart Status**.
 
 ### Card details
 
+- **Compact mode**: the row shows the Heart Score inside a small ring, the character's
+  name, their relationship label, and Trust/Arousal/Jealousy inline. Tap anywhere on the
+  row to expand it (no page reload, no re-generation) and see Location/Thoughts/Goal —
+  tap again to collapse. This is independent from the existing "only the latest message
+  stays open" behavior: an older message still collapses to the `💗 Name's Status`
+  summary line either way; compact mode only changes what the *expanded* card looks like.
 - Missing fields are shown as “—” instead of breaking the card.
 - Ranges: Trust / Arousal / Jealousy `0–100`, Heart Score `-1000–1000`. The percentage is
   `(score + 1000) / 20` unless the model writes its own.

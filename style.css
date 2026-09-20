@@ -157,6 +157,28 @@ details.hst-wrap > summary {
 .hst-info-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ac); margin-bottom: 3px; }
 .hst-info-value { font-size: 0.92em; color: var(--hst-text); line-height: 1.4; }
 
+/* ---- Compact mode (mini row, tap to expand) ---- */
+.hst-card.hst-compact { padding: 14px 16px; }
+.hst-mini { width: 100%; }
+.hst-mini > summary { list-style: none; cursor: pointer; }
+.hst-mini > summary::-webkit-details-marker { display: none; }
+.hst-mini-row { display: flex; align-items: center; gap: 12px; }
+.hst-mini-ring { position: relative; width: 46px; height: 46px; flex-shrink: 0; }
+.hst-mini-ring svg { position: absolute; inset: 0; transform: rotate(-90deg); width: 100%; height: 100%; }
+.hst-mini-score {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; color: var(--hst-text);
+}
+.hst-mini-mid { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.hst-mini-name { font-size: 14px; }
+.hst-mini-rel {
+  font-size: 11px; color: var(--hst-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hst-mini-chev { font-size: 11px; color: var(--hst-muted); flex-shrink: 0; transition: transform 0.2s ease; }
+.hst-mini[open] .hst-mini-chev { transform: rotate(180deg); }
+.hst-mini-body { margin-top: 14px; }
+.hst-mini-body .hst-info:last-child { margin-bottom: 0; }
+
 /* ---- Theme swatches ---- */
 .hst-theme-picker { display: flex; gap: 6px; align-items: center; }
 .hst-swatch {
