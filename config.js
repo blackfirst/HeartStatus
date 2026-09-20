@@ -4,11 +4,6 @@
 
 export const extensionName = 'heart-status';
 
-// Must match "version" in manifest.json. On load the extension compares the two and
-// force-reloads the page when they differ (i.e. the files on disk were updated but the
-// browser is still running the old cached code). Bump BOTH together on every update.
-export const EXTENSION_VERSION = '1.1.0';
-
 // Key used to store the manual adjustment inside chat metadata (per chat).
 export const META_KEY = 'heart_status_override';
 
