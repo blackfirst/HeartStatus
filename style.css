@@ -28,7 +28,6 @@ details.hst-wrap[data-hst-theme="dark-red"],
       --hst-summary-bg:#140607; --hst-summary-text:#ff4d5d; --hst-summary-border:#421015;
       --hst-pulse-bg1:#171313; --hst-pulse-bg2:#0d0d0d; --hst-ring-track:#241417;
       --hst-daytime-bg1:#1c1012; --hst-daytime-bg2:#0c0a0a;
-      --hst-shadow-a:0.55; --hst-daytime-shadow-a:0.45; --hst-stat-shadow-a:0.4;
 }
 
 details.hst-wrap[data-hst-theme="white-pink"],
@@ -40,7 +39,6 @@ details.hst-wrap[data-hst-theme="white-pink"],
       --hst-summary-bg:#ffe3ec; --hst-summary-text:#d6487a; --hst-summary-border:#ffc2d6;
       --hst-pulse-bg1:#ffffff; --hst-pulse-bg2:#fbeaf0; --hst-ring-track:#f7dbe4;
       --hst-daytime-bg1:#fff5f8; --hst-daytime-bg2:#ffffff;
-      --hst-shadow-a:0.14; --hst-daytime-shadow-a:0.06; --hst-stat-shadow-a:0.10;
 }
 
 
@@ -86,7 +84,7 @@ details.hst-wrap[data-hst-theme="idol-night"],
       --hst-summary-bg:#1a0d2e; --hst-summary-text:#ff7ac0; --hst-summary-border:#3f2568;
       --hst-pulse-bg1:#241640; --hst-pulse-bg2:#120a22; --hst-ring-track:#2a1a48;
       --hst-daytime-bg1:#221438; --hst-daytime-bg2:#150c26;
-      --hst-shadow-a:0.6; --hst-daytime-shadow-a:0.4; --hst-stat-shadow-a:0.4;
+      --hst-shadow-a:0.6;
       --hst-idol-panel:rgba(255,255,255,0.07); --hst-idol-line:rgba(255,255,255,0.16);
       --hst-idol-bubble:#3a1a52; --hst-idol-bubble-line:#ff4fa3;
       --hst-idol-trust:#3ee0ff; --hst-idol-arousal:#ff4fa3; --hst-idol-jealousy:#ffd84d;
@@ -102,7 +100,7 @@ details.hst-wrap[data-hst-theme="idol-day"],
       --hst-summary-bg:#ffe3f0; --hst-summary-text:#d02f7c; --hst-summary-border:#ffc2dc;
       --hst-pulse-bg1:#ffffff; --hst-pulse-bg2:#ffeaf4; --hst-ring-track:#f7d6e6;
       --hst-daytime-bg1:#fff4f9; --hst-daytime-bg2:#ffffff;
-      --hst-shadow-a:0.10; --hst-daytime-shadow-a:0.05; --hst-stat-shadow-a:0.06;
+      --hst-shadow-a:0.10;
       --hst-idol-panel:rgba(232,56,138,0.07); --hst-idol-line:rgba(59,31,74,0.16);
       --hst-idol-bubble:#ffe3f0; --hst-idol-bubble-line:#e8388a;
       --hst-idol-trust:#12a9d6; --hst-idol-arousal:#e8388a; --hst-idol-jealousy:#e9a400;
@@ -111,7 +109,7 @@ details.hst-wrap[data-hst-theme="idol-day"],
 
 
 /* ---- Wrapper / summary ---- */
-.hst-slot { margin: 6px 0; }
+.hst-slot { margin: 6px 0; container: hst / inline-size; }
 .hst-slot:empty { margin: 0; }
 
 details.hst-wrap > summary {
@@ -178,8 +176,6 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-affbar-fill { height: 100%; background: linear-gradient(90deg,var(--hst-c1),var(--hst-c2)); }
 .hst-affbar-label { font-size: 10px; letter-spacing: 1.5px; color: var(--hst-muted); text-transform: uppercase; margin-top: 18px; }
 
-/* ---- Change markers ---- */
-
 /* ---- Date / time tiles ---- */
 .hst-dt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
 .hst-dt {
@@ -194,7 +190,7 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 }
 .hst-dt-body { display: flex; flex-direction: column; min-width: 0; }
 .hst-dt-label { font-size: 9px; letter-spacing: 1.5px; color: var(--hst-muted); text-transform: uppercase; }
-.hst-dt-value { font-size: 0.9em; color: var(--hst-text); line-height: 1.3; }
+.hst-dt-value { overflow-wrap: anywhere; font-size: 0.9em; color: var(--hst-text); line-height: 1.3; }
 
 /* ---- Stat tiles ---- */
 .hst-stats { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 10px; margin-bottom: 14px; }
@@ -219,7 +215,7 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-info.thought { --ac: #c99bff; }
 .hst-info.goal { --ac: #d9a441; }
 .hst-info-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ac); margin-bottom: 3px; }
-.hst-info-value { font-size: 0.92em; color: var(--hst-text); line-height: 1.4; }
+.hst-info-value { overflow-wrap: anywhere; font-size: 0.92em; color: var(--hst-text); line-height: 1.4; }
 
 /* ---- Compact mode (mini row, tap to expand) ---- */
 .hst-card.hst-compact { padding: 14px 16px; }
@@ -318,7 +314,7 @@ details.hst-wrap[data-hst-theme^="racing-"] .hst-card::before,
 details.hst-wrap[data-hst-theme^="racing-"] .hst-name { font-style: italic; letter-spacing: 0.3px; }
 details.hst-wrap[data-hst-theme^="racing-"] .hst-pill {
   background: linear-gradient(135deg, var(--hst-c1), #a30400); color: #fff; font-weight: 700;
-  border: 1px solid rgba(255,255,255,0.25); border-radius: 5px; letter-spacing: 0.4px; white-space: nowrap;
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 5px; letter-spacing: 0.4px; max-width: 100%; text-align: center;
   transform: skewX(-10deg); box-shadow: 0 0 10px rgba(var(--hst-rgb),0.45);
 }
 details.hst-wrap[data-hst-theme^="racing-"] .hst-pill::before { content: '🏁 '; }
@@ -389,7 +385,7 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card {
 
 /* Grid layout of the full card (each direct child gets its own area) */
 details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) {
-  display: grid; grid-template-columns: auto 1fr; column-gap: 24px; align-items: center;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 24px; align-items: center;
   grid-template-areas: "head head" "bubble bubble" "ring sticks" "ticket ticket" "venue venue" "goal goal";
 }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-divider { display: none; }
@@ -407,7 +403,7 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-eyebrow > span:first-child::after
 details.hst-wrap[data-hst-theme^="idol-"] .hst-name { font-size: 1.25em; }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-pill {
   background: var(--hst-idol-panel); color: var(--hst-c1); border: 1px solid var(--hst-c1);
-  font-weight: 600; white-space: nowrap;
+  font-weight: 600; max-width: 100%; text-align: center; border-radius: 18px;
 }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-pill::before { content: '★ '; }
 
@@ -456,7 +452,7 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(5) { animation-del
 details.hst-wrap[data-hst-theme^="idol-"] .hst-affbar { height: 7px; max-width: 190px; border: 1px solid var(--hst-idol-line); background: var(--hst-idol-panel); }
 
 /* Stats → vertical light sticks (value on top, stick, icon, label) */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-stats { display: flex; justify-content: center; gap: 18px; margin: 0; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin: 0; min-width: 0; }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"] { --sc: var(--hst-idol-trust) !important; }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"] { --sc: var(--hst-idol-arousal) !important; }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-idol-jealousy) !important; }
@@ -480,7 +476,7 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat 
 
 /* Date / time → one ticket with a dashed tear line (no cut-outs, so every circle stays whole) */
 details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-dt-grid {
-  grid-template-columns: 1fr 1fr; gap: 0; margin: 16px 0 0; overflow: hidden;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; margin: 16px 0 0; overflow: hidden;
   border: 1px solid var(--hst-idol-line); border-radius: 14px; background: var(--hst-idol-panel);
 }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-dt { background: none; border: none; border-radius: 0; box-shadow: none; }
@@ -599,7 +595,7 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-inf
 /* ---- Racing panel ---- */
 .hst-modal[data-hst-theme^="racing-"] .hst-modal-head b { font-style: italic; }
 .hst-modal[data-hst-theme^="racing-"] .hst-modal-rel {
-  display: inline-block; margin: 2px 0 14px; padding: 3px 12px; border-radius: 5px; font-size: 0.85em; font-weight: 700; white-space: nowrap;
+  display: inline-block; margin: 2px 0 14px; padding: 3px 12px; border-radius: 5px; font-size: 0.85em; font-weight: 700; max-width: 100%; text-align: center;
   background: linear-gradient(135deg, var(--hst-c1), #a30400); color: #fff; border: 1px solid rgba(255,255,255,0.25);
   transform: skewX(-10deg); box-shadow: 0 0 10px rgba(var(--hst-rgb),0.45);
 }
@@ -670,8 +666,17 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-inf
   .hst-card { padding: 14px; border-radius: 18px; }
   .hst-dt-grid { grid-template-columns: 1fr; }
   details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) {
-    grid-template-columns: 1fr; row-gap: 8px;
+    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
     grid-template-areas: "head" "bubble" "ring" "sticks" "ticket" "venue" "goal";
   }
-  details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-template-columns: 1fr 1fr; }
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+/* Narrow card (phone, or a slim chat column on desktop): stack the Idol Stage layout.
+   Uses the card's own container width, not the screen width. */
+@container hst (max-width: 480px) {
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) {
+    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
+    grid-template-areas: "head" "bubble" "ring" "sticks" "ticket" "venue" "goal";
+  }
 }

@@ -53,7 +53,7 @@ function fmtStat(label, value) {
 }
 
 // The numbers the next board must start from.
-function baselineBlock(s, chat) {
+function baselineBlock(chat) {
     const override = getActiveOverride(chat);
     const idx = lastBoardIndex(chat);
     const prev = idx >= 0 ? dataOf(chat[idx]) : null;
@@ -97,7 +97,7 @@ function buildPrompt(chat) {
     let b = '[HEART STATUS]\n';
     b += 'Start every roleplay reply with an Information Board giving extra scene context, in this exact format:\n\n';
     b += boardFormat() + '\n\nRules:\n' + rules() + '\n';
-    b += baselineBlock(s, chat);
+    b += baselineBlock(chat);
     return b;
 }
 

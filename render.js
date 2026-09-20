@@ -5,8 +5,6 @@
 import { STAT_COLORS, normalizeTheme } from './config.js';
 import { derivePct } from './parser.js';
 
-const RING_LENGTH = 603; // circumference of the r=96 ring
-
 export function escapeHtml(value) {
     return String(value ?? '').replace(/[&<>"']/g, c => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
@@ -73,7 +71,6 @@ export function buildCardHtml(data, opts = {}) {
     // Heart Score shown in the middle (a percentage the model wrote itself is ignored).
     const shownPct = data.heart === null ? data.pct : derivePct(data.heart);
     const ringPct = shownPct === null ? 0 : clamp(shownPct, 0, 100);
-    const dashOffset = '0';
 
     const tiles = [statTile('trust', '🤝', 'Trust', data.trust)];
     if (data.arousal !== null) tiles.push(statTile('arousal', '💓', 'Arousal', data.arousal));
@@ -87,7 +84,7 @@ export function buildCardHtml(data, opts = {}) {
       <span class="hst-mini-ring">
         <svg viewBox="0 0 220 220">
           <circle cx="110" cy="110" r="96" fill="none" class="hst-ring-track" stroke-width="20"/>
-          <circle class="hst-ring-rotate" cx="110" cy="110" r="96" fill="none" stroke-width="20" stroke-linecap="round" stroke-dasharray="${RING_LENGTH}" stroke-dashoffset="${dashOffset}"/>
+          <circle class="hst-ring-rotate" cx="110" cy="110" r="96" fill="none" stroke-width="20" stroke-linecap="round"/>
         </svg>
         <span class="hst-mini-score">${fmt(data.heart)}</span>
       </span>
@@ -113,7 +110,7 @@ export function buildCardHtml(data, opts = {}) {
     <div class="hst-ringbox">
       <svg class="hst-ringsvg" width="220" height="220" viewBox="0 0 220 220">
         <circle cx="110" cy="110" r="96" fill="none" class="hst-ring-track" stroke-width="13"/>
-        <circle class="hst-ring-rotate" cx="110" cy="110" r="96" fill="none" stroke-width="13" stroke-linecap="round" stroke-dasharray="${RING_LENGTH}" stroke-dashoffset="${dashOffset}"/>
+        <circle class="hst-ring-rotate" cx="110" cy="110" r="96" fill="none" stroke-width="13" stroke-linecap="round"/>
       </svg>
       <div class="hst-pulse-wrap">
         <b class="hst-score">${fmt(data.heart)}</b>

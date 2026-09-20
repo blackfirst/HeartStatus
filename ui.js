@@ -99,7 +99,7 @@ function showPanel() {
             chip('trust', 'Trust', latest.trust, STAT_COLORS.trust, latest.trust ?? 0),
             chip('arousal', 'Arousal', latest.arousal, STAT_COLORS.arousal, latest.arousal ?? 0),
             chip('jealousy', 'Jealousy', latest.jealousy, STAT_COLORS.jealousy, latest.jealousy ?? 0),
-            chip('heart', 'Heart', latest.heart === null ? null : `${latest.heart} (${latest.pct}%)`, 'var(--hst-accent, #ff4d6d)'),
+            chip('heart', 'Heart', latest.heart === null ? null : `${latest.heart} (${latest.pct}%)`, '#ff4d6d'),
         ].join('')
         : '';
 
