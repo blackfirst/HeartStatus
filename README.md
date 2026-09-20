@@ -62,7 +62,7 @@ Reload SillyTavern, then open **Extensions** and find **Heart Status** in the se
 | **Remove board from message** | On = the raw `<info_board>` text is erased from the message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
 | Theme | Dark / Light / Racing (Dark) / Racing (Light) / Idol Stage (Night) / Idol Stage (Day). Applies to every card and the quick panel, and is remembered. |
 | **Card open state** | Always open (default) / Always collapsed. This only sets the *starting* state each time a card is drawn — you can still click any card's `💗 Name's Status` line to open or close it by hand regardless of this setting. |
-| **Compact card (mini row, tap to expand)** | On = each card collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full card. Off = the full card shows every time (default). See "Card details" below for how this looks per theme. |
+| **Compact card** | On = each card collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full card. Off = the full card shows every time (default). See "Card details" below for how this looks per theme. |
 
 These two switches are independent, so all four combinations work: card + keep raw text
 (default), card + erased, hidden + keep raw text, or hidden + erased. Older messages that

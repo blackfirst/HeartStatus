@@ -198,7 +198,7 @@ export function setupUI() {
                 <label for="hst-theme">Theme</label>
                 <select id="hst-theme" class="text_pole">${themeOptions}</select>
             </div>
-            <label class="checkbox_label" title="Show a one-row mini card (small ring, name, inline stats) — tap it to expand location/thought/goal."><input type="checkbox" id="hst-compact"><span>Compact card (mini row, tap to expand)</span></label>
+            <label class="checkbox_label" title="Show a one-row mini card (small ring, name, inline stats) — tap it to expand location/thought/goal."><input type="checkbox" id="hst-compact"><span>Compact card</span></label>
             <div class="hst-row" title="Whether a card starts expanded or collapsed. You can still click any card's summary line to open/close it by hand either way.">
                 <label for="hst-open-mode">Card open state</label>
                 <select id="hst-open-mode" class="text_pole">${openModeOptions}</select>
