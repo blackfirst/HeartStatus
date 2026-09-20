@@ -132,8 +132,13 @@ export function buildCardHtml(data, opts = {}) {
   </div>
   ${statsAndInfoHtml(tiles, data, thought)}`;
 
-    return `<details class="hst-wrap" data-hst-theme="${theme}"${opts.open === false ? '' : ' open'}>
-<summary>💗 ${name ? `${name}'s Status` : 'Status'}</summary>
+    const outerSummary = opts.compact
+        ? `<summary class="hst-wrap-summary-none"></summary>`
+        : `<summary>💗 ${name ? `${name}'s Status` : 'Status'}</summary>`;
+    const outerOpen = opts.compact ? true : opts.open !== false;
+
+    return `<details class="hst-wrap" data-hst-theme="${theme}"${outerOpen ? ' open' : ''}>
+${outerSummary}
 <div class="hst-card${opts.compact ? ' hst-compact' : ''}">
   ${body}
 </div>

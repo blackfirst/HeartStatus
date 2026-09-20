@@ -153,6 +153,7 @@ details.hst-wrap > summary {
 /* Replace the browser's default triangle with a thin minimal chevron. */
 details.hst-wrap > summary::-webkit-details-marker { display: none; }
 details.hst-wrap > summary::marker { content: ''; }
+details.hst-wrap > summary.hst-wrap-summary-none { display: none; padding: 0; margin: 0; border: none; }
 details.hst-wrap > summary::after {
   content: ''; flex-shrink: 0; width: 7px; height: 7px; margin: -3px 4px 0 0;
   border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
