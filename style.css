@@ -52,7 +52,19 @@ details.hst-wrap > summary {
   background: var(--hst-summary-bg); color: var(--hst-summary-text); padding: 12px;
   border-radius: 14px; border: 1px solid var(--hst-summary-border); cursor: pointer;
   transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 8px;
 }
+/* Replace the browser's default triangle with a thin minimal chevron. */
+details.hst-wrap > summary::-webkit-details-marker { display: none; }
+details.hst-wrap > summary::marker { content: ''; }
+details.hst-wrap > summary::after {
+  content: ''; flex-shrink: 0; width: 7px; height: 7px; margin: -3px 4px 0 0;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg); opacity: 0.55;
+  transition: transform 0.2s ease, margin 0.2s ease, opacity 0.2s ease;
+}
+details.hst-wrap > summary:hover::after { opacity: 0.9; }
+details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top: 3px; }
 
 /* ---- Card ---- */
 .hst-card {
@@ -159,7 +171,12 @@ details.hst-wrap > summary {
 .hst-mini-rel {
   font-size: 11px; color: var(--hst-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.hst-mini-chev { font-size: 11px; color: var(--hst-muted); flex-shrink: 0; transition: transform 0.2s ease; }
+.hst-mini-chev { position: relative; width: 14px; height: 14px; font-size: 0; flex-shrink: 0; transition: transform 0.2s ease; }
+.hst-mini-chev::before {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px;
+  border-right: 1.5px solid var(--hst-muted); border-bottom: 1.5px solid var(--hst-muted);
+  transform: translate(-50%, -70%) rotate(45deg);
+}
 .hst-mini[open] .hst-mini-chev { transform: rotate(180deg); }
 .hst-mini-body { margin-top: 14px; }
 .hst-mini-body .hst-info:last-child { margin-bottom: 0; }
