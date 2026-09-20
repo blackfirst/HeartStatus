@@ -100,10 +100,6 @@ details.hst-wrap > summary {
 .hst-affbar-label { font-size: 10px; letter-spacing: 1.5px; color: var(--hst-muted); text-transform: uppercase; margin-top: 18px; }
 
 /* ---- Change markers ---- */
-.hst-delta { margin-left: 5px; font-size: 10px; font-weight: 600; letter-spacing: 0.3px; vertical-align: middle; }
-.hst-delta.up { color: #4fbf7a; }
-.hst-delta.down { color: #ef5d6c; }
-.hst-pulse-wrap .hst-delta { margin: 0; }
 
 /* ---- Date / time tiles ---- */
 .hst-dt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
@@ -167,16 +163,6 @@ details.hst-wrap > summary {
 .hst-mini[open] .hst-mini-chev { transform: rotate(180deg); }
 .hst-mini-body { margin-top: 14px; }
 .hst-mini-body .hst-info:last-child { margin-bottom: 0; }
-
-/* ---- Theme swatches ---- */
-.hst-theme-picker { display: flex; gap: 6px; align-items: center; }
-.hst-swatch {
-  width: 13px; height: 13px; border-radius: 50%; cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
-  transition: transform 0.15s ease;
-}
-.hst-swatch:hover { transform: scale(1.25); }
-.hst-swatch.active { box-shadow: 0 0 0 2px rgba(255,255,255,0.85), 0 0 0 3px rgba(0,0,0,0.35); }
 
 /* ---- Settings drawer ---- */
 .hst-settings { display: flex; flex-direction: column; gap: 6px; }

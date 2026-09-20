@@ -50,7 +50,7 @@ export const THEMES = [
     { id: 'white-pink', label: 'Light', color: '#ff6f9c' },
 ];
 
-export const DEFAULT_THEME = 'dark-red';
+const DEFAULT_THEME = 'dark-red';
 
 export function normalizeTheme(id) {
     return THEMES.some(t => t.id === id) ? id : DEFAULT_THEME;

@@ -107,7 +107,4 @@ export function hasLegacyCard(mesText) {
 
 export function setThemeEverywhere(theme) {
     document.querySelectorAll('details.hst-wrap').forEach(el => el.setAttribute('data-hst-theme', theme));
-    document.querySelectorAll('.hst-swatch').forEach(el => {
-        el.classList.toggle('active', el.getAttribute('data-hst-theme-id') === theme);
-    });
 }

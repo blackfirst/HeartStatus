@@ -140,7 +140,7 @@ heart-status/
 ├── migrate.js           one-time cleanup of the old regex script for upgraders
 ├── render.js            card HTML
 ├── dom.js               swaps the raw board for the card
-├── message-handler.js   rendering, notifications, prompt filter, capture-and-strip, cleanup
+├── message-handler.js   rendering, notifications, prompt filter, capture-and-strip
 ├── state.js             settings access and the one-shot manual adjustment
 ├── ui.js                settings drawer, quick panel, wand entry
 ├── notifications.js     toasts

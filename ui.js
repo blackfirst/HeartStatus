@@ -12,9 +12,9 @@ import { renderAll, captureAll } from './message-handler.js';
 import { setThemeEverywhere, removeCards } from './dom.js';
 import { notify } from './notifications.js';
 
-// ─── Theme (also used by the swatches on the card) ───
+// ─── Theme ───
 
-export function setTheme(id) {
+function setTheme(id) {
     const s = getSettings();
     s.theme = normalizeTheme(id);
     saveSettingsDebounced();
@@ -76,11 +76,11 @@ function readNumber(id, range) {
     return Math.min(range[1], Math.max(range[0], Math.round(n)));
 }
 
-export function closePanel() {
+function closePanel() {
     $('#hst-modal').remove();
 }
 
-export function showPanel() {
+function showPanel() {
     closePanel();
     const s = getSettings();
     const chat = getChat();

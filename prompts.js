@@ -11,7 +11,7 @@ import { derivePct } from './parser.js';
 
 const FENCE = '```';
 
-function boardFormat(s) {
+function boardFormat() {
     const lines = [
         '⏰ Time: [in-world time at start, 12-hour clock with AM/PM] → [in-world time at end of this post]',
         '🗓️ Date: [in-world day, EEE dd MMM yyyy] | [current season]',
@@ -27,7 +27,7 @@ function boardFormat(s) {
     return `<info_board>\n${FENCE}\n${lines.join('\n')}\n${FENCE}\n</info_board>`;
 }
 
-function rules(s) {
+function rules() {
     const r = [
         '- Values shift based only on what actually happens ({{user}}\'s words/actions), never randomly or by fixed steps.',
         '- Trust: ↑ honesty, kindness, consistency, kept promises; ↓ lies, broken promises, coldness, betrayal.',
@@ -91,12 +91,12 @@ function baselineBlock(s, chat) {
     return b;
 }
 
-export function buildPrompt(chat) {
+function buildPrompt(chat) {
     const s = getSettings();
     if (!s || !s.isEnabled) return '';
     let b = '[HEART STATUS]\n';
     b += 'Start every roleplay reply with an Information Board giving extra scene context, in this exact format:\n\n';
-    b += boardFormat(s) + '\n\nRules:\n' + rules(s) + '\n';
+    b += boardFormat() + '\n\nRules:\n' + rules() + '\n';
     b += baselineBlock(s, chat);
     return b;
 }

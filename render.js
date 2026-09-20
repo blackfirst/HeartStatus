@@ -21,17 +21,12 @@ function fmt(n) {
     return Number.isInteger(n) ? String(n) : n.toFixed(1);
 }
 
-// Change indicators (▲/▼) are turned off — always render nothing.
-function deltaHtml() {
-    return '';
-}
-
-function statTile(key, icon, label, value, delta) {
+function statTile(key, icon, label, value) {
     const pct = value === null ? 0 : clamp(value, 0, 100);
     return `<div class="hst-stat" style="--sc:${STAT_COLORS[key]};">
         <div class="hst-badge">${icon}</div>
         <small>${label}</small><br>
-        <b>${fmt(value)}</b>${deltaHtml(delta)}
+        <b>${fmt(value)}</b>
         <div class="hst-stat-bar"><div class="hst-stat-bar-fill" style="width:${pct}%;"></div></div>
     </div>`;
 }
@@ -65,19 +60,18 @@ function miniStatsInline(data) {
 
 /**
  * @param {object} data   parsed board (see parser.js)
- * @param {object} opts   { name, theme, open, compact, deltas }
+ * @param {object} opts   { name, theme, open, compact }
  */
 export function buildCardHtml(data, opts = {}) {
     const theme = normalizeTheme(opts.theme);
     const name = escapeHtml(opts.name || '');
-    const deltas = opts.deltas || {};
 
     const ringPct = data.pct === null ? 0 : clamp(data.pct, 0, 100);
     const dashOffset = (RING_LENGTH - (RING_LENGTH * ringPct) / 100).toFixed(1);
 
-    const tiles = [statTile('trust', '🤝', 'Trust', data.trust, deltas.trust)];
-    if (data.arousal !== null) tiles.push(statTile('arousal', '💓', 'Arousal', data.arousal, deltas.arousal));
-    if (data.jealousy !== null) tiles.push(statTile('jealousy', '🔥', 'Jealousy', data.jealousy, deltas.jealousy));
+    const tiles = [statTile('trust', '🤝', 'Trust', data.trust)];
+    if (data.arousal !== null) tiles.push(statTile('arousal', '💓', 'Arousal', data.arousal));
+    if (data.jealousy !== null) tiles.push(statTile('jealousy', '🔥', 'Jealousy', data.jealousy));
 
     const thought = data.thought ? `“${escapeHtml(data.thought)}”` : '—';
 
@@ -116,7 +110,7 @@ export function buildCardHtml(data, opts = {}) {
         <circle class="hst-ring-rotate" cx="110" cy="110" r="96" fill="none" stroke-width="13" stroke-linecap="round" stroke-dasharray="${RING_LENGTH}" stroke-dashoffset="${dashOffset}"/>
       </svg>
       <div class="hst-pulse-wrap">
-        <b class="hst-score">${fmt(data.heart)}</b>${deltaHtml(deltas.heart)}
+        <b class="hst-score">${fmt(data.heart)}</b>
         <span class="hst-ring-label">Heart Score</span>
         <svg class="hst-ecg" width="90" height="22" viewBox="0 0 200 22">
           <path class="hst-ecg-path" d="M0,11 L60,11 L70,2 L80,20 L90,11 L120,11 L130,4 L140,18 L150,11 L200,11" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

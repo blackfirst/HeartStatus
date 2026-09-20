@@ -62,8 +62,6 @@ export function renderMessage(mesId) {
 
     // 'always' opens every card, 'never' collapses every card (the person can still toggle by hand).
     const open = s.openMode !== 'never';
-    const previous = previousData(chat, idx);
-    const deltas = computeDeltas(data, previous ? previous.data : null);
     const key = [idx, hashData(data), open ? 1 : 0, s.compactMode ? 1 : 0, msg.name || ''].join('|');
 
     const html = buildCardHtml(data, {
@@ -71,7 +69,6 @@ export function renderMessage(mesId) {
         theme: s.theme,
         open,
         compact: !!s.compactMode,
-        deltas,
     });
     mountCard(mesText, key, html, data.rawLength);
 }
@@ -208,26 +205,4 @@ export async function captureAll() {
         reportError('[Heart Status] captureAll error:', error);
         return false;
     }
-}
-
-// Removes every board from the chat text (and its swipes). Returns how many messages changed.
-export async function purgeBoards() {
-    const ctx = getContextSafe();
-    if (!ctx || !Array.isArray(ctx.chat)) return 0;
-    let changed = 0;
-    for (const msg of ctx.chat) {
-        if (!msg?.extra?.heartStatus && !hasBoardTag(msg?.mes)) continue;
-        if (msg.extra) delete msg.extra.heartStatus;
-        const clean = hasBoardTag(msg.mes) ? stripInfoBoards(msg.mes) : msg.mes;
-        if (clean !== msg.mes) msg.mes = clean;
-        if (Array.isArray(msg.swipes)) {
-            msg.swipes = msg.swipes.map(t => (typeof t === 'string' ? (stripInfoBoards(t) || t) : t));
-        }
-        changed++;
-    }
-    if (changed) {
-        try { await ctx.saveChat?.(); } catch (e) { /* ignore */ }
-        try { await ctx.reloadCurrentChat?.(); } catch (e) { /* ignore */ }
-    }
-    return changed;
 }
