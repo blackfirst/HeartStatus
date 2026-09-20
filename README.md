@@ -3,7 +3,7 @@
 Tracks a character's **Trust / Arousal / Jealousy / Heart Score** (Arousal and Jealousy are always on) during a roleplay and shows
 it as a status card under each reply. This is the extension version of the old
 "Heart Status" kit (a prompt + a regex script): it does both jobs by itself, and adds a settings
-panel, notifications and manual control — and keeps the raw board text out of your chat.
+panel and manual control — and keeps the raw board text out of your chat.
 
 ## What it does
 
@@ -53,7 +53,6 @@ Reload SillyTavern, then open **Extensions** and find **Heart Status** in the se
 | Setting | What it does |
 |---|---|
 | Enable | Master switch. Off = no prompt, no cards. |
-| Notify on big changes / threshold | Toast when Trust, Arousal, Jealousy or the Heart Score percentage moves by at least this many points in one reply. |
 | **Show in chat (as a card)** | On = the board renders as a card under the message (default). Off = nothing is shown in the chat at all — stats are still tracked and readable from the quick panel. |
 | **Remove board format from message** | On = the raw `<info_board>` text is erased from the message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
 | Theme | Dark / Light / Racing (Dark) / Racing (Light) / Idol Stage (Night) / Idol Stage (Day). Applies to every card and the quick panel, and is remembered. |
@@ -130,7 +129,7 @@ heart-status/
 ├── migrate.js           one-time cleanup of the old regex script for upgraders
 ├── render.js            card HTML
 ├── dom.js               swaps the raw board for the card
-├── message-handler.js   rendering, notifications, prompt filter, capture-and-strip
+├── message-handler.js   rendering, prompt filter, capture-and-strip
 ├── state.js             settings access and the one-shot manual adjustment
 ├── ui.js                settings drawer, quick panel, wand entry
 ├── notifications.js     toasts

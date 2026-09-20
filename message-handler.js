@@ -1,10 +1,10 @@
 // ═══════════════════════════════════════════
-// MESSAGE HANDLER — rendering, notifications, prompt context
+// MESSAGE HANDLER — rendering, prompt context
 // ═══════════════════════════════════════════
 
 import { reportError } from './diagnostics.js';
 import { getSettings, getChat, getContextSafe } from './state.js';
-import { dataOf, lastBoardIndex, previousData, computeDeltas } from './history.js';
+import { dataOf, lastBoardIndex } from './history.js';
 import { hashData, hasBoardTag, stripInfoBoards, parseInfoBoard } from './parser.js';
 import { buildCardHtml } from './render.js';
 import { mountCard, removeCards, hasLegacyCard } from './dom.js';
@@ -89,55 +89,6 @@ let renderTimer = null;
 export function scheduleRenderAll(delay = 150) {
     clearTimeout(renderTimer);
     renderTimer = setTimeout(renderAll, delay);
-}
-
-// ─── Notifications ───
-
-const notified = new Set();
-export function resetNotified() {
-    notified.clear();
-}
-
-const STAT_LABELS = [
-    ['trust', 'Trust'],
-    ['arousal', 'Arousal'],
-    ['jealousy', 'Jealousy'],
-];
-
-export function checkNotify(mesId) {
-    try {
-        const s = getSettings();
-        if (!s?.isEnabled || !s.showNotifications) return;
-        const chat = getChat();
-        const idx = Number(mesId);
-        const data = dataOf(chat[idx]);
-        if (!data) return;
-
-        const key = `${idx}|${hashData(data)}`;
-        if (notified.has(key)) return;
-        notified.add(key);
-        if (notified.size > 200) notified.delete(notified.values().next().value);
-
-        const previous = previousData(chat, idx);
-        const deltas = computeDeltas(data, previous ? previous.data : null);
-        const threshold = Math.max(1, Number(s.notifyThreshold) || 15);
-        const lines = [];
-
-        for (const [k, label] of STAT_LABELS) {
-            const d = deltas[k];
-            if (d !== null && Math.abs(d) >= threshold) {
-                lines.push(`${d > 0 ? '▲' : '▼'} ${label} ${d > 0 ? '+' : ''}${d} (now ${data[k]})`);
-            }
-        }
-        // Heart Score is compared on its 0–100 percentage so the threshold means the same thing.
-        if (deltas.heartPct !== null && Math.abs(deltas.heartPct) >= threshold) {
-            const d = deltas.heart;
-            lines.push(`${deltas.heartPct > 0 ? '▲' : '▼'} Heart Score ${d !== null && d > 0 ? '+' : ''}${d ?? ''} (now ${data.heart})`);
-        }
-        if (lines.length) notify(lines.join('<br>'), 'info');
-    } catch (error) {
-        reportError('[Heart Status] checkNotify error:', error);
-    }
 }
 
 // ─── Prompt context (generate interceptor) ───

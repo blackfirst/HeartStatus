@@ -28,8 +28,6 @@ export function syncUI() {
     const s = getSettings();
     if (!s) return;
     $('#hst-enabled').prop('checked', !!s.isEnabled);
-    $('#hst-notify').prop('checked', !!s.showNotifications);
-    $('#hst-threshold').val(s.notifyThreshold);
     $('#hst-theme').val(normalizeTheme(s.theme));
     $('#hst-open-mode').val(normalizeOpenMode(s.openMode));
     $('#hst-show-in-chat').prop('checked', s.showInChat !== false);
@@ -185,11 +183,6 @@ export function setupUI() {
     <div class="inline-drawer-content">
         <div class="hst-settings">
             <label class="checkbox_label"><input type="checkbox" id="hst-enabled"><span>Enable</span></label>
-            <label class="checkbox_label"><input type="checkbox" id="hst-notify"><span>Notify on big changes</span></label>
-            <div class="hst-row" title="Toast when Trust, Arousal, Jealousy or the Heart Score percentage moves by at least this many points">
-                <label for="hst-threshold">Notify threshold</label>
-                <input type="number" id="hst-threshold" class="text_pole" min="1" max="100">
-            </div>
             <hr>
             <label class="checkbox_label" title="If off, the board is tracked but nothing shows in the chat at all."><input type="checkbox" id="hst-show-in-chat"><span>Show in chat (as a card)</span></label>
             <label class="checkbox_label" title="If off, the raw <info_board> text stays in the message (e.g. visible while editing) instead of being erased."><input type="checkbox" id="hst-strip"><span>Remove board format from message</span></label>
@@ -234,13 +227,6 @@ export function setupUI() {
             save();
             if (!this.checked) removeCards();
             refreshAll();
-        });
-        $('#hst-notify').on('change', function () { getSettings().showNotifications = this.checked; save(); });
-        $('#hst-threshold').on('change', function () {
-            const v = parseInt(this.value, 10);
-            getSettings().notifyThreshold = Number.isFinite(v) ? Math.min(100, Math.max(1, v)) : 15;
-            this.value = getSettings().notifyThreshold;
-            save();
         });
         $('#hst-theme').on('change', function () { setTheme(this.value); });
         $('#hst-open-mode').on('change', function () {

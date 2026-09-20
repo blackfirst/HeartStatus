@@ -9,9 +9,6 @@ export const META_KEY = 'heart_status_override';
 
 export const defaultSettings = {
     isEnabled: true,
-    // Toast when a stat jumps by at least `notifyThreshold` points (0–100 scale).
-    showNotifications: true,
-    notifyThreshold: 15,
     // 'dark-red' | 'white-pink' | 'racing-dark' | 'racing-light' | 'idol-night' | 'idol-day'
     theme: 'dark-red',
     // Show the board as a card under the message. If off, nothing is shown in the

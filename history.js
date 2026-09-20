@@ -44,16 +44,6 @@ export function lastBoardIndex(chat) {
     return -1;
 }
 
-export function previousData(chat, idx) {
-    for (let i = Math.min(idx, chat.length) - 1; i >= 0; i--) {
-        if (usable(chat[i])) {
-            const data = dataOf(chat[i]);
-            if (data) return { idx: i, data };
-        }
-    }
-    return null;
-}
-
 // Oldest → newest, at most `limit` entries.
 export function collectHistory(chat, limit = 60) {
     const out = [];
@@ -63,20 +53,4 @@ export function collectHistory(chat, limit = 60) {
         if (data) out.push({ idx: i, data });
     }
     return out.slice(-limit);
-}
-
-// Changes versus the previous board. A change trail inside the board ("40 → 62")
-// wins over the previous message, because it is what the model itself reported.
-export function computeDeltas(data, previous) {
-    const deltas = {};
-    for (const key of ['trust', 'arousal', 'jealousy', 'heart']) {
-        const now = data[key];
-        const base = data.prev[key] ?? (previous ? previous[key] : null);
-        deltas[key] = (now === null || base === null || base === undefined) ? null : now - base;
-    }
-    let basePct = null;
-    if (data.prev.heart !== null) basePct = derivePct(data.prev.heart);
-    else if (previous && previous.pct !== null) basePct = previous.pct;
-    deltas.heartPct = (data.pct === null || basePct === null) ? null : data.pct - basePct;
-    return deltas;
 }

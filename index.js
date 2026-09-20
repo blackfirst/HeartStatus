@@ -9,7 +9,7 @@ import { reportError } from './diagnostics.js';
 import { updatePromptInjection } from './prompts.js';
 import { setupUI, syncUI } from './ui.js';
 import {
-    renderMessage, renderAll, scheduleRenderAll, checkNotify, resetNotified,
+    renderMessage, renderAll, scheduleRenderAll,
     filterContext, setMutationDiscarder, captureAll,
 } from './message-handler.js';
 import { setThemeEverywhere } from './dom.js';
@@ -33,6 +33,9 @@ function loadSettings() {
         // Arousal and Jealousy are always tracked now; drop the old on/off switches.
         delete s.showArousal;
         delete s.showJealousy;
+        // The "notify on big changes" toast feature was removed.
+        delete s.showNotifications;
+        delete s.notifyThreshold;
     } catch (error) {
         reportError('[Heart Status] Error loading settings:', error);
         extension_settings[extensionName] = structuredClone(defaultSettings);
@@ -40,7 +43,6 @@ function loadSettings() {
 }
 
 function afterChatChange() {
-    resetNotified();
     syncUI();
     updatePromptInjection();
     captureAll();
@@ -56,9 +58,8 @@ jQuery(async () => {
         setupUI();
         updatePromptInjection();
 
-        // New reply finished: toast on big jumps, refresh the prompt for the next turn.
-        eventSource.on(event_types.MESSAGE_RECEIVED, (mesId) => {
-            checkNotify(mesId);
+        // New reply finished: refresh the prompt for the next turn.
+        eventSource.on(event_types.MESSAGE_RECEIVED, () => {
             updatePromptInjection();
         });
 
