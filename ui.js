@@ -9,7 +9,7 @@ import { collectHistory, lastBoardIndex, dataOf } from './history.js';
 import { escapeHtml } from './render.js';
 import { updatePromptInjection } from './prompts.js';
 import { renderAll, captureAll } from './message-handler.js';
-import { setThemeEverywhere, removeCards, applyCustomCss } from './dom.js';
+import { setThemeEverywhere, removeCards } from './dom.js';
 import { notify } from './notifications.js';
 
 // ─── Theme (also used by the swatches on the card) ───
@@ -35,8 +35,6 @@ export function syncUI() {
     $('#hst-strip').prop('checked', s.stripFromMessage !== false);
     $('#hst-arousal').prop('checked', s.showArousal !== false);
     $('#hst-jealousy').prop('checked', s.showJealousy !== false);
-    const $css = $('#hst-custom-css');
-    if ($css.length && document.activeElement !== $css[0]) $css.val(s.customCss || '');
 }
 
 // Called after any setting that changes what the model is told or what the card shows.
@@ -195,11 +193,6 @@ export function setupUI() {
             <hr>
             <label class="checkbox_label"><input type="checkbox" id="hst-arousal"><span>Track Arousal</span></label>
             <label class="checkbox_label"><input type="checkbox" id="hst-jealousy"><span>Track Jealousy</span></label>
-            <hr>
-            <div class="hst-row" style="align-items:flex-start;">
-                <label for="hst-custom-css" title="Raw CSS, applied after the extension's own stylesheet. Targets: .hst-card, .hst-stat, .hst-score, .hst-eyebrow, .hst-info, #hst-modal, etc.">Custom CSS</label>
-                <textarea id="hst-custom-css" class="text_pole" rows="6" spellcheck="false" placeholder=".hst-card { border-radius: 8px; }"></textarea>
-            </div>
         </div>
     </div>
 </div>`;
@@ -248,11 +241,6 @@ export function setupUI() {
         });
         $('#hst-arousal').on('change', function () { getSettings().showArousal = this.checked; save(); refreshAll(); });
         $('#hst-jealousy').on('change', function () { getSettings().showJealousy = this.checked; save(); refreshAll(); });
-        $('#hst-custom-css').on('input', function () {
-            getSettings().customCss = this.value;
-            save();
-            applyCustomCss(this.value);
-        });
 
         syncUI();
     } catch (error) {

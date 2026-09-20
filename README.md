@@ -61,7 +61,6 @@ Reload SillyTavern, then open **Extensions** and find **Heart Status** in the se
 | **Remove board from saved message** | On = the raw `<info_board>` text is erased from the saved message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
 | Theme | Dark Red / White Pink / White Gold. Applies to every card and the quick panel, and is remembered. |
 | Track Arousal / Track Jealousy | Turn a stat off everywhere: the prompt stops asking for it and the card hides it. |
-| **Custom CSS** | Raw CSS, applied after the extension's own stylesheet — restyle the card, quick panel or anything else without editing `style.css`. Common targets: `.hst-card`, `.hst-stat`, `.hst-score`, `.hst-eyebrow`, `.hst-info`, `#hst-modal`. Applies live as you type. |
 
 These two switches are independent, so all four combinations work: card + keep raw text
 (default), card + erased, hidden + keep raw text, or hidden + erased. Older messages that

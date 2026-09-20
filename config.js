@@ -27,9 +27,6 @@ export const defaultSettings = {
     showJealousy: true,
     // Remove older boards from the prompt sent to the model (the latest one stays as a format example).
     trimOldBoards: true,
-    // User-supplied CSS, injected as-is into a <style> tag so anyone can restyle
-    // the card/panel without editing style.css directly.
-    customCss: '',
 };
 
 export const THEMES = [

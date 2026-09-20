@@ -12,7 +12,7 @@ import {
     renderMessage, renderAll, scheduleRenderAll, checkNotify, resetNotified,
     filterContext, setMutationDiscarder, captureAll,
 } from './message-handler.js';
-import { setThemeEverywhere, applyCustomCss } from './dom.js';
+import { setThemeEverywhere } from './dom.js';
 import { migrateFromOldKit } from './migrate.js';
 
 // Named in manifest.json ("generate_interceptor"); SillyTavern calls it before every generation.
@@ -109,9 +109,8 @@ jQuery(async () => {
             reportError('[Heart Status] observer setup failed:', error);
         }
 
-        // Apply the saved theme and any custom CSS to any card already on screen.
+        // Apply the saved theme to any card already on screen.
         setThemeEverywhere(extension_settings[extensionName].theme);
-        applyCustomCss(extension_settings[extensionName].customCss);
         captureAll().then(() => setTimeout(renderAll, 800));
         setTimeout(renderAll, 800);
     } catch (error) {
