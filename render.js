@@ -23,8 +23,9 @@ function fmt(n) {
 function statTile(key, icon, label, value) {
     const pct = value === null ? 0 : clamp(value, 0, 100);
     // data-stat and --p are hooks for themes that restyle the bar (e.g. Idol Stage draws it
-    // as a vertical light stick). Other themes ignore them and keep using the width.
-    return `<div class="hst-stat" data-stat="${key}" style="--sc:${STAT_COLORS[key]};">
+    // as a vertical light stick, Angel fills a circular gauge from --p on the tile). Other themes ignore
+    // them and keep using the width.
+    return `<div class="hst-stat" data-stat="${key}" style="--sc:${STAT_COLORS[key]};--p:${pct};">
         <div class="hst-badge">${icon}</div>
         <small>${label}</small><br>
         <b>${fmt(value)}</b>

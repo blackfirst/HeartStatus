@@ -51,6 +51,8 @@ export const THEMES = [
     { id: 'idol-day', label: 'Idol Stage (Day)', color: '#e8388a' },
     { id: 'library-night', label: 'Library (Night)', color: '#c99a4a' },
     { id: 'library-day', label: 'Library (Day)', color: '#b5822b' },
+    { id: 'velvet-noir', label: 'Velvet Noir', color: '#d81f4f' },
+    { id: 'angel-gold', label: 'Angel (White & Gold)', color: '#c8a03c' },
 ];
 
 const DEFAULT_THEME = 'dark-red';
