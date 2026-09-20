@@ -30,7 +30,7 @@ export const defaultSettings = {
     // (The old 'auto' mode was removed; saved 'auto' values are converted to 'always'.)
     openMode: 'always',
     // Remove older boards from the prompt sent to the model (the latest one stays as a format example).
-    trimOldBoards: false,
+    trimOldBoards: true,
 };
 
 export const OPEN_MODES = [

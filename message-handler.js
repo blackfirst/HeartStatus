@@ -20,6 +20,8 @@ export function setMutationDiscarder(fn) {
 
 let legacyWarned = false;
 
+// ─── Rendering ───
+
 export function renderMessage(mesId) {
     const s = getSettings();
     const idx = Number(mesId);
@@ -89,6 +91,7 @@ export function scheduleRenderAll(delay = 150) {
     renderTimer = setTimeout(renderAll, delay);
 }
 
+// ─── Prompt context (generate interceptor) ───
 // Registered in manifest.json as "heartStatusContextFilter". SillyTavern passes a
 // copy of the chat used for the prompt, so replacing entries never touches the
 // messages.
@@ -111,6 +114,8 @@ export function filterContext(chat) {
         reportError('[Heart Status] filterContext error:', error);
     }
 }
+
+// ─── Maintenance ───
 
 // Reads the board out of a message's raw text into msg.extra.heartStatus, then
 // erases it from the message text (and the active swipe) so it never sits
