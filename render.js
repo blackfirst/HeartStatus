@@ -90,7 +90,8 @@ export function buildCardHtml(data, opts = {}) {
       </span>
       <span class="hst-mini-mid">
         <b class="hst-mini-name">${name || 'Status'}</b>
-        <span class="hst-mini-rel">${data.relationship ? `<span class="hst-mini-rel-label">${escapeHtml(data.relationship)}</span><span class="hst-mini-dot">·</span>` : ''}<span class="hst-mini-stats-inline">${miniStatsInline(data)}</span></span>
+        ${data.relationship ? `<span class="hst-mini-rel-label">${escapeHtml(data.relationship)}</span>` : ''}
+        <span class="hst-mini-stats-inline">${miniStatsInline(data)}</span>
       </span>
       <span class="hst-mini-chev" aria-hidden="true">▾</span>
     </summary>
