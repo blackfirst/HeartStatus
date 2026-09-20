@@ -143,7 +143,7 @@ export function checkNotify(mesId) {
 // ─── Prompt context (generate interceptor) ───
 // Registered in manifest.json as "heartStatusContextFilter". SillyTavern passes a
 // copy of the chat used for the prompt, so replacing entries never touches the
-// saved messages.
+// messages.
 
 export function filterContext(chat) {
     try {
@@ -167,7 +167,7 @@ export function filterContext(chat) {
 // ─── Maintenance ───
 
 // Reads the board out of a message's raw text into msg.extra.heartStatus, then
-// erases it from the visible/saved text (and the active swipe) so it never sits
+// erases it from the message text (and the active swipe) so it never sits
 // in the message itself — not in the chat log, not while editing, not in swipes.
 // Only call this once a message is finalized (never mid-stream: it mutates
 // msg.mes, which an in-progress generation is still appending to).
@@ -186,7 +186,7 @@ async function captureOne(msg) {
 }
 
 // Sweeps the whole chat (cheap: hasBoardTag skips anything already captured).
-// No-ops entirely when the "erase from saved message" setting is off.
+// No-ops entirely when the "Remove board from message" setting is off.
 export async function captureAll() {
     if (!getSettings()?.stripFromMessage) return false;
     try {

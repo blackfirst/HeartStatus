@@ -185,7 +185,7 @@ export function setupUI() {
             </div>
             <hr>
             <label class="checkbox_label" title="If off, the board is tracked but nothing shows in the chat at all."><input type="checkbox" id="hst-show-in-chat"><span>Show in chat (as a card)</span></label>
-            <label class="checkbox_label" title="If off, the raw <info_board> text stays in the saved message (e.g. visible while editing) instead of being erased."><input type="checkbox" id="hst-strip"><span>Remove board from saved message</span></label>
+            <label class="checkbox_label" title="If off, the raw <info_board> text stays in the message (e.g. visible while editing) instead of being erased."><input type="checkbox" id="hst-strip"><span>Remove board from message</span></label>
             <hr>
             <div class="hst-row">
                 <label for="hst-theme">Theme</label>

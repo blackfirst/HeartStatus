@@ -17,7 +17,7 @@ export const defaultSettings = {
     // Show the board as a card under the message. If off, nothing is shown in the
     // chat for it at all (stats are still tracked either way).
     showInChat: true,
-    // Erase the raw <info_board>...</info_board> text from the saved message (and
+    // Erase the raw <info_board>...</info_board> text from the message (and
     // its active swipe) once a reply finishes, keeping the parsed values in
     // msg.extra.heartStatus instead. If off, the raw board stays in the message
     // text (e.g. visible while editing) and is simply hidden/replaced on display.

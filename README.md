@@ -3,7 +3,7 @@
 Tracks a character's **Trust / Arousal / Jealousy / Heart Score** (Arousal and Jealousy are always on) during a roleplay and shows
 it as a status card under each reply. This is the extension version of the old
 "Heart Status" kit (a prompt + a regex script): it does both jobs by itself, and adds a settings
-panel, notifications and manual control — and keeps the raw board text out of your saved chat.
+panel, notifications and manual control — and keeps the raw board text out of your chat.
 
 ## What it does
 
@@ -11,7 +11,7 @@ panel, notifications and manual control — and keeps the raw board text out of 
    instruction, plus the *previous* board's values so the numbers keep moving gradually.
 2. **Reads the board** the model writes (`<info_board> … </info_board>`) and replaces it in the
    chat with a card: Heart Score ring, stat bars, date/time, location, thought and goal.
-3. **Erases the board from the saved message (optional).** Once a reply is finished, the parsed
+3. **Erases the board from the message (optional).** Once a reply is finished, the parsed
    values are moved into that message's `extra.heartStatus`. By default the raw
    `<info_board>…</info_board>` text is then deleted from `mes` (and the active swipe), so nothing
    is printed in the chat and editing or swiping a message never shows the raw block — the card
@@ -21,8 +21,8 @@ panel, notifications and manual control — and keeps the raw board text out of 
    message, but you can turn that off and have the values tracked silently instead (still visible
    any time from the quick panel).
 5. **Keeps the prompt small.** Once a board's text is captured/erased there's nothing left in the
-   saved chat to trim; if you turn erasing off, older raw boards are automatically stripped from
-   what's *sent to the model* (not your saved chat) to save tokens, with the latest one kept as a
+   chat to trim; if you turn erasing off, older raw boards are automatically stripped from
+   what's *sent to the model* (not your chat) to save tokens, with the latest one kept as a
    format example.
 
 The card has 2 themes (Dark, Light), set from the Theme dropdown in
@@ -58,16 +58,16 @@ Reload SillyTavern, then open **Extensions** and find **Heart Status** in the se
 | Enable | Master switch. Off = no prompt, no cards. |
 | Notify on big changes / threshold | Toast when Trust, Arousal, Jealousy or the Heart Score percentage moves by at least this many points in one reply. |
 | **Show in chat (as a card)** | On = the board renders as a card under the message (default). Off = nothing is shown in the chat at all — stats are still tracked and readable from the quick panel. |
-| **Remove board from saved message** | On = the raw `<info_board>` text is erased from the saved message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
+| **Remove board from message** | On = the raw `<info_board>` text is erased from the message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
 | Theme | Dark / Light. Applies to every card and the quick panel, and is remembered. |
 | **Card open state** | Always open (default) / Always collapsed. This only sets the *starting* state each time a card is drawn — you can still click any card's `💗 Name's Status` line to open or close it by hand regardless of this setting. |
 | **Compact card (mini row, tap to expand)** | On = each card collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full card. Off = the full card shows every time (default). |
 
 These two switches are independent, so all four combinations work: card + keep raw text
 (default), card + erased, hidden + keep raw text, or hidden + erased. Older messages that
-still have a raw board embedded in their text (saved before this version, or loaded from an older
-backup) get swept and captured automatically when the chat opens, if "Remove board from saved
-message" is on.
+still have a raw board embedded in their text (from before this version, or loaded from an older
+backup) get swept and captured automatically when the chat opens, if "Remove board from message"
+is on.
 
 ### Quick panel
 
@@ -124,7 +124,7 @@ lines after it, so a missing close can never swallow the rest of the reply.
 - All text from the model is HTML-escaped before it goes into the card.
 - The Trust bar now fills `0–100%`. The old card drew it as `50% + trust/2`, so Trust 0 showed a
   half-full bar.
-- The board is captured out of the message and erased from the saved text, instead of just being
+- The board is captured out of the message and erased from the message text, instead of just being
   hidden by the display — see "What it does" above.
 
 ## Files
@@ -153,7 +153,7 @@ heart-status/
 - **Nothing shows in the chat** — first check "Show in chat" is on; if it is, the reply likely had
   no parseable board at all (no `<info_board>` tag, or fewer than three recognised fields).
 - **Raw `<info_board>` text visible while editing a message** — expected if "Remove board from
-  saved message" is off. If it's on and you still see raw text after generation is clearly
+  message" is off. If it's on and you still see raw text after generation is clearly
   finished, something failed to parse it — check the board has at least Trust or Heart Score plus
   two other fields.
 - **Two cards** — this extension auto-disables the old regex script on first load, but if it

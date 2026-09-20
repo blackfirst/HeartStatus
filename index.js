@@ -73,7 +73,7 @@ jQuery(async () => {
             eventSource.on(event_types.GENERATION_ENDED, () => {
                 updatePromptInjection();
                 // The reply is finalized now, so it's safe to pull its board into
-                // msg.extra and erase it from the saved text.
+                // msg.extra and erase it from the message text.
                 captureAll().then(() => scheduleRenderAll(300));
                 scheduleRenderAll(300);
             });
