@@ -51,14 +51,14 @@ export const THEMES = [
     { id: 'idol-day', label: 'Idol Stage (Day)', color: '#e8388a' },
     { id: 'library-night', label: 'Library (Night)', color: '#c99a4a' },
     { id: 'library-day', label: 'Library (Day)', color: '#b5822b' },
-    { id: 'demon', label: 'Demon', color: '#e0243f' },
+    { id: 'demons', label: 'Demons', color: '#e0243f' },
     { id: 'gods', label: 'Gods', color: '#c8a03c' },
 ];
 
 const DEFAULT_THEME = 'dark-red';
 
 // Themes that were renamed keep working: a saved old id is mapped to its replacement.
-const LEGACY_THEMES = { 'velvet-noir': 'demon', 'fallen-angel': 'demon', 'angel-gold': 'gods' };
+const LEGACY_THEMES = { 'velvet-noir': 'demons', 'fallen-angel': 'demons', 'demon': 'demons', 'angel-gold': 'gods' };
 
 export function normalizeTheme(id) {
     const mapped = LEGACY_THEMES[id] || id;
