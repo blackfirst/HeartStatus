@@ -335,16 +335,43 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-name,
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-score {
   font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif; font-style: italic;
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="trust"] { --sc: var(--hst-lib-ribbon-trust) !important; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="arousal"] { --sc: var(--hst-lib-ribbon-arousal) !important; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="jealousy"] { --sc: var(--hst-lib-ribbon-jealousy) !important; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info {
-  background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line); border-left: none; border-radius: 3px;
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="trust"],
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="arousal"],
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="jealousy"] { --sc: var(--hst-c1) !important; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat {
+  background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,var(--hst-lib-shadow-a));
 }
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info {
+  position: relative; padding-left: 32px;
+  background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line); border-left: none; border-radius: 3px;
+  background-image:
+    linear-gradient(var(--hst-lib-rule-red) 0 2px, transparent 2px) top / 100% 100% no-repeat,
+    repeating-linear-gradient(var(--hst-lib-card-line) 0 1px, transparent 1px 22px) left 0 top 24px / 100% calc(100% - 24px) no-repeat;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info::before {
+  content: ''; position: absolute; left: 13px; top: 13px; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--hst-bg2); border: 1px solid var(--hst-lib-card-line); box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info-label { font-variant: small-caps; letter-spacing: 2px; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.loc { --ac: var(--hst-lib-rule-blue); }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.thought { --ac: var(--hst-c2); }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.thought .hst-info-value { font-style: italic; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.goal { --ac: var(--hst-lib-rule-red); }
+
+/* Compact shell itself: same paper card, corner radius and dashed ink-stamp ring as the full card */
+details.hst-wrap[data-hst-theme^="library-"] .hst-card.hst-compact {
+  border-radius: 8px; border-color: var(--hst-lib-card-line);
+  box-shadow: 0 10px 24px rgba(0,0,0,var(--hst-lib-shadow-a));
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-ring::before {
+  content: ''; position: absolute; inset: -5px; border-radius: 50%; pointer-events: none;
+  border: 1px dashed rgba(var(--hst-rgb),0.4);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-score { font-variant-numeric: oldstyle-nums; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: italic; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label::before { content: '§ '; }
 
 /* ---- Settings drawer ---- */
 .hst-settings { display: flex; flex-direction: column; gap: 6px; }
@@ -732,28 +759,67 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
 .hst-modal[data-hst-theme^="library-"] #hst-ov-clear { background: transparent; color: var(--hst-c1); border: 1px solid var(--hst-c1); border-radius: 2px; padding: 8px 18px; }
 
 /* Narrow card: stack the two pages, drop the spine, and bring the tabs back into normal
-   flow as a wrapped row (no more sticking out past the card edge — there's no room). */
+   flow — now as three square sticky notes sitting in the gap right under the date
+   ticket, instead of a wrapped row of ribbon flags above the header. */
 @media (max-width: 480px) {
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
     grid-template-columns: minmax(0, 1fr); row-gap: 14px;
-    grid-template-areas: "sticks" "head" "ring" "date" "loc" "thought" "goal";
+    grid-template-areas: "head" "ring" "date" "sticks" "loc" "thought" "goal";
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
-    grid-area: sticks; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: stretch;
+    grid-area: sticks; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0;
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat { clip-path: none; border-radius: 4px; margin-right: 0; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
+    --sc: var(--hst-c1) !important;
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
+    clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 4px;
+    box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
+    transform: rotate(var(--hst-lib-tilt, 0deg));
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat::before {
+    content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
 }
 @container hst (max-width: 480px) {
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
     grid-template-columns: minmax(0, 1fr); row-gap: 14px;
-    grid-template-areas: "sticks" "head" "ring" "date" "loc" "thought" "goal";
+    grid-template-areas: "head" "ring" "date" "sticks" "loc" "thought" "goal";
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
-    grid-area: sticks; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: stretch;
+    grid-area: sticks; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0;
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat { clip-path: none; border-radius: 4px; margin-right: 0; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
+    --sc: var(--hst-c1) !important;
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
+    clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 4px;
+    box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
+    transform: rotate(var(--hst-lib-tilt, 0deg));
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat::before {
+    content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
 }
 
 /* ═══════════════════════════════════════════
