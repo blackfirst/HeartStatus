@@ -12,7 +12,7 @@ export const defaultSettings = {
     // Toast when a stat jumps by at least `notifyThreshold` points (0–100 scale).
     showNotifications: true,
     notifyThreshold: 15,
-    // 'dark-red' | 'white-pink' | 'white-gold'
+    // 'dark-red' | 'white-pink'
     theme: 'dark-red',
     // Show the board as a card under the message. If off, nothing is shown in the
     // chat for it at all (stats are still tracked either way).
@@ -33,9 +33,8 @@ export const defaultSettings = {
 };
 
 export const THEMES = [
-    { id: 'dark-red', label: 'Dark Red', color: '#ff3650' },
-    { id: 'white-pink', label: 'White Pink', color: '#ff6f9c' },
-    { id: 'white-gold', label: 'White Gold', color: '#c9962f' },
+    { id: 'dark-red', label: 'Dark', color: '#ff3650' },
+    { id: 'white-pink', label: 'Light', color: '#ff6f9c' },
 ];
 
 export const DEFAULT_THEME = 'dark-red';

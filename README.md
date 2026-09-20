@@ -25,7 +25,7 @@ panel, notifications and manual control — and keeps the raw board text out of 
    what's *sent to the model* (not your saved chat) to save tokens, with the latest one kept as a
    format example.
 
-The card has 3 themes (Dark Red, White Pink, White Gold), set from the Theme dropdown in
+The card has 2 themes (Dark, Light), set from the Theme dropdown in
 settings. It also colors the quick panel (see below).
 
 ## Install
@@ -59,7 +59,7 @@ Reload SillyTavern, then open **Extensions** and find **Heart Status** in the se
 | Notify on big changes / threshold | Toast when Trust, Arousal, Jealousy or the Heart Score percentage moves by at least this many points in one reply. |
 | **Show in chat (as a card)** | On = the board renders as a card under the message (default). Off = nothing is shown in the chat at all — stats are still tracked and readable from the quick panel. |
 | **Remove board from saved message** | On = the raw `<info_board>` text is erased from the saved message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
-| Theme | Dark Red / White Pink / White Gold. Applies to every card and the quick panel, and is remembered. |
+| Theme | Dark / Light. Applies to every card and the quick panel, and is remembered. |
 | **Compact card (mini row, tap to expand)** | On = each card collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full card. Off = the full card shows every time (default). |
 | Track Arousal / Track Jealousy | Turn a stat off everywhere: the prompt stops asking for it and the card hides it. |
 
