@@ -30,18 +30,8 @@ Themes:
 
 ## Install
 
-**Repository:** https://github.com/blackfirst/HeartStatus.git — this one package includes
+**Install:** https://github.com/blackfirst/HeartStatus.git — this one package includes
 everything (prompt injection, parser, card, settings); you don't need anything else alongside it.
-
-In SillyTavern, go to **Extensions → Install extension**, paste that URL, and reload. Or clone/
-download it and copy the `heart-status` folder to:
-
-```
-SillyTavern/data/<your-user>/extensions/heart-status          (per user)
-SillyTavern/public/scripts/extensions/third-party/heart-status (all users)
-```
-
-Reload SillyTavern, then open **Extensions** and find **Heart Status** in the settings list.
 
 > ⚠️ **Already using the old separate "Heart Status" kit (prompt + regex script)?** This
 > extension replaces both, so leaving the old ones on gives you double instructions and double
