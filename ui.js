@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════
 
 import { saveSettingsDebounced } from '../../../../script.js';
-import { THEMES, LIMITS, STAT_COLORS, normalizeTheme } from './config.js';
+import { THEMES, OPEN_MODES, LIMITS, STAT_COLORS, normalizeTheme, normalizeOpenMode } from './config.js';
 import { getSettings, getChat, setOverride, clearOverride, getActiveOverride } from './state.js';
 import { collectHistory, lastBoardIndex, dataOf } from './history.js';
 import { escapeHtml } from './render.js';
@@ -31,6 +31,7 @@ export function syncUI() {
     $('#hst-notify').prop('checked', !!s.showNotifications);
     $('#hst-threshold').val(s.notifyThreshold);
     $('#hst-theme').val(normalizeTheme(s.theme));
+    $('#hst-open-mode').val(normalizeOpenMode(s.openMode));
     $('#hst-show-in-chat').prop('checked', s.showInChat !== false);
     $('#hst-strip').prop('checked', s.stripFromMessage !== false);
     $('#hst-arousal').prop('checked', s.showArousal !== false);
@@ -169,6 +170,7 @@ export function showPanel() {
 export function setupUI() {
     try {
         const themeOptions = THEMES.map(t => `<option value="${t.id}">${t.label}</option>`).join('');
+        const openModeOptions = OPEN_MODES.map(m => `<option value="${m.id}">${m.label}</option>`).join('');
         const html = `
 <div class="inline-drawer">
     <div class="inline-drawer-toggle inline-drawer-header">
@@ -192,6 +194,10 @@ export function setupUI() {
                 <select id="hst-theme" class="text_pole">${themeOptions}</select>
             </div>
             <label class="checkbox_label" title="Show a one-row mini card (small ring, name, inline stats) — tap it to expand location/thought/goal."><input type="checkbox" id="hst-compact"><span>Compact card (mini row, tap to expand)</span></label>
+            <div class="hst-row" title="Whether a card starts expanded or collapsed. You can still click any card's summary line to open/close it by hand either way.">
+                <label for="hst-open-mode">Card open state</label>
+                <select id="hst-open-mode" class="text_pole">${openModeOptions}</select>
+            </div>
             <hr>
             <label class="checkbox_label"><input type="checkbox" id="hst-arousal"><span>Track Arousal</span></label>
             <label class="checkbox_label"><input type="checkbox" id="hst-jealousy"><span>Track Jealousy</span></label>
@@ -235,6 +241,11 @@ export function setupUI() {
             save();
         });
         $('#hst-theme').on('change', function () { setTheme(this.value); });
+        $('#hst-open-mode').on('change', function () {
+            getSettings().openMode = normalizeOpenMode(this.value);
+            save();
+            refreshAll();
+        });
         $('#hst-show-in-chat').on('change', function () { getSettings().showInChat = this.checked; save(); refreshAll(); });
         $('#hst-strip').on('change', function () {
             getSettings().stripFromMessage = this.checked;

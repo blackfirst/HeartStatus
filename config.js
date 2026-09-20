@@ -28,9 +28,27 @@ export const defaultSettings = {
     // Show a one-row mini card (small ring, name, inline stats) with a tap-to-expand
     // detail panel for location/thought/goal, instead of the full card every time.
     compactMode: false,
+    // Whether a card starts expanded or collapsed:
+    // 'auto'   — only the latest message's card starts expanded, older ones collapse
+    //            to the "💗 Name's Status" summary line (existing default behavior).
+    // 'always' — every card starts expanded, always.
+    // 'never'  — every card starts collapsed to the summary line; tap to open any of them.
+    // This only sets the STARTING state — the person can still click any card's summary
+    // to open/close it by hand regardless of this setting.
+    openMode: 'auto',
     // Remove older boards from the prompt sent to the model (the latest one stays as a format example).
     trimOldBoards: true,
 };
+
+export const OPEN_MODES = [
+    { id: 'auto', label: 'Auto (only latest open)' },
+    { id: 'always', label: 'Always open' },
+    { id: 'never', label: 'Always collapsed' },
+];
+
+export function normalizeOpenMode(id) {
+    return OPEN_MODES.some(m => m.id === id) ? id : 'auto';
+}
 
 export const THEMES = [
     { id: 'dark-red', label: 'Dark', color: '#ff3650' },

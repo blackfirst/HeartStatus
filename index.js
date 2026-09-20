@@ -4,7 +4,7 @@
 
 import { eventSource, event_types } from '../../../../script.js';
 import { extension_settings } from '../../../extensions.js';
-import { extensionName, defaultSettings, normalizeTheme } from './config.js';
+import { extensionName, defaultSettings, normalizeTheme, normalizeOpenMode } from './config.js';
 import { reportError } from './diagnostics.js';
 import { updatePromptInjection } from './prompts.js';
 import { setupUI, syncUI } from './ui.js';
@@ -29,6 +29,7 @@ function loadSettings() {
             if (s[key] === undefined) s[key] = structuredClone(defaultSettings[key]);
         }
         s.theme = normalizeTheme(s.theme);
+        s.openMode = normalizeOpenMode(s.openMode);
     } catch (error) {
         reportError('[Heart Status] Error loading settings:', error);
         extension_settings[extensionName] = structuredClone(defaultSettings);

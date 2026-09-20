@@ -60,8 +60,11 @@ export function renderMessage(mesId) {
         return;
     }
 
-    // Only the newest board stays open; older ones collapse automatically.
-    const open = idx === lastBoardIndex(chat);
+    // Only the newest board stays open; older ones collapse automatically — unless
+    // openMode overrides that ('always' / 'never' apply to every card the same way).
+    const open = s.openMode === 'always' ? true
+        : s.openMode === 'never' ? false
+        : idx === lastBoardIndex(chat);
     const previous = previousData(chat, idx);
     const deltas = computeDeltas(data, previous ? previous.data : null);
     const key = [idx, hashData(data), open ? 1 : 0, s.showArousal ? 1 : 0, s.showJealousy ? 1 : 0, s.compactMode ? 1 : 0, msg.name || ''].join('|');
