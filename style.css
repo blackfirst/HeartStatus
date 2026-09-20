@@ -244,6 +244,58 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-mini-body { margin-top: 14px; }
 .hst-mini-body .hst-info:last-child { margin-bottom: 0; }
 
+/* ---- Compact mode theming (Racing / Idol Stage match their full-card look) ---- */
+
+/* Racing: italic, tabular-nums score + name, same touch as the full card */
+details.hst-wrap[data-hst-theme^="racing-"] .hst-mini-name { font-style: italic; letter-spacing: 0.3px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-mini-score { font-style: italic; font-variant-numeric: tabular-nums; }
+
+/* Idol Stage: rainbow ring, bigger name, neon stat colors + framed panels in the expanded body */
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-name { font-size: 15px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-ring .hst-ring-track,
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-ring .hst-ring-rotate { stroke: transparent; filter: none; animation: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-ring::before {
+  content: ''; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: conic-gradient(from 0deg, #ff4fa3, #ffd84d, #3ee0ff, #a66bff, #ff4fa3);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px), #000 calc(100% - 1px), transparent 100%);
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px), #000 calc(100% - 1px), transparent 100%);
+  animation: hst-id-spin 10s linear infinite;
+}
+
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat[data-stat="trust"] { --sc: var(--hst-idol-trust) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat[data-stat="arousal"] { --sc: var(--hst-idol-arousal) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat[data-stat="jealousy"] { --sc: var(--hst-idol-jealousy) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 14px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  background: none; border: none; border-radius: 0; box-shadow: none; padding: 0; min-width: 44px;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat br { display: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat b { order: 1; font-size: 14px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat-bar {
+  order: 2; position: relative; width: 22px; height: 74px; margin: 0; overflow: hidden; border-radius: 11px;
+  background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--sc) calc(var(--hst-idol-glow) * 100%), transparent));
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat-bar-fill {
+  position: absolute; left: 0; right: 0; bottom: 0; width: 100% !important;
+  height: calc(var(--p, 0) * 1%); border-radius: 0; background: var(--sc);
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-badge { order: 3; width: 22px; height: 22px; margin: 0; font-size: 11px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat small { order: 4; font-size: 10px; letter-spacing: 0.3px; text-transform: none; }
+
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info {
+  background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line); border-left: none; border-radius: 12px;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info.loc { --ac: var(--hst-idol-venue); }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info.thought { --ac: var(--hst-idol-bubble-line); }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info.goal { --ac: var(--hst-c1); }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info.thought .hst-info-value { font-style: italic; }
+
+@media (prefers-reduced-motion: reduce) {
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-ring::before { animation: none; }
+}
+
 /* ---- Settings drawer ---- */
 .hst-settings { display: flex; flex-direction: column; gap: 6px; }
 .hst-row { display: flex; gap: 6px; align-items: center; justify-content: space-between; }

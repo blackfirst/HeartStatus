@@ -62,7 +62,7 @@ Reload SillyTavern, then open **Extensions** and find **Heart Status** in the se
 | **Remove board from message** | On = the raw `<info_board>` text is erased from the message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
 | Theme | Dark / Light / Racing (Dark) / Racing (Light) / Idol Stage (Night) / Idol Stage (Day). Applies to every card and the quick panel, and is remembered. |
 | **Card open state** | Always open (default) / Always collapsed. This only sets the *starting* state each time a card is drawn — you can still click any card's `💗 Name's Status` line to open or close it by hand regardless of this setting. |
-| **Compact card (mini row, tap to expand)** | On = each card collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full card. Off = the full card shows every time (default). |
+| **Compact card (mini row, tap to expand)** | On = each card collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full card. Off = the full card shows every time (default). See "Card details" below for how this looks per theme. |
 
 These two switches are independent, so all four combinations work: card + keep raw text
 (default), card + erased, hidden + keep raw text, or hidden + erased. Older messages that
@@ -86,7 +86,10 @@ Open it from the **wand menu → Heart Status**.
   name, their relationship label, and Trust/Arousal/Jealousy inline. Tap anywhere on the
   row to expand it (no page reload, no re-generation) and see Location/Thoughts/Goal —
   tap again to collapse. Compact mode only changes what the *expanded* card looks like; whether cards start open
-  or collapsed is set by **Card open state**.
+  or collapsed is set by **Card open state**. The mini row and its expanded panel follow the
+  current theme too — Racing gives the name and score its italic look, Idol Stage draws the mini
+  ring as a spinning rainbow, recolors Trust/Arousal/Jealousy to its neon palette, and frames
+  Location/Thoughts/Goal the same way the full card does.
 - Missing fields are shown as “—” instead of breaking the card.
 - Ranges: Trust / Arousal / Jealousy `0–100`, Heart Score `-1000–1000`. The percentage is
   always `(score + 1000) / 20`, worked out from the Heart Score itself — a percentage the model writes in the board is ignored, so the “Affection” bar and label always match the number in the middle. The Heart Score ring itself is always drawn as a full circle.
