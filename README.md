@@ -95,16 +95,16 @@ Open it from the **wand menu → Heart Status**.
 ````
 <info_board>
 ```
-⏰ Time: 09:15 AM → 09:40 AM
+⏰ Time: 06:30 PM → 07:05 PM
 🗓️ Date: Mon 03 Mar 2025 | Spring
-📍 Location: Kitchen | 💡 Dim
+📍 Location: Kitchen | 💡 Warm
 🤝 Trust: 62
 💓 Arousal: 40
 🔥 Jealousy: 12
 💗 Heart Score: 210 (61%)
-🏷️ Relationship: Anna ↔ You: Close friends
-💭 Thought: "I hope he stays a little longer."
-🏆 Goal: Get him to stay for breakfast
+🏷️ Relationship: {{char}} ↔ {{user}}: Close friends
+💭 Thought: "I could get used to cooking side by side with {{user}}."
+🏆 Goal: Finish cooking dinner together with {{user}}
 ```
 </info_board>
 ````
