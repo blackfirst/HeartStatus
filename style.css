@@ -171,6 +171,8 @@ details.hst-wrap > summary {
 .hst-settings { display: flex; flex-direction: column; gap: 6px; }
 .hst-row { display: flex; gap: 6px; align-items: center; justify-content: space-between; }
 .hst-row .text_pole { width: auto; min-width: 120px; flex: 0 1 55%; }
+.hst-row label[for="hst-custom-css"] { flex: 0 0 auto; padding-top: 6px; }
+#hst-custom-css { flex: 1 1 auto; width: 100%; min-width: 0; font-family: monospace; font-size: 12px; resize: vertical; }
 .hst-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
 
 /* ---- Quick panel ---- */

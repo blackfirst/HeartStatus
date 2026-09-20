@@ -21,12 +21,15 @@ export const defaultSettings = {
     // its active swipe) once a reply finishes, keeping the parsed values in
     // msg.extra.heartStatus instead. If off, the raw board stays in the message
     // text (e.g. visible while editing) and is simply hidden/replaced on display.
-    stripFromMessage: true,
+    stripFromMessage: false,
     // SFW switches: hide a stat everywhere (prompt, parser output and card).
     showArousal: true,
     showJealousy: true,
     // Remove older boards from the prompt sent to the model (the latest one stays as a format example).
     trimOldBoards: true,
+    // User-supplied CSS, injected as-is into a <style> tag so anyone can restyle
+    // the card/panel without editing style.css directly.
+    customCss: '',
 };
 
 export const THEMES = [

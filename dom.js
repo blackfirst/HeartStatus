@@ -111,3 +111,16 @@ export function setThemeEverywhere(theme) {
         el.classList.toggle('active', el.getAttribute('data-hst-theme-id') === theme);
     });
 }
+
+// Lets anyone override the card/panel's look from the settings panel, without
+// touching style.css. Injected as its own <style> tag so it always applies last
+// (after style.css) and can be swapped out cleanly.
+export function applyCustomCss(css) {
+    let style = document.getElementById('hst-custom-css');
+    if (!style) {
+        style = document.createElement('style');
+        style.id = 'hst-custom-css';
+        document.head.appendChild(style);
+    }
+    style.textContent = typeof css === 'string' ? css : '';
+}

@@ -33,6 +33,16 @@ settings. It also colors the quick panel (see below).
 **Repository:** https://github.com/blackfirst/HeartStatus.git — this one package includes
 everything (prompt injection, parser, card, settings); you don't need anything else alongside it.
 
+In SillyTavern, go to **Extensions → Install extension**, paste that URL, and reload. Or clone/
+download it and copy the `heart-status` folder to:
+
+```
+SillyTavern/data/<your-user>/extensions/heart-status          (per user)
+SillyTavern/public/scripts/extensions/third-party/heart-status (all users)
+```
+
+Reload SillyTavern, then open **Extensions** and find **Heart Status** in the settings list.
+
 > ⚠️ **Already using the old separate "Heart Status" kit (prompt + regex script)?** This
 > extension replaces both, so leaving the old ones on gives you double instructions and double
 > cards. The first time this extension loads it **automatically disables the old regex script**
@@ -48,12 +58,13 @@ everything (prompt injection, parser, card, settings); you don't need anything e
 | Enable | Master switch. Off = no prompt, no cards. |
 | Notify on big changes / threshold | Toast when Trust, Arousal, Jealousy or the Heart Score percentage moves by at least this many points in one reply. |
 | **Show in chat (as a card)** | On = the board renders as a card under the message (default). Off = nothing is shown in the chat at all — stats are still tracked and readable from the quick panel. |
-| **Remove board from saved message** | On = the raw `<info_board>` text is erased from the saved message once a reply finishes (default). Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. |
+| **Remove board from saved message** | On = the raw `<info_board>` text is erased from the saved message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
 | Theme | Dark Red / White Pink / White Gold. Applies to every card and the quick panel, and is remembered. |
 | Track Arousal / Track Jealousy | Turn a stat off everywhere: the prompt stops asking for it and the card hides it. |
+| **Custom CSS** | Raw CSS, applied after the extension's own stylesheet — restyle the card, quick panel or anything else without editing `style.css`. Common targets: `.hst-card`, `.hst-stat`, `.hst-score`, `.hst-eyebrow`, `.hst-info`, `#hst-modal`. Applies live as you type. |
 
-These two switches are independent, so all four combinations work: card + erased (default), card
-+ keep raw text in the message, hidden + erased, or hidden + keep raw text. Older messages that
+These two switches are independent, so all four combinations work: card + keep raw text
+(default), card + erased, hidden + keep raw text, or hidden + erased. Older messages that
 still have a raw board embedded in their text (saved before this version, or loaded from an older
 backup) get swept and captured automatically when the chat opens, if "Remove board from saved
 message" is on.
