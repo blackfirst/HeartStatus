@@ -70,27 +70,3 @@ export const STAT_COLORS = {
     arousal: '#ff4d6d',
     jealousy: '#ff8a3d',
 };
-
-// Ring colour follows the Heart Score percentage (0 = -1000, 100 = +1000):
-// cold blue-grey when the relationship is strained, warming through violet and pink
-// to red, then gold at the very top. Same on every theme.
-const HEART_COLOR_STOPS = [
-    [0,   [95, 126, 168]],
-    [25,  [143, 127, 192]],
-    [50,  [224, 105, 154]],
-    [75,  [255, 61, 110]],
-    [100, [255, 176, 32]],
-];
-
-export function heartColor(pct) {
-    const p = Math.min(100, Math.max(0, Number(pct)));
-    if (!Number.isFinite(p)) return null;
-    let i = 0;
-    while (i < HEART_COLOR_STOPS.length - 2 && p > HEART_COLOR_STOPS[i + 1][0]) i++;
-    const [p0, c0] = HEART_COLOR_STOPS[i];
-    const [p1, c1] = HEART_COLOR_STOPS[i + 1];
-    const t = (p - p0) / (p1 - p0);
-    const rgb = c0.map((v, k) => Math.round(v + (c1[k] - v) * t));
-    const hex = '#' + rgb.map(v => v.toString(16).padStart(2, '0')).join('');
-    return { hex, rgb: rgb.join(',') };
-}
