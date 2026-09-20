@@ -602,12 +602,12 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-inf
 /* ═══════════════════════════════════════════
    LIBRARY THEMES — layout & decoration
    (library-night and library-day; palettes are above)
-   Layout (full card): an open book. A spine runs down the middle; the left page holds
-   the ring + date/time stamp, the right page holds Location/Thought/Goal as ruled
-   library-card-catalog entries. The three stats are horizontal sticky-note index tabs
-   clipped to a flag point, stacked down the fore-edge (outer right side) of the card —
-   clear of the title, not hanging over it. The gauge stays a COMPLETE 360° ring, same
-   as every other theme.
+   Layout (full card): an open book, as 4 real grid columns — left page, spine gutter,
+   right page, tab rail — so nothing ever overlaps regardless of content length. Left
+   page holds the ring + date/time stamp, right page holds Location/Thought/Goal as
+   ruled library-card-catalog entries, and the tab rail holds the three stats as
+   horizontal sticky-note flags down the fore-edge. The gauge stays a COMPLETE 360°
+   ring, same as every other theme.
    ═══════════════════════════════════════════ */
 
 details.hst-wrap[data-hst-theme^="library-"] .hst-card {
@@ -619,26 +619,27 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card,
   font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
-/* Grid layout of the full card: header row, then two book pages. The tab stack
-   (.hst-stats) is positioned absolutely against this box — see "Index tabs" below —
-   so it is intentionally left out of the template/areas here. */
+/* Grid layout of the full card: 4 real columns — left page, spine gutter, right page,
+   and a dedicated tab rail. Because the tab rail is its own column (not an overlay),
+   it reserves its own space and can never cover the Location/Thought/Goal cards. */
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
-  position: relative; display: grid;
-  grid-template-columns: 1fr 1fr; column-gap: 30px; row-gap: 16px;
-  grid-template-areas: "head head" "ring loc" "date thought" "date goal";
+  display: grid;
+  grid-template-columns: 1fr 22px 1fr 104px; column-gap: 14px; row-gap: 16px;
+  grid-template-areas: "head head head head" "ring gutter loc tabs" "date gutter thought tabs" "date gutter goal tabs";
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-divider { display: none; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; padding-right: 74px; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-center { grid-area: ring; align-self: start; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-area: date; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.loc { grid-area: loc; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.thought { grid-area: thought; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
 
-/* Spine: a shaded gutter running down the middle, like an open book's binding */
+/* Spine: a shaded gutter column running down the middle, like an open book's binding.
+   It's a real grid item (the card's own ::before), not an overlay, so it always lands
+   exactly between the two pages regardless of card width. */
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before {
-  content: ''; position: absolute; top: 8px; bottom: 8px; left: 50%; width: 30px; margin-left: -15px;
-  pointer-events: none; z-index: 0;
+  content: ''; grid-area: gutter; align-self: stretch; pointer-events: none;
   background: linear-gradient(90deg, transparent, rgba(0,0,0,var(--hst-lib-spine-a)) 45%, rgba(0,0,0,calc(var(--hst-lib-spine-a) * 1.4)) 50%, rgba(0,0,0,var(--hst-lib-spine-a)) 55%, transparent);
 }
 
@@ -652,32 +653,31 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-pill {
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-pill::before { content: '§ '; }
 
-/* Index tabs: horizontal sticky-note flags stacked down the card's outer (right) edge,
-   clear of the title — not hanging over it. Positioned against the card box itself
-   (see the grid comment above), so they don't consume grid space. */
+/* Index tabs: horizontal sticky-note flags in their own rail down the fore-edge (outer
+   right side) of the card. A real grid column, so they never overlap the page cards —
+   they only bleed a few px past the card's own padding to look attached to the edge. */
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
-  position: absolute; top: 54px; right: -12px; z-index: 3;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 7px; margin: 0;
+  grid-area: tabs; display: flex; flex-direction: column; align-items: stretch; gap: 8px; margin: 0;
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"] { --sc: var(--hst-lib-ribbon-trust) !important; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"] { --sc: var(--hst-lib-ribbon-arousal) !important; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-lib-ribbon-jealousy) !important; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
-  display: flex; flex-direction: row; align-items: center; gap: 7px;
-  min-width: 116px; padding: 6px 16px 6px 10px; background: var(--sc); color: #fff9ec;
+  display: flex; flex-direction: row; align-items: center; gap: 6px;
+  margin-right: -20px; padding: 6px 14px 6px 10px; background: var(--sc); color: #fff9ec;
   box-shadow: 0 3px 8px rgba(0,0,0,0.3);
   clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat br { display: none; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-badge {
-  width: 22px; height: 22px; margin: 0; font-size: 11px; order: 1; flex-shrink: 0;
+  width: 20px; height: 20px; margin: 0; font-size: 10px; order: 1; flex-shrink: 0;
   background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.55); color: #fff9ec;
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small {
-  order: 2; color: rgba(255,249,236,0.85); font-size: 10px; letter-spacing: 0.4px; white-space: nowrap;
+  order: 2; color: rgba(255,249,236,0.85); font-size: 9px; letter-spacing: 0.3px; white-space: nowrap;
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b {
-  order: 3; margin-left: auto; font-style: italic; font-variant-numeric: oldstyle-nums; font-size: 14px; white-space: nowrap;
+  order: 3; margin-left: auto; font-style: italic; font-variant-numeric: oldstyle-nums; font-size: 13px; white-space: nowrap;
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat-bar { display: none; }
 
@@ -739,11 +739,10 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
     grid-template-areas: "sticks" "head" "ring" "date" "loc" "thought" "goal";
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { padding-right: 0; }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
-    grid-area: sticks; position: static; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: stretch;
+    grid-area: sticks; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: stretch;
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat { clip-path: none; border-radius: 4px; min-width: 0; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat { clip-path: none; border-radius: 4px; margin-right: 0; }
 }
 @container hst (max-width: 480px) {
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
@@ -751,11 +750,10 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
     grid-template-areas: "sticks" "head" "ring" "date" "loc" "thought" "goal";
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { padding-right: 0; }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
-    grid-area: sticks; position: static; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: stretch;
+    grid-area: sticks; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: stretch;
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat { clip-path: none; border-radius: 4px; min-width: 0; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat { clip-path: none; border-radius: 4px; margin-right: 0; }
 }
 
 /* ═══════════════════════════════════════════
