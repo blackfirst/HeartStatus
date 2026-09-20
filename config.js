@@ -51,14 +51,18 @@ export const THEMES = [
     { id: 'idol-day', label: 'Idol Stage (Day)', color: '#e8388a' },
     { id: 'library-night', label: 'Library (Night)', color: '#c99a4a' },
     { id: 'library-day', label: 'Library (Day)', color: '#b5822b' },
-    { id: 'velvet-noir', label: 'Velvet Noir', color: '#d81f4f' },
-    { id: 'angel-gold', label: 'Angel (White & Gold)', color: '#c8a03c' },
+    { id: 'demon', label: 'Demon', color: '#e0243f' },
+    { id: 'gods', label: 'Gods', color: '#c8a03c' },
 ];
 
 const DEFAULT_THEME = 'dark-red';
 
+// Themes that were renamed keep working: a saved old id is mapped to its replacement.
+const LEGACY_THEMES = { 'velvet-noir': 'demon', 'fallen-angel': 'demon', 'angel-gold': 'gods' };
+
 export function normalizeTheme(id) {
-    return THEMES.some(t => t.id === id) ? id : DEFAULT_THEME;
+    const mapped = LEGACY_THEMES[id] || id;
+    return THEMES.some(t => t.id === mapped) ? mapped : DEFAULT_THEME;
 }
 
 // Value ranges used by the prompt, the parser and the card.

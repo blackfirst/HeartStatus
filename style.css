@@ -140,27 +140,40 @@ details.hst-wrap[data-hst-theme="idol-day"],
 }
 
 
-/* ---- Velvet Noir (plum-black velvet, rose-gold ink, wax-seal wine) — own layout, see the block at the end ---- */
+/* ---- Demon (black & red) and Gods (white & gold): same cathedral layout, two skins (layout block at the end) ---- */
 
-details.hst-wrap[data-hst-theme="velvet-noir"],
-.hst-modal[data-hst-theme="velvet-noir"] {
-  --hst-c1:#cf3a63; --hst-c2:#e8c3a4; --hst-rgb:207,58,99;
-      --hst-bg1:#2a0f22; --hst-bg2:#0b0409; --hst-text:#f1e4e2; --hst-eyebrow:#d9a48c;
-      --hst-muted:#a58592; --hst-stat-bg:#170a14; --hst-stat-small:#b89aa0;
-      --hst-track:rgba(255,255,255,0.09); --hst-info-bg:#170a14;
-      --hst-summary-bg:#150710; --hst-summary-text:#e8c3a4; --hst-summary-border:#4a2238;
-      --hst-pulse-bg1:#2a0f22; --hst-pulse-bg2:#0b0409; --hst-ring-track:#3a0f24;
-      --hst-daytime-bg1:#240b1d; --hst-daytime-bg2:#0a0409;
-      --hst-vn-line:rgba(232,195,164,0.30); --hst-vn-mono:ui-monospace, "SF Mono", "Courier New", Courier, monospace;
-      --hst-vn-serif:Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-      --hst-vn-trust:#e8c3a4; --hst-vn-arousal:#f0456f; --hst-vn-jealousy:#a07be0;
-      --hst-vn-loc:#e8c3a4; --hst-vn-thought:#d9a4c0; --hst-vn-goal:#f0456f;
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]),
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) {
+  --hst-t-serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
-/* ---- Angel (white & gold) — own layout, see the block at the end ---- */
+details.hst-wrap[data-hst-theme="demon"],
+.hst-modal[data-hst-theme="demon"] {
+  --hst-c1:#e0243f; --hst-c2:#ff6b6b; --hst-rgb:224,36,63;
+      --hst-bg1:#2a0508; --hst-bg2:#050203; --hst-text:#f4e6e6; --hst-eyebrow:#ff6b7a;
+      --hst-muted:#a8757b; --hst-stat-bg:#130608; --hst-stat-small:#b98a8f;
+      --hst-track:rgba(255,255,255,0.09); --hst-info-bg:#130608;
+      --hst-summary-bg:#120405; --hst-summary-text:#ff6b7a; --hst-summary-border:#4d1119;
+      --hst-pulse-bg1:#22080c; --hst-pulse-bg2:#050203; --hst-ring-track:#2e0a10;
+      --hst-daytime-bg1:#240609; --hst-daytime-bg2:#070203;
+      --hst-t-line:rgba(224,36,63,0.38); --hst-t-inset:#050203; --hst-t-glow:rgba(224,36,63,0.22);
+      --hst-t-card:radial-gradient(ellipse at 50% 0%, rgba(224,36,63,0.30) 0%, rgba(224,36,63,0) 55%), linear-gradient(180deg, #1a0508 0%, #050203 100%);
+      --hst-t-summary:linear-gradient(180deg, #1c0609, #120405);
+      --hst-t-disc:radial-gradient(circle at 50% 35%, #2a080d 0%, #050203 100%);
+      --hst-t-disc-ring:rgba(224,36,63,0.5); --hst-t-disc-glow:rgba(224,36,63,0.35);
+      --hst-t-ray:rgba(224,36,63,0.75); --hst-t-score:#ffe3e3; --hst-t-text-glow:rgba(224,36,63,0.7); --hst-t-name-glow:rgba(224,36,63,0.45);
+      --hst-t-pill-bg:#120406; --hst-t-pill-fg:#ff6b7a; --hst-t-pill-border:#e0243f; --hst-t-pill-shadow:0 0 10px rgba(224,36,63,0.25);
+      --hst-t-affill:linear-gradient(90deg, #7d0f22, #e0243f, #ff6b6b);
+      --hst-t-gauge-bg:#0b0406; --hst-t-gauge-track:rgba(255,255,255,0.10); --hst-t-gauge-glow:60%;
+      --hst-t-trust:#f0d8d0; --hst-t-arousal:#ff2d55; --hst-t-jealousy:#ff8a3d;
+      --hst-t-loc:#ff6b7a; --hst-t-thought:#d9a4b0; --hst-t-goal:#e0243f;
+      --hst-t-overlay:rgba(4,1,2,0.78);
+      --hst-t-btn:linear-gradient(135deg, #e0243f, #7d0f22); --hst-t-btn-fg:#fff; --hst-t-btn2:#ff6b7a;
+      --hst-t-eyebrow:'† Sinner'; --hst-t-foot:'†  ✦  †'; --hst-t-sep:'†'; --hst-t-pill-l:'† '; --hst-t-pill-r:' †';
+}
 
-details.hst-wrap[data-hst-theme="angel-gold"],
-.hst-modal[data-hst-theme="angel-gold"] {
+details.hst-wrap[data-hst-theme="gods"],
+.hst-modal[data-hst-theme="gods"] {
   --hst-c1:#c8a03c; --hst-c2:#f3e2a4; --hst-rgb:200,160,60;
       --hst-bg1:#fffbee; --hst-bg2:#ffffff; --hst-text:#4a4130; --hst-eyebrow:#b28a2a;
       --hst-muted:#a99a76; --hst-stat-bg:#fbf5e3; --hst-stat-small:#a99a76;
@@ -168,9 +181,20 @@ details.hst-wrap[data-hst-theme="angel-gold"],
       --hst-summary-bg:#fbf3d8; --hst-summary-text:#96721c; --hst-summary-border:#ecdca0;
       --hst-pulse-bg1:#ffffff; --hst-pulse-bg2:#faf1d3; --hst-ring-track:#f4ebc8;
       --hst-daytime-bg1:#fffaea; --hst-daytime-bg2:#ffffff;
-      --hst-an-serif:Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-      --hst-an-trust:#c8a03c; --hst-an-arousal:#e39aa0; --hst-an-jealousy:#8fb1d6;
-      --hst-an-loc:#b28a2a; --hst-an-thought:#7f9fc8; --hst-an-goal:#d98f96;
+      --hst-t-line:rgba(200,160,60,0.34); --hst-t-inset:#ffffff; --hst-t-glow:rgba(200,160,60,0.20);
+      --hst-t-card:radial-gradient(ellipse at 50% 0%, #fff4cf 0%, rgba(255,244,207,0) 55%), linear-gradient(180deg, #fffdf6 0%, #ffffff 100%);
+      --hst-t-summary:linear-gradient(180deg, #fffdf2, #fbf3d8);
+      --hst-t-disc:radial-gradient(circle at 50% 35%, #ffffff 0%, #fbf1cf 100%);
+      --hst-t-disc-ring:rgba(200,160,60,0.35); --hst-t-disc-glow:rgba(200,160,60,0.25);
+      --hst-t-ray:rgba(200,160,60,0.6); --hst-t-score:#8a6a17; --hst-t-text-glow:transparent; --hst-t-name-glow:transparent;
+      --hst-t-pill-bg:linear-gradient(180deg, #fffdf2, #fbf0cc); --hst-t-pill-fg:#8a6a17; --hst-t-pill-border:rgba(200,160,60,0.55); --hst-t-pill-shadow:none;
+      --hst-t-affill:linear-gradient(90deg, #c8a03c, #f3e2a4);
+      --hst-t-gauge-bg:#fffdf6; --hst-t-gauge-track:rgba(200,160,60,0.16); --hst-t-gauge-glow:0%;
+      --hst-t-trust:#c8a03c; --hst-t-arousal:#e39aa0; --hst-t-jealousy:#8fb1d6;
+      --hst-t-loc:#b28a2a; --hst-t-thought:#7f9fc8; --hst-t-goal:#d98f96;
+      --hst-t-overlay:rgba(90,70,20,0.30);
+      --hst-t-btn:#c8a03c; --hst-t-btn-fg:#3b2f0e; --hst-t-btn2:#96721c;
+      --hst-t-eyebrow:'✦ Blessed'; --hst-t-foot:'✧  ✦  ✧'; --hst-t-sep:'✦'; --hst-t-pill-l:'✧ '; --hst-t-pill-r:' ✧';
 }
 
 /* ---- Wrapper / summary ---- */
@@ -1057,354 +1081,164 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
 
 
 /* ═══════════════════════════════════════════════════════════════
-   VELVET NOIR — "sin ledger" layout
-   Left-aligned case-file card: wax-seal Heart Score beside the name,
-   ticket-stub date strip on top, typewriter ledger rows for stats
-   and info (no boxed tiles). Playing-card ♥ corners, double frame.
-   The seal is always a full circle.
+   DEMON (black & red) and GODS (white & gold) — cathedral layout
+   One layout, two skins (the colours live in the palettes above).
+   Arched window; the Heart Score medallion (always a full circle)
+   dead centre with a slow sunburst behind it; name, relationship and
+   date centred under it; the three stats as circular gauges; then
+   Location / Thoughts / Goal as straight rows sharing one label
+   column and one text edge.
    ═══════════════════════════════════════════════════════════════ */
 
-details.hst-wrap[data-hst-theme="velvet-noir"] > summary {
-  border-radius: 6px; border-color: var(--hst-vn-line);
-  font-family: var(--hst-vn-serif); font-style: italic; letter-spacing: 0.3px;
-}
+@keyframes hst-t-rays { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* shell: sharp corners, velvet pile texture, double rose-gold frame */
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card {
-  position: relative; overflow: hidden; border-radius: 6px; padding: 26px 22px 22px;
-  border: 1px solid var(--hst-vn-line);
-  background:
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 6px),
-    radial-gradient(ellipse at 15% 0%, var(--hst-bg1) 0%, var(--hst-bg2) 75%);
-  box-shadow: 0 16px 34px rgba(0,0,0,0.65), inset 0 0 0 5px var(--hst-bg2), inset 0 0 0 6px var(--hst-vn-line);
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card::before,
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card::after {
-  content: '♥'; position: absolute; font-size: 11px; line-height: 1; color: var(--hst-c1); opacity: 0.85; pointer-events: none;
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card::before { top: 10px; left: 14px; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card::after { bottom: 10px; right: 14px; transform: rotate(180deg); }
-
-/* grid: ring | head+affection, then full-width ledger */
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) {
-  display: grid; grid-template-columns: 112px minmax(0, 1fr); column-gap: 18px; align-items: start;
-  grid-template-areas:
-    "strip strip"
-    "ring  head"
-    "ring  albl"
-    "ring  abar"
-    "stats stats"
-    "loc   loc"
-    "thought thought"
-    "goal  goal";
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) > .hst-divider { display: none; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) > .hst-center { display: contents; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-area: strip; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; min-width: 0; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) .hst-ringbox { grid-area: ring; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) .hst-affbar-label { grid-area: albl; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) .hst-affbar { grid-area: abar; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) > .hst-stats { grid-area: stats; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) > .hst-info.loc { grid-area: loc; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) > .hst-info.thought { grid-area: thought; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
-
-/* ticket-stub date / time strip */
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-dt-grid {
-  display: flex; justify-content: space-between; gap: 12px; margin: 0 0 16px; padding-bottom: 10px;
-  border-bottom: 1px dashed var(--hst-vn-line);
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-dt { background: none; border: none; border-radius: 0; padding: 0; gap: 6px; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-dt-icon { width: auto; height: auto; background: none; border: none; font-size: 11px; opacity: 0.8; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-dt-label { display: none; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-dt-value {
-  font-family: var(--hst-vn-mono); font-size: 10.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--hst-eyebrow);
-}
-
-/* head: eyebrow, serif name, rubber-stamp relationship */
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-eyebrow { justify-content: flex-start; margin-bottom: 4px; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-eyebrow > span:first-child::after {
-  content: '✦ Guilty pleasure'; font-family: var(--hst-vn-mono); font-size: 9.5px; letter-spacing: 1.8px; white-space: nowrap; color: var(--hst-eyebrow); opacity: 0.85;
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-namerow { flex-direction: column; align-items: flex-start; gap: 8px; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-name { font-family: var(--hst-vn-serif); font-style: italic; font-size: 1.6em; line-height: 1.1; overflow-wrap: anywhere; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-pill {
-  background: transparent; color: var(--hst-c1); border: 1px solid var(--hst-c1); border-radius: 3px; padding: 3px 9px;
-  font-family: var(--hst-vn-mono); font-size: 9.5px; letter-spacing: 1.5px; text-transform: uppercase; transform: rotate(-2deg);
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-pill::before { content: '♥ '; }
-
-/* wax seal */
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-ringbox { width: 112px; height: 112px; margin: 0; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-ringbox .hst-ringsvg { width: 100%; height: 100%; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-ring-track { stroke: #5c0a1c; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-ring-rotate { stroke: rgba(232,195,164,0.55); filter: none; animation: none; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-pulse-wrap {
-  top: 9px; left: 9px; right: 9px; bottom: 9px; gap: 0;
-  background: radial-gradient(circle at 35% 28%, #e0466f 0%, #a3122f 55%, #5c0a1c 100%);
-  box-shadow: inset 0 2px 4px rgba(255,255,255,0.25), inset 0 -5px 9px rgba(0,0,0,0.45), 0 5px 12px rgba(0,0,0,0.6);
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-pulse-wrap::before {
-  content: ''; position: absolute; inset: 5px; border-radius: 50%; border: 1px solid rgba(255,233,236,0.28); pointer-events: none;
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-score { font-family: var(--hst-vn-serif); font-style: italic; font-size: 27px; color: #ffe9ec; text-shadow: 0 1px 2px rgba(0,0,0,0.55); }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-ring-label { font-family: var(--hst-vn-mono); font-size: 6.5px; letter-spacing: 1.5px; color: rgba(255,233,236,0.7); margin-top: 3px; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-ecg { display: none; }
-
-/* affection line under the name */
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card:not(.hst-compact) .hst-center { text-align: left; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-affbar-label {
-  font-family: var(--hst-vn-mono); font-size: 9.5px; letter-spacing: 2px; color: var(--hst-eyebrow); margin: 12px 0 5px; text-align: left;
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-affbar { height: 3px; max-width: none; margin: 0; background: var(--hst-track); }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-affbar-fill { background: linear-gradient(90deg, #a3122f, var(--hst-c1), var(--hst-c2)); }
-
-/* ledger: stats as one line each — icon | label | bar | value */
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-stats {
-  display: flex; flex-direction: column; gap: 10px; margin: 18px 0 0; padding: 14px 0 14px;
-  border-top: 1px solid var(--hst-vn-line); border-bottom: 1px dashed var(--hst-vn-line);
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-stat {
-  display: grid; grid-template-columns: 22px 78px minmax(0, 1fr) 32px; align-items: center; column-gap: 10px;
-  background: none; border: none; border-radius: 0; padding: 0; text-align: left;
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-stat br { display: none; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-stat .hst-badge { grid-column: 1; grid-row: 1; width: 22px; height: 22px; margin: 0; font-size: 11px; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-stat small {
-  grid-column: 2; grid-row: 1; font-family: var(--hst-vn-mono); font-size: 9.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--hst-eyebrow);
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-stat .hst-stat-bar { grid-column: 3; grid-row: 1; height: 3px; margin: 0; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-stat b { grid-column: 4; grid-row: 1; text-align: right; font-family: var(--hst-vn-serif); font-style: italic; font-size: 16px; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-stat[data-stat="trust"] { --sc: var(--hst-vn-trust) !important; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-stat[data-stat="arousal"] { --sc: var(--hst-vn-arousal) !important; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-stat[data-stat="jealousy"] { --sc: var(--hst-vn-jealousy) !important; }
-
-/* ledger: info as label | text rows with dotted rules (Thoughts stays a plain row) */
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-info {
-  display: grid; grid-template-columns: 104px minmax(0, 1fr); column-gap: 10px; align-items: baseline;
-  background: none; border: none; border-bottom: 1px dotted var(--hst-vn-line); border-radius: 0; padding: 11px 0; margin: 0;
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-info:last-child { border-bottom: none; padding-bottom: 0; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-info-label { font-family: var(--hst-vn-mono); font-size: 9.5px; letter-spacing: 1.5px; margin: 0; white-space: nowrap; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-info.loc { --ac: var(--hst-vn-loc); }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-info.thought { --ac: var(--hst-vn-thought); }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-info.goal { --ac: var(--hst-vn-goal); }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-info.thought .hst-info-value { font-family: var(--hst-vn-serif); font-style: italic; }
-
-/* compact row: same seal + ledger when expanded */
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-card.hst-compact { padding: 18px 20px; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-mini-name { font-family: var(--hst-vn-serif); font-style: italic; font-size: 15px; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-mini-rel-label { font-family: var(--hst-vn-mono); font-size: 9.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--hst-eyebrow); }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-mini-ring .hst-ring-track { stroke: #5c0a1c; }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-mini-ring::before {
-  content: ''; position: absolute; inset: 4px; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(circle at 35% 28%, #e0466f 0%, #a3122f 55%, #5c0a1c 100%);
-  box-shadow: inset 0 1px 2px rgba(255,255,255,0.25), 0 2px 5px rgba(0,0,0,0.6);
-}
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-mini-score { font-family: var(--hst-vn-serif); font-style: italic; color: #ffe9ec; text-shadow: 0 1px 1px rgba(0,0,0,0.5); }
-details.hst-wrap[data-hst-theme="velvet-noir"] .hst-mini-body .hst-stats { margin-top: 0; border-top: none; padding-top: 0; }
-
-/* quick panel */
-.hst-modal[data-hst-theme="velvet-noir"] { background: rgba(6,2,8,0.74); }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-modal-box {
-  border-radius: 6px; border-color: var(--hst-vn-line);
-  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 6px), radial-gradient(ellipse at 15% 0%, var(--hst-bg1) 0%, var(--hst-bg2) 75%);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.7), inset 0 0 0 5px var(--hst-bg2), inset 0 0 0 6px var(--hst-vn-line);
-  padding: 22px;
-}
-.hst-modal[data-hst-theme="velvet-noir"] .hst-modal-head b, .hst-modal[data-hst-theme="velvet-noir"] .hst-modal-rel { font-family: var(--hst-vn-serif); font-style: italic; }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-modal-rel { color: var(--hst-c2); }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-section { font-family: var(--hst-vn-mono); letter-spacing: 2px; }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-chips { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--hst-vn-line); margin-bottom: 4px; }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-chip {
-  flex-direction: row; justify-content: space-between; align-items: baseline; background: none; border: none; border-radius: 0;
-  border-bottom: 1px dotted var(--hst-vn-line); padding: 8px 0;
-}
-.hst-modal[data-hst-theme="velvet-noir"] .hst-chip small { font-family: var(--hst-vn-mono); text-transform: uppercase; letter-spacing: 1.5px; font-size: 9.5px; color: var(--hst-eyebrow); }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-chip b { font-family: var(--hst-vn-serif); font-style: italic; }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-chip[data-stat="trust"] { --sc: var(--hst-vn-trust) !important; }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-chip[data-stat="arousal"] { --sc: var(--hst-vn-arousal) !important; }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-chip[data-stat="jealousy"] { --sc: var(--hst-vn-jealousy) !important; }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-chip[data-stat="heart"] { --sc: var(--hst-c1) !important; }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-spark { border: 1px solid var(--hst-vn-line); border-radius: 4px; }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-spark-dot { fill: var(--hst-c2); }
-.hst-modal[data-hst-theme="velvet-noir"] .hst-ov-row .text_pole { background: var(--hst-info-bg); color: var(--hst-text); border: 1px solid var(--hst-vn-line); border-radius: 4px; }
-.hst-modal[data-hst-theme="velvet-noir"] #hst-ov-apply { background: linear-gradient(135deg, #cf3a63, #8e1236); color: #fff; border: 1px solid var(--hst-vn-line); border-radius: 4px; padding: 8px 18px; }
-.hst-modal[data-hst-theme="velvet-noir"] #hst-ov-clear { background: transparent; color: var(--hst-c2); border: 1px solid var(--hst-vn-line); border-radius: 4px; padding: 8px 18px; }
-
-@media (prefers-reduced-motion: reduce) {
-  details.hst-wrap[data-hst-theme="velvet-noir"] .hst-pulse-wrap { animation: none; }
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   ANGEL (WHITE & GOLD) — "cathedral window" layout
-   Centered, symmetrical: arched double-framed card, a haloed
-   medallion with sunburst rays and wings (the Heart Score, always
-   a full circle) at the very top, then the name, a one-line
-   date, and the three stats as circular gauges. No boxes.
-   ═══════════════════════════════════════════════════════════════ */
-
-@keyframes hst-an-rays { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes hst-an-halo { 0%, 100% { box-shadow: 0 0 10px rgba(var(--hst-rgb),0.45), inset 0 0 5px rgba(var(--hst-rgb),0.4); }
-                          50%      { box-shadow: 0 0 18px rgba(var(--hst-rgb),0.75), inset 0 0 7px rgba(var(--hst-rgb),0.6); } }
-
-details.hst-wrap[data-hst-theme="angel-gold"] > summary {
-  border-radius: 999px; background: linear-gradient(180deg, #fffdf2, var(--hst-summary-bg)); border-color: rgba(var(--hst-rgb),0.45);
-  font-family: var(--hst-an-serif); letter-spacing: 0.5px;
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) > summary {
+  border-radius: 999px; border-color: var(--hst-t-line); background: var(--hst-t-summary);
+  font-family: var(--hst-t-serif); letter-spacing: 0.5px;
 }
 
 /* arched window shell */
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card {
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card {
   position: relative; overflow: hidden; border-radius: 110px 110px 26px 26px;
-  border: 1px solid rgba(var(--hst-rgb),0.5);
-  background:
-    radial-gradient(ellipse at 50% 0%, #fff4cf 0%, rgba(255,244,207,0) 55%),
-    linear-gradient(180deg, #fffdf6 0%, #ffffff 100%);
-  box-shadow: 0 14px 34px rgba(var(--hst-rgb),0.20), inset 0 0 0 5px #ffffff, inset 0 0 0 6px rgba(var(--hst-rgb),0.30);
+  border: 1px solid var(--hst-t-line); background: var(--hst-t-card);
+  box-shadow: 0 14px 34px var(--hst-t-glow), inset 0 0 0 5px var(--hst-t-inset), inset 0 0 0 6px var(--hst-t-line);
 }
-/* the halo */
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact)::before {
-  content: ''; position: absolute; top: 20px; left: 50%; width: 96px; height: 22px; margin-left: -48px; box-sizing: border-box;
-  border: 3px solid #d9b24c; border-radius: 50%; pointer-events: none; animation: hst-an-halo 4s ease-in-out infinite;
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) {
+  display: flex; flex-direction: column; align-items: center; text-align: center; padding: 50px 24px 34px;
 }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact)::after {
+  content: var(--hst-t-foot); position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%); white-space: nowrap;
+  font-size: 10px; letter-spacing: 4px; color: rgba(var(--hst-rgb),0.7); pointer-events: none;
+}
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-divider { display: none; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-center { display: contents; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) .hst-ringbox { order: 1; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > div:first-child { order: 2; width: 100%; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-dt-grid { order: 3; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) .hst-affbar-label { order: 4; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) .hst-affbar { order: 5; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-stats { order: 6; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-info.loc { order: 7; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-info.thought { order: 8; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-info.goal { order: 9; }
 
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) {
-  display: flex; flex-direction: column; align-items: center; text-align: center; padding: 60px 24px 26px;
-}
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) > .hst-divider { display: none; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) > .hst-center { display: contents; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) .hst-ringbox { order: 1; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) > div:first-child { order: 2; width: 100%; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) > .hst-dt-grid { order: 3; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) .hst-affbar-label { order: 4; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) .hst-affbar { order: 5; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) > .hst-stats { order: 6; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) > .hst-info.loc { order: 7; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) > .hst-info.thought { order: 8; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact) > .hst-info.goal { order: 9; }
-
-/* medallion: thin full ring, sunburst rays, wings */
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-ringbox { width: 176px; height: 176px; margin: 0 auto 26px; isolation: isolate; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-ringbox .hst-ringsvg { width: 100%; height: 100%; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-ring-track { stroke: var(--hst-ring-track); stroke-width: 5; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-ring-rotate { stroke: var(--hst-c1); stroke-width: 5; filter: drop-shadow(0 0 4px rgba(var(--hst-rgb),0.55)); }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-ringbox::before {
+/* medallion: thin full ring, glass disc, sunburst behind */
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-ringbox { width: 176px; height: 176px; margin: 0 auto 26px; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-ringbox .hst-ringsvg { width: 100%; height: 100%; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-ring-track { stroke: var(--hst-ring-track); stroke-width: 5; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-ring-rotate { stroke: var(--hst-c1); stroke-width: 5; filter: drop-shadow(0 0 5px rgba(var(--hst-rgb),0.65)); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-ringbox::before {
   content: ''; position: absolute; inset: -22px; border-radius: 50%; pointer-events: none;
-  background: repeating-conic-gradient(from -2deg, rgba(var(--hst-rgb),0.6) 0 2deg, transparent 2deg 9deg);
+  background: repeating-conic-gradient(from -2deg, var(--hst-t-ray) 0 2deg, transparent 2deg 9deg);
   -webkit-mask: radial-gradient(circle closest-side, transparent 0 82%, #000 85%, rgba(0,0,0,0) 100%);
           mask: radial-gradient(circle closest-side, transparent 0 82%, #000 85%, rgba(0,0,0,0) 100%);
-  animation: hst-an-rays 120s linear infinite;
+  animation: hst-t-rays 120s linear infinite;
 }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-ringbox::after {
-  content: ''; position: absolute; top: 30px; left: -100px; width: 376px; height: 120px; pointer-events: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 376 120'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='1' stop-color='%23fbefc4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='url(%23g)' stroke='%23caa445' stroke-width='1.1' stroke-linejoin='round'%3E%3Cpath d='M0,0 C16.2,-8.5 45.2,-7.7 58,0 C45.2,7.7 16.2,8.5 0,0Z' transform='translate(94 58) rotate(246)'/%3E%3Cpath d='M0,0 C20.2,-8.5 56.2,-7.7 72,0 C56.2,7.7 20.2,8.5 0,0Z' transform='translate(94 58) rotate(230)'/%3E%3Cpath d='M0,0 C23.0,-8.5 64.0,-7.7 82,0 C64.0,7.7 23.0,8.5 0,0Z' transform='translate(94 58) rotate(214)'/%3E%3Cpath d='M0,0 C23.5,-8.5 65.5,-7.7 84,0 C65.5,7.7 23.5,8.5 0,0Z' transform='translate(94 58) rotate(198)'/%3E%3Cpath d='M0,0 C21.8,-8.5 60.8,-7.7 78,0 C60.8,7.7 21.8,8.5 0,0Z' transform='translate(94 58) rotate(182)'/%3E%3Cpath d='M0,0 C18.5,-8.5 51.5,-7.7 66,0 C51.5,7.7 18.5,8.5 0,0Z' transform='translate(94 58) rotate(166)'/%3E%3Cpath d='M0,0 C14.6,-8.5 40.6,-7.7 52,0 C40.6,7.7 14.6,8.5 0,0Z' transform='translate(94 58) rotate(152)'/%3E%3Cpath d='M0,0 C10.6,-7 29.6,-6.3 38,0 C29.6,6.3 10.6,7 0,0Z' transform='translate(94 58) rotate(238)'/%3E%3Cpath d='M0,0 C12.9,-7 35.9,-6.3 46,0 C35.9,6.3 12.9,7 0,0Z' transform='translate(94 58) rotate(222)'/%3E%3Cpath d='M0,0 C14.6,-7 40.6,-6.3 52,0 C40.6,6.3 14.6,7 0,0Z' transform='translate(94 58) rotate(206)'/%3E%3Cpath d='M0,0 C15.1,-7 42.1,-6.3 54,0 C42.1,6.3 15.1,7 0,0Z' transform='translate(94 58) rotate(190)'/%3E%3Cpath d='M0,0 C13.4,-7 37.4,-6.3 48,0 C37.4,6.3 13.4,7 0,0Z' transform='translate(94 58) rotate(174)'/%3E%3Cpath d='M0,0 C11.2,-7 31.2,-6.3 40,0 C31.2,6.3 11.2,7 0,0Z' transform='translate(94 58) rotate(160)'/%3E%3C/g%3E%3Cg fill='url(%23g)' stroke='%23caa445' stroke-width='1.1' stroke-linejoin='round' transform='translate(376 0) scale(-1 1)'%3E%3Cpath d='M0,0 C16.2,-8.5 45.2,-7.7 58,0 C45.2,7.7 16.2,8.5 0,0Z' transform='translate(94 58) rotate(246)'/%3E%3Cpath d='M0,0 C20.2,-8.5 56.2,-7.7 72,0 C56.2,7.7 20.2,8.5 0,0Z' transform='translate(94 58) rotate(230)'/%3E%3Cpath d='M0,0 C23.0,-8.5 64.0,-7.7 82,0 C64.0,7.7 23.0,8.5 0,0Z' transform='translate(94 58) rotate(214)'/%3E%3Cpath d='M0,0 C23.5,-8.5 65.5,-7.7 84,0 C65.5,7.7 23.5,8.5 0,0Z' transform='translate(94 58) rotate(198)'/%3E%3Cpath d='M0,0 C21.8,-8.5 60.8,-7.7 78,0 C60.8,7.7 21.8,8.5 0,0Z' transform='translate(94 58) rotate(182)'/%3E%3Cpath d='M0,0 C18.5,-8.5 51.5,-7.7 66,0 C51.5,7.7 18.5,8.5 0,0Z' transform='translate(94 58) rotate(166)'/%3E%3Cpath d='M0,0 C14.6,-8.5 40.6,-7.7 52,0 C40.6,7.7 14.6,8.5 0,0Z' transform='translate(94 58) rotate(152)'/%3E%3Cpath d='M0,0 C10.6,-7 29.6,-6.3 38,0 C29.6,6.3 10.6,7 0,0Z' transform='translate(94 58) rotate(238)'/%3E%3Cpath d='M0,0 C12.9,-7 35.9,-6.3 46,0 C35.9,6.3 12.9,7 0,0Z' transform='translate(94 58) rotate(222)'/%3E%3Cpath d='M0,0 C14.6,-7 40.6,-6.3 52,0 C40.6,6.3 14.6,7 0,0Z' transform='translate(94 58) rotate(206)'/%3E%3Cpath d='M0,0 C15.1,-7 42.1,-6.3 54,0 C42.1,6.3 15.1,7 0,0Z' transform='translate(94 58) rotate(190)'/%3E%3Cpath d='M0,0 C13.4,-7 37.4,-6.3 48,0 C37.4,6.3 13.4,7 0,0Z' transform='translate(94 58) rotate(174)'/%3E%3Cpath d='M0,0 C11.2,-7 31.2,-6.3 40,0 C31.2,6.3 11.2,7 0,0Z' transform='translate(94 58) rotate(160)'/%3E%3C/g%3E%3C/svg%3E") center / 100% 100% no-repeat; z-index: -1;
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-pulse-wrap {
+  top: 14px; left: 14px; right: 14px; bottom: 14px; background: var(--hst-t-disc);
+  box-shadow: inset 0 0 0 1px var(--hst-t-disc-ring), inset 0 0 20px var(--hst-t-disc-glow);
 }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-pulse-wrap {
-  top: 14px; left: 14px; right: 14px; bottom: 14px;
-  background: radial-gradient(circle at 50% 35%, #ffffff 0%, #fbf1cf 100%);
-  box-shadow: inset 0 0 0 1px rgba(var(--hst-rgb),0.35), inset 0 0 14px rgba(var(--hst-rgb),0.25);
-}
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-score { font-family: var(--hst-an-serif); font-weight: 400; font-size: 40px; color: #8a6a17; letter-spacing: 1px; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-ring-label { color: #b28a2a; letter-spacing: 3px; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-ecg-path { stroke: var(--hst-c1); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-score { font-family: var(--hst-t-serif); font-weight: 400; font-size: 40px; color: var(--hst-t-score); letter-spacing: 1px; text-shadow: 0 0 12px var(--hst-t-text-glow); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-ring-label { color: var(--hst-eyebrow); letter-spacing: 3px; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-ecg-path { stroke: var(--hst-c1); }
 
 /* name + relationship */
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-eyebrow { justify-content: center; margin-bottom: 4px; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-eyebrow > span:first-child::after { content: '✦ Blessed'; font-size: 9.5px; letter-spacing: 4px; color: var(--hst-eyebrow); opacity: 0.9; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-namerow { flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-name { font-family: var(--hst-an-serif); font-weight: 400; font-variant: small-caps; letter-spacing: 2.5px; font-size: 1.45em; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-pill {
-  background: linear-gradient(180deg, #fffdf2, #fbf0cc); color: #8a6a17; border-color: rgba(var(--hst-rgb),0.55);
-  letter-spacing: 0.6px; padding: 4px 14px;
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-eyebrow { justify-content: center; margin-bottom: 4px; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-eyebrow > span:first-child::after { content: var(--hst-t-eyebrow); font-size: 9.5px; letter-spacing: 4px; color: var(--hst-eyebrow); opacity: 0.95; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-namerow { flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-name {
+  font-family: var(--hst-t-serif); font-weight: 400; font-variant: small-caps; letter-spacing: 2.5px; font-size: 1.5em;
+  text-shadow: 0 0 14px var(--hst-t-name-glow); overflow-wrap: anywhere;
 }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-pill::before { content: '✧ '; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-pill::after { content: ' ✧'; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-pill {
+  background: var(--hst-t-pill-bg); color: var(--hst-t-pill-fg); border: 1px solid var(--hst-t-pill-border); border-radius: 999px;
+  letter-spacing: 0.6px; padding: 4px 14px; box-shadow: var(--hst-t-pill-shadow);
+}
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-pill::before { content: var(--hst-t-pill-l); color: var(--hst-c1); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-pill::after { content: var(--hst-t-pill-r); color: var(--hst-c1); }
 
-/* one-line date */
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-dt-grid { display: flex; justify-content: center; align-items: center; gap: 0; margin: 14px 0 0; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-dt { background: none; border: none; border-radius: 0; padding: 0; gap: 0; box-shadow: none; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-dt + .hst-dt::before { content: '✦'; margin: 0 12px; font-size: 8px; color: var(--hst-c1); align-self: center; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-dt-icon, details.hst-wrap[data-hst-theme="angel-gold"] .hst-dt-label { display: none; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-dt-value { font-size: 0.82em; letter-spacing: 1px; color: var(--hst-muted); }
+/* date, affection: one centred column */
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-dt-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 0; margin: 14px 0 0; width: 100%; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-dt { background: none; border: none; border-radius: 0; padding: 0; gap: 0; box-shadow: none; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-dt + .hst-dt::before { content: var(--hst-t-sep); margin: 0 12px; font-size: 9px; color: var(--hst-c1); align-self: center; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-dt-icon, details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-dt-label { display: none; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-dt-value { font-size: 0.8em; letter-spacing: 1px; color: var(--hst-muted); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-affbar-label { font-family: var(--hst-t-serif); font-variant: small-caps; font-size: 11px; letter-spacing: 3px; color: var(--hst-eyebrow); margin: 18px 0 7px; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-affbar { width: 100%; max-width: 420px; height: 3px; margin: 0; background: var(--hst-track); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-affbar-fill { background: var(--hst-t-affill); }
 
-/* affection: centered hairline */
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-affbar-label { font-size: 9px; letter-spacing: 3px; color: var(--hst-eyebrow); margin: 18px 0 7px; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-affbar { width: 62%; max-width: 230px; height: 3px; margin: 0; background: rgba(var(--hst-rgb),0.16); }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-affbar-fill { background: linear-gradient(90deg, var(--hst-c1), var(--hst-c2)); }
-
-/* stats: three circular gauges (ring fills to the value) */
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-stats { display: flex; justify-content: center; gap: 24px; margin: 24px 0 4px; width: 100%; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-stat {
+/* stats: three circular gauges (the ring fills to the value) */
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stats { display: flex; justify-content: center; gap: 24px; margin: 24px 0 4px; width: 100%; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stat {
   display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 62px;
   background: none; border: none; border-radius: 0; padding: 0; box-shadow: none;
 }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-stat br, details.hst-wrap[data-hst-theme="angel-gold"] .hst-stat .hst-stat-bar { display: none; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-stat .hst-badge {
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stat br, details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stat .hst-stat-bar { display: none; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stat .hst-badge {
   order: 1; width: 54px; height: 54px; margin: 0; font-size: 18px; border: none;
   background:
-    radial-gradient(circle closest-side, #fffdf6 0 calc(100% - 5px), transparent calc(100% - 4px)),
-    conic-gradient(var(--sc) calc(var(--p, 0) * 1%), rgba(var(--hst-rgb),0.16) 0);
+    radial-gradient(circle closest-side, var(--hst-t-gauge-bg) 0 calc(100% - 5px), transparent calc(100% - 4px)),
+    conic-gradient(var(--sc) calc(var(--p, 0) * 1%), var(--hst-t-gauge-track) 0);
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--sc) var(--hst-t-gauge-glow), transparent));
 }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-stat b { order: 2; font-family: var(--hst-an-serif); font-weight: 400; font-size: 1.15em; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-stat small { order: 3; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--hst-muted); }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-stat[data-stat="trust"] { --sc: var(--hst-an-trust) !important; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-stat[data-stat="arousal"] { --sc: var(--hst-an-arousal) !important; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-stat[data-stat="jealousy"] { --sc: var(--hst-an-jealousy) !important; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stat b { order: 2; font-family: var(--hst-t-serif); font-weight: 400; font-size: 1.15em; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stat small { order: 3; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--hst-stat-small); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stat[data-stat="trust"] { --sc: var(--hst-t-trust) !important; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stat[data-stat="arousal"] { --sc: var(--hst-t-arousal) !important; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-t-jealousy) !important; }
 
-/* info: centered, no boxes, a gold hairline above each */
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-info { background: none; border: none; border-radius: 0; text-align: center; padding: 14px 0 0; margin: 0; width: 100%; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-info::before {
-  content: ''; display: block; width: 46px; height: 1px; margin: 0 auto 11px;
-  background: linear-gradient(90deg, transparent, rgba(var(--hst-rgb),0.8), transparent);
+/* Location / Thoughts / Goal: label | text, one shared column, a hairline above each row */
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-info {
+  display: grid; grid-template-columns: 106px minmax(0, 1fr); column-gap: 10px; align-items: baseline; text-align: left;
+  width: 100%; max-width: 420px; margin: 0 auto; padding: 12px 0; background: none; border: none; border-radius: 0;
+  border-top: 1px solid var(--hst-t-line);
 }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-info-label { letter-spacing: 3px; font-size: 9px; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-info.loc { --ac: var(--hst-an-loc); }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-info.thought { --ac: var(--hst-an-thought); }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-info.goal { --ac: var(--hst-an-goal); }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-info.thought .hst-info-value { font-family: var(--hst-an-serif); font-style: italic; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-info:last-of-type { padding-bottom: 0; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-stats + .hst-info { margin-top: 18px; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-info-label { font-family: var(--hst-t-serif); font-variant: small-caps; font-size: 11px; letter-spacing: 2px; margin: 0; white-space: nowrap; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-info.loc { --ac: var(--hst-t-loc); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-info.thought { --ac: var(--hst-t-thought); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-info.goal { --ac: var(--hst-t-goal); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-info.thought .hst-info-value { font-family: var(--hst-t-serif); font-style: italic; }
 
-/* compact row: a small haloed ring; expanded body reuses the gauges */
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-card.hst-compact { padding: 20px 22px; border-radius: 40px 40px 20px 20px; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-mini-name { font-family: var(--hst-an-serif); font-variant: small-caps; letter-spacing: 1.5px; font-size: 15px; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-mini-ring::before {
-  content: ''; position: absolute; top: -8px; left: 50%; width: 26px; height: 7px; margin-left: -13px; box-sizing: border-box;
-  border: 1.5px solid #d9b24c; border-radius: 50%; box-shadow: 0 0 6px rgba(var(--hst-rgb),0.5);
-}
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-mini-ring .hst-ring-track, details.hst-wrap[data-hst-theme="angel-gold"] .hst-mini-ring .hst-ring-rotate { stroke-width: 14; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-mini-score { font-family: var(--hst-an-serif); color: #8a6a17; }
-details.hst-wrap[data-hst-theme="angel-gold"] .hst-mini-body .hst-stats { margin-top: 4px; }
+/* compact row */
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-card.hst-compact { padding: 20px 22px; border-radius: 40px 40px 20px 20px; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-mini-name { font-family: var(--hst-t-serif); font-variant: small-caps; letter-spacing: 1.5px; font-size: 15px; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-mini-ring .hst-ring-track, details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-mini-ring .hst-ring-rotate { stroke-width: 14; }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-mini-score { font-family: var(--hst-t-serif); color: var(--hst-t-score); }
+details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-mini-body .hst-stats { margin-top: 0; }
 
-/* narrow columns: drop the wings (they need ~400px) */
-@container hst (max-width: 430px) {
-  details.hst-wrap[data-hst-theme="angel-gold"] .hst-ringbox::after { display: none; }
+/* very narrow columns: label above the text so the text keeps its width, and no dangling date separator */
+@container hst (max-width: 400px) {
+  details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-info { grid-template-columns: minmax(0, 1fr); row-gap: 4px; }
+  details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-dt-grid { flex-direction: column; }
+  details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-dt + .hst-dt::before { display: none; }
 }
 
 /* quick panel */
-.hst-modal[data-hst-theme="angel-gold"] { background: rgba(90,70,20,0.30); }
-.hst-modal[data-hst-theme="angel-gold"] .hst-modal-box {
-  border-radius: 90px 90px 22px 22px; border-color: rgba(var(--hst-rgb),0.5); padding: 40px 24px 22px;
-  background: radial-gradient(ellipse at 50% 0%, #fff4cf 0%, rgba(255,244,207,0) 55%), linear-gradient(180deg, #fffdf6, #ffffff);
-  box-shadow: 0 20px 50px rgba(var(--hst-rgb),0.30), inset 0 0 0 5px #fff, inset 0 0 0 6px rgba(var(--hst-rgb),0.30);
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) { background: var(--hst-t-overlay); }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-modal-box {
+  border-radius: 90px 90px 22px 22px; border-color: var(--hst-t-line); padding: 40px 24px 22px; background: var(--hst-t-card);
+  box-shadow: 0 20px 50px var(--hst-t-glow), inset 0 0 0 5px var(--hst-t-inset), inset 0 0 0 6px var(--hst-t-line);
 }
-.hst-modal[data-hst-theme="angel-gold"] .hst-modal-head { justify-content: center; position: relative; }
-.hst-modal[data-hst-theme="angel-gold"] .hst-modal-close { position: absolute; right: 0; top: -22px; }
-.hst-modal[data-hst-theme="angel-gold"] .hst-modal-head b { font-family: var(--hst-an-serif); font-weight: 400; letter-spacing: 1.5px; }
-.hst-modal[data-hst-theme="angel-gold"] .hst-modal-rel { text-align: center; color: #96721c; }
-.hst-modal[data-hst-theme="angel-gold"] .hst-section { text-align: center; letter-spacing: 3px; }
-.hst-modal[data-hst-theme="angel-gold"] .hst-chip { border-radius: 14px; border: 1px solid rgba(var(--hst-rgb),0.25); border-top: 3px solid var(--sc); }
-.hst-modal[data-hst-theme="angel-gold"] .hst-chip[data-stat="trust"] { --sc: var(--hst-an-trust) !important; }
-.hst-modal[data-hst-theme="angel-gold"] .hst-chip[data-stat="arousal"] { --sc: var(--hst-an-arousal) !important; }
-.hst-modal[data-hst-theme="angel-gold"] .hst-chip[data-stat="jealousy"] { --sc: var(--hst-an-jealousy) !important; }
-.hst-modal[data-hst-theme="angel-gold"] .hst-chip[data-stat="heart"] { --sc: var(--hst-c1) !important; }
-.hst-modal[data-hst-theme="angel-gold"] .hst-spark { border: 1px solid rgba(var(--hst-rgb),0.25); border-radius: 14px; }
-.hst-modal[data-hst-theme="angel-gold"] .hst-ov-row .text_pole { background: var(--hst-info-bg); color: var(--hst-text); border: 1px solid rgba(var(--hst-rgb),0.35); border-radius: 999px; padding-left: 12px; }
-.hst-modal[data-hst-theme="angel-gold"] #hst-ov-apply { background: var(--hst-c1); color: #3b2f0e; border: none; border-radius: 999px; padding: 8px 20px; }
-.hst-modal[data-hst-theme="angel-gold"] #hst-ov-clear { background: transparent; color: #96721c; border: 1px solid var(--hst-c1); border-radius: 999px; padding: 8px 20px; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-modal-head { justify-content: center; position: relative; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-modal-close { position: absolute; right: 0; top: -22px; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-modal-head b { font-family: var(--hst-t-serif); font-weight: 400; letter-spacing: 1.5px; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-modal-rel { text-align: center; color: var(--hst-eyebrow); font-style: italic; font-family: var(--hst-t-serif); }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-section { text-align: center; letter-spacing: 3px; font-family: var(--hst-t-serif); font-variant: small-caps; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-chip { border-radius: 14px; border: 1px solid var(--hst-t-line); border-top: 3px solid var(--sc); }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-chip b { font-family: var(--hst-t-serif); font-weight: 400; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-chip[data-stat="trust"] { --sc: var(--hst-t-trust) !important; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-chip[data-stat="arousal"] { --sc: var(--hst-t-arousal) !important; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-chip[data-stat="jealousy"] { --sc: var(--hst-t-jealousy) !important; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-chip[data-stat="heart"] { --sc: var(--hst-c1) !important; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-spark { border: 1px solid var(--hst-t-line); border-radius: 14px; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-spark-dot { fill: var(--hst-c2); }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-ov-row .text_pole { background: var(--hst-info-bg); color: var(--hst-text); border: 1px solid var(--hst-t-line); border-radius: 999px; padding-left: 12px; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) #hst-ov-apply { background: var(--hst-t-btn); color: var(--hst-t-btn-fg); border: 1px solid var(--hst-t-line); border-radius: 999px; padding: 8px 20px; }
+.hst-modal:is([data-hst-theme="demon"], [data-hst-theme="gods"]) #hst-ov-clear { background: transparent; color: var(--hst-t-btn2); border: 1px solid var(--hst-t-line); border-radius: 999px; padding: 8px 20px; }
 
 @media (prefers-reduced-motion: reduce) {
-  details.hst-wrap[data-hst-theme="angel-gold"] .hst-ringbox::before, details.hst-wrap[data-hst-theme="angel-gold"] .hst-card:not(.hst-compact)::before { animation: none; }
+  details.hst-wrap:is([data-hst-theme="demon"], [data-hst-theme="gods"]) .hst-ringbox::before { animation: none; }
 }
