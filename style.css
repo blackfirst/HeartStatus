@@ -482,16 +482,14 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-dt-
 details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-dt { background: none; border: none; border-radius: 0; box-shadow: none; }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-dt + .hst-dt { border-left: 1.5px dashed var(--hst-idol-line); }
 
-/* Venue (plain line) and goal (panel) */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.loc {
-  display: flex; align-items: baseline; gap: 10px; margin: 14px 2px 0; padding: 0;
-  background: none; border: none; border-radius: 0; --ac: var(--hst-idol-venue);
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.loc .hst-info-label { margin-bottom: 0; white-space: nowrap; }
+/* Venue and goal: same framed panel as the date/time ticket */
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.loc,
 details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.goal {
-  margin: 14px 0 0; padding: 10px 14px; --ac: var(--hst-c1);
+  margin: 14px 0 0; padding: 10px 14px;
   background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line); border-radius: 12px;
 }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.loc { --ac: var(--hst-idol-venue); }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.goal { --ac: var(--hst-c1); }
 
 @media (prefers-reduced-motion: reduce) {
   details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::before,
