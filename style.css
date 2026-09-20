@@ -75,6 +75,41 @@ details.hst-wrap[data-hst-theme="racing-light"],
 }
 
 
+/* ---- Idol Stage themes (rainbow full-circle ring, light sticks, speech bubble) ---- */
+
+details.hst-wrap[data-hst-theme="idol-night"],
+.hst-modal[data-hst-theme="idol-night"] {
+  --hst-c1:#ff4fa3; --hst-c2:#ffd84d; --hst-rgb:255,79,163;
+      --hst-bg1:#1d1035; --hst-bg2:#0b0716; --hst-text:#f5ecff; --hst-eyebrow:#ff7ac0;
+      --hst-muted:#ad9bd0; --hst-stat-bg:#16102a; --hst-stat-small:#ad9bd0;
+      --hst-track:rgba(255,255,255,0.08); --hst-info-bg:#1a1030;
+      --hst-summary-bg:#1a0d2e; --hst-summary-text:#ff7ac0; --hst-summary-border:#3f2568;
+      --hst-pulse-bg1:#241640; --hst-pulse-bg2:#120a22; --hst-ring-track:#2a1a48;
+      --hst-daytime-bg1:#221438; --hst-daytime-bg2:#150c26;
+      --hst-shadow-a:0.6; --hst-daytime-shadow-a:0.4; --hst-stat-shadow-a:0.4;
+      --hst-idol-panel:rgba(255,255,255,0.07); --hst-idol-line:rgba(255,255,255,0.16);
+      --hst-idol-bubble:#3a1a52; --hst-idol-bubble-line:#ff4fa3;
+      --hst-idol-trust:#3ee0ff; --hst-idol-arousal:#ff4fa3; --hst-idol-jealousy:#ffd84d;
+      --hst-idol-venue:#ffd84d; --hst-idol-glow:0.55;
+}
+
+details.hst-wrap[data-hst-theme="idol-day"],
+.hst-modal[data-hst-theme="idol-day"] {
+  --hst-c1:#e8388a; --hst-c2:#e9a400; --hst-rgb:232,56,138;
+      --hst-bg1:#fff0f7; --hst-bg2:#ffffff; --hst-text:#3b1f4a; --hst-eyebrow:#d02f7c;
+      --hst-muted:#8d6a9f; --hst-stat-bg:#fff5fa; --hst-stat-small:#8d6a9f;
+      --hst-track:rgba(59,31,74,0.08); --hst-info-bg:#fff4f9;
+      --hst-summary-bg:#ffe3f0; --hst-summary-text:#d02f7c; --hst-summary-border:#ffc2dc;
+      --hst-pulse-bg1:#ffffff; --hst-pulse-bg2:#ffeaf4; --hst-ring-track:#f7d6e6;
+      --hst-daytime-bg1:#fff4f9; --hst-daytime-bg2:#ffffff;
+      --hst-shadow-a:0.10; --hst-daytime-shadow-a:0.05; --hst-stat-shadow-a:0.06;
+      --hst-idol-panel:rgba(232,56,138,0.07); --hst-idol-line:rgba(59,31,74,0.16);
+      --hst-idol-bubble:#ffe3f0; --hst-idol-bubble-line:#e8388a;
+      --hst-idol-trust:#12a9d6; --hst-idol-arousal:#e8388a; --hst-idol-jealousy:#e9a400;
+      --hst-idol-venue:#c98a00; --hst-idol-glow:0.3;
+}
+
+
 /* ---- Wrapper / summary ---- */
 .hst-slot { margin: 6px 0; }
 .hst-slot:empty { margin: 0; }
@@ -137,6 +172,7 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-score { font-size: 48px; line-height: 1; }
 .hst-ring-label { font-size: 9px; letter-spacing: 2px; color: var(--hst-muted); text-transform: uppercase; margin-top: 2px; }
 .hst-ecg { margin-top: 6px; }
+.hst-eq { display: none; }
 .hst-ecg-path { stroke: var(--hst-c1); stroke-dasharray: 200; animation: hst-ecg-move 1.6s linear infinite; }
 .hst-affbar { height: 6px; width: 100%; max-width: 260px; margin: 24px auto 0 auto; background: rgba(var(--hst-rgb),0.15); border-radius: 999px; overflow: hidden; }
 .hst-affbar-fill { height: 100%; background: linear-gradient(90deg,var(--hst-c1),var(--hst-c2)); }
@@ -330,7 +366,145 @@ details.hst-wrap[data-hst-theme^="racing-"] .hst-info.goal { --ac: var(--hst-rc-
   details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::before { animation: none; }
 }
 
+/* ═══════════════════════════════════════════
+   IDOL STAGE THEMES — layout & decoration
+   (idol-night and idol-day; palettes are above)
+   Layout (full card): name → speech bubble → ring + light sticks → ticket → venue → goal.
+   The gauge is a COMPLETE 360° rainbow ring (it never shortens with the score); the
+   bulb ring around it is a full ring too. No spotlights.
+   ═══════════════════════════════════════════ */
+
+@keyframes hst-id-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes hst-id-twinkle { 0%, 100% { opacity: 0.95; } 50% { opacity: 0.45; } }
+@keyframes hst-id-eq { from { height: 4px; } to { height: 17px; } }
+
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card {
+  border-radius: 20px; border-color: rgba(var(--hst-rgb),0.3);
+  box-shadow: 0 14px 30px rgba(0,0,0,var(--hst-shadow-a));
+}
+
+/* Grid layout of the full card (each direct child gets its own area) */
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) {
+  display: grid; grid-template-columns: auto 1fr; column-gap: 24px; align-items: center;
+  grid-template-areas: "head head" "bubble bubble" "ring sticks" "ticket ticket" "venue venue" "goal goal";
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-divider { display: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > div:first-child { grid-area: head; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-center { grid-area: ring; padding: 12px 10px 0; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-stats { grid-area: sticks; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-area: ticket; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.loc { grid-area: venue; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.thought { grid-area: bubble; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
+
+/* Header: "On stage" label, name, outlined pill with a star */
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eyebrow > span:first-child::after { content: '✦ On stage'; font-size: 10px; letter-spacing: 2.5px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-name { font-size: 1.25em; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-pill {
+  background: var(--hst-idol-panel); color: var(--hst-c1); border: 1px solid var(--hst-c1);
+  font-weight: 600; white-space: nowrap;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-pill::before { content: '★ '; }
+
+/* Speech bubble: one color for fill, outline and tail; the tail points up at the name */
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.thought {
+  position: relative; margin: 14px 0 6px; padding: 12px 16px; --ac: var(--hst-idol-bubble-line);
+  background: var(--hst-idol-bubble); border: 1px solid var(--hst-idol-bubble-line); border-radius: 16px;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.thought::before {
+  content: ''; position: absolute; top: -8px; left: 22px; width: 14px; height: 14px;
+  background: var(--hst-idol-bubble); border-top: 1px solid var(--hst-idol-bubble-line);
+  border-left: 1px solid var(--hst-idol-bubble-line); border-radius: 3px 0 0 0; transform: rotate(45deg);
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.thought .hst-info-value { font-style: italic; }
+
+/* Gauge: rainbow full ring (spins), bulb ring, equalizer inside */
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox { width: 190px; height: 190px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox .hst-ringsvg { width: 100%; height: 100%; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox .hst-ring-track,
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox .hst-ring-rotate { stroke: transparent; filter: none; animation: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::before {
+  content: ''; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: conic-gradient(from 0deg, #ff4fa3, #ffd84d, #3ee0ff, #a66bff, #ff4fa3);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 14px), #000 calc(100% - 12.5px), #000 calc(100% - 1.5px), transparent 100%);
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 14px), #000 calc(100% - 12.5px), #000 calc(100% - 1.5px), transparent 100%);
+  animation: hst-id-spin 10s linear infinite;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::after {
+  content: ''; position: absolute; inset: -9px; border-radius: 50%; pointer-events: none;
+  background: repeating-conic-gradient(from -1.5deg, var(--hst-c2) 0 3deg, transparent 3deg 15deg);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 5px), #000 calc(100% - 5px));
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 5px), #000 calc(100% - 5px));
+  animation: hst-id-twinkle 2.4s ease-in-out infinite;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-pulse-wrap {
+  top: 20px; left: 20px; right: 20px; bottom: 20px; border: 1px solid var(--hst-idol-line);
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-score { font-size: 42px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ecg { display: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq { display: flex; align-items: flex-end; gap: 3px; height: 18px; margin-top: 8px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i { width: 3px; height: 4px; border-radius: 2px; background: var(--hst-c1); animation: hst-id-eq 0.9s ease-in-out infinite alternate; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(2) { animation-delay: 0.2s; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(3) { animation-delay: 0.45s; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(4) { animation-delay: 0.1s; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(5) { animation-delay: 0.35s; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-affbar { height: 7px; max-width: 190px; border: 1px solid var(--hst-idol-line); background: var(--hst-idol-panel); }
+
+/* Stats → vertical light sticks (value on top, stick, icon, label) */
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-stats { display: flex; justify-content: center; gap: 18px; margin: 0; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"] { --sc: var(--hst-idol-trust) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"] { --sc: var(--hst-idol-arousal) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-idol-jealousy) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  background: none; border: none; border-radius: 0; box-shadow: none; padding: 0; min-width: 44px;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat br { display: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat b { order: 1; font-size: 15px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat-bar {
+  order: 2; position: relative; width: 28px; height: 112px; margin: 0; overflow: hidden; border-radius: 14px;
+  background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--sc) calc(var(--hst-idol-glow) * 100%), transparent));
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat-bar-fill {
+  position: absolute; left: 0; right: 0; bottom: 0; width: 100% !important;
+  height: calc(var(--p, 0) * 1%); border-radius: 0; background: var(--sc);
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-badge { order: 3; width: 24px; height: 24px; margin: 0; font-size: 12px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat small { order: 4; font-size: 11px; letter-spacing: 0.3px; text-transform: none; }
+
+/* Date / time → one ticket with a dashed tear line (no cut-outs, so every circle stays whole) */
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-dt-grid {
+  grid-template-columns: 1fr 1fr; gap: 0; margin: 16px 0 0; overflow: hidden;
+  border: 1px solid var(--hst-idol-line); border-radius: 14px; background: var(--hst-idol-panel);
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-dt { background: none; border: none; border-radius: 0; box-shadow: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-dt + .hst-dt { border-left: 1.5px dashed var(--hst-idol-line); }
+
+/* Venue (plain line) and goal (panel) */
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.loc {
+  display: flex; align-items: baseline; gap: 10px; margin: 14px 2px 0; padding: 0;
+  background: none; border: none; border-radius: 0; --ac: var(--hst-idol-venue);
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.loc .hst-info-label { margin-bottom: 0; white-space: nowrap; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.goal {
+  margin: 14px 0 0; padding: 10px 14px; --ac: var(--hst-c1);
+  background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line); border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::before,
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::after,
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i { animation: none; }
+}
+
 @media (max-width: 480px) {
   .hst-card { padding: 14px; border-radius: 18px; }
   .hst-dt-grid { grid-template-columns: 1fr; }
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) {
+    grid-template-columns: 1fr; row-gap: 8px;
+    grid-template-areas: "head" "bubble" "ring" "sticks" "ticket" "venue" "goal";
+  }
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-template-columns: 1fr 1fr; }
 }

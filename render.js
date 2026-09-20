@@ -24,11 +24,13 @@ function fmt(n) {
 
 function statTile(key, icon, label, value) {
     const pct = value === null ? 0 : clamp(value, 0, 100);
-    return `<div class="hst-stat" style="--sc:${STAT_COLORS[key]};">
+    // data-stat and --p are hooks for themes that restyle the bar (e.g. Idol Stage draws it
+    // as a vertical light stick). Other themes ignore them and keep using the width.
+    return `<div class="hst-stat" data-stat="${key}" style="--sc:${STAT_COLORS[key]};">
         <div class="hst-badge">${icon}</div>
         <small>${label}</small><br>
         <b>${fmt(value)}</b>
-        <div class="hst-stat-bar"><div class="hst-stat-bar-fill" style="width:${pct}%;"></div></div>
+        <div class="hst-stat-bar"><div class="hst-stat-bar-fill" style="width:${pct}%;--p:${pct};"></div></div>
     </div>`;
 }
 
@@ -119,6 +121,7 @@ export function buildCardHtml(data, opts = {}) {
         <svg class="hst-ecg" width="90" height="22" viewBox="0 0 200 22">
           <path class="hst-ecg-path" d="M0,11 L60,11 L70,2 L80,20 L90,11 L120,11 L130,4 L140,18 L150,11 L200,11" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
+        <span class="hst-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
       </div>
     </div>
     <div class="hst-affbar"><div class="hst-affbar-fill" style="width:${ringPct}%;"></div></div>
