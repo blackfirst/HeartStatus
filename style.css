@@ -684,7 +684,7 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-pill::before { content: '§ ';
 /* Stat notes: three square sticky notes sitting under the date ticket on the left
    page, all in the same muted paper/tab tone (no separate bright colour per stat). */
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
-  grid-area: sticks; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0; align-self: start;
+  grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; align-self: start;
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"],
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"],
@@ -692,7 +692,7 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-st
   --sc: var(--hst-c1) !important;
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
-  position: relative; aspect-ratio: 1; margin-right: 0; clip-path: none;
+  position: relative; aspect-ratio: 1; margin-right: 0; clip-path: none; min-width: 0;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 4px;
   box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
@@ -701,6 +701,10 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-st
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat::before {
   content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
   width: 7px; height: 7px; border-radius: 50%; background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small,
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b {
+  overflow-wrap: anywhere; text-align: center;
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
@@ -768,7 +772,7 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
-    grid-area: sticks; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0;
+    grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0;
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"],
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"],
@@ -776,7 +780,7 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
     --sc: var(--hst-c1) !important;
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
-    clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1;
+    clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1; min-width: 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 4px;
     box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
@@ -786,6 +790,10 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
     content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
     width: 7px; height: 7px; border-radius: 50%;
     background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small,
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b {
+    overflow-wrap: anywhere; text-align: center;
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
@@ -798,7 +806,7 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
-    grid-area: sticks; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0;
+    grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0;
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"],
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"],
@@ -806,7 +814,7 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
     --sc: var(--hst-c1) !important;
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
-    clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1;
+    clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1; min-width: 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 4px;
     box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
@@ -816,6 +824,10 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
     content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
     width: 7px; height: 7px; border-radius: 50%;
     background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small,
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b {
+    overflow-wrap: anywhere; text-align: center;
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
