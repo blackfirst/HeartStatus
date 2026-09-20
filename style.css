@@ -52,6 +52,10 @@ details.hst-wrap[data-hst-theme="library-day"],
       --hst-summary-bg:#f3e6c8; --hst-summary-text:#7a5222; --hst-summary-border:#ddc190;
       --hst-pulse-bg1:#fffaf0; --hst-pulse-bg2:#f6ead0; --hst-ring-track:#e6d6ab;
       --hst-daytime-bg1:#fdf6e6; --hst-daytime-bg2:#f4ead2;
+      --hst-lib-card-bg:#fffcf2; --hst-lib-card-line:rgba(74,52,24,0.18);
+      --hst-lib-rule-red:#a3462b; --hst-lib-rule-blue:#3b5b8a; --hst-lib-tab:#e4cf9e;
+      --hst-lib-spine-a:0.22; --hst-lib-shadow-a:0.12;
+      --hst-lib-ribbon-trust:#3b5b8a; --hst-lib-ribbon-arousal:#a3263a; --hst-lib-ribbon-jealousy:#5a7a3a;
 }
 
 details.hst-wrap[data-hst-theme="library-night"],
@@ -63,6 +67,10 @@ details.hst-wrap[data-hst-theme="library-night"],
       --hst-summary-bg:#1c130a; --hst-summary-text:#d9ac5a; --hst-summary-border:#4a3826;
       --hst-pulse-bg1:#2c2115; --hst-pulse-bg2:#170f08; --hst-ring-track:#3a2c1c;
       --hst-daytime-bg1:#2c2015; --hst-daytime-bg2:#160f09;
+      --hst-lib-card-bg:#2f2415; --hst-lib-card-line:rgba(241,228,201,0.16);
+      --hst-lib-rule-red:#9c4a35; --hst-lib-rule-blue:#4d6f9c; --hst-lib-tab:#4a3826;
+      --hst-lib-spine-a:0.45; --hst-lib-shadow-a:0.35;
+      --hst-lib-ribbon-trust:#5a86c2; --hst-lib-ribbon-arousal:#c9636f; --hst-lib-ribbon-jealousy:#8aab5f;
 }
 
 
@@ -322,6 +330,22 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info.thought .hst-
   details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-ring::before { animation: none; }
 }
 
+/* Library: serif italic name/score, ribbon-colored stat icons, ruled-card info panels */
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-name,
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-score {
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif; font-style: italic;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="trust"] { --sc: var(--hst-lib-ribbon-trust) !important; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="arousal"] { --sc: var(--hst-lib-ribbon-arousal) !important; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="jealousy"] { --sc: var(--hst-lib-ribbon-jealousy) !important; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info {
+  background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line); border-left: none; border-radius: 3px;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.loc { --ac: var(--hst-lib-rule-blue); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.thought { --ac: var(--hst-c2); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.thought .hst-info-value { font-style: italic; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.goal { --ac: var(--hst-lib-rule-red); }
+
 /* ---- Settings drawer ---- */
 .hst-settings { display: flex; flex-direction: column; gap: 6px; }
 .hst-row { display: flex; gap: 6px; align-items: center; justify-content: space-between; }
@@ -573,6 +597,141 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-inf
   details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::before,
   details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::after,
   details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i { animation: none; }
+}
+
+/* ═══════════════════════════════════════════
+   LIBRARY THEMES — layout & decoration
+   (library-night and library-day; palettes are above)
+   Layout (full card): an open book. Ribbons hang from the top edge, a spine runs down
+   the middle, the left page holds the ring + date/time stamp, the right page holds
+   Location/Thought/Goal as ruled library-card-catalog entries. The gauge stays a
+   COMPLETE 360° ring, same as every other theme.
+   ═══════════════════════════════════════════ */
+
+details.hst-wrap[data-hst-theme^="library-"] .hst-card {
+  border-radius: 8px; border-color: var(--hst-lib-card-line);
+  box-shadow: 0 10px 24px rgba(0,0,0,var(--hst-lib-shadow-a));
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card,
+.hst-modal[data-hst-theme^="library-"] .hst-modal-box {
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+/* Grid layout of the full card: ribbons row, header row, then two book pages */
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
+  position: relative; display: grid; padding-top: 30px;
+  grid-template-columns: 1fr 1fr; column-gap: 30px; row-gap: 16px;
+  grid-template-areas: "sticks sticks" "head head" "ring loc" "date thought" "date goal";
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-divider { display: none; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-center { grid-area: ring; align-self: start; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-area: date; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats { grid-area: sticks; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.loc { grid-area: loc; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.thought { grid-area: thought; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
+
+/* Spine: a shaded gutter running down the middle, like an open book's binding */
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before {
+  content: ''; position: absolute; top: 8px; bottom: 8px; left: 50%; width: 30px; margin-left: -15px;
+  pointer-events: none; z-index: 0;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,var(--hst-lib-spine-a)) 45%, rgba(0,0,0,calc(var(--hst-lib-spine-a) * 1.4)) 50%, rgba(0,0,0,var(--hst-lib-spine-a)) 55%, transparent);
+}
+
+/* Header: small "card catalog" eyebrow label, serif italic name, dashed-stamp relationship pill */
+details.hst-wrap[data-hst-theme^="library-"] .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-eyebrow > span:first-child::after { content: '📖 Card Catalog'; font-size: 10px; letter-spacing: 2.5px; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-name { font-style: italic; font-variant: small-caps; letter-spacing: 0.4px; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-pill {
+  background: var(--hst-lib-card-bg); color: var(--hst-c1); border: 1px dashed var(--hst-c1);
+  border-radius: 2px; font-style: italic; max-width: 100%; text-align: center;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-pill::before { content: '§ '; }
+
+/* Bookmarks: ribbons hanging from the card's top edge, one per stat, V-notched like real page markers */
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
+  display: flex; justify-content: center; gap: 20px; margin: 0; position: relative; z-index: 2;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"] { --sc: var(--hst-lib-ribbon-trust) !important; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"] { --sc: var(--hst-lib-ribbon-arousal) !important; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-lib-ribbon-jealousy) !important; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; width: 38px;
+  margin-top: -44px; padding: 8px 2px 16px; background: var(--sc); color: #fff9ec;
+  border-radius: 3px 3px 0 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat br { display: none; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-badge { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.55); color: #fff9ec; order: 1; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small { order: 2; color: rgba(255,249,236,0.85); font-size: 9px; letter-spacing: 0.4px; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b { order: 3; font-style: italic; font-variant-numeric: oldstyle-nums; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat-bar { display: none; }
+
+/* Ring: a dashed ink-stamp ring around the gauge, italic old-style score */
+details.hst-wrap[data-hst-theme^="library-"] .hst-ringbox { position: relative; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-ringbox::before {
+  content: ''; position: absolute; inset: -7px; border-radius: 50%; pointer-events: none;
+  border: 1px dashed rgba(var(--hst-rgb),0.4);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-score { font-style: italic; font-variant-numeric: oldstyle-nums; }
+
+/* Date/time → one stamped ticket, ruled like a due-date card */
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-dt-grid {
+  align-self: start; background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line);
+  border-radius: 4px; padding: 8px; margin: 0; grid-template-columns: 1fr; gap: 6px;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-dt { background: none; border: none; padding: 2px 4px; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-dt-icon { border-radius: 2px; background: none; border: 1px solid var(--hst-lib-card-line); }
+
+/* Location / Thought / Goal → ruled library-card-catalog entries, with a punch hole and a red rule */
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info {
+  position: relative; margin: 0; padding: 14px 14px 12px 32px;
+  background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line); border-left: none;
+  border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,var(--hst-lib-shadow-a));
+  background-image:
+    linear-gradient(var(--hst-lib-rule-red) 0 2px, transparent 2px) top / 100% 100% no-repeat,
+    repeating-linear-gradient(var(--hst-lib-card-line) 0 1px, transparent 1px 22px) left 0 top 24px / 100% calc(100% - 24px) no-repeat;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info::before {
+  content: ''; position: absolute; left: 13px; top: 13px; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--hst-bg2); border: 1px solid var(--hst-lib-card-line); box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.loc { --ac: var(--hst-lib-rule-blue); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.thought { --ac: var(--hst-c2); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.thought .hst-info-value { font-style: italic; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.goal { --ac: var(--hst-lib-rule-red); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-info-label { font-variant: small-caps; letter-spacing: 2px; }
+
+/* Panel touches to match: ruled ticket chips, dashed-stamp relationship pill */
+.hst-modal[data-hst-theme^="library-"] .hst-modal-rel {
+  display: inline-block; margin-bottom: 12px; padding: 3px 12px; border-radius: 2px; font-size: 0.85em; font-style: italic;
+  border: 1px dashed var(--hst-c1); background: var(--hst-lib-card-bg);
+}
+.hst-modal[data-hst-theme^="library-"] .hst-modal-rel::before { content: '§ '; }
+.hst-modal[data-hst-theme^="library-"] .hst-chip {
+  background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line); border-top: 3px solid var(--sc); border-radius: 3px;
+}
+.hst-modal[data-hst-theme^="library-"] .hst-chip[data-stat="trust"] { --sc: var(--hst-lib-ribbon-trust) !important; }
+.hst-modal[data-hst-theme^="library-"] .hst-chip[data-stat="arousal"] { --sc: var(--hst-lib-ribbon-arousal) !important; }
+.hst-modal[data-hst-theme^="library-"] .hst-chip[data-stat="jealousy"] { --sc: var(--hst-lib-ribbon-jealousy) !important; }
+.hst-modal[data-hst-theme^="library-"] #hst-ov-apply { background: var(--hst-c1); color: #fff9ec; border: none; border-radius: 2px; padding: 8px 18px; }
+.hst-modal[data-hst-theme^="library-"] #hst-ov-clear { background: transparent; color: var(--hst-c1); border: 1px solid var(--hst-c1); border-radius: 2px; padding: 8px 18px; }
+
+/* Narrow card: stack the two pages, drop the spine and the hanging ribbons' negative offset */
+@media (max-width: 480px) {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
+    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
+    grid-template-areas: "sticks" "head" "ring" "date" "loc" "thought" "goal";
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
+}
+@container hst (max-width: 480px) {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
+    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
+    grid-template-areas: "sticks" "head" "ring" "date" "loc" "thought" "goal";
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
 }
 
 /* ═══════════════════════════════════════════
