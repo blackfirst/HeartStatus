@@ -671,6 +671,12 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before
   background: linear-gradient(90deg, transparent, rgba(0,0,0,var(--hst-lib-spine-a)) 45%, rgba(0,0,0,calc(var(--hst-lib-spine-a) * 1.4)) 50%, rgba(0,0,0,var(--hst-lib-spine-a)) 55%, transparent);
 }
 
+/* Sticky-note label text: the old muted grey was tuned for a near-white stat
+   background and is too low-contrast against the tan/gold note colour used here
+   (worst in Library Day). Use the card's main text colour, just dimmed a touch,
+   in every place these notes appear (full card, compact expanded view, all sizes). */
+details.hst-wrap[data-hst-theme^="library-"] .hst-stat small { color: var(--hst-text); opacity: 0.72; }
+
 /* Header: small "card catalog" eyebrow label, serif italic name, dashed-stamp relationship pill */
 details.hst-wrap[data-hst-theme^="library-"] .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-eyebrow > span:first-child::after { content: '📖 Card Catalog'; font-size: 10px; letter-spacing: 2.5px; }
