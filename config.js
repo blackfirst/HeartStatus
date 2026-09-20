@@ -4,6 +4,10 @@
 
 export const extensionName = 'heart-status';
 
+// Must match manifest.json's "version" — bump both together on release.
+// updater.js compares this against the live manifest.json to detect a stale page.
+export const EXTENSION_VERSION = '1.0.1';
+
 // Key used to store the manual adjustment inside chat metadata (per chat).
 export const META_KEY = 'heart_status_override';
 
@@ -30,7 +34,7 @@ export const defaultSettings = {
     // (The old 'auto' mode was removed; saved 'auto' values are converted to 'always'.)
     openMode: 'always',
     // Remove older boards from the prompt sent to the model (the latest one stays as a format example).
-    trimOldBoards: true,
+    trimOldBoards: false,
 };
 
 export const OPEN_MODES = [

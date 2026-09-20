@@ -14,6 +14,7 @@ import {
 } from './message-handler.js';
 import { setThemeEverywhere } from './dom.js';
 import { migrateFromOldKit } from './migrate.js';
+import { reloadIfUpdated } from './updater.js';
 
 // Named in manifest.json ("generate_interceptor"); SillyTavern calls it before every generation.
 window.heartStatusContextFilter = filterContext;
@@ -43,6 +44,7 @@ function loadSettings() {
 }
 
 function afterChatChange() {
+    reloadIfUpdated();
     syncUI();
     updatePromptInjection();
     captureAll();
@@ -53,6 +55,10 @@ function afterChatChange() {
 
 jQuery(async () => {
     try {
+        // If the running code is stale (extension was updated since this page loaded),
+        // this reloads the page and returns true — skip the rest of setup in that case.
+        if (await reloadIfUpdated()) return;
+
         loadSettings();
         migrateFromOldKit();
         setupUI();

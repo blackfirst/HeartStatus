@@ -12,8 +12,6 @@ import { renderAll, captureAll } from './message-handler.js';
 import { setThemeEverywhere, removeCards } from './dom.js';
 import { notify } from './notifications.js';
 
-// ─── Theme ───
-
 function setTheme(id) {
     const s = getSettings();
     s.theme = normalizeTheme(id);
@@ -21,8 +19,6 @@ function setTheme(id) {
     setThemeEverywhere(s.theme);
     $('#hst-theme').val(s.theme);
 }
-
-// ─── Settings sync ───
 
 export function syncUI() {
     const s = getSettings();
@@ -32,6 +28,7 @@ export function syncUI() {
     $('#hst-open-mode').val(normalizeOpenMode(s.openMode));
     $('#hst-show-in-chat').prop('checked', s.showInChat !== false);
     $('#hst-strip').prop('checked', s.stripFromMessage !== false);
+    $('#hst-trim').prop('checked', s.trimOldBoards !== false);
     $('#hst-compact').prop('checked', !!s.compactMode);
 }
 
@@ -40,8 +37,6 @@ function refreshAll() {
     updatePromptInjection();
     renderAll();
 }
-
-// ─── Quick panel ───
 
 function sparkline(values) {
     const W = 300, H = 84, PAD = 8;
@@ -168,8 +163,6 @@ function showPanel() {
     });
 }
 
-// ─── Setup ───
-
 export function setupUI() {
     try {
         const themeOptions = THEMES.map(t => `<option value="${t.id}">${t.label}</option>`).join('');
@@ -186,6 +179,7 @@ export function setupUI() {
             <hr>
             <label class="checkbox_label" title="If off, the board is tracked but nothing shows in the chat at all."><input type="checkbox" id="hst-show-in-chat"><span>Show in chat (as a card)</span></label>
             <label class="checkbox_label" title="If off, the raw <info_board> text stays in the message (e.g. visible while editing) instead of being erased."><input type="checkbox" id="hst-strip"><span>Remove board format from message</span></label>
+            <label class="checkbox_label" title="On (default): the AI only sees the newest status board, keeping the chat sent to it shorter. Off: the AI also sees every old status board still left in the chat history, which uses more of its memory/context."><input type="checkbox" id="hst-trim"><span>Only send latest board to AI</span></label>
             <hr>
             <div class="hst-row">
                 <label for="hst-theme">Theme</label>
@@ -219,7 +213,6 @@ export function setupUI() {
         };
         registerWandItem();
 
-        // ── Events ──
         const save = () => saveSettingsDebounced();
 
         $('#hst-enabled').on('change', function () {
@@ -239,6 +232,11 @@ export function setupUI() {
             getSettings().stripFromMessage = this.checked;
             save();
             if (this.checked) captureAll();
+        });
+        $('#hst-trim').on('change', function () {
+            getSettings().trimOldBoards = this.checked;
+            save();
+            updatePromptInjection();
         });
         $('#hst-compact').on('change', function () { getSettings().compactMode = this.checked; save(); refreshAll(); });
 
