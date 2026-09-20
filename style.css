@@ -602,10 +602,12 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-inf
 /* ═══════════════════════════════════════════
    LIBRARY THEMES — layout & decoration
    (library-night and library-day; palettes are above)
-   Layout (full card): an open book. Ribbons hang from the top edge, a spine runs down
-   the middle, the left page holds the ring + date/time stamp, the right page holds
-   Location/Thought/Goal as ruled library-card-catalog entries. The gauge stays a
-   COMPLETE 360° ring, same as every other theme.
+   Layout (full card): an open book. A spine runs down the middle; the left page holds
+   the ring + date/time stamp, the right page holds Location/Thought/Goal as ruled
+   library-card-catalog entries. The three stats are horizontal sticky-note index tabs
+   clipped to a flag point, stacked down the fore-edge (outer right side) of the card —
+   clear of the title, not hanging over it. The gauge stays a COMPLETE 360° ring, same
+   as every other theme.
    ═══════════════════════════════════════════ */
 
 details.hst-wrap[data-hst-theme^="library-"] .hst-card {
@@ -617,17 +619,18 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card,
   font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
-/* Grid layout of the full card: ribbons row, header row, then two book pages */
+/* Grid layout of the full card: header row, then two book pages. The tab stack
+   (.hst-stats) is positioned absolutely against this box — see "Index tabs" below —
+   so it is intentionally left out of the template/areas here. */
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
-  position: relative; display: grid; padding-top: 30px;
+  position: relative; display: grid;
   grid-template-columns: 1fr 1fr; column-gap: 30px; row-gap: 16px;
-  grid-template-areas: "sticks sticks" "head head" "ring loc" "date thought" "date goal";
+  grid-template-areas: "head head" "ring loc" "date thought" "date goal";
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-divider { display: none; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; padding-right: 74px; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-center { grid-area: ring; align-self: start; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-area: date; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats { grid-area: sticks; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.loc { grid-area: loc; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.thought { grid-area: thought; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
@@ -649,23 +652,33 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-pill {
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-pill::before { content: '§ '; }
 
-/* Bookmarks: ribbons hanging from the card's top edge, one per stat, V-notched like real page markers */
+/* Index tabs: horizontal sticky-note flags stacked down the card's outer (right) edge,
+   clear of the title — not hanging over it. Positioned against the card box itself
+   (see the grid comment above), so they don't consume grid space. */
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
-  display: flex; justify-content: center; gap: 20px; margin: 0; position: relative; z-index: 2;
+  position: absolute; top: 54px; right: -12px; z-index: 3;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 7px; margin: 0;
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"] { --sc: var(--hst-lib-ribbon-trust) !important; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"] { --sc: var(--hst-lib-ribbon-arousal) !important; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-lib-ribbon-jealousy) !important; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
-  display: flex; flex-direction: column; align-items: center; gap: 4px; width: 38px;
-  margin-top: -44px; padding: 8px 2px 16px; background: var(--sc); color: #fff9ec;
-  border-radius: 3px 3px 0 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
+  display: flex; flex-direction: row; align-items: center; gap: 7px;
+  min-width: 116px; padding: 6px 16px 6px 10px; background: var(--sc); color: #fff9ec;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat br { display: none; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-badge { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.55); color: #fff9ec; order: 1; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small { order: 2; color: rgba(255,249,236,0.85); font-size: 9px; letter-spacing: 0.4px; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b { order: 3; font-style: italic; font-variant-numeric: oldstyle-nums; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-badge {
+  width: 22px; height: 22px; margin: 0; font-size: 11px; order: 1; flex-shrink: 0;
+  background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.55); color: #fff9ec;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small {
+  order: 2; color: rgba(255,249,236,0.85); font-size: 10px; letter-spacing: 0.4px; white-space: nowrap;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b {
+  order: 3; margin-left: auto; font-style: italic; font-variant-numeric: oldstyle-nums; font-size: 14px; white-space: nowrap;
+}
 details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat-bar { display: none; }
 
 /* Ring: a dashed ink-stamp ring around the gauge, italic old-style score */
@@ -718,13 +731,19 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
 .hst-modal[data-hst-theme^="library-"] #hst-ov-apply { background: var(--hst-c1); color: #fff9ec; border: none; border-radius: 2px; padding: 8px 18px; }
 .hst-modal[data-hst-theme^="library-"] #hst-ov-clear { background: transparent; color: var(--hst-c1); border: 1px solid var(--hst-c1); border-radius: 2px; padding: 8px 18px; }
 
-/* Narrow card: stack the two pages, drop the spine and the hanging ribbons' negative offset */
+/* Narrow card: stack the two pages, drop the spine, and bring the tabs back into normal
+   flow as a wrapped row (no more sticking out past the card edge — there's no room). */
 @media (max-width: 480px) {
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
     grid-template-columns: minmax(0, 1fr); row-gap: 14px;
     grid-template-areas: "sticks" "head" "ring" "date" "loc" "thought" "goal";
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { padding-right: 0; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
+    grid-area: sticks; position: static; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: stretch;
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat { clip-path: none; border-radius: 4px; min-width: 0; }
 }
 @container hst (max-width: 480px) {
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
@@ -732,6 +751,11 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
     grid-template-areas: "sticks" "head" "ring" "date" "loc" "thought" "goal";
   }
   details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { padding-right: 0; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
+    grid-area: sticks; position: static; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: stretch;
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat { clip-path: none; border-radius: 4px; min-width: 0; }
 }
 
 /* ═══════════════════════════════════════════
