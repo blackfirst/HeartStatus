@@ -372,7 +372,6 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-ring::before {
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-score { font-variant-numeric: oldstyle-nums; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: italic; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label::before { content: '§ '; }
 
 /* ---- Settings drawer ---- */
 .hst-settings { display: flex; flex-direction: column; gap: 6px; }
@@ -680,7 +679,6 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-pill {
   background: var(--hst-lib-card-bg); color: var(--hst-c1); border: 1px dashed var(--hst-c1);
   border-radius: 2px; font-style: italic; max-width: 100%; text-align: center;
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-pill::before { content: '§ '; }
 
 /* Stat notes: three square sticky notes sitting under the date ticket on the left
    page, all in the same muted paper/tab tone (no separate bright colour per stat). */
@@ -753,7 +751,6 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
   display: inline-block; margin-bottom: 12px; padding: 3px 12px; border-radius: 2px; font-size: 0.85em; font-style: italic;
   border: 1px dashed var(--hst-c1); background: var(--hst-lib-card-bg);
 }
-.hst-modal[data-hst-theme^="library-"] .hst-modal-rel::before { content: '§ '; }
 .hst-modal[data-hst-theme^="library-"] .hst-chip {
   background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line); border-top: 3px solid var(--sc); border-radius: 3px;
 }
