@@ -41,6 +41,30 @@ details.hst-wrap[data-hst-theme="white-pink"],
       --hst-daytime-bg1:#fff5f8; --hst-daytime-bg2:#ffffff;
 }
 
+/* ---- Library themes (warm parchment/candlelight palette, same layout as Dark/Light) ---- */
+
+details.hst-wrap[data-hst-theme="library-day"],
+.hst-modal[data-hst-theme="library-day"] {
+  --hst-c1:#b5822b; --hst-c2:#d9a441; --hst-rgb:181,130,43;
+      --hst-bg1:#fdf6e6; --hst-bg2:#f4ead2; --hst-text:#4a3418; --hst-eyebrow:#8a5a2b;
+      --hst-muted:#a98b5d; --hst-stat-bg:#f8f0dc; --hst-stat-small:#9c8058;
+      --hst-track:rgba(74,52,24,0.12); --hst-info-bg:#f6ecd6;
+      --hst-summary-bg:#f3e6c8; --hst-summary-text:#7a5222; --hst-summary-border:#ddc190;
+      --hst-pulse-bg1:#fffaf0; --hst-pulse-bg2:#f6ead0; --hst-ring-track:#e6d6ab;
+      --hst-daytime-bg1:#fdf6e6; --hst-daytime-bg2:#f4ead2;
+}
+
+details.hst-wrap[data-hst-theme="library-night"],
+.hst-modal[data-hst-theme="library-night"] {
+  --hst-c1:#c99a4a; --hst-c2:#e0b563; --hst-rgb:201,154,74;
+      --hst-bg1:#2a2015; --hst-bg2:#150f0a; --hst-text:#f1e4c9; --hst-eyebrow:#d4a24d;
+      --hst-muted:#a68e66; --hst-stat-bg:#241a10; --hst-stat-small:#b39868;
+      --hst-track:rgba(255,255,255,0.08); --hst-info-bg:#201609;
+      --hst-summary-bg:#1c130a; --hst-summary-text:#d9ac5a; --hst-summary-border:#4a3826;
+      --hst-pulse-bg1:#2c2115; --hst-pulse-bg2:#170f08; --hst-ring-track:#3a2c1c;
+      --hst-daytime-bg1:#2c2015; --hst-daytime-bg2:#160f09;
+}
+
 
 /* ---- Racing themes (full-circle gauge, checkered-flag trim) ---- */
 

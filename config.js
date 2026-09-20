@@ -49,6 +49,8 @@ export const THEMES = [
     { id: 'racing-light', label: 'Racing (Light)', color: '#e10600' },
     { id: 'idol-night', label: 'Idol Stage (Night)', color: '#ff4fa3' },
     { id: 'idol-day', label: 'Idol Stage (Day)', color: '#e8388a' },
+    { id: 'library-night', label: 'Library (Night)', color: '#c99a4a' },
+    { id: 'library-day', label: 'Library (Day)', color: '#b5822b' },
 ];
 
 const DEFAULT_THEME = 'dark-red';
