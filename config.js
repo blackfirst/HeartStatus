@@ -4,6 +4,11 @@
 
 export const extensionName = 'heart-status';
 
+// Must match "version" in manifest.json. On load the extension compares the two and
+// force-reloads the page when they differ (i.e. the files on disk were updated but the
+// browser is still running the old cached code). Bump BOTH together on every update.
+export const EXTENSION_VERSION = '1.1.0';
+
 // Key used to store the manual adjustment inside chat metadata (per chat).
 export const META_KEY = 'heart_status_override';
 
@@ -22,32 +27,27 @@ export const defaultSettings = {
     // msg.extra.heartStatus instead. If off, the raw board stays in the message
     // text (e.g. visible while editing) and is simply hidden/replaced on display.
     stripFromMessage: false,
-    // SFW switches: hide a stat everywhere (prompt, parser output and card).
-    showArousal: true,
-    showJealousy: true,
     // Show a one-row mini card (small ring, name, inline stats) with a tap-to-expand
     // detail panel for location/thought/goal, instead of the full card every time.
     compactMode: false,
     // Whether a card starts expanded or collapsed:
-    // 'auto'   — only the latest message's card starts expanded, older ones collapse
-    //            to the "💗 Name's Status" summary line (existing default behavior).
-    // 'always' — every card starts expanded, always.
-    // 'never'  — every card starts collapsed to the summary line; tap to open any of them.
+    // 'always' — every card starts expanded, always (default).
+    // 'never'  — every card starts collapsed to the "💗 Name's Status" summary line.
     // This only sets the STARTING state — the person can still click any card's summary
     // to open/close it by hand regardless of this setting.
-    openMode: 'auto',
+    // (The old 'auto' mode was removed; saved 'auto' values are converted to 'always'.)
+    openMode: 'always',
     // Remove older boards from the prompt sent to the model (the latest one stays as a format example).
     trimOldBoards: true,
 };
 
 export const OPEN_MODES = [
-    { id: 'auto', label: 'Auto (only latest open)' },
     { id: 'always', label: 'Always open' },
     { id: 'never', label: 'Always collapsed' },
 ];
 
 export function normalizeOpenMode(id) {
-    return OPEN_MODES.some(m => m.id === id) ? id : 'auto';
+    return OPEN_MODES.some(m => m.id === id) ? id : 'always';
 }
 
 export const THEMES = [

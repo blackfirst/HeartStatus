@@ -1,6 +1,6 @@
 # 💗 Heart Status — SillyTavern Extension
 
-Tracks a character's **Trust / Arousal / Jealousy / Heart Score** during a roleplay and shows
+Tracks a character's **Trust / Arousal / Jealousy / Heart Score** (Arousal and Jealousy are always on) during a roleplay and shows
 it as a status card under each reply. This is the extension version of the old
 "Heart Status" kit (a prompt + a regex script): it does both jobs by itself, and adds a settings
 panel, notifications and manual control — and keeps the raw board text out of your saved chat.
@@ -60,9 +60,8 @@ Reload SillyTavern, then open **Extensions** and find **Heart Status** in the se
 | **Show in chat (as a card)** | On = the board renders as a card under the message (default). Off = nothing is shown in the chat at all — stats are still tracked and readable from the quick panel. |
 | **Remove board from saved message** | On = the raw `<info_board>` text is erased from the saved message once a reply finishes. Off = the raw text stays in the message (e.g. visible while editing); it's still hidden/replaced whenever it's displayed. **Default: off.** |
 | Theme | Dark / Light. Applies to every card and the quick panel, and is remembered. |
-| **Card open state** | Auto (only the latest message's card starts expanded, older ones collapse to a summary line — the previous default) / Always open / Always collapsed. This only sets the *starting* state each time a card is drawn — you can still click any card's `💗 Name's Status` line to open or close it by hand regardless of this setting. |
+| **Card open state** | Always open (default) / Always collapsed. This only sets the *starting* state each time a card is drawn — you can still click any card's `💗 Name's Status` line to open or close it by hand regardless of this setting. |
 | **Compact card (mini row, tap to expand)** | On = each card collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full card. Off = the full card shows every time (default). |
-| Track Arousal / Track Jealousy | Turn a stat off everywhere: the prompt stops asking for it and the card hides it. |
 
 These two switches are independent, so all four combinations work: card + keep raw text
 (default), card + erased, hidden + keep raw text, or hidden + erased. Older messages that
@@ -82,12 +81,12 @@ Open it from the **wand menu → Heart Status**.
 
 ### Card details
 
+- **Updates reload the page automatically.** On load (and on every chat change) the extension re-reads `manifest.json` and compares its `version` with `EXTENSION_VERSION` in `config.js`. If they differ, the page reloads once so the new code runs. When you release an update, bump the version in **both** places.
 - **Compact mode**: the row shows the Heart Score inside a small ring, the character's
   name, their relationship label, and Trust/Arousal/Jealousy inline. Tap anywhere on the
   row to expand it (no page reload, no re-generation) and see Location/Thoughts/Goal —
-  tap again to collapse. This is independent from the existing "only the latest message
-  stays open" behavior: an older message still collapses to the `💗 Name's Status`
-  summary line either way; compact mode only changes what the *expanded* card looks like.
+  tap again to collapse. Compact mode only changes what the *expanded* card looks like; whether cards start open
+  or collapsed is set by **Card open state**.
 - Missing fields are shown as “—” instead of breaking the card.
 - Ranges: Trust / Arousal / Jealousy `0–100`, Heart Score `-1000–1000`. The percentage is
   `(score + 1000) / 20` unless the model writes its own.
@@ -140,6 +139,7 @@ heart-status/
 ├── history.js           reads boards (from extra.heartStatus, or the raw text as a fallback)
 ├── prompts.js           prompt injection (instruction + current values)
 ├── migrate.js           one-time cleanup of the old regex script for upgraders
+├── updater.js           reloads the page when the extension version changes
 ├── render.js            card HTML
 ├── dom.js               swaps the raw board for the card
 ├── message-handler.js   rendering, notifications, prompt filter, capture-and-strip, cleanup

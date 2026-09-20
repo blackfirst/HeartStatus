@@ -34,8 +34,6 @@ export function syncUI() {
     $('#hst-open-mode').val(normalizeOpenMode(s.openMode));
     $('#hst-show-in-chat').prop('checked', s.showInChat !== false);
     $('#hst-strip').prop('checked', s.stripFromMessage !== false);
-    $('#hst-arousal').prop('checked', s.showArousal !== false);
-    $('#hst-jealousy').prop('checked', s.showJealousy !== false);
     $('#hst-compact').prop('checked', !!s.compactMode);
 }
 
@@ -95,8 +93,8 @@ export function showPanel() {
     const chips = latest
         ? [
             chip('Trust', latest.trust, STAT_COLORS.trust),
-            s.showArousal !== false ? chip('Arousal', latest.arousal, STAT_COLORS.arousal) : '',
-            s.showJealousy !== false ? chip('Jealousy', latest.jealousy, STAT_COLORS.jealousy) : '',
+            chip('Arousal', latest.arousal, STAT_COLORS.arousal),
+            chip('Jealousy', latest.jealousy, STAT_COLORS.jealousy),
             chip('Heart', latest.heart === null ? null : `${latest.heart} (${latest.pct}%)`, 'var(--hst-accent, #ff4d6d)'),
         ].join('')
         : '';
@@ -114,8 +112,8 @@ export function showPanel() {
     <div class="hst-hint">Leave a field empty to keep it. The model is told once and the adjustment expires when the next board appears.</div>
     <div class="hst-ov-grid">
       ${inputRow('hst-ov-trust', 'Trust', shown.trust, LIMITS.trust)}
-      ${s.showArousal !== false ? inputRow('hst-ov-arousal', 'Arousal', shown.arousal, LIMITS.arousal) : ''}
-      ${s.showJealousy !== false ? inputRow('hst-ov-jealousy', 'Jealousy', shown.jealousy, LIMITS.jealousy) : ''}
+      ${inputRow('hst-ov-arousal', 'Arousal', shown.arousal, LIMITS.arousal)}
+      ${inputRow('hst-ov-jealousy', 'Jealousy', shown.jealousy, LIMITS.jealousy)}
       ${inputRow('hst-ov-heart', 'Heart Score', shown.heart, LIMITS.heart)}
     </div>
     <div class="hst-buttons">
@@ -132,8 +130,8 @@ export function showPanel() {
     $('#hst-ov-apply').on('click', () => {
         const values = {
             trust: readNumber('#hst-ov-trust', LIMITS.trust),
-            arousal: s.showArousal !== false ? readNumber('#hst-ov-arousal', LIMITS.arousal) : null,
-            jealousy: s.showJealousy !== false ? readNumber('#hst-ov-jealousy', LIMITS.jealousy) : null,
+            arousal: readNumber('#hst-ov-arousal', LIMITS.arousal),
+            jealousy: readNumber('#hst-ov-jealousy', LIMITS.jealousy),
             heart: readNumber('#hst-ov-heart', LIMITS.heart),
         };
         if (Object.values(values).every(v => v === null)) {
@@ -198,9 +196,6 @@ export function setupUI() {
                 <label for="hst-open-mode">Card open state</label>
                 <select id="hst-open-mode" class="text_pole">${openModeOptions}</select>
             </div>
-            <hr>
-            <label class="checkbox_label"><input type="checkbox" id="hst-arousal"><span>Track Arousal</span></label>
-            <label class="checkbox_label"><input type="checkbox" id="hst-jealousy"><span>Track Jealousy</span></label>
         </div>
     </div>
 </div>`;
@@ -252,8 +247,6 @@ export function setupUI() {
             save();
             if (this.checked) captureAll();
         });
-        $('#hst-arousal').on('change', function () { getSettings().showArousal = this.checked; save(); refreshAll(); });
-        $('#hst-jealousy').on('change', function () { getSettings().showJealousy = this.checked; save(); refreshAll(); });
         $('#hst-compact').on('change', function () { getSettings().compactMode = this.checked; save(); refreshAll(); });
 
         syncUI();

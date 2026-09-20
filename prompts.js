@@ -17,15 +17,13 @@ function boardFormat(s) {
         '🗓️ Date: [in-world day, EEE dd MMM yyyy] | [current season]',
         '📍 Location: [current in-world location] | 💡 [lighting/illumination level]',
         '🤝 Trust: [0 - 100]',
-    ];
-    if (s.showArousal !== false) lines.push('💓 Arousal: [0 - 100]');
-    if (s.showJealousy !== false) lines.push('🔥 Jealousy: [0 - 100]');
-    lines.push(
+        '💓 Arousal: [0 - 100]',
+        '🔥 Jealousy: [0 - 100]',
         '💗 Heart Score: [-1000 - 1000] ([percentage equivalent]%)',
         '🏷️ Relationship: [{{char}} ↔ {{user}} current relationship label]',
         '💭 Thought: "one unspoken sentence reflecting {{char}}\'s current internal thought"',
         '🏆 Goal: [one sentence describing {{char}}\'s current immediate goal]',
-    );
+    ];
     return `<info_board>\n${FENCE}\n${lines.join('\n')}\n${FENCE}\n</info_board>`;
 }
 
@@ -33,20 +31,14 @@ function rules(s) {
     const r = [
         '- Values shift based only on what actually happens ({{user}}\'s words/actions), never randomly or by fixed steps.',
         '- Trust: ↑ honesty, kindness, consistency, kept promises; ↓ lies, broken promises, coldness, betrayal.',
-    ];
-    if (s.showArousal !== false) {
-        r.push('- Arousal: ↑ romantic/physical closeness, flirtation, intimacy fitting the scene; decays naturally over time, distance, or conflict.');
-    }
-    if (s.showJealousy !== false) {
-        r.push('- Jealousy: ↑ perceived rivals, neglect, threats to the relationship; ↓ reassurance, exclusivity, affection.');
-    }
-    r.push(
+        '- Arousal: ↑ romantic/physical closeness, flirtation, intimacy fitting the scene; decays naturally over time, distance, or conflict.',
+        '- Jealousy: ↑ perceived rivals, neglect, threats to the relationship; ↓ reassurance, exclusivity, affection.',
         '- Heart Score: running total reflecting cumulative interaction quality — trends up/down over time, not swung by one line. The percentage equals (score + 1000) / 20, rounded.',
         '- Change magnitude scales with the moment\'s significance (small talk = small shift; confession/betrayal/reconciliation = large shift).',
         '- The board is a summary only — it must never dictate or override {{char}}\'s behavior in the roleplay text; behavior comes first, board reflects it after.',
         '- Dates/seasons/time must match the setting\'s established calendar (real or fictional), staying internally consistent.',
         '- Write the board once, at the very start of the reply, then continue with the roleplay text.',
-    );
+    ];
     return r.join('\n');
 }
 
@@ -69,8 +61,8 @@ function baselineBlock(s, chat) {
     if (override) {
         const parts = [
             fmtStat('Trust', override.trust),
-            s.showArousal !== false ? fmtStat('Arousal', override.arousal) : '',
-            s.showJealousy !== false ? fmtStat('Jealousy', override.jealousy) : '',
+            fmtStat('Arousal', override.arousal),
+            fmtStat('Jealousy', override.jealousy),
             override.heart === null || override.heart === undefined
                 ? '' : `Heart Score ${override.heart} (${derivePct(override.heart)}%)`,
         ].filter(Boolean);
@@ -86,8 +78,8 @@ function baselineBlock(s, chat) {
 
     const stats = [
         fmtStat('Trust', prev.trust),
-        s.showArousal !== false ? fmtStat('Arousal', prev.arousal) : '',
-        s.showJealousy !== false ? fmtStat('Jealousy', prev.jealousy) : '',
+        fmtStat('Arousal', prev.arousal),
+        fmtStat('Jealousy', prev.jealousy),
         prev.heart === null ? '' : `Heart Score ${prev.heart} (${prev.pct}%)`,
     ].filter(Boolean).join(', ');
     let b = `\n[CURRENT VALUES] Previous board: ${stats}.`;

@@ -60,22 +60,17 @@ export function renderMessage(mesId) {
         return;
     }
 
-    // Only the newest board stays open; older ones collapse automatically — unless
-    // openMode overrides that ('always' / 'never' apply to every card the same way).
-    const open = s.openMode === 'always' ? true
-        : s.openMode === 'never' ? false
-        : idx === lastBoardIndex(chat);
+    // 'always' opens every card, 'never' collapses every card (the person can still toggle by hand).
+    const open = s.openMode !== 'never';
     const previous = previousData(chat, idx);
     const deltas = computeDeltas(data, previous ? previous.data : null);
-    const key = [idx, hashData(data), open ? 1 : 0, s.showArousal ? 1 : 0, s.showJealousy ? 1 : 0, s.compactMode ? 1 : 0, msg.name || ''].join('|');
+    const key = [idx, hashData(data), open ? 1 : 0, s.compactMode ? 1 : 0, msg.name || ''].join('|');
 
     const html = buildCardHtml(data, {
         name: msg.name || '',
         theme: s.theme,
         open,
         compact: !!s.compactMode,
-        showArousal: s.showArousal,
-        showJealousy: s.showJealousy,
         deltas,
     });
     mountCard(mesText, key, html, data.rawLength);
@@ -132,8 +127,6 @@ export function checkNotify(mesId) {
         const lines = [];
 
         for (const [k, label] of STAT_LABELS) {
-            if (k === 'arousal' && s.showArousal === false) continue;
-            if (k === 'jealousy' && s.showJealousy === false) continue;
             const d = deltas[k];
             if (d !== null && Math.abs(d) >= threshold) {
                 lines.push(`${d > 0 ? '▲' : '▼'} ${label} ${d > 0 ? '+' : ''}${d} (now ${data[k]})`);

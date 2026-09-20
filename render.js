@@ -56,30 +56,28 @@ function statsAndInfoHtml(tiles, data, thought) {
 }
 
 // One-line inline readout used in the compact row, e.g. "🤝 62 · 💓 40 · 🔥 12".
-function miniStatsInline(data, showArousal, showJealousy) {
+function miniStatsInline(data) {
     const parts = [`🤝 ${fmt(data.trust)}`];
-    if (showArousal) parts.push(`💓 ${fmt(data.arousal)}`);
-    if (showJealousy) parts.push(`🔥 ${fmt(data.jealousy)}`);
+    if (data.arousal !== null) parts.push(`💓 ${fmt(data.arousal)}`);
+    if (data.jealousy !== null) parts.push(`🔥 ${fmt(data.jealousy)}`);
     return parts.join(' · ');
 }
 
 /**
  * @param {object} data   parsed board (see parser.js)
- * @param {object} opts   { name, theme, open, compact, showArousal, showJealousy, deltas }
+ * @param {object} opts   { name, theme, open, compact, deltas }
  */
 export function buildCardHtml(data, opts = {}) {
     const theme = normalizeTheme(opts.theme);
     const name = escapeHtml(opts.name || '');
     const deltas = opts.deltas || {};
-    const showArousal = opts.showArousal !== false && data.arousal !== null;
-    const showJealousy = opts.showJealousy !== false && data.jealousy !== null;
 
     const ringPct = data.pct === null ? 0 : clamp(data.pct, 0, 100);
     const dashOffset = (RING_LENGTH - (RING_LENGTH * ringPct) / 100).toFixed(1);
 
     const tiles = [statTile('trust', '🤝', 'Trust', data.trust, deltas.trust)];
-    if (showArousal) tiles.push(statTile('arousal', '💓', 'Arousal', data.arousal, deltas.arousal));
-    if (showJealousy) tiles.push(statTile('jealousy', '🔥', 'Jealousy', data.jealousy, deltas.jealousy));
+    if (data.arousal !== null) tiles.push(statTile('arousal', '💓', 'Arousal', data.arousal, deltas.arousal));
+    if (data.jealousy !== null) tiles.push(statTile('jealousy', '🔥', 'Jealousy', data.jealousy, deltas.jealousy));
 
     const thought = data.thought ? `“${escapeHtml(data.thought)}”` : '—';
 
@@ -95,7 +93,7 @@ export function buildCardHtml(data, opts = {}) {
       </span>
       <span class="hst-mini-mid">
         <b class="hst-mini-name">${name || 'Status'}</b>
-        <span class="hst-mini-rel">${data.relationship ? `${escapeHtml(data.relationship)} · ` : ''}${miniStatsInline(data, showArousal, showJealousy)}</span>
+        <span class="hst-mini-rel">${data.relationship ? `${escapeHtml(data.relationship)} · ` : ''}${miniStatsInline(data)}</span>
       </span>
       <span class="hst-mini-chev" aria-hidden="true">▾</span>
     </summary>

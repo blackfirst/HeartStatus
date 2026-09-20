@@ -14,6 +14,7 @@ import {
 } from './message-handler.js';
 import { setThemeEverywhere } from './dom.js';
 import { migrateFromOldKit } from './migrate.js';
+import { reloadIfUpdated } from './updater.js';
 
 // Named in manifest.json ("generate_interceptor"); SillyTavern calls it before every generation.
 window.heartStatusContextFilter = filterContext;
@@ -29,7 +30,10 @@ function loadSettings() {
             if (s[key] === undefined) s[key] = structuredClone(defaultSettings[key]);
         }
         s.theme = normalizeTheme(s.theme);
-        s.openMode = normalizeOpenMode(s.openMode);
+        s.openMode = normalizeOpenMode(s.openMode); // removed 'auto' (or anything unknown) becomes 'always'
+        // Arousal and Jealousy are always tracked now; drop the old on/off switches.
+        delete s.showArousal;
+        delete s.showJealousy;
     } catch (error) {
         reportError('[Heart Status] Error loading settings:', error);
         extension_settings[extensionName] = structuredClone(defaultSettings);
@@ -37,6 +41,7 @@ function loadSettings() {
 }
 
 function afterChatChange() {
+    reloadIfUpdated(); // catches updates made while the page was already open
     resetNotified();
     syncUI();
     updatePromptInjection();
@@ -48,6 +53,9 @@ function afterChatChange() {
 
 jQuery(async () => {
     try {
+        // If the extension files were updated, reload the page right away so the new code runs.
+        if (await reloadIfUpdated()) return;
+
         loadSettings();
         migrateFromOldKit();
         setupUI();
