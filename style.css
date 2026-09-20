@@ -44,6 +44,37 @@ details.hst-wrap[data-hst-theme="white-pink"],
 }
 
 
+/* ---- Racing themes (full-circle gauge, checkered-flag trim) ---- */
+
+details.hst-wrap[data-hst-theme="racing-dark"],
+.hst-modal[data-hst-theme="racing-dark"] {
+  --hst-c1:#e10600; --hst-c2:#ffcc00; --hst-rgb:225,6,0;
+      --hst-bg1:#14100a; --hst-bg2:#0a0a0b; --hst-text:#f0f0f0; --hst-eyebrow:#ffcc00;
+      --hst-muted:#a08a70; --hst-stat-bg:#141414; --hst-stat-small:#a08a70;
+      --hst-track:rgba(255,255,255,0.08); --hst-info-bg:#131313;
+      --hst-summary-bg:#160805; --hst-summary-text:#ff5a3c; --hst-summary-border:#3d1710;
+      --hst-pulse-bg1:#181310; --hst-pulse-bg2:#0d0d0d; --hst-ring-track:#241914;
+      --hst-daytime-bg1:#1c1410; --hst-daytime-bg2:#0c0a0a;
+      --hst-shadow-a:0.6; --hst-daytime-shadow-a:0.45; --hst-stat-shadow-a:0.4;
+      --hst-rc-flag-dark:#0d0d0d; --hst-rc-flag-light:#f2f2f2;
+      --hst-rc-loc:#ff8a3d; --hst-rc-thought:#c99bff; --hst-rc-goal:#ffcc00;
+}
+
+details.hst-wrap[data-hst-theme="racing-light"],
+.hst-modal[data-hst-theme="racing-light"] {
+  --hst-c1:#e10600; --hst-c2:#ff9d00; --hst-rgb:225,6,0;
+      --hst-bg1:#fff8f0; --hst-bg2:#ffffff; --hst-text:#2b2b2f; --hst-eyebrow:#c98a00;
+      --hst-muted:#8a7a68; --hst-stat-bg:#fdf9f5; --hst-stat-small:#8a7a68;
+      --hst-track:rgba(0,0,0,0.08); --hst-info-bg:#fbf8f5;
+      --hst-summary-bg:#fff1eb; --hst-summary-text:#c2410c; --hst-summary-border:#ffd7b8;
+      --hst-pulse-bg1:#ffffff; --hst-pulse-bg2:#fff3e6; --hst-ring-track:#f0e2d4;
+      --hst-daytime-bg1:#fff7ee; --hst-daytime-bg2:#ffffff;
+      --hst-shadow-a:0.10; --hst-daytime-shadow-a:0.06; --hst-stat-shadow-a:0.06;
+      --hst-rc-flag-dark:#0d0d0d; --hst-rc-flag-light:#f2f2f2;
+      --hst-rc-loc:#e8701a; --hst-rc-thought:#9b5de5; --hst-rc-goal:#c98a00;
+}
+
+
 /* ---- Wrapper / summary ---- */
 .hst-slot { margin: 6px 0; }
 .hst-slot:empty { margin: 0; }
@@ -216,6 +247,88 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-ov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
 .hst-ov-row { display: flex; flex-direction: column; gap: 3px; font-size: 0.85em; }
 .hst-ov-row .text_pole { width: 100%; box-sizing: border-box; }
+
+/* ═══════════════════════════════════════════
+   RACING THEMES — layout & decoration
+   (applies to racing-dark and racing-light; palettes are above)
+   Every circle here is a COMPLETE 360° circle: the gauge ring never
+   shortens with the score, and the dashed ring and tick marks around
+   it are full rings too.
+   ═══════════════════════════════════════════ */
+
+@keyframes hst-rc-flag { from { background-position: 0 0; } to { background-position: 16px 0; } }
+@keyframes hst-rc-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Card shell: sharper corners, checkered flag along the top edge */
+details.hst-wrap[data-hst-theme^="racing-"] .hst-card {
+  position: relative; overflow: hidden; border-radius: 16px; padding-top: 28px;
+  border-color: rgba(var(--hst-rgb),0.3);
+  box-shadow: 0 14px 30px rgba(0,0,0,var(--hst-shadow-a)), inset 0 0 40px rgba(var(--hst-rgb),0.04);
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-card.hst-compact { padding-top: 24px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-card::before,
+.hst-modal[data-hst-theme^="racing-"] .hst-modal-box::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px; pointer-events: none;
+  background: repeating-conic-gradient(var(--hst-rc-flag-dark) 0% 25%, var(--hst-rc-flag-light) 0% 50%) 0 0 / 8px 8px;
+  opacity: 0.9; animation: hst-rc-flag 3s linear infinite;
+}
+.hst-modal[data-hst-theme^="racing-"] .hst-modal-box { position: relative; border-radius: 14px; padding-top: 24px; }
+
+/* Header: italic name + slanted position badge */
+details.hst-wrap[data-hst-theme^="racing-"] .hst-name { font-style: italic; letter-spacing: 0.3px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-pill {
+  background: linear-gradient(135deg, var(--hst-c1), #a30400); color: #fff; font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 5px; letter-spacing: 0.4px; white-space: nowrap;
+  transform: skewX(-10deg); box-shadow: 0 0 10px rgba(var(--hst-rgb),0.45);
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-pill::before { content: '🏁 '; }
+
+/* Gauge: full solid ring + dotted spinning ring + tachometer tick marks */
+details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::before {
+  content: ''; position: absolute; inset: 3px; border-radius: 50%; pointer-events: none;
+  border: 2px dotted rgba(var(--hst-rgb),0.4); animation: hst-rc-spin 7s linear infinite;
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::after {
+  content: ''; position: absolute; inset: -9px; border-radius: 50%; pointer-events: none;
+  background:
+    repeating-conic-gradient(from -1deg, var(--hst-c1) 0 2deg, transparent 2deg 30deg),
+    repeating-conic-gradient(from -0.5deg, rgba(var(--hst-rgb),0.35) 0 1deg, transparent 1deg 6deg);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-ring-rotate { animation: hst-glow-slow 2.2s ease-in-out infinite; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-pulse-wrap { animation: hst-glow-slow 2.2s ease-in-out infinite; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-score { font-style: italic; font-variant-numeric: tabular-nums; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-ecg-path { stroke: var(--hst-c2); animation-duration: 1.5s; }
+
+/* Affection bar → speed bar with tick marks */
+details.hst-wrap[data-hst-theme^="racing-"] .hst-affbar { position: relative; height: 7px; border-radius: 4px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-affbar::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.25) 0 2px, transparent 2px 10px);
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-affbar-fill { border-radius: 4px 0 0 4px; }
+
+/* Tiles: slanted timing-tower edge on date/time, telemetry look on stats (badges stay full circles) */
+details.hst-wrap[data-hst-theme^="racing-"] .hst-dt {
+  border-left: 4px solid var(--hst-c1); border-radius: 4px 12px 12px 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,var(--hst-daytime-shadow-a));
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-stat {
+  border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,var(--hst-stat-shadow-a));
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-stat-bar,
+details.hst-wrap[data-hst-theme^="racing-"] .hst-stat-bar-fill { border-radius: 2px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-info { border-radius: 0 8px 8px 0; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-info.loc { --ac: var(--hst-rc-loc); }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-info.thought { --ac: var(--hst-rc-thought); }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-info.goal { --ac: var(--hst-rc-goal); }
+
+@media (prefers-reduced-motion: reduce) {
+  details.hst-wrap[data-hst-theme^="racing-"] .hst-card::before,
+  .hst-modal[data-hst-theme^="racing-"] .hst-modal-box::before,
+  details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::before { animation: none; }
+}
 
 @media (max-width: 480px) {
   .hst-card { padding: 14px; border-radius: 18px; }
