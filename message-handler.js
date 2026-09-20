@@ -44,6 +44,14 @@ export function renderMessage(mesId) {
         return;
     }
 
+    if (!s.showInChat) {
+        // Tracked, just not shown: clear whatever's there (raw text or an old
+        // card) down to nothing.
+        const key = [idx, hashData(data), 'hidden'].join('|');
+        mountCard(mesText, key, '', data.rawLength);
+        return;
+    }
+
     if (hasLegacyCard(mesText)) {
         if (!legacyWarned) {
             legacyWarned = true;
@@ -184,7 +192,9 @@ async function captureOne(msg) {
 }
 
 // Sweeps the whole chat (cheap: hasBoardTag skips anything already captured).
+// No-ops entirely when the "erase from saved message" setting is off.
 export async function captureAll() {
+    if (!getSettings()?.stripFromMessage) return false;
     try {
         const ctx = getContextSafe();
         const chat = ctx?.chat;

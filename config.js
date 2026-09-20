@@ -14,10 +14,14 @@ export const defaultSettings = {
     notifyThreshold: 15,
     // 'dark-red' | 'white-pink' | 'white-gold'
     theme: 'dark-red',
-    // 'card' = replace the raw board with the status card, 'raw' = leave the model's text alone
-    displayMode: 'card',
-    // Older messages show their card collapsed; only the latest one is open.
-    collapseOlder: true,
+    // Show the board as a card under the message. If off, nothing is shown in the
+    // chat for it at all (stats are still tracked either way).
+    showInChat: true,
+    // Erase the raw <info_board>...</info_board> text from the saved message (and
+    // its active swipe) once a reply finishes, keeping the parsed values in
+    // msg.extra.heartStatus instead. If off, the raw board stays in the message
+    // text (e.g. visible while editing) and is simply hidden/replaced on display.
+    stripFromMessage: true,
     // SFW switches: hide a stat everywhere (prompt, parser output and card).
     showArousal: true,
     showJealousy: true,

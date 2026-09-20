@@ -8,7 +8,7 @@ import { getSettings, getChat, setOverride, clearOverride, getActiveOverride } f
 import { collectHistory, lastBoardIndex, dataOf } from './history.js';
 import { escapeHtml } from './render.js';
 import { updatePromptInjection } from './prompts.js';
-import { renderAll } from './message-handler.js';
+import { renderAll, captureAll } from './message-handler.js';
 import { setThemeEverywhere, removeCards } from './dom.js';
 import { notify } from './notifications.js';
 
@@ -31,7 +31,8 @@ export function syncUI() {
     $('#hst-notify').prop('checked', !!s.showNotifications);
     $('#hst-threshold').val(s.notifyThreshold);
     $('#hst-theme').val(normalizeTheme(s.theme));
-    $('#hst-collapse').prop('checked', !!s.collapseOlder);
+    $('#hst-show-in-chat').prop('checked', s.showInChat !== false);
+    $('#hst-strip').prop('checked', s.stripFromMessage !== false);
     $('#hst-arousal').prop('checked', s.showArousal !== false);
     $('#hst-jealousy').prop('checked', s.showJealousy !== false);
 }
@@ -182,11 +183,13 @@ export function setupUI() {
                 <input type="number" id="hst-threshold" class="text_pole" min="1" max="100">
             </div>
             <hr>
+            <label class="checkbox_label" title="If off, the board is tracked but nothing shows in the chat at all."><input type="checkbox" id="hst-show-in-chat"><span>Show in chat (as a card)</span></label>
+            <label class="checkbox_label" title="If off, the raw <info_board> text stays in the saved message (e.g. visible while editing) instead of being erased."><input type="checkbox" id="hst-strip"><span>Remove board from saved message</span></label>
+            <hr>
             <div class="hst-row">
                 <label for="hst-theme">Theme</label>
                 <select id="hst-theme" class="text_pole">${themeOptions}</select>
             </div>
-            <label class="checkbox_label"><input type="checkbox" id="hst-collapse"><span>Collapse cards on older messages</span></label>
             <hr>
             <label class="checkbox_label"><input type="checkbox" id="hst-arousal"><span>Track Arousal</span></label>
             <label class="checkbox_label"><input type="checkbox" id="hst-jealousy"><span>Track Jealousy</span></label>
@@ -230,7 +233,12 @@ export function setupUI() {
             save();
         });
         $('#hst-theme').on('change', function () { setTheme(this.value); });
-        $('#hst-collapse').on('change', function () { getSettings().collapseOlder = this.checked; save(); renderAll(); });
+        $('#hst-show-in-chat').on('change', function () { getSettings().showInChat = this.checked; save(); refreshAll(); });
+        $('#hst-strip').on('change', function () {
+            getSettings().stripFromMessage = this.checked;
+            save();
+            if (this.checked) captureAll();
+        });
         $('#hst-arousal').on('change', function () { getSettings().showArousal = this.checked; save(); refreshAll(); });
         $('#hst-jealousy').on('change', function () { getSettings().showJealousy = this.checked; save(); refreshAll(); });
 
