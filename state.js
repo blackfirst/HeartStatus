@@ -23,7 +23,6 @@ export function getChat() {
     return getContextSafe()?.chat || [];
 }
 
-// ── Manual adjustment ("apply these values to the next reply") ──
 // Stored in chat metadata. It expires as soon as a newer board appears, so it
 // only ever affects one reply.
 

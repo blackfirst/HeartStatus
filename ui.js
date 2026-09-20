@@ -12,8 +12,6 @@ import { renderAll, captureAll } from './message-handler.js';
 import { setThemeEverywhere, removeCards } from './dom.js';
 import { notify } from './notifications.js';
 
-// ─── Theme ───
-
 function setTheme(id) {
     const s = getSettings();
     s.theme = normalizeTheme(id);
@@ -21,8 +19,6 @@ function setTheme(id) {
     setThemeEverywhere(s.theme);
     $('#hst-theme').val(s.theme);
 }
-
-// ─── Settings sync ───
 
 export function syncUI() {
     const s = getSettings();
@@ -40,8 +36,6 @@ function refreshAll() {
     updatePromptInjection();
     renderAll();
 }
-
-// ─── Quick panel ───
 
 function sparkline(values) {
     const W = 300, H = 84, PAD = 8;
@@ -168,8 +162,6 @@ function showPanel() {
     });
 }
 
-// ─── Setup ───
-
 export function setupUI() {
     try {
         const themeOptions = THEMES.map(t => `<option value="${t.id}">${t.label}</option>`).join('');
@@ -219,7 +211,6 @@ export function setupUI() {
         };
         registerWandItem();
 
-        // ── Events ──
         const save = () => saveSettingsDebounced();
 
         $('#hst-enabled').on('change', function () {
