@@ -26,8 +26,7 @@ Themes:
 - 🏁 Racing Dark / Racing Light
 - 🎤 Idol Stage Night / Idol Stage Day
 - 📖 Library Night / Library Day
-- 🖤 Demons (black & red) — cathedral layout: arched window, centered Heart Score medallion with a red sunburst, circular stat gauges, and straight Location / Thoughts / Goal rows
-- ✨ Gods (white & gold) — the same cathedral layout in white and gold
+- 🖤 Demons / ✨ Gods
 
 ## Install
 
