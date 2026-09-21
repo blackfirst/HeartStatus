@@ -14,21 +14,21 @@ export const META_KEY = 'heart_status_override';
 export const defaultSettings = {
     // Master switch ("Enable prompt"). ON: the board instruction is injected so the AI
     // writes a board on every reply. OFF: the extension does nothing at all — no prompt
-    // is sent, no card is drawn, the quick panel is hidden, and any board already in the
+    // is sent, no styled board is drawn, the quick panel is hidden, and any board already in the
     // chat is left exactly as the model wrote it.
     isEnabled: true,
-    // "Enable card". ON: the board is drawn as a card. OFF: the plain board text is shown
+    // "Enable Theme". ON: the board is drawn styled with the theme. OFF: the plain board text is shown
     // as-is. Only matters while isEnabled is on (the prompt is sent either way).
     cardEnabled: true,
     // 'dark-red' | 'white-pink' | 'racing-dark' | 'racing-light' | 'idol-night' | 'idol-day'
     theme: 'dark-red',
-    // Show a one-row mini card (small ring, name, inline stats) with a tap-to-expand
-    // detail panel for location/thought/goal, instead of the full card every time.
+    // Show a one-row mini board (small ring, name, inline stats) with a tap-to-expand
+    // detail panel for location/thought/goal, instead of the full board every time.
     compactMode: false,
-    // Whether a card starts expanded or collapsed:
-    // 'always' — every card starts expanded, always (default).
-    // 'never'  — every card starts collapsed to the "💗 Name's Status" summary line.
-    // This only sets the STARTING state — the person can still click any card's summary
+    // Whether a board starts expanded or collapsed:
+    // 'always' — every board starts expanded, always (default).
+    // 'never'  — every board starts collapsed to the "💗 Name's Status" summary line.
+    // This only sets the STARTING state — the person can still click any board's summary
     // to open/close it by hand regardless of this setting.
     // (The old 'auto' mode was removed; saved 'auto' values are converted to 'always'.)
     openMode: 'always',

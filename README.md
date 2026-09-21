@@ -1,7 +1,7 @@
 # 💗 Heart Status — SillyTavern Extension
 
 Tracks a character's **Trust / Arousal / Jealousy / Heart Score** during a roleplay and shows it
-as a status card under each reply. This is the extension version of the old "Heart Status" kit (a
+as a status board under each reply. This is the extension version of the old "Heart Status" kit (a
 prompt + a regex script): it does both jobs by itself, and adds a settings panel and manual
 control.
 
@@ -11,12 +11,12 @@ control.
    instruction, plus the *previous* board's values so the numbers keep moving gradually. This
    happens whenever **Enable** is on (see Settings).
 2. **Reads the board** the model writes (`<info_board> … </info_board>`) and, in its place, shows
-   a card: Heart Score ring, stat bars, date/time, location, thought and goal. The raw
+   a board: Heart Score ring, stat bars, date/time, location, thought and goal. The raw
    `<info_board>` text is left untouched inside the message itself (so editing/saving the chat
-   still has the model's original text) — it's just hidden from view and replaced by the card
+   still has the model's original text) — it's just hidden from view and replaced by the styled board
    visually.
-3. **Showing the card is optional.** Turn "Enable Theme" off and the plain board is shown exactly
-   as the model wrote it, instead of the card. The prompt is still sent and the values are still
+3. **Styling the board is optional.** Turn "Enable Theme" off and the plain board is shown exactly
+   as the model wrote it, instead of the styled board. The prompt is still sent and the values are still
    tracked (readable from the 💗 quick panel).
 
 Themes:
@@ -29,11 +29,11 @@ Themes:
 ## Install
 
 **Install:** https://github.com/blackfirst/HeartStatus.git — this one package includes
-everything (prompt injection, parser, card, settings); you don't need anything else alongside it.
+everything (prompt injection, parser, board, settings); you don't need anything else alongside it.
 
 > ⚠️ **Already using the old separate "Heart Status" kit (prompt + regex script)?** This
 > extension replaces both, so leaving the old ones on gives you double instructions and double
-> cards. The first time this extension loads it **automatically disables the old regex script**
+> boards. The first time this extension loads it **automatically disables the old regex script**
 > for you (Extensions → Regex — you'll get a toast confirming it, if one was found). The old
 > `info-board` prompt instruction, though, lives inside your own preset or author's note, and
 > this extension can't safely edit arbitrary prompt text on its own — you'll get a one-time
@@ -43,16 +43,16 @@ everything (prompt injection, parser, card, settings); you don't need anything e
 
 | Setting | What it does |
 |---|---|
-| **Enable** | Master switch. On = the board instruction is sent and the model writes a board on every reply. Off = Heart Status stops completely: no prompt is sent, no card is drawn, the 💗 quick panel entry is hidden, and any board already in the chat is shown as plain text. The options below are greyed out while it's off. |
-| **Enable Theme** | On = the board is drawn as a themed card. Off = the plain board is shown as the model wrote it. The prompt is still sent either way. Sits in the same group as Theme. When off, *Mini board* and *Card open state* are greyed out (they only shape the card). |
-| Theme | Dark / Light / Racing (Dark) / Racing (Light) / Idol Stage (Night) / Idol Stage (Day) / Library (Night) / Library (Day) / Demons / Gods. Applies to every card and the quick panel, and is remembered. |
-| **Card open state** | Always open (default) / Always collapsed. This only sets the *starting* state each time a card is drawn — you can still click any card's `💗 Name's Status` line to open or close it by hand regardless of this setting. |
-| **Mini board** | Off / On dropdown. On = each card collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full card. Off = the full card shows every time (default). See "Card details" below for how this looks per theme. |
+| **Enable** | Master switch. On = the board instruction is sent and the model writes a board on every reply. Off = Heart Status stops completely: no prompt is sent, no styled board is drawn, the 💗 quick panel entry is hidden, and any board already in the chat is shown as plain text. The options below are greyed out while it's off. |
+| **Enable Theme** | On = the board is drawn styled with the theme. Off = the plain board is shown as the model wrote it. The prompt is still sent either way. Sits in the same group as Theme. When off, *Mini board* and *Board open state* are greyed out (they only shape the board). |
+| Theme | Dark / Light / Racing (Dark) / Racing (Light) / Idol Stage (Night) / Idol Stage (Day) / Library (Night) / Library (Day) / Demons / Gods. Applies to every board and the quick panel, and is remembered. |
+| **Board open state** | Always open (default) / Always collapsed. This only sets the *starting* state each time a board is drawn — you can still click any board's `💗 Name's Status` line to open or close it by hand regardless of this setting. |
+| **Mini board** | Off / On dropdown. On = each board collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full board. Off = the full board shows every time (default). See "Board details" below for how this looks per theme. |
 
-### Card details
+### Board details
 
-- **Mini board**: collapses the card to a one-row summary (ring, name, inline stats); tap to expand/collapse.
-- Missing fields are shown as "—" instead of breaking the card.
+- **Mini board**: collapses the board to a one-row summary (ring, name, inline stats); tap to expand/collapse.
+- Missing fields are shown as "—" instead of breaking the board.
 - Ranges: Trust / Arousal / Jealousy `0–100`, Heart Score `-1000–1000`. The percentage is
   always `(score + 1000) / 20`, worked out from the Heart Score itself — a percentage the model writes in the board is ignored, so the "Affection" bar and label always match the number in the middle. The Heart Score ring itself is always drawn as a full circle.
 
@@ -87,8 +87,8 @@ lines after it, so a missing close can never swallow the rest of the reply.
 - No regex to import and no strict field order.
 - The theme is stored in SillyTavern's settings, not browser `localStorage`, so it follows you
   across devices. No JavaScript inside chat messages is needed.
-- All text from the model is HTML-escaped before it goes into the card.
-- The Trust bar now fills `0–100%`. The old card drew it as `50% + trust/2`, so Trust 0 showed a
+- All text from the model is HTML-escaped before it goes into the board.
+- The Trust bar now fills `0–100%`. The old board drew it as `50% + trust/2`, so Trust 0 showed a
   half-full bar.
 
 ## Files
@@ -102,14 +102,14 @@ heart-status/
 ├── history.js           reads boards straight from each message's text
 ├── prompts.js           prompt injection (instruction + current values)
 ├── migrate.js           one-time cleanup of the old regex script for upgraders
-├── render.js            card HTML
-├── dom.js               hides the raw board and shows the card in its place
+├── render.js            board HTML
+├── dom.js               hides the raw board and shows the board in its place
 ├── message-handler.js   rendering and the prompt filter
 ├── state.js             settings access and the one-shot manual adjustment
 ├── ui.js                settings drawer, quick panel, wand entry
 ├── notifications.js     toasts
 ├── diagnostics.js       throttled error logging
-└── style.css            card and panel styles
+└── style.css            board and panel styles
 ```
 
 ## Troubleshooting
@@ -117,9 +117,9 @@ heart-status/
 - **Nothing shows in the chat** — first check "Enable" and "Enable Theme" are on; if they
   are, the reply likely had no parseable board at all (no `<info_board>` tag, or fewer than
   three recognised fields).
-- **Upgrading from 1.0.1** — the old "Enable" only hid the card. If you had it off, it is carried
+- **Upgrading from 1.0.1** — the old "Enable" only hid the board. If you had it off, it is carried
   over to "Enable Theme" (off) and "Enable" is turned on, so nothing stops working.
-- **Two cards** — this extension auto-disables the old regex script on first load, but if it
+- **Two boards** — this extension auto-disables the old regex script on first load, but if it
   didn't find it (different name, character-scoped script it can't see, etc.), disable it
   yourself under Extensions → Regex.
 - **The model ignores the board** — check that the old `info-board` prompt is not also active and

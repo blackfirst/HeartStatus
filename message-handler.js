@@ -46,7 +46,7 @@ export function renderMessage(mesId) {
     if (hasLegacyCard(mesText)) {
         if (!legacyWarned) {
             legacyWarned = true;
-            notify('The old “Heart Status” regex script is still enabled and already draws a card. Disable it in Extensions → Regex to use this extension’s card.', 'warning');
+            notify('The old “Heart Status” regex script is still enabled and already draws a board. Disable it in Extensions → Regex to use this extension’s board.', 'warning');
         }
         return;
     }
