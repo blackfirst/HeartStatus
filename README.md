@@ -41,8 +41,8 @@ stay active alongside it.
 **What you must do by hand** — the extension can't safely do these for you:
 1. **Regex** — open Extensions → Regex and switch off (or delete) every old Heart Status script
    that is still on. Check especially: scripts with a different name (e.g. your own theme
-   scripts), scripts saved on other characters, and scripts on the character that was not open
-   on first load. Symptom if one is left on: two boards under one reply.
+   scripts) and scripts saved on other characters. Symptom if one is left on: two boards under
+   one reply.
 2. **Prompt** — find the old `info-board` instruction in your preset's prompt and **delete it or
    switch it off**. Don't leave it enabled — the model would get two board instructions and may
    write two boards or mix the formats.
@@ -127,9 +127,8 @@ heart-status/
 - **Nothing shows in the chat** — first check "Enable" and "Enable Theme" are on; if they
   are, the reply likely had no parseable board at all (no `<info_board>` tag, or fewer than
   three recognised fields).
-- **Two boards** — this extension auto-disables the old regex script on first load, but if it
-  didn't find it (different name, character-scoped script it can't see, etc.), disable it
-  yourself under Extensions → Regex.
+- **Two boards** — an old Heart Status regex script is still on. Switch it off yourself under
+  Extensions → Regex.
 - **The model ignores the board** — check that the old `info-board` prompt is not also active and
   that nothing else in your preset tells it to skip extra headers.
 
