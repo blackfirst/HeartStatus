@@ -10,9 +10,10 @@ import { updatePromptInjection } from './prompts.js';
 import { setupUI, syncUI } from './ui.js';
 import {
     renderMessage, renderAll, scheduleRenderAll,
-    filterContext, setMutationDiscarder, captureAll,
+    filterContext, setMutationDiscarder,
 } from './message-handler.js';
 import { setThemeEverywhere } from './dom.js';
+import { getSettings } from './state.js';
 import { migrateFromOldKit } from './migrate.js';
 import { reloadIfUpdated } from './updater.js';
 
@@ -25,6 +26,13 @@ function loadSettings() {
             extension_settings[extensionName] = structuredClone(defaultSettings);
         }
         const s = extension_settings[extensionName];
+        // Before v1.0.2, "Enable" only hid the card while the prompt kept going out. That
+        // meaning now belongs to "Enable card"; "Enable" is the master switch. Carry an
+        // old "off" over to the card so upgrading doesn't switch the whole extension off.
+        if (s.cardEnabled === undefined && s.isEnabled === false) {
+            s.cardEnabled = false;
+            s.isEnabled = true;
+        }
         // Add settings introduced by newer versions without touching existing choices.
         for (const key in defaultSettings) {
             if (s[key] === undefined) s[key] = structuredClone(defaultSettings[key]);
@@ -41,6 +49,8 @@ function loadSettings() {
         // were removed as options; the behavior is now permanently off.
         delete s.stripFromMessage;
         delete s.trimOldBoards;
+        // The old "Show in chat (as a card)" option is gone; "Enable card" replaces it.
+        delete s.showInChat;
     } catch (error) {
         reportError('[Heart Status] Error loading settings:', error);
         extension_settings[extensionName] = structuredClone(defaultSettings);
@@ -51,7 +61,6 @@ function afterChatChange() {
     reloadIfUpdated();
     syncUI();
     updatePromptInjection();
-    captureAll();
     // Messages are drawn a moment after the event; try twice for slow/large chats.
     setTimeout(renderAll, 400);
     setTimeout(renderAll, 1500);
@@ -83,9 +92,6 @@ jQuery(async () => {
         if (event_types.GENERATION_ENDED) {
             eventSource.on(event_types.GENERATION_ENDED, () => {
                 updatePromptInjection();
-                // The reply is finalized now, so it's safe to pull its board into
-                // msg.extra and erase it from the message text.
-                captureAll().then(() => scheduleRenderAll(300));
                 scheduleRenderAll(300);
             });
         }
@@ -93,7 +99,6 @@ jQuery(async () => {
             if (event_types[name]) {
                 eventSource.on(event_types[name], () => {
                     updatePromptInjection();
-                    captureAll().then(() => scheduleRenderAll(300));
                     scheduleRenderAll(300);
                 });
             }
@@ -108,6 +113,9 @@ jQuery(async () => {
             const chatEl = document.getElementById('chat');
             if (chatEl) {
                 const observer = new MutationObserver((mutations) => {
+                    // Nothing to redraw while the extension or the card is off.
+                    const cfg = getSettings();
+                    if (!cfg?.isEnabled || !cfg.cardEnabled) return;
                     for (const m of mutations) {
                         const target = m.target && m.target.nodeType === 1 ? m.target : m.target?.parentElement;
                         const mesText = target?.closest?.('.mes_text');
@@ -126,7 +134,6 @@ jQuery(async () => {
 
         // Apply the saved theme to any card already on screen.
         setThemeEverywhere(extension_settings[extensionName].theme);
-        captureAll().then(() => setTimeout(renderAll, 800));
         setTimeout(renderAll, 800);
     } catch (error) {
         reportError('[Heart Status] FATAL ERROR:', error);

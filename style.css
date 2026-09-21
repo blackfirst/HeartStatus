@@ -434,6 +434,9 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 .hst-settings { display: flex; flex-direction: column; gap: 6px; }
 .hst-row { display: flex; gap: 6px; align-items: center; justify-content: space-between; }
 .hst-row .text_pole { width: auto; min-width: 120px; flex: 0 1 55%; }
+/* Options that don't apply right now (extension or card switched off) look greyed out. */
+.hst-settings .checkbox_label:has(input:disabled),
+.hst-settings .hst-row:has(select:disabled) { opacity: .5; }
 .hst-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
 
 /* ---- Quick panel ---- */

@@ -6,18 +6,22 @@ export const extensionName = 'heart-status';
 
 // Must match manifest.json's "version" — bump both together on release.
 // updater.js compares this against the live manifest.json to detect a stale page.
-export const EXTENSION_VERSION = '1.0.1';
+export const EXTENSION_VERSION = '1.0.2';
 
 // Key used to store the manual adjustment inside chat metadata (per chat).
 export const META_KEY = 'heart_status_override';
 
 export const defaultSettings = {
+    // Master switch ("Enable prompt"). ON: the board instruction is injected so the AI
+    // writes a board on every reply. OFF: the extension does nothing at all — no prompt
+    // is sent, no card is drawn, the quick panel is hidden, and any board already in the
+    // chat is left exactly as the model wrote it.
     isEnabled: true,
+    // "Enable card". ON: the board is drawn as a card. OFF: the plain board text is shown
+    // as-is. Only matters while isEnabled is on (the prompt is sent either way).
+    cardEnabled: true,
     // 'dark-red' | 'white-pink' | 'racing-dark' | 'racing-light' | 'idol-night' | 'idol-day'
     theme: 'dark-red',
-    // Show the board as a card under the message. If off, nothing is shown in the
-    // chat for it at all (stats are still tracked either way).
-    showInChat: true,
     // Show a one-row mini card (small ring, name, inline stats) with a tap-to-expand
     // detail panel for location/thought/goal, instead of the full card every time.
     compactMode: false,

@@ -27,7 +27,9 @@ export function renderMessage(mesId) {
     const mesText = document.querySelector(`#chat .mes[mesid="${idx}"] .mes_text`);
     if (!mesText) return;
 
-    if (!s?.isEnabled) {
+    // Master switch off, or card switched off: show the plain board exactly as the model
+    // wrote it. removeCards() un-hides the original board and drops any card we drew.
+    if (!s?.isEnabled || !s.cardEnabled) {
         removeCards(mesText);
         return;
     }
@@ -36,17 +38,8 @@ export function renderMessage(mesId) {
     const msg = chat[idx];
     const data = dataOf(msg);
     if (!data) {
-        // Nothing parsed: still wipe any raw board text out of view rather than
-        // leaving it printed in the chat.
+        // Nothing parsed: nothing to draw, and no card should be left behind.
         removeCards(mesText);
-        return;
-    }
-
-    if (!s.showInChat) {
-        // Tracked, just not shown: clear whatever's there (raw text or an old
-        // card) down to nothing.
-        const key = [idx, hashData(data), 'hidden'].join('|');
-        mountCard(mesText, key, '', data.rawLength);
         return;
     }
 
@@ -99,12 +92,4 @@ export function filterContext(chat) {
     } catch (error) {
         reportError('[Heart Status] filterContext error:', error);
     }
-}
-
-// The "remove board format from message" behavior was removed as an option.
-// Boards are never stripped out of msg.mes now — dataOf() in history.js parses
-// them live from the message text instead. Kept as a no-op stub since it's
-// still called from index.js/ui.js.
-export async function captureAll() {
-    return false;
 }

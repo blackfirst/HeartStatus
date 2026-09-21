@@ -73,7 +73,7 @@ function sweepRemnants(slot) {
  *
  * The original board element is never destroyed — it's hidden and left in
  * place (marked with .hst-original) so removeCards() can bring it back
- * exactly as the model wrote it whenever the extension (or "Show in chat")
+ * exactly as the model wrote it whenever the extension (or just the card)
  * is turned off, instead of leaving a blank gap where the board used to be.
  */
 export function mountCard(mesText, key, html, rawLength) {

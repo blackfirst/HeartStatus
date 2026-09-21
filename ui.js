@@ -24,10 +24,18 @@ export function syncUI() {
     const s = getSettings();
     if (!s) return;
     $('#hst-enabled').prop('checked', !!s.isEnabled);
+    $('#hst-card-enabled').prop('checked', !!s.cardEnabled);
     $('#hst-theme').val(normalizeTheme(s.theme));
     $('#hst-open-mode').val(normalizeOpenMode(s.openMode));
-    $('#hst-show-in-chat').prop('checked', s.showInChat !== false);
     $('#hst-compact').prop('checked', !!s.compactMode);
+
+    // Master off greys out everything below it and hides the quick-panel entry.
+    // Card off also greys out the options that only shape the card itself.
+    const on = !!s.isEnabled;
+    const card = on && !!s.cardEnabled;
+    $('#hst-card-enabled, #hst-theme').prop('disabled', !on);
+    $('#hst-compact, #hst-open-mode').prop('disabled', !card);
+    $('#hst_wand_open').toggle(on);
 }
 
 // Called after any setting that changes what the model is told or what the card shows.
@@ -173,10 +181,9 @@ export function setupUI() {
     </div>
     <div class="inline-drawer-content">
         <div class="hst-settings">
-            <label class="checkbox_label"><input type="checkbox" id="hst-enabled"><span>Enable</span></label>
+            <label class="checkbox_label" title="Master switch. On: the board instruction is sent so the AI writes a board on every reply. Off: Heart Status stops completely — no prompt is sent, no card is drawn, and the 💗 quick panel is hidden."><input type="checkbox" id="hst-enabled"><span>Enable prompt</span></label>
             <hr>
-            <label class="checkbox_label" title="If off, the board is tracked but nothing shows in the chat at all."><input type="checkbox" id="hst-show-in-chat"><span>Show in chat (as a card)</span></label>
-            <hr>
+            <label class="checkbox_label" title="On: the board is shown as a card. Off: the plain board text is shown as the AI wrote it. The prompt is still sent either way."><input type="checkbox" id="hst-card-enabled"><span>Enable card</span></label>
             <div class="hst-row">
                 <label for="hst-theme">Theme</label>
                 <select id="hst-theme" class="text_pole">${themeOptions}</select>
@@ -205,6 +212,7 @@ export function setupUI() {
                     <span>Heart Status</span>
                 </div>`);
             menu.append(item);
+            item.toggle(!!getSettings()?.isEnabled);
             item.on('click', () => { menu.hide(); showPanel(); });
         };
         registerWandItem();
@@ -215,6 +223,14 @@ export function setupUI() {
             getSettings().isEnabled = this.checked;
             save();
             if (!this.checked) removeCards();
+            syncUI();
+            refreshAll();
+        });
+        $('#hst-card-enabled').on('change', function () {
+            getSettings().cardEnabled = this.checked;
+            save();
+            if (!this.checked) removeCards();
+            syncUI();
             refreshAll();
         });
         $('#hst-theme').on('change', function () { setTheme(this.value); });
@@ -223,7 +239,6 @@ export function setupUI() {
             save();
             refreshAll();
         });
-        $('#hst-show-in-chat').on('change', function () { getSettings().showInChat = this.checked; save(); refreshAll(); });
         $('#hst-compact').on('change', function () { getSettings().compactMode = this.checked; save(); refreshAll(); });
 
         syncUI();

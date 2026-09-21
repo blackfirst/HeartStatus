@@ -93,6 +93,7 @@ function baselineBlock(chat) {
 
 function buildPrompt(chat) {
     const s = getSettings();
+    // Master switch off = send nothing.
     if (!s || !s.isEnabled) return '';
     let b = '[HEART STATUS]\n';
     b += 'Start every roleplay reply with an Information Board giving extra scene context, in this exact format:\n\n';
@@ -105,6 +106,9 @@ export function updatePromptInjection(chat) {
     try {
         const text = buildPrompt(chat || getChat());
         const installed = extension_prompts[extensionName];
+        // Turned off and nothing installed: nothing to do. (If something IS installed,
+        // fall through so it gets replaced with the empty text and stops being sent.)
+        if (!text && !installed) return;
         // SillyTavern replaces this registry when a chat is cleared, so compare with
         // what the host actually holds instead of a local cache.
         if (installed
