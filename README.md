@@ -39,9 +39,8 @@ This extension replaces **both** parts of the old kit, so the old prompt and the
 stay active alongside it.
 
 **What happens by itself** (once, the first time the extension loads):
-- Regex scripts whose name contains "heart status" are switched **off** — global ones, and the
-  ones on the character that is open at that moment. Nothing is deleted, and you can switch them
-  back on any time. You get a toast saying how many were switched off.
+- Regex scripts whose name contains "heart status" are switched **off**. Nothing is deleted, and
+  you can switch them back on any time. You get a toast saying how many were switched off.
 - Your chat messages are never touched. Boards the old kit already wrote are picked up and drawn
   by this extension once the old regex is off.
 
