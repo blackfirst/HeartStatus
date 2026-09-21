@@ -38,7 +38,7 @@ everything (prompt injection, parser, board, settings); you don't need anything 
 This extension replaces **both** parts of the old kit, so the old prompt and the old regex must not
 stay active alongside it.
 
-**What you must do by hand** — the extension can't safely do these for you:
+**What you must do by hand** — the extension can't do these for you:
 1. **Regex** — open Extensions → Regex and switch off (or delete) every old Heart Status script
    that is still on. Check especially: scripts with a different name (e.g. your own theme
    scripts) and scripts saved on other characters. Symptom if one is left on: two boards under
