@@ -117,8 +117,6 @@ heart-status/
 - **Nothing shows in the chat** — first check "Enable" and "Enable Theme" are on; if they
   are, the reply likely had no parseable board at all (no `<info_board>` tag, or fewer than
   three recognised fields).
-- **Upgrading from 1.0.1** — the old "Enable" only hid the board. If you had it off, it is carried
-  over to "Enable Theme" (off) and "Enable" is turned on, so nothing stops working.
 - **Two boards** — this extension auto-disables the old regex script on first load, but if it
   didn't find it (different name, character-scoped script it can't see, etc.), disable it
   yourself under Extensions → Regex.

@@ -2,30 +2,16 @@
 // HISTORY — board data derived from the chat itself
 // ═══════════════════════════════════════════
 //
-// The board is captured once (message-handler.js) into msg.extra.heartStatus and
-// wiped out of msg.mes, so it's read from there first. Older messages that still
-// have the raw tag in their text (from before this existed, or not yet captured
-// this session) fall back to parsing it live.
+// Boards are read straight from each message's text (the raw <info_board> stays in
+// msg.mes) and cached per message.
 
-import { parseInfoBoard, derivePct } from './parser.js';
+import { parseInfoBoard } from './parser.js';
 
 const cache = new WeakMap();
 
-// Boards captured before the percentage was always derived may carry a model-written
-// percentage that disagrees with the score. Make it match the Heart Score.
-function withDerivedPct(data) {
-    if (data && typeof data.heart === 'number') {
-        const pct = derivePct(data.heart);
-        if (data.pct !== pct) data.pct = pct;
-    }
-    return data;
-}
-
-// Parsed board of a bot message, or null. Prefers the captured copy in
-// msg.extra so nothing has to remain in the visible message text.
+// Parsed board of a bot message, or null.
 export function dataOf(msg) {
     if (!msg || msg.is_user) return null;
-    if (msg.extra && msg.extra.heartStatus) return withDerivedPct(msg.extra.heartStatus);
     if (typeof msg.mes !== 'string') return null;
     const hit = cache.get(msg);
     if (hit && hit.mes === msg.mes) return hit.data;

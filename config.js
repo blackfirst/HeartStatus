@@ -6,7 +6,7 @@ export const extensionName = 'heart-status';
 
 // Must match manifest.json's "version" — bump both together on release.
 // updater.js compares this against the live manifest.json to detect a stale page.
-export const EXTENSION_VERSION = '1.0.3';
+export const EXTENSION_VERSION = '1.0.0';
 
 // Key used to store the manual adjustment inside chat metadata (per chat).
 export const META_KEY = 'heart_status_override';
@@ -30,7 +30,6 @@ export const defaultSettings = {
     // 'never'  — every board starts collapsed to the "💗 Name's Status" summary line.
     // This only sets the STARTING state — the person can still click any board's summary
     // to open/close it by hand regardless of this setting.
-    // (The old 'auto' mode was removed; saved 'auto' values are converted to 'always'.)
     openMode: 'always',
 };
 
@@ -58,12 +57,8 @@ export const THEMES = [
 
 const DEFAULT_THEME = 'dark-red';
 
-// Themes that were renamed keep working: a saved old id is mapped to its replacement.
-const LEGACY_THEMES = { 'velvet-noir': 'demons', 'fallen-angel': 'demons', 'demon': 'demons', 'angel-gold': 'gods' };
-
 export function normalizeTheme(id) {
-    const mapped = LEGACY_THEMES[id] || id;
-    return THEMES.some(t => t.id === mapped) ? mapped : DEFAULT_THEME;
+    return THEMES.some(t => t.id === id) ? id : DEFAULT_THEME;
 }
 
 // Value ranges used by the prompt, the parser and the board.

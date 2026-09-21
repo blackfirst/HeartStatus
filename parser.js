@@ -52,19 +52,12 @@ function splitTrail(value) {
     return parts.map(p => p.trim()).filter(Boolean);
 }
 
-// "62", "40 → 62", "62 (+22)" -> { value: 62, from: 40 | null, last: "62 (+22)" }
+// "62", "40 → 62", "62 (+22)" -> 62 (the last number of a change trail), or null.
 function parseStat(raw, key) {
     const parts = splitTrail(raw);
     if (!parts.length) return null;
-    const last = parts[parts.length - 1];
-    const cur = firstNumber(last);
-    if (cur === null) return null;
-    const from = parts.length > 1 ? firstNumber(parts[0]) : null;
-    return {
-        value: clamp(cur, LIMITS[key]),
-        from: from === null ? null : clamp(from, LIMITS[key]),
-        last,
-    };
+    const cur = firstNumber(parts[parts.length - 1]);
+    return cur === null ? null : clamp(cur, LIMITS[key]);
 }
 
 // Percentage equivalent of a Heart Score (-1000..1000 -> 0..100).
@@ -97,40 +90,33 @@ function parseBody(body, raw) {
     const trust = fields.trust !== undefined ? parseStat(fields.trust, 'trust') : null;
     const arousal = fields.arousal !== undefined ? parseStat(fields.arousal, 'arousal') : null;
     const jealousy = fields.jealousy !== undefined ? parseStat(fields.jealousy, 'jealousy') : null;
-    const heartStat = fields.heartscore !== undefined ? parseStat(fields.heartscore, 'heart') : null;
+    const heart = fields.heartscore !== undefined ? parseStat(fields.heartscore, 'heart') : null;
 
     // Always derived from the Heart Score itself. The model sometimes writes its own
     // "(61%)" that disagrees with the score, and the ring/label must match the number.
-    const pct = heartStat ? derivePct(heartStat.value) : null;
+    const pct = heart !== null ? derivePct(heart) : null;
 
     const fieldCount = Object.keys(fields).length;
     // Needs to look like a real board, not a stray mention of the tag.
-    if (fieldCount < 3 || (!trust && !heartStat)) return null;
+    if (fieldCount < 3 || (trust === null && heart === null)) return null;
 
     return {
         time: (fields.time || '').trim(),
         date: (fields.date || '').trim(),
         location: (fields.location || '').trim(),
-        trust: trust ? trust.value : null,
-        arousal: arousal ? arousal.value : null,
-        jealousy: jealousy ? jealousy.value : null,
-        heart: heartStat ? heartStat.value : null,
+        trust,
+        arousal,
+        jealousy,
+        heart,
         pct,
         relationship: (fields.relationship || '').trim(),
         thought: cleanQuotes(fields.thought || ''),
         goal: (fields.goal || '').trim(),
-        // Start values when the model showed a change trail ("40 → 62").
-        prev: {
-            trust: trust ? trust.from : null,
-            arousal: arousal ? arousal.from : null,
-            jealousy: jealousy ? jealousy.from : null,
-            heart: heartStat ? heartStat.from : null,
-        },
         rawLength: raw.length,
     };
 }
 
-export function hasBoardTag(text) {
+function hasBoardTag(text) {
     return typeof text === 'string' && /<info_board>/i.test(text);
 }
 
@@ -178,15 +164,6 @@ export function parseInfoBoard(text) {
         } catch (e) { return null; }
     }
     return null;
-}
-
-// Removes every complete board from the text.
-export function stripInfoBoards(text) {
-    if (!hasBoardTag(text)) return text;
-    let out = text.replace(boardRe('gi'), '');
-    // Also drop an unclosed board (tag + its fence) so it doesn't linger in the prompt.
-    out = out.replace(new RegExp('<info_board>\\s*```(?:[a-zA-Z0-9_-]*\\n)?[\\s\\S]*?```', 'gi'), '');
-    return out.replace(/^\s+/, '').replace(/\n{3,}/g, '\n\n');
 }
 
 // Short fingerprint used to decide whether a rendered board is still up to date.

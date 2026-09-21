@@ -26,37 +26,12 @@ function loadSettings() {
             extension_settings[extensionName] = structuredClone(defaultSettings);
         }
         const s = extension_settings[extensionName];
-        // v1.0.2 stored the "Enable Theme" switch under the name "cardEnabled"; it is now
-        // "boardEnabled". Carry the saved value over.
-        if (s.cardEnabled !== undefined) {
-            if (s.boardEnabled === undefined) s.boardEnabled = !!s.cardEnabled;
-            delete s.cardEnabled;
-        }
-        // Before v1.0.2, "Enable" only hid the styled board while the prompt kept going out.
-        // That meaning now belongs to "Enable Theme"; "Enable" is the master switch. Carry an
-        // old "off" over so upgrading doesn't switch the whole extension off.
-        if (s.boardEnabled === undefined && s.isEnabled === false) {
-            s.boardEnabled = false;
-            s.isEnabled = true;
-        }
         // Add settings introduced by newer versions without touching existing choices.
         for (const key in defaultSettings) {
             if (s[key] === undefined) s[key] = structuredClone(defaultSettings[key]);
         }
         s.theme = normalizeTheme(s.theme);
-        s.openMode = normalizeOpenMode(s.openMode); // removed 'auto' (or anything unknown) becomes 'always'
-        // Arousal and Jealousy are always tracked now; drop the old on/off switches.
-        delete s.showArousal;
-        delete s.showJealousy;
-        // The "notify on big changes" toast feature was removed.
-        delete s.showNotifications;
-        delete s.notifyThreshold;
-        // "Remove board format from message" and "Only send latest board to AI"
-        // were removed as options; the behavior is now permanently off.
-        delete s.stripFromMessage;
-        delete s.trimOldBoards;
-        // The old "Show in chat" option is gone; "Enable Theme" replaces it.
-        delete s.showInChat;
+        s.openMode = normalizeOpenMode(s.openMode); // anything unknown becomes 'always'
     } catch (error) {
         reportError('[Heart Status] Error loading settings:', error);
         extension_settings[extensionName] = structuredClone(defaultSettings);
