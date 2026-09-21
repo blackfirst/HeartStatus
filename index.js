@@ -37,6 +37,10 @@ function loadSettings() {
         // The "notify on big changes" toast feature was removed.
         delete s.showNotifications;
         delete s.notifyThreshold;
+        // "Remove board format from message" and "Only send latest board to AI"
+        // were removed as options; the behavior is now permanently off.
+        delete s.stripFromMessage;
+        delete s.trimOldBoards;
     } catch (error) {
         reportError('[Heart Status] Error loading settings:', error);
         extension_settings[extensionName] = structuredClone(defaultSettings);

@@ -80,7 +80,7 @@ export function buildCardHtml(data, opts = {}) {
     const thought = data.thought ? `“${escapeHtml(data.thought)}”` : '—';
 
     const body = opts.compact
-        ? `<details class="hst-mini">
+        ? `<details class="hst-mini"${opts.open !== false ? ' open' : ''}>
     <summary class="hst-mini-row">
       <span class="hst-mini-ring">
         <svg viewBox="0 0 220 220">

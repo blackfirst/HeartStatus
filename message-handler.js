@@ -3,9 +3,9 @@
 // ═══════════════════════════════════════════
 
 import { reportError } from './diagnostics.js';
-import { getSettings, getChat, getContextSafe } from './state.js';
-import { dataOf, lastBoardIndex } from './history.js';
-import { hashData, hasBoardTag, stripInfoBoards, parseInfoBoard } from './parser.js';
+import { getSettings, getChat } from './state.js';
+import { dataOf } from './history.js';
+import { hashData } from './parser.js';
 import { buildCardHtml } from './render.js';
 import { mountCard, removeCards, hasLegacyCard } from './dom.js';
 import { updatePromptInjection } from './prompts.js';
@@ -95,60 +95,16 @@ export function scheduleRenderAll(delay = 150) {
 
 export function filterContext(chat) {
     try {
-        const s = getSettings();
-        if (s?.isEnabled && s.trimOldBoards && Array.isArray(chat)) {
-            const keep = lastBoardIndex(chat);
-            for (let i = 0; i < chat.length; i++) {
-                if (i === keep) continue; // the latest board stays as the model's format example
-                const msg = chat[i];
-                if (!msg || msg.is_user || !hasBoardTag(msg.mes)) continue;
-                const clean = stripInfoBoards(msg.mes);
-                if (clean && clean !== msg.mes) chat[i] = { ...msg, mes: clean };
-            }
-        }
         updatePromptInjection(chat);
     } catch (error) {
         reportError('[Heart Status] filterContext error:', error);
     }
 }
 
-// Reads the board out of a message's raw text into msg.extra.heartStatus, then
-// erases it from the message text (and the active swipe) so it never sits
-// in the message itself — not in the chat log, not while editing, not in swipes.
-// Only call this once a message is finalized (never mid-stream: it mutates
-// msg.mes, which an in-progress generation is still appending to).
-async function captureOne(msg) {
-    if (!msg || msg.is_user || typeof msg.mes !== 'string' || !hasBoardTag(msg.mes)) return false;
-    const data = parseInfoBoard(msg.mes);
-    if (!data) return false;
-    const clean = stripInfoBoards(msg.mes);
-    msg.extra = msg.extra || {};
-    msg.extra.heartStatus = data;
-    msg.mes = clean;
-    if (Array.isArray(msg.swipes) && typeof msg.swipe_id === 'number' && typeof msg.swipes[msg.swipe_id] === 'string') {
-        msg.swipes[msg.swipe_id] = stripInfoBoards(msg.swipes[msg.swipe_id]);
-    }
-    return true;
-}
-
-// Sweeps the whole chat (cheap: hasBoardTag skips anything already captured).
-// No-ops entirely when the "Remove board from message" setting is off.
+// The "remove board format from message" behavior was removed as an option.
+// Boards are never stripped out of msg.mes now — dataOf() in history.js parses
+// them live from the message text instead. Kept as a no-op stub since it's
+// still called from index.js/ui.js.
 export async function captureAll() {
-    if (!getSettings()?.stripFromMessage) return false;
-    try {
-        const ctx = getContextSafe();
-        const chat = ctx?.chat;
-        if (!Array.isArray(chat)) return false;
-        let changed = false;
-        for (const msg of chat) {
-            if (await captureOne(msg)) changed = true;
-        }
-        if (changed) {
-            try { await ctx.saveChat?.(); } catch (e) { /* ignore */ }
-        }
-        return changed;
-    } catch (error) {
-        reportError('[Heart Status] captureAll error:', error);
-        return false;
-    }
+    return false;
 }

@@ -18,11 +18,6 @@ export const defaultSettings = {
     // Show the board as a card under the message. If off, nothing is shown in the
     // chat for it at all (stats are still tracked either way).
     showInChat: true,
-    // Erase the raw <info_board>...</info_board> text from the message (and
-    // its active swipe) once a reply finishes, keeping the parsed values in
-    // msg.extra.heartStatus instead. If off, the raw board stays in the message
-    // text (e.g. visible while editing) and is simply hidden/replaced on display.
-    stripFromMessage: false,
     // Show a one-row mini card (small ring, name, inline stats) with a tap-to-expand
     // detail panel for location/thought/goal, instead of the full card every time.
     compactMode: false,
@@ -33,8 +28,6 @@ export const defaultSettings = {
     // to open/close it by hand regardless of this setting.
     // (The old 'auto' mode was removed; saved 'auto' values are converted to 'always'.)
     openMode: 'always',
-    // Remove older boards from the prompt sent to the model (the latest one stays as a format example).
-    trimOldBoards: false,
 };
 
 export const OPEN_MODES = [

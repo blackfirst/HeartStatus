@@ -70,6 +70,11 @@ function sweepRemnants(slot) {
 /**
  * Puts the card into a message. Returns true when the DOM changed.
  * `key` identifies the content; an unchanged key means nothing to do.
+ *
+ * The original board element is never destroyed — it's hidden and left in
+ * place (marked with .hst-original) so removeCards() can bring it back
+ * exactly as the model wrote it whenever the extension (or "Show in chat")
+ * is turned off, instead of leaving a blank gap where the board used to be.
  */
 export function mountCard(mesText, key, html, rawLength) {
     const existing = mesText.querySelector('.hst-slot');
@@ -87,7 +92,9 @@ export function mountCard(mesText, key, html, rawLength) {
 
     const target = locateBoard(mesText, rawLength);
     if (target) {
-        target.replaceWith(slot);
+        target.classList.add('hst-original');
+        target.style.display = 'none';
+        target.insertAdjacentElement('beforebegin', slot);
         sweepRemnants(slot);
     } else {
         // Board text not found in the DOM (e.g. the tag was hidden by another extension).
@@ -97,7 +104,14 @@ export function mountCard(mesText, key, html, rawLength) {
 }
 
 export function removeCards(root = document) {
-    root.querySelectorAll('.hst-slot').forEach(el => el.remove());
+    root.querySelectorAll('.hst-slot').forEach(slot => {
+        const original = slot.nextElementSibling;
+        if (original && original.classList.contains('hst-original')) {
+            original.classList.remove('hst-original');
+            original.style.display = '';
+        }
+        slot.remove();
+    });
 }
 
 // Cards drawn by the OLD regex script share nothing with ours except intent.
