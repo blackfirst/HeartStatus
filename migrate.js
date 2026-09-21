@@ -55,11 +55,11 @@ export function migrateFromOldKit() {
             );
         }
 
-        // The old prompt instruction lives inside your own preset / author's note,
+        // The old prompt instruction lives inside your own preset prompt,
         // which this extension can't safely search-and-edit on its own — a manual
         // check is the only safe option here.
         notify(
-            'If you used the old Heart Status prompt kit, remove its "info-board" instruction from your preset or author\'s note — this extension injects its own, and having both confuses the model.',
+            'If you used the old Heart Status prompt kit, delete or switch off its "info-board" instruction in your preset prompt — this extension injects its own, and having both confuses the model.',
             'info',
         );
     } catch (error) {

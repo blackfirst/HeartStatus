@@ -29,13 +29,32 @@ Themes:
 **Install:** https://github.com/blackfirst/HeartStatus.git — this one package includes
 everything (prompt injection, parser, board, settings); you don't need anything else alongside it.
 
-> ⚠️ **Already using the old separate "Heart Status" kit (prompt + regex script)?** This
-> extension replaces both, so leaving the old ones on gives you double instructions and double
-> boards. The first time this extension loads it **automatically disables the old regex script**
-> for you (Extensions → Regex — you'll get a toast confirming it, if one was found). The old
-> `info-board` prompt instruction, though, lives inside your own preset or author's note, and
-> this extension can't safely edit arbitrary prompt text on its own — you'll get a one-time
-> reminder toast to remove that part by hand.
+> ⚠️ **Already using the old separate "Heart Status" kit (prompt + regex script)?** Read
+> [Moving from the old kit](#moving-from-the-old-kit) below before you start a chat — leaving the
+> old prompt or regex on gives you double instructions and double boards.
+
+## Moving from the old kit
+
+This extension replaces **both** parts of the old kit, so the old prompt and the old regex must not
+stay active alongside it.
+
+**What happens by itself** (once, the first time the extension loads):
+- Regex scripts whose name contains "heart status" are switched **off** — global ones, and the
+  ones on the character that is open at that moment. Nothing is deleted, and you can switch them
+  back on any time. You get a toast saying how many were switched off.
+- Your chat messages are never touched. Boards the old kit already wrote are picked up and drawn
+  by this extension once the old regex is off.
+
+**What you must do by hand** — the extension can't safely do these for you:
+1. **Regex** — open Extensions → Regex and switch off (or delete) every old Heart Status script
+   that is still on. Check especially: scripts with a different name (e.g. your own theme
+   scripts), scripts saved on other characters, and scripts on the character that was not open
+   on first load. Symptom if one is left on: two boards under one reply.
+2. **Prompt** — find the old `info-board` instruction in your preset's prompt and **delete it or
+   switch it off**. Don't leave it enabled — the model would get two board instructions and may
+   write two boards or mix the formats.
+
+That's all: no need to clear old chats or re-import anything.
 
 ## Settings
 
