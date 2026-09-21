@@ -29,14 +29,3 @@ export function lastBoardIndex(chat) {
     }
     return -1;
 }
-
-// Oldest → newest, at most `limit` entries.
-export function collectHistory(chat, limit = 60) {
-    const out = [];
-    for (let i = 0; i < chat.length; i++) {
-        if (!usable(chat[i])) continue;
-        const data = dataOf(chat[i]);
-        if (data) out.push({ idx: i, data });
-    }
-    return out.slice(-limit);
-}

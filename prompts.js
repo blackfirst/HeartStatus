@@ -5,9 +5,8 @@
 import { setExtensionPrompt, extension_prompts, extension_prompt_types, extension_prompt_roles } from '../../../../script.js';
 import { extensionName } from './config.js';
 import { reportError } from './diagnostics.js';
-import { getSettings, getChat, getActiveOverride } from './state.js';
+import { getSettings, getChat } from './state.js';
 import { lastBoardIndex, dataOf } from './history.js';
-import { derivePct } from './parser.js';
 
 const FENCE = '```';
 
@@ -54,23 +53,8 @@ function fmtStat(label, value) {
 
 // The numbers the next board must start from.
 function baselineBlock(chat) {
-    const override = getActiveOverride(chat);
     const idx = lastBoardIndex(chat);
     const prev = idx >= 0 ? dataOf(chat[idx]) : null;
-
-    if (override) {
-        const parts = [
-            fmtStat('Trust', override.trust),
-            fmtStat('Arousal', override.arousal),
-            fmtStat('Jealousy', override.jealousy),
-            override.heart === null || override.heart === undefined
-                ? '' : `Heart Score ${override.heart} (${derivePct(override.heart)}%)`,
-        ].filter(Boolean);
-        let b = `\n[CURRENT VALUES] {{user}} manually adjusted the tracker. Use these as the new starting point for the next board: ${parts.join(', ')}.`;
-        b += ' Keep any stat not listed as it was. Never mention this adjustment in the story.';
-        if (prev) b += ` Last in-world time: ${lastTime(prev.time)}; date: ${prev.date}.`;
-        return b + '\n';
-    }
 
     if (!prev) {
         return '\n[CURRENT VALUES] No board has been shown yet. Start with values that fit how well {{char}} and {{user}} know each other at this point of the story.\n';

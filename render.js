@@ -5,7 +5,7 @@
 import { STAT_COLORS, normalizeTheme } from './config.js';
 import { derivePct } from './parser.js';
 
-export function escapeHtml(value) {
+function escapeHtml(value) {
     return String(value ?? '').replace(/[&<>"']/g, c => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
     }[c]));

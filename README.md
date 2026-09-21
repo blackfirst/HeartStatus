@@ -2,8 +2,7 @@
 
 Tracks a character's **Trust / Arousal / Jealousy / Heart Score** during a roleplay and shows it
 as a status board under each reply. This is the extension version of the old "Heart Status" kit (a
-prompt + a regex script): it does both jobs by itself, and adds a settings panel and manual
-control.
+prompt + a regex script): it does both jobs by itself, and adds a settings section.
 
 ## What it does
 
@@ -16,8 +15,7 @@ control.
    still has the model's original text) — it's just hidden from view and replaced by the styled board
    visually.
 3. **Styling the board is optional.** Turn "Enable Theme" off and the plain board is shown exactly
-   as the model wrote it, instead of the styled board. The prompt is still sent and the values are still
-   tracked (readable from the 💗 quick panel).
+   as the model wrote it, instead of the styled board. The prompt is still sent either way.
 
 Themes:
 - 🌑🌕 Dark / Light
@@ -43,10 +41,9 @@ everything (prompt injection, parser, board, settings); you don't need anything 
 
 | Setting | What it does |
 |---|---|
-| **Enable** | Master switch. On = the board instruction is sent and the model writes a board on every reply. Off = Heart Status stops completely: no prompt is sent, no styled board is drawn, the 💗 quick panel entry is hidden, and any board already in the chat is shown as plain text. The options below are greyed out while it's off. |
+| **Enable** | Master switch. On = the board instruction is sent and the model writes a board on every reply. Off = Heart Status stops completely: no prompt is sent, no styled board is drawn, and any board already in the chat is shown as plain text. The options below are greyed out while it's off. |
 | **Enable Theme** | On = the board is drawn styled with the theme. Off = the plain board is shown as the model wrote it. The prompt is still sent either way. Sits in the same group as Theme. When off, *Mini board* and *Board open state* are greyed out (they only shape the board). |
-| Theme | Dark / Light / Racing (Dark) / Racing (Light) / Idol Stage (Night) / Idol Stage (Day) / Library (Night) / Library (Day) / Demons / Gods. Applies to every board and the quick panel, and is remembered. |
-| **Open panel** | Button that opens the 💗 quick panel (Heart Score history and manual adjustment for the next reply). The same panel is also under the 🪄 menu next to the message box, as "Heart Status". Greyed out while **Enable** is off. |
+| Theme | Dark / Light / Racing (Dark) / Racing (Light) / Idol Stage (Night) / Idol Stage (Day) / Library (Night) / Library (Day) / Demons / Gods. Applies to every board and is remembered. |
 | **Board open state** | Always open (default) / Always collapsed. This only sets the *starting* state each time a board is drawn — you can still click any board's `💗 Name's Status` line to open or close it by hand regardless of this setting. |
 | **Mini board** | Off / On dropdown. On = each board collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full board. Off = the full board shows every time (default). See "Board details" below for how this looks per theme. |
 
@@ -106,11 +103,11 @@ heart-status/
 ├── render.js            board HTML
 ├── dom.js               hides the raw board and shows the board in its place
 ├── message-handler.js   rendering and the prompt filter
-├── state.js             settings access and the one-shot manual adjustment
-├── ui.js                settings drawer, quick panel, wand entry
+├── state.js             settings and chat access
+├── ui.js                settings drawer
 ├── notifications.js     toasts
 ├── diagnostics.js       throttled error logging
-└── style.css            board and panel styles
+└── style.css            board and settings styles
 ```
 
 ## Troubleshooting

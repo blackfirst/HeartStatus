@@ -8,13 +8,10 @@ export const extensionName = 'heart-status';
 // updater.js compares this against the live manifest.json to detect a stale page.
 export const EXTENSION_VERSION = '1.0.0';
 
-// Key used to store the manual adjustment inside chat metadata (per chat).
-export const META_KEY = 'heart_status_override';
-
 export const defaultSettings = {
     // Master switch ("Enable prompt"). ON: the board instruction is injected so the AI
     // writes a board on every reply. OFF: the extension does nothing at all — no prompt
-    // is sent, no styled board is drawn, the quick panel is hidden, and any board already in the
+    // is sent, and any board already in the
     // chat is left exactly as the model wrote it.
     isEnabled: true,
     // "Enable Theme". ON: the board is drawn styled with the theme. OFF: the plain board text is shown
@@ -43,16 +40,16 @@ export function normalizeOpenMode(id) {
 }
 
 export const THEMES = [
-    { id: 'dark-red', label: 'Dark', color: '#ff3650' },
-    { id: 'white-pink', label: 'Light', color: '#ff6f9c' },
-    { id: 'racing-dark', label: 'Racing (Dark)', color: '#e10600' },
-    { id: 'racing-light', label: 'Racing (Light)', color: '#e10600' },
-    { id: 'idol-night', label: 'Idol Stage (Night)', color: '#ff4fa3' },
-    { id: 'idol-day', label: 'Idol Stage (Day)', color: '#e8388a' },
-    { id: 'library-night', label: 'Library (Night)', color: '#c99a4a' },
-    { id: 'library-day', label: 'Library (Day)', color: '#b5822b' },
-    { id: 'demons', label: 'Demons', color: '#e0243f' },
-    { id: 'gods', label: 'Gods', color: '#c8a03c' },
+    { id: 'dark-red', label: 'Dark' },
+    { id: 'white-pink', label: 'Light' },
+    { id: 'racing-dark', label: 'Racing (Dark)' },
+    { id: 'racing-light', label: 'Racing (Light)' },
+    { id: 'idol-night', label: 'Idol Stage (Night)' },
+    { id: 'idol-day', label: 'Idol Stage (Day)' },
+    { id: 'library-night', label: 'Library (Night)' },
+    { id: 'library-day', label: 'Library (Day)' },
+    { id: 'demons', label: 'Demons' },
+    { id: 'gods', label: 'Gods' },
 ];
 
 const DEFAULT_THEME = 'dark-red';
