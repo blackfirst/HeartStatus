@@ -17,8 +17,6 @@
 
 /* ---- Theme palettes (on the board wrapper and on the panel) ---- */
 
-details.hst-wrap:not([data-hst-theme]),
-.hst-modal:not([data-hst-theme]),
 details.hst-wrap[data-hst-theme="dark-red"],
 .hst-modal[data-hst-theme="dark-red"] {
   --hst-c1:#ff3650; --hst-c2:#b061ff; --hst-rgb:255,54,80;
@@ -199,7 +197,6 @@ details.hst-wrap[data-hst-theme="gods"],
 
 /* ---- Wrapper / summary ---- */
 .hst-slot { margin: 6px 0; container: hst / inline-size; }
-.hst-slot:empty { margin: 0; }
 
 details.hst-wrap > summary {
   background: var(--hst-summary-bg); color: var(--hst-summary-text); padding: 12px;
