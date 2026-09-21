@@ -27,6 +27,13 @@ export function renderMessage(mesId) {
     const mesText = document.querySelector(`#chat .mes[mesid="${idx}"] .mes_text`);
     if (!mesText) return;
 
+    // The message is open in SillyTavern's edit box: draw nothing there. The board comes
+    // back by itself once the edit is saved or cancelled (SillyTavern rebuilds the message).
+    if (mesText.querySelector('#curEditTextarea, textarea.edit_textarea')) {
+        removeBoards(mesText);
+        return;
+    }
+
     // Master switch off, or board switched off: show the plain board exactly as the model
     // wrote it. removeBoards() un-hides the original board and drops any board we drew.
     if (!s?.isEnabled || !s.boardEnabled) {
