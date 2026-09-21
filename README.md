@@ -38,12 +38,6 @@ everything (prompt injection, parser, board, settings); you don't need anything 
 This extension replaces **both** parts of the old kit, so the old prompt and the old regex must not
 stay active alongside it.
 
-**What happens by itself** (once, the first time the extension loads):
-- Regex scripts whose name contains "heart status" are switched **off**. Nothing is deleted, and
-  you can switch them back on any time. You get a toast saying how many were switched off.
-- Your chat messages are never touched. Boards the old kit already wrote are picked up and drawn
-  by this extension once the old regex is off.
-
 **What you must do by hand** — the extension can't safely do these for you:
 1. **Regex** — open Extensions → Regex and switch off (or delete) every old Heart Status script
    that is still on. Check especially: scripts with a different name (e.g. your own theme
