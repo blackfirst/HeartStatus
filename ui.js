@@ -36,6 +36,7 @@ export function syncUI() {
     $('#hst-board-enabled, #hst-theme').prop('disabled', !on);
     $('#hst-compact, #hst-open-mode').prop('disabled', !board);
     $('#hst_wand_open').toggle(on);
+    $('#hst-open-panel').prop('disabled', !on);
 }
 
 // Called after any setting that changes what the model is told or what the board shows.
@@ -196,6 +197,8 @@ export function setupUI() {
                 <label for="hst-open-mode">Board open state</label>
                 <select id="hst-open-mode" class="text_pole">${openModeOptions}</select>
             </div>
+            <hr>
+            <button id="hst-open-panel" class="menu_button" title="Heart score history and manual adjustment. Same panel as the Heart Status entry in the 🪄 menu next to the message box."><i class="fa-solid fa-heart-pulse"></i> Open panel</button>
         </div>
     </div>
 </div>`;
@@ -236,6 +239,7 @@ export function setupUI() {
             syncUI();
             refreshAll();
         });
+        $('#hst-open-panel').on('click', showPanel);
         $('#hst-theme').on('change', function () { setTheme(this.value); });
         $('#hst-open-mode').on('change', function () {
             getSettings().openMode = normalizeOpenMode(this.value);
