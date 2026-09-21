@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   HEART STATUS — card, panel and settings styles
+   HEART STATUS — board, panel and settings styles
    ═══════════════════════════════════════════ */
 
 @keyframes hst-glow-slow {
@@ -15,7 +15,7 @@
   70% { transform: scale(1); }
 }
 
-/* ---- Theme palettes (on the card wrapper and on the panel) ---- */
+/* ---- Theme palettes (on the board wrapper and on the panel) ---- */
 
 details.hst-wrap:not([data-hst-theme]),
 .hst-modal:not([data-hst-theme]),
@@ -52,7 +52,7 @@ details.hst-wrap[data-hst-theme="library-day"],
       --hst-summary-bg:#f3e6c8; --hst-summary-text:#7a5222; --hst-summary-border:#ddc190;
       --hst-pulse-bg1:#fffaf0; --hst-pulse-bg2:#f6ead0; --hst-ring-track:#e6d6ab;
       --hst-daytime-bg1:#fdf6e6; --hst-daytime-bg2:#f4ead2;
-      --hst-lib-card-bg:#fffcf2; --hst-lib-card-line:rgba(74,52,24,0.18);
+      --hst-lib-board-bg:#fffcf2; --hst-lib-board-line:rgba(74,52,24,0.18);
       --hst-lib-rule-red:#a3462b; --hst-lib-rule-blue:#3b5b8a; --hst-lib-tab:#e4cf9e;
       --hst-lib-spine-a:0.22; --hst-lib-shadow-a:0.12;
       --hst-lib-ribbon-trust:#3b5b8a; --hst-lib-ribbon-arousal:#a3263a; --hst-lib-ribbon-jealousy:#5a7a3a;
@@ -67,7 +67,7 @@ details.hst-wrap[data-hst-theme="library-night"],
       --hst-summary-bg:#1c130a; --hst-summary-text:#d9ac5a; --hst-summary-border:#4a3826;
       --hst-pulse-bg1:#2c2115; --hst-pulse-bg2:#170f08; --hst-ring-track:#3a2c1c;
       --hst-daytime-bg1:#2c2015; --hst-daytime-bg2:#160f09;
-      --hst-lib-card-bg:#2f2415; --hst-lib-card-line:rgba(241,228,201,0.16);
+      --hst-lib-board-bg:#2f2415; --hst-lib-board-line:rgba(241,228,201,0.16);
       --hst-lib-rule-red:#9c4a35; --hst-lib-rule-blue:#4d6f9c; --hst-lib-tab:#4a3826;
       --hst-lib-spine-a:0.45; --hst-lib-shadow-a:0.35;
       --hst-lib-ribbon-trust:#5a86c2; --hst-lib-ribbon-arousal:#c9636f; --hst-lib-ribbon-jealousy:#8aab5f;
@@ -157,7 +157,7 @@ details.hst-wrap[data-hst-theme="demons"],
       --hst-pulse-bg1:#22080c; --hst-pulse-bg2:#050203; --hst-ring-track:#2e0a10;
       --hst-daytime-bg1:#240609; --hst-daytime-bg2:#070203;
       --hst-t-line:rgba(224,36,63,0.38); --hst-t-inset:#050203; --hst-t-glow:rgba(0,0,0,0.5);
-      --hst-t-card:radial-gradient(ellipse at 50% 0%, rgba(224,36,63,0.30) 0%, rgba(224,36,63,0) 55%), linear-gradient(180deg, #1a0508 0%, #050203 100%);
+      --hst-t-board:radial-gradient(ellipse at 50% 0%, rgba(224,36,63,0.30) 0%, rgba(224,36,63,0) 55%), linear-gradient(180deg, #1a0508 0%, #050203 100%);
       --hst-t-summary:linear-gradient(180deg, #1c0609, #120405);
       --hst-t-disc:radial-gradient(circle at 50% 35%, #2a080d 0%, #050203 100%);
       --hst-t-disc-ring:rgba(224,36,63,0.5); --hst-t-disc-glow:rgba(224,36,63,0.35);
@@ -182,7 +182,7 @@ details.hst-wrap[data-hst-theme="gods"],
       --hst-pulse-bg1:#ffffff; --hst-pulse-bg2:#faf1d3; --hst-ring-track:#f4ebc8;
       --hst-daytime-bg1:#fffaea; --hst-daytime-bg2:#ffffff;
       --hst-t-line:rgba(200,160,60,0.34); --hst-t-inset:#ffffff; --hst-t-glow:rgba(74,65,48,0.14);
-      --hst-t-card:radial-gradient(ellipse at 50% 0%, #fff4cf 0%, rgba(255,244,207,0) 55%), linear-gradient(180deg, #fffdf6 0%, #ffffff 100%);
+      --hst-t-board:radial-gradient(ellipse at 50% 0%, #fff4cf 0%, rgba(255,244,207,0) 55%), linear-gradient(180deg, #fffdf6 0%, #ffffff 100%);
       --hst-t-summary:linear-gradient(180deg, #fffdf2, #fbf3d8);
       --hst-t-disc:radial-gradient(circle at 50% 35%, #ffffff 0%, #fbf1cf 100%);
       --hst-t-disc-ring:rgba(200,160,60,0.35); --hst-t-disc-glow:rgba(200,160,60,0.25);
@@ -220,8 +220,8 @@ details.hst-wrap > summary::after {
 details.hst-wrap > summary:hover::after { opacity: 0.9; }
 details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top: 3px; }
 
-/* ---- Card ---- */
-.hst-card {
+/* ---- Board ---- */
+.hst-board {
   width: 100%; max-width: none; margin: 10px 0; box-sizing: border-box;
   background: radial-gradient(ellipse at top, var(--hst-bg1) 0%, var(--hst-bg2) 65%);
   border: 1px solid rgba(var(--hst-rgb),0.25);
@@ -308,7 +308,7 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-info-value { overflow-wrap: anywhere; font-size: 0.92em; color: var(--hst-text); line-height: 1.4; }
 
 /* ---- Compact mode (mini row, tap to expand) ---- */
-.hst-card.hst-compact { padding: 14px 16px; }
+.hst-board.hst-compact { padding: 14px 16px; }
 .hst-mini { width: 100%; }
 .hst-mini > summary { list-style: none; cursor: pointer; }
 .hst-mini > summary::-webkit-details-marker { display: none; }
@@ -336,9 +336,9 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-mini-body { margin-top: 14px; }
 .hst-mini-body .hst-info:last-child { margin-bottom: 0; }
 
-/* ---- Compact mode theming (Racing / Idol Stage match their full-card look) ---- */
+/* ---- Compact mode theming (Racing / Idol Stage match their full-board look) ---- */
 
-/* Racing: italic, tabular-nums score + name, same touch as the full card */
+/* Racing: italic, tabular-nums score + name, same touch as the full board */
 details.hst-wrap[data-hst-theme^="racing-"] .hst-mini-name { font-style: italic; letter-spacing: 0.3px; }
 details.hst-wrap[data-hst-theme^="racing-"] .hst-mini-score { font-style: italic; font-variant-numeric: tabular-nums; }
 
@@ -397,19 +397,19 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat=
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="arousal"],
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat[data-stat="jealousy"] { --sc: var(--hst-c1) !important; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-stat {
-  background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 3px;
+  background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-board-line); border-radius: 3px;
   box-shadow: 0 2px 6px rgba(0,0,0,var(--hst-lib-shadow-a));
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info {
   position: relative; padding-left: 32px;
-  background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line); border-left: none; border-radius: 3px;
+  background: var(--hst-lib-board-bg); border: 1px solid var(--hst-lib-board-line); border-left: none; border-radius: 3px;
   background-image:
     linear-gradient(var(--hst-lib-rule-red) 0 2px, transparent 2px) top / 100% 100% no-repeat,
-    repeating-linear-gradient(var(--hst-lib-card-line) 0 1px, transparent 1px 22px) left 0 top 24px / 100% calc(100% - 24px) no-repeat;
+    repeating-linear-gradient(var(--hst-lib-board-line) 0 1px, transparent 1px 22px) left 0 top 24px / 100% calc(100% - 24px) no-repeat;
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info::before {
   content: ''; position: absolute; left: 13px; top: 13px; width: 8px; height: 8px; border-radius: 50%;
-  background: var(--hst-bg2); border: 1px solid var(--hst-lib-card-line); box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+  background: var(--hst-bg2); border: 1px solid var(--hst-lib-board-line); box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
 }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info-label { font-variant: small-caps; letter-spacing: 2px; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.loc { --ac: var(--hst-lib-rule-blue); }
@@ -417,9 +417,9 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.thought { 
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.thought .hst-info-value { font-style: italic; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.goal { --ac: var(--hst-lib-rule-red); }
 
-/* Compact shell itself: same paper card, corner radius and dashed ink-stamp ring as the full card */
-details.hst-wrap[data-hst-theme^="library-"] .hst-card.hst-compact {
-  border-radius: 8px; border-color: var(--hst-lib-card-line);
+/* Compact shell itself: same paper board, corner radius and dashed ink-stamp ring as the full board */
+details.hst-wrap[data-hst-theme^="library-"] .hst-board.hst-compact {
+  border-radius: 8px; border-color: var(--hst-lib-board-line);
   box-shadow: 0 10px 24px rgba(0,0,0,var(--hst-lib-shadow-a));
   font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
@@ -434,7 +434,7 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 .hst-settings { display: flex; flex-direction: column; gap: 6px; }
 .hst-row { display: flex; gap: 6px; align-items: center; justify-content: space-between; }
 .hst-row .text_pole { width: auto; min-width: 120px; flex: 0 1 55%; }
-/* Options that don't apply right now (extension or card switched off) look greyed out. */
+/* Options that don't apply right now (extension or board switched off) look greyed out. */
 .hst-settings .checkbox_label:has(input:disabled),
 .hst-settings .hst-row:has(select:disabled) { opacity: .5; }
 .hst-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -484,14 +484,14 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 @keyframes hst-rc-flag { from { background-position: 0 0; } to { background-position: 16px 0; } }
 @keyframes hst-rc-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* Card shell: sharper corners, checkered flag along the top edge */
-details.hst-wrap[data-hst-theme^="racing-"] .hst-card {
+/* Board shell: sharper corners, checkered flag along the top edge */
+details.hst-wrap[data-hst-theme^="racing-"] .hst-board {
   position: relative; overflow: hidden; border-radius: 16px; padding-top: 28px;
   border-color: rgba(var(--hst-rgb),0.3);
   box-shadow: 0 14px 30px rgba(0,0,0,var(--hst-shadow-a)), inset 0 0 40px rgba(var(--hst-rgb),0.04);
 }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-card.hst-compact { padding-top: 24px; }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-card::before,
+details.hst-wrap[data-hst-theme^="racing-"] .hst-board.hst-compact { padding-top: 24px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-board::before,
 .hst-modal[data-hst-theme^="racing-"] .hst-modal-box::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px; pointer-events: none;
   background: repeating-conic-gradient(var(--hst-rc-flag-dark) 0% 25%, var(--hst-rc-flag-light) 0% 50%) 0 0 / 8px 8px;
@@ -550,7 +550,7 @@ details.hst-wrap[data-hst-theme^="racing-"] .hst-info.thought { --ac: var(--hst-
 details.hst-wrap[data-hst-theme^="racing-"] .hst-info.goal { --ac: var(--hst-rc-goal); }
 
 @media (prefers-reduced-motion: reduce) {
-  details.hst-wrap[data-hst-theme^="racing-"] .hst-card::before,
+  details.hst-wrap[data-hst-theme^="racing-"] .hst-board::before,
   .hst-modal[data-hst-theme^="racing-"] .hst-modal-box::before,
   details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::before { animation: none; }
 }
@@ -558,7 +558,7 @@ details.hst-wrap[data-hst-theme^="racing-"] .hst-info.goal { --ac: var(--hst-rc-
 /* ═══════════════════════════════════════════
    IDOL STAGE THEMES — layout & decoration
    (idol-night and idol-day; palettes are above)
-   Layout (full card): name → speech bubble → ring + light sticks → ticket → venue → goal.
+   Layout (full board): name → speech bubble → ring + light sticks → ticket → venue → goal.
    The gauge is a COMPLETE 360° rainbow ring (it never shortens with the score); the
    bulb ring around it is a full ring too. No spotlights.
    ═══════════════════════════════════════════ */
@@ -567,24 +567,24 @@ details.hst-wrap[data-hst-theme^="racing-"] .hst-info.goal { --ac: var(--hst-rc-
 @keyframes hst-id-twinkle { 0%, 100% { opacity: 0.95; } 50% { opacity: 0.45; } }
 @keyframes hst-id-eq { from { height: 4px; } to { height: 17px; } }
 
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card {
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board {
   border-radius: 20px; border-color: rgba(var(--hst-rgb),0.3);
   box-shadow: 0 14px 30px rgba(0,0,0,var(--hst-shadow-a));
 }
 
-/* Grid layout of the full card (each direct child gets its own area) */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) {
+/* Grid layout of the full board (each direct child gets its own area) */
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) {
   display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 24px; align-items: center;
   grid-template-areas: "head head" "bubble bubble" "ring sticks" "ticket ticket" "venue venue" "goal goal";
 }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-divider { display: none; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > div:first-child { grid-area: head; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-center { grid-area: ring; padding: 12px 10px 0; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-stats { grid-area: sticks; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-area: ticket; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.loc { grid-area: venue; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.thought { grid-area: bubble; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-divider { display: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > div:first-child { grid-area: head; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-center { grid-area: ring; padding: 12px 10px 0; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-stats { grid-area: sticks; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-dt-grid { grid-area: ticket; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.loc { grid-area: venue; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought { grid-area: bubble; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
 
 /* Header: "On stage" label, name, outlined pill with a star */
 details.hst-wrap[data-hst-theme^="idol-"] .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
@@ -597,16 +597,16 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-pill {
 details.hst-wrap[data-hst-theme^="idol-"] .hst-pill::before { content: '★ '; }
 
 /* Speech bubble: one color for fill, outline and tail; the tail points up at the name */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.thought {
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought {
   position: relative; margin: 14px 0 6px; padding: 12px 16px; --ac: var(--hst-idol-bubble-line);
   background: var(--hst-idol-bubble); border: 1px solid var(--hst-idol-bubble-line); border-radius: 16px;
 }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.thought::before {
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought::before {
   content: ''; position: absolute; top: -8px; left: 22px; width: 14px; height: 14px;
   background: var(--hst-idol-bubble); border-top: 1px solid var(--hst-idol-bubble-line);
   border-left: 1px solid var(--hst-idol-bubble-line); border-radius: 3px 0 0 0; transform: rotate(45deg);
 }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.thought .hst-info-value { font-style: italic; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought .hst-info-value { font-style: italic; }
 
 /* Gauge: rainbow full ring (spins), bulb ring, equalizer inside */
 details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox { width: 190px; height: 190px; }
@@ -641,44 +641,44 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(5) { animation-del
 details.hst-wrap[data-hst-theme^="idol-"] .hst-affbar { height: 7px; max-width: 190px; border: 1px solid var(--hst-idol-line); background: var(--hst-idol-panel); }
 
 /* Stats → vertical light sticks (value on top, stick, icon, label) */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin: 0; min-width: 0; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"] { --sc: var(--hst-idol-trust) !important; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"] { --sc: var(--hst-idol-arousal) !important; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-idol-jealousy) !important; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat {
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin: 0; min-width: 0; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"] { --sc: var(--hst-idol-trust) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"] { --sc: var(--hst-idol-arousal) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-idol-jealousy) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat {
   display: flex; flex-direction: column; align-items: center; gap: 6px;
   background: none; border: none; border-radius: 0; box-shadow: none; padding: 0; min-width: 44px;
 }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat br { display: none; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat b { order: 1; font-size: 15px; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat-bar {
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat br { display: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat b { order: 1; font-size: 15px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat-bar {
   order: 2; position: relative; width: 28px; height: 112px; margin: 0; overflow: hidden; border-radius: 14px;
   background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line);
   filter: drop-shadow(0 0 6px color-mix(in srgb, var(--sc) calc(var(--hst-idol-glow) * 100%), transparent));
 }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat-bar-fill {
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat-bar-fill {
   position: absolute; left: 0; right: 0; bottom: 0; width: 100% !important;
   height: calc(var(--p, 0) * 1%); border-radius: 0; background: var(--sc);
 }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-badge { order: 3; width: 24px; height: 24px; margin: 0; font-size: 12px; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-stat small { order: 4; font-size: 11px; letter-spacing: 0.3px; text-transform: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-badge { order: 3; width: 24px; height: 24px; margin: 0; font-size: 12px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat small { order: 4; font-size: 11px; letter-spacing: 0.3px; text-transform: none; }
 
 /* Date / time → one ticket with a dashed tear line (no cut-outs, so every circle stays whole) */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-dt-grid {
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-dt-grid {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; margin: 16px 0 0; overflow: hidden;
   border: 1px solid var(--hst-idol-line); border-radius: 14px; background: var(--hst-idol-panel);
 }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-dt { background: none; border: none; border-radius: 0; box-shadow: none; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) .hst-dt + .hst-dt { border-left: 1.5px dashed var(--hst-idol-line); }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-dt { background: none; border: none; border-radius: 0; box-shadow: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-dt + .hst-dt { border-left: 1.5px dashed var(--hst-idol-line); }
 
 /* Venue and goal: same framed panel as the date/time ticket */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.loc,
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.goal {
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.loc,
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.goal {
   margin: 14px 0 0; padding: 10px 14px;
   background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line); border-radius: 12px;
 }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.loc { --ac: var(--hst-idol-venue); }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-info.goal { --ac: var(--hst-c1); }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.loc { --ac: var(--hst-idol-venue); }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.goal { --ac: var(--hst-c1); }
 
 @media (prefers-reduced-motion: reduce) {
   details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::before,
@@ -689,7 +689,7 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-inf
 /* ═══════════════════════════════════════════
    LIBRARY THEMES — layout & decoration
    (library-night and library-day; palettes are above)
-   Layout (full card): an open book, as 4 real grid columns — left page, spine gutter,
+   Layout (full board): an open book, as 4 real grid columns — left page, spine gutter,
    right page, tab rail — so nothing ever overlaps regardless of content length. Left
    page holds the ring + date/time stamp, right page holds Location/Thought/Goal as
    ruled library-card-catalog entries, and the tab rail holds the three stats as
@@ -697,44 +697,44 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-inf
    ring, same as every other theme.
    ═══════════════════════════════════════════ */
 
-details.hst-wrap[data-hst-theme^="library-"] .hst-card {
-  border-radius: 8px; border-color: var(--hst-lib-card-line);
+details.hst-wrap[data-hst-theme^="library-"] .hst-board {
+  border-radius: 8px; border-color: var(--hst-lib-board-line);
   box-shadow: 0 10px 24px rgba(0,0,0,var(--hst-lib-shadow-a));
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card,
+details.hst-wrap[data-hst-theme^="library-"] .hst-board,
 .hst-modal[data-hst-theme^="library-"] .hst-modal-box {
   font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
-/* Grid layout of the full card: 3 real columns — left page, spine gutter, right page.
+/* Grid layout of the full board: 3 real columns — left page, spine gutter, right page.
    Left page stacks the ring, the date/time ticket, then the three stat notes right
    underneath it; right page holds Location/Thought/Goal as ruled library-card-catalog
    entries, one per row so nothing overlaps regardless of content length. */
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) {
   display: grid;
   grid-template-columns: 1fr 22px 1fr; column-gap: 14px; row-gap: 16px;
   grid-template-areas: "head head head" "ring gutter loc" "date gutter thought" "sticks gutter goal";
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-divider { display: none; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-center { grid-area: ring; align-self: start; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-area: date; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.loc { grid-area: loc; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.thought { grid-area: thought; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-divider { display: none; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-center { grid-area: ring; align-self: start; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-dt-grid { grid-area: date; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.loc { grid-area: loc; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.thought { grid-area: thought; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
 
 /* Spine: a shaded gutter column running down the middle, like an open book's binding.
-   It's a real grid item (the card's own ::before), not an overlay, so it always lands
-   exactly between the two pages regardless of card width. */
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before {
+   It's a real grid item (the board's own ::before), not an overlay, so it always lands
+   exactly between the two pages regardless of board width. */
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact)::before {
   content: ''; grid-area: gutter; align-self: stretch; pointer-events: none;
   background: linear-gradient(90deg, transparent, rgba(0,0,0,var(--hst-lib-spine-a)) 45%, rgba(0,0,0,calc(var(--hst-lib-spine-a) * 1.4)) 50%, rgba(0,0,0,var(--hst-lib-spine-a)) 55%, transparent);
 }
 
 /* Sticky-note label text: the old muted grey was tuned for a near-white stat
    background and is too low-contrast against the tan/gold note colour used here
-   (worst in Library Day). Use the card's main text colour, just dimmed a touch,
-   in every place these notes appear (full card, compact expanded view, all sizes). */
+   (worst in Library Day). Use the board's main text colour, just dimmed a touch,
+   in every place these notes appear (full board, compact expanded view, all sizes). */
 details.hst-wrap[data-hst-theme^="library-"] .hst-stat small { color: var(--hst-text); opacity: 0.72; }
 
 /* Header: small "card catalog" eyebrow label, serif italic name, dashed-stamp relationship pill */
@@ -742,40 +742,40 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-eyebrow > span:first-child { f
 details.hst-wrap[data-hst-theme^="library-"] .hst-eyebrow > span:first-child::after { content: '📖 Card Catalog'; font-size: 10px; letter-spacing: 2.5px; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-name { font-style: italic; font-variant: small-caps; letter-spacing: 0.4px; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-pill {
-  background: var(--hst-lib-card-bg); color: var(--hst-c1); border: 1px dashed var(--hst-c1);
+  background: var(--hst-lib-board-bg); color: var(--hst-c1); border: 1px dashed var(--hst-c1);
   border-radius: 2px; font-style: italic; max-width: 100%; text-align: center;
 }
 
 /* Stat notes: three square sticky notes sitting under the date ticket on the left
    page, all in the same muted paper/tab tone (no separate bright colour per stat). */
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-stats {
   grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; align-self: start;
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"],
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"],
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"],
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"],
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
   --sc: var(--hst-c1) !important;
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat {
   position: relative; aspect-ratio: 1; margin-right: 0; clip-path: none; min-width: 0;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 4px;
+  background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-board-line); border-radius: 4px;
   box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
   transform: rotate(var(--hst-lib-tilt, 0deg));
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat::before {
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat::before {
   content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
   width: 7px; height: 7px; border-radius: 50%; background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small,
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b {
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat small,
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat b {
   overflow-wrap: anywhere; text-align: center;
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat br { display: none; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat-bar { display: none; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat br { display: none; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat-bar { display: none; }
 
 /* Ring: a dashed ink-stamp ring around the gauge, italic old-style score */
 details.hst-wrap[data-hst-theme^="library-"] .hst-ringbox { position: relative; }
@@ -786,39 +786,39 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-ringbox::before {
 details.hst-wrap[data-hst-theme^="library-"] .hst-score { font-style: italic; font-variant-numeric: oldstyle-nums; }
 
 /* Date/time → one stamped ticket, ruled like a due-date card */
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-dt-grid {
-  align-self: start; background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line);
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-dt-grid {
+  align-self: start; background: var(--hst-lib-board-bg); border: 1px solid var(--hst-lib-board-line);
   border-radius: 4px; padding: 8px; margin: 0; grid-template-columns: 1fr; gap: 6px;
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-dt { background: none; border: none; padding: 2px 4px; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-dt-icon { border-radius: 2px; background: none; border: 1px solid var(--hst-lib-card-line); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-dt { background: none; border: none; padding: 2px 4px; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-dt-icon { border-radius: 2px; background: none; border: 1px solid var(--hst-lib-board-line); }
 
 /* Location / Thought / Goal → ruled library-card-catalog entries, with a punch hole and a red rule */
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info {
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info {
   position: relative; margin: 0; padding: 14px 14px 12px 32px;
-  background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line); border-left: none;
+  background: var(--hst-lib-board-bg); border: 1px solid var(--hst-lib-board-line); border-left: none;
   border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,var(--hst-lib-shadow-a));
   background-image:
     linear-gradient(var(--hst-lib-rule-red) 0 2px, transparent 2px) top / 100% 100% no-repeat,
-    repeating-linear-gradient(var(--hst-lib-card-line) 0 1px, transparent 1px 22px) left 0 top 24px / 100% calc(100% - 24px) no-repeat;
+    repeating-linear-gradient(var(--hst-lib-board-line) 0 1px, transparent 1px 22px) left 0 top 24px / 100% calc(100% - 24px) no-repeat;
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info::before {
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info::before {
   content: ''; position: absolute; left: 13px; top: 13px; width: 8px; height: 8px; border-radius: 50%;
-  background: var(--hst-bg2); border: 1px solid var(--hst-lib-card-line); box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+  background: var(--hst-bg2); border: 1px solid var(--hst-lib-board-line); box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
 }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.loc { --ac: var(--hst-lib-rule-blue); }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.thought { --ac: var(--hst-c2); }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.thought .hst-info-value { font-style: italic; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-info.goal { --ac: var(--hst-lib-rule-red); }
-details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-info-label { font-variant: small-caps; letter-spacing: 2px; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.loc { --ac: var(--hst-lib-rule-blue); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.thought { --ac: var(--hst-c2); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.thought .hst-info-value { font-style: italic; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.goal { --ac: var(--hst-lib-rule-red); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-info-label { font-variant: small-caps; letter-spacing: 2px; }
 
 /* Panel touches to match: ruled ticket chips, dashed-stamp relationship pill */
 .hst-modal[data-hst-theme^="library-"] .hst-modal-rel {
   display: inline-block; margin-bottom: 12px; padding: 3px 12px; border-radius: 2px; font-size: 0.85em; font-style: italic;
-  border: 1px dashed var(--hst-c1); background: var(--hst-lib-card-bg);
+  border: 1px dashed var(--hst-c1); background: var(--hst-lib-board-bg);
 }
 .hst-modal[data-hst-theme^="library-"] .hst-chip {
-  background: var(--hst-lib-card-bg); border: 1px solid var(--hst-lib-card-line); border-top: 3px solid var(--sc); border-radius: 3px;
+  background: var(--hst-lib-board-bg); border: 1px solid var(--hst-lib-board-line); border-top: 3px solid var(--sc); border-radius: 3px;
 }
 .hst-modal[data-hst-theme^="library-"] .hst-chip[data-stat="trust"] { --sc: var(--hst-lib-ribbon-trust) !important; }
 .hst-modal[data-hst-theme^="library-"] .hst-chip[data-stat="arousal"] { --sc: var(--hst-lib-ribbon-arousal) !important; }
@@ -826,76 +826,76 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
 .hst-modal[data-hst-theme^="library-"] #hst-ov-apply { background: var(--hst-c1); color: #fff9ec; border: none; border-radius: 2px; padding: 8px 18px; }
 .hst-modal[data-hst-theme^="library-"] #hst-ov-clear { background: transparent; color: var(--hst-c1); border: 1px solid var(--hst-c1); border-radius: 2px; padding: 8px 18px; }
 
-/* Narrow card: stack the two pages, drop the spine, and bring the tabs back into normal
+/* Narrow board: stack the two pages, drop the spine, and bring the tabs back into normal
    flow — now as three square sticky notes sitting in the gap right under the date
    ticket, instead of a wrapped row of ribbon flags above the header. */
 @media (max-width: 480px) {
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) {
     grid-template-columns: minmax(0, 1fr); row-gap: 14px;
     grid-template-areas: "head" "ring" "date" "sticks" "loc" "thought" "goal";
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact)::before { display: none; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-stats {
     grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0;
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"],
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"],
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
     --sc: var(--hst-c1) !important;
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat {
     clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1; min-width: 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 4px;
+    background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-board-line); border-radius: 4px;
     box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
     transform: rotate(var(--hst-lib-tilt, 0deg));
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat::before {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat::before {
     content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
     width: 7px; height: 7px; border-radius: 50%;
     background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small,
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat small,
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat b {
     overflow-wrap: anywhere; text-align: center;
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
 }
 @container hst (max-width: 480px) {
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) {
     grid-template-columns: minmax(0, 1fr); row-gap: 14px;
     grid-template-areas: "head" "ring" "date" "sticks" "loc" "thought" "goal";
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact)::before { display: none; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) > .hst-stats {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact)::before { display: none; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-stats {
     grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0;
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="trust"],
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="arousal"],
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
     --sc: var(--hst-c1) !important;
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat {
     clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1; min-width: 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-card-line); border-radius: 4px;
+    background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-board-line); border-radius: 4px;
     box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
     transform: rotate(var(--hst-lib-tilt, 0deg));
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat::before {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat::before {
     content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
     width: 7px; height: 7px; border-radius: 50%;
     background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat small,
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat b {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat small,
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat b {
     overflow-wrap: anywhere; text-align: center;
   }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
 }
 
 /* ═══════════════════════════════════════════
@@ -1064,19 +1064,19 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-card:not(.hst-compact) .hst-in
 }
 
 @media (max-width: 480px) {
-  .hst-card { padding: 14px; border-radius: 18px; }
+  .hst-board { padding: 14px; border-radius: 18px; }
   .hst-dt-grid { grid-template-columns: 1fr; }
-  details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) {
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) {
     grid-template-columns: minmax(0, 1fr); row-gap: 14px;
     grid-template-areas: "head" "bubble" "ring" "sticks" "ticket" "venue" "goal";
   }
-  details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) > .hst-dt-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-dt-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 
-/* Narrow card (phone, or a slim chat column on desktop): stack the Idol Stage layout.
-   Uses the card's own container width, not the screen width. */
+/* Narrow board (phone, or a slim chat column on desktop): stack the Idol Stage layout.
+   Uses the board's own container width, not the screen width. */
 @container hst (max-width: 480px) {
-  details.hst-wrap[data-hst-theme^="idol-"] .hst-card:not(.hst-compact) {
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) {
     grid-template-columns: minmax(0, 1fr); row-gap: 14px;
     grid-template-areas: "head" "bubble" "ring" "sticks" "ticket" "venue" "goal";
   }
@@ -1101,29 +1101,29 @@ details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) > summar
 }
 
 /* arched window shell */
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card {
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board {
   position: relative; overflow: hidden; border-radius: 110px 110px 26px 26px;
-  border: 1px solid var(--hst-t-line); background: var(--hst-t-card);
+  border: 1px solid var(--hst-t-line); background: var(--hst-t-board);
   box-shadow: 0 10px 24px var(--hst-t-glow), inset 0 0 0 5px var(--hst-t-inset), inset 0 0 0 6px var(--hst-t-line);
 }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) {
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) {
   display: flex; flex-direction: column; align-items: center; text-align: center; padding: 50px 24px 34px;
 }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact)::after {
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact)::after {
   content: var(--hst-t-foot); position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%); white-space: nowrap;
   font-size: 10px; letter-spacing: 4px; color: rgba(var(--hst-rgb),0.7); pointer-events: none;
 }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-divider { display: none; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-center { display: contents; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) .hst-ringbox { order: 1; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > div:first-child { order: 2; width: 100%; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-dt-grid { order: 3; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) .hst-affbar-label { order: 4; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) .hst-affbar { order: 5; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-stats { order: 6; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-info.loc { order: 7; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-info.thought { order: 8; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card:not(.hst-compact) > .hst-info.goal { order: 9; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-divider { display: none; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-center { display: contents; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) .hst-ringbox { order: 1; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > div:first-child { order: 2; width: 100%; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-dt-grid { order: 3; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) .hst-affbar-label { order: 4; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) .hst-affbar { order: 5; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-stats { order: 6; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-info.loc { order: 7; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-info.thought { order: 8; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-info.goal { order: 9; }
 
 /* medallion: thin full ring, glass disc, sunburst behind */
 details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ringbox { width: 176px; height: 176px; margin: 0 auto 26px; }
@@ -1206,7 +1206,7 @@ details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-inf
 details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info.thought .hst-info-value { font-family: var(--hst-t-serif); font-style: italic; }
 
 /* compact row */
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-card.hst-compact { padding: 20px 22px; border-radius: 40px 40px 20px 20px; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board.hst-compact { padding: 20px 22px; border-radius: 40px 40px 20px 20px; }
 details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-name { font-family: var(--hst-t-serif); font-variant: small-caps; letter-spacing: 1.5px; font-size: 15px; }
 details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-ring .hst-ring-track, details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-ring .hst-ring-rotate { stroke-width: 14; }
 details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-score { font-family: var(--hst-t-serif); color: var(--hst-t-score); }
@@ -1222,7 +1222,7 @@ details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-min
 /* quick panel */
 .hst-modal:is([data-hst-theme="demons"], [data-hst-theme="gods"]) { background: var(--hst-t-overlay); }
 .hst-modal:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-modal-box {
-  border-radius: 90px 90px 22px 22px; border-color: var(--hst-t-line); padding: 40px 24px 22px; background: var(--hst-t-card);
+  border-radius: 90px 90px 22px 22px; border-color: var(--hst-t-line); padding: 40px 24px 22px; background: var(--hst-t-board);
   box-shadow: 0 16px 36px var(--hst-t-glow), inset 0 0 0 5px var(--hst-t-inset), inset 0 0 0 6px var(--hst-t-line);
 }
 .hst-modal:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-modal-head { justify-content: center; position: relative; }

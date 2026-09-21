@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════
-// DOM — swaps the rendered raw board for the card
+// DOM — swaps the rendered raw board for the styled board
 // ═══════════════════════════════════════════
 //
 // SillyTavern turns the model's text into HTML before we see it, and what the
@@ -68,15 +68,15 @@ function sweepRemnants(slot) {
 }
 
 /**
- * Puts the card into a message. Returns true when the DOM changed.
+ * Puts the board into a message. Returns true when the DOM changed.
  * `key` identifies the content; an unchanged key means nothing to do.
  *
  * The original board element is never destroyed — it's hidden and left in
- * place (marked with .hst-original) so removeCards() can bring it back
- * exactly as the model wrote it whenever the extension (or just the card)
+ * place (marked with .hst-original) so removeBoards() can bring it back
+ * exactly as the model wrote it whenever the extension (or just the board)
  * is turned off, instead of leaving a blank gap where the board used to be.
  */
-export function mountCard(mesText, key, html, rawLength) {
+export function mountBoard(mesText, key, html, rawLength) {
     const existing = mesText.querySelector('.hst-slot');
     if (existing && existing.dataset.hstKey === key) return false;
 
@@ -103,7 +103,7 @@ export function mountCard(mesText, key, html, rawLength) {
     return true;
 }
 
-export function removeCards(root = document) {
+export function removeBoards(root = document) {
     root.querySelectorAll('.hst-slot').forEach(slot => {
         const original = slot.nextElementSibling;
         if (original && original.classList.contains('hst-original')) {
@@ -114,8 +114,8 @@ export function removeCards(root = document) {
     });
 }
 
-// Cards drawn by the OLD regex script share nothing with ours except intent.
-export function hasLegacyCard(mesText) {
+// Boards drawn by the OLD regex script share nothing with ours except intent.
+export function hasLegacyBoard(mesText) {
     return !!mesText.querySelector('details.hs-wrap');
 }
 

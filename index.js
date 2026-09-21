@@ -26,11 +26,17 @@ function loadSettings() {
             extension_settings[extensionName] = structuredClone(defaultSettings);
         }
         const s = extension_settings[extensionName];
-        // Before v1.0.2, "Enable" only hid the card while the prompt kept going out. That
-        // meaning now belongs to "Enable card"; "Enable" is the master switch. Carry an
-        // old "off" over to the card so upgrading doesn't switch the whole extension off.
-        if (s.cardEnabled === undefined && s.isEnabled === false) {
-            s.cardEnabled = false;
+        // v1.0.2 stored the "Enable Theme" switch under the name "cardEnabled"; it is now
+        // "boardEnabled". Carry the saved value over.
+        if (s.cardEnabled !== undefined) {
+            if (s.boardEnabled === undefined) s.boardEnabled = !!s.cardEnabled;
+            delete s.cardEnabled;
+        }
+        // Before v1.0.2, "Enable" only hid the styled board while the prompt kept going out.
+        // That meaning now belongs to "Enable Theme"; "Enable" is the master switch. Carry an
+        // old "off" over so upgrading doesn't switch the whole extension off.
+        if (s.boardEnabled === undefined && s.isEnabled === false) {
+            s.boardEnabled = false;
             s.isEnabled = true;
         }
         // Add settings introduced by newer versions without touching existing choices.
@@ -49,7 +55,7 @@ function loadSettings() {
         // were removed as options; the behavior is now permanently off.
         delete s.stripFromMessage;
         delete s.trimOldBoards;
-        // The old "Show in chat (as a card)" option is gone; "Enable card" replaces it.
+        // The old "Show in chat" option is gone; "Enable Theme" replaces it.
         delete s.showInChat;
     } catch (error) {
         reportError('[Heart Status] Error loading settings:', error);
@@ -82,11 +88,11 @@ jQuery(async () => {
             updatePromptInjection();
         });
 
-        // The message is in the DOM: swap the raw board for the card.
+        // The message is in the DOM: swap the raw board for the styled board.
         if (event_types.CHARACTER_MESSAGE_RENDERED) {
             eventSource.on(event_types.CHARACTER_MESSAGE_RENDERED, (mesId) => {
                 renderMessage(mesId);
-                scheduleRenderAll(); // updates collapsed/open state of older cards
+                scheduleRenderAll(); // updates collapsed/open state of older boards
             });
         }
         if (event_types.GENERATION_ENDED) {
@@ -107,15 +113,15 @@ jQuery(async () => {
             eventSource.on(event_types.CHAT_CHANGED, afterChatChange);
         }
 
-        // SillyTavern rebuilds .mes_text on swipe/continue/edit, wiping the card.
+        // SillyTavern rebuilds .mes_text on swipe/continue/edit, wiping the board.
         // Watch the chat and redraw when a message shows a raw board again.
         try {
             const chatEl = document.getElementById('chat');
             if (chatEl) {
                 const observer = new MutationObserver((mutations) => {
-                    // Nothing to redraw while the extension or the card is off.
+                    // Nothing to redraw while the extension or the board is off.
                     const cfg = getSettings();
-                    if (!cfg?.isEnabled || !cfg.cardEnabled) return;
+                    if (!cfg?.isEnabled || !cfg.boardEnabled) return;
                     for (const m of mutations) {
                         const target = m.target && m.target.nodeType === 1 ? m.target : m.target?.parentElement;
                         const mesText = target?.closest?.('.mes_text');
@@ -132,7 +138,7 @@ jQuery(async () => {
             reportError('[Heart Status] observer setup failed:', error);
         }
 
-        // Apply the saved theme to any card already on screen.
+        // Apply the saved theme to any board already on screen.
         setThemeEverywhere(extension_settings[extensionName].theme);
         setTimeout(renderAll, 800);
     } catch (error) {

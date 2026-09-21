@@ -6,7 +6,7 @@ export const extensionName = 'heart-status';
 
 // Must match manifest.json's "version" — bump both together on release.
 // updater.js compares this against the live manifest.json to detect a stale page.
-export const EXTENSION_VERSION = '1.0.2';
+export const EXTENSION_VERSION = '1.0.3';
 
 // Key used to store the manual adjustment inside chat metadata (per chat).
 export const META_KEY = 'heart_status_override';
@@ -19,7 +19,7 @@ export const defaultSettings = {
     isEnabled: true,
     // "Enable Theme". ON: the board is drawn styled with the theme. OFF: the plain board text is shown
     // as-is. Only matters while isEnabled is on (the prompt is sent either way).
-    cardEnabled: true,
+    boardEnabled: true,
     // 'dark-red' | 'white-pink' | 'racing-dark' | 'racing-light' | 'idol-night' | 'idol-day'
     theme: 'dark-red',
     // Show a one-row mini board (small ring, name, inline stats) with a tap-to-expand
@@ -66,7 +66,7 @@ export function normalizeTheme(id) {
     return THEMES.some(t => t.id === mapped) ? mapped : DEFAULT_THEME;
 }
 
-// Value ranges used by the prompt, the parser and the card.
+// Value ranges used by the prompt, the parser and the board.
 export const LIMITS = {
     trust: [0, 100],
     arousal: [0, 100],

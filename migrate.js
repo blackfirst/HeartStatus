@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════
 // MIGRATE — turns off the old "Heart Status" kit for people upgrading to this
-// extension, so they don't end up with double instructions and double cards.
+// extension, so they don't end up with double instructions and double boards.
 // ═══════════════════════════════════════════
 //
 // This runs once (guarded by a flag in extension_settings) per install. It only

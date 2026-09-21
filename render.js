@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════
-// RENDER — builds the status card HTML
+// RENDER — builds the status board HTML
 // ═══════════════════════════════════════════
 
 import { STAT_COLORS, normalizeTheme } from './config.js';
@@ -64,7 +64,7 @@ function miniStatsInline(data) {
  * @param {object} data   parsed board (see parser.js)
  * @param {object} opts   { name, theme, open, compact }
  */
-export function buildCardHtml(data, opts = {}) {
+export function buildBoardHtml(data, opts = {}) {
     const theme = normalizeTheme(opts.theme);
     const name = escapeHtml(opts.name || '');
 
@@ -140,7 +140,7 @@ export function buildCardHtml(data, opts = {}) {
 
     return `<details class="hst-wrap" data-hst-theme="${theme}"${outerOpen ? ' open' : ''}>
 ${outerSummary}
-<div class="hst-card${opts.compact ? ' hst-compact' : ''}">
+<div class="hst-board${opts.compact ? ' hst-compact' : ''}">
   ${body}
 </div>
 </details>`;

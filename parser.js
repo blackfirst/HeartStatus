@@ -189,7 +189,7 @@ export function stripInfoBoards(text) {
     return out.replace(/^\s+/, '').replace(/\n{3,}/g, '\n\n');
 }
 
-// Short fingerprint used to decide whether a rendered card is still up to date.
+// Short fingerprint used to decide whether a rendered board is still up to date.
 export function hashData(d) {
     if (!d) return '';
     return [d.time, d.date, d.location, d.trust, d.arousal, d.jealousy, d.heart, d.pct, d.relationship, d.thought, d.goal].join('¦');

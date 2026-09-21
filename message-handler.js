@@ -6,8 +6,8 @@ import { reportError } from './diagnostics.js';
 import { getSettings, getChat } from './state.js';
 import { dataOf } from './history.js';
 import { hashData } from './parser.js';
-import { buildCardHtml } from './render.js';
-import { mountCard, removeCards, hasLegacyCard } from './dom.js';
+import { buildBoardHtml } from './render.js';
+import { mountBoard, removeBoards, hasLegacyBoard } from './dom.js';
 import { updatePromptInjection } from './prompts.js';
 import { notify } from './notifications.js';
 
@@ -27,10 +27,10 @@ export function renderMessage(mesId) {
     const mesText = document.querySelector(`#chat .mes[mesid="${idx}"] .mes_text`);
     if (!mesText) return;
 
-    // Master switch off, or card switched off: show the plain board exactly as the model
-    // wrote it. removeCards() un-hides the original board and drops any card we drew.
-    if (!s?.isEnabled || !s.cardEnabled) {
-        removeCards(mesText);
+    // Master switch off, or board switched off: show the plain board exactly as the model
+    // wrote it. removeBoards() un-hides the original board and drops any board we drew.
+    if (!s?.isEnabled || !s.boardEnabled) {
+        removeBoards(mesText);
         return;
     }
 
@@ -38,12 +38,12 @@ export function renderMessage(mesId) {
     const msg = chat[idx];
     const data = dataOf(msg);
     if (!data) {
-        // Nothing parsed: nothing to draw, and no card should be left behind.
-        removeCards(mesText);
+        // Nothing parsed: nothing to draw, and no board should be left behind.
+        removeBoards(mesText);
         return;
     }
 
-    if (hasLegacyCard(mesText)) {
+    if (hasLegacyBoard(mesText)) {
         if (!legacyWarned) {
             legacyWarned = true;
             notify('The old “Heart Status” regex script is still enabled and already draws a board. Disable it in Extensions → Regex to use this extension’s board.', 'warning');
@@ -51,17 +51,17 @@ export function renderMessage(mesId) {
         return;
     }
 
-    // 'always' opens every card, 'never' collapses every card (the person can still toggle by hand).
+    // 'always' opens every board, 'never' collapses every board (the person can still toggle by hand).
     const open = s.openMode !== 'never';
     const key = [idx, hashData(data), open ? 1 : 0, s.compactMode ? 1 : 0, msg.name || ''].join('|');
 
-    const html = buildCardHtml(data, {
+    const html = buildBoardHtml(data, {
         name: msg.name || '',
         theme: s.theme,
         open,
         compact: !!s.compactMode,
     });
-    mountCard(mesText, key, html, data.rawLength);
+    mountBoard(mesText, key, html, data.rawLength);
 }
 
 export function renderAll() {

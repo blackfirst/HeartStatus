@@ -9,7 +9,7 @@ import { collectHistory, lastBoardIndex, dataOf } from './history.js';
 import { escapeHtml } from './render.js';
 import { updatePromptInjection } from './prompts.js';
 import { renderAll } from './message-handler.js';
-import { setThemeEverywhere, removeCards } from './dom.js';
+import { setThemeEverywhere, removeBoards } from './dom.js';
 import { notify } from './notifications.js';
 
 function setTheme(id) {
@@ -24,7 +24,7 @@ export function syncUI() {
     const s = getSettings();
     if (!s) return;
     $('#hst-enabled').prop('checked', !!s.isEnabled);
-    $('#hst-card-enabled').prop('checked', !!s.cardEnabled);
+    $('#hst-board-enabled').prop('checked', !!s.boardEnabled);
     $('#hst-theme').val(normalizeTheme(s.theme));
     $('#hst-open-mode').val(normalizeOpenMode(s.openMode));
     $('#hst-compact').val(s.compactMode ? 'on' : 'off');
@@ -32,9 +32,9 @@ export function syncUI() {
     // Master off greys out everything below it and hides the quick-panel entry.
     // Enable Theme off also greys out the options that only shape the board itself.
     const on = !!s.isEnabled;
-    const card = on && !!s.cardEnabled;
-    $('#hst-card-enabled, #hst-theme').prop('disabled', !on);
-    $('#hst-compact, #hst-open-mode').prop('disabled', !card);
+    const board = on && !!s.boardEnabled;
+    $('#hst-board-enabled, #hst-theme').prop('disabled', !on);
+    $('#hst-compact, #hst-open-mode').prop('disabled', !board);
     $('#hst_wand_open').toggle(on);
 }
 
@@ -183,7 +183,7 @@ export function setupUI() {
         <div class="hst-settings">
             <label class="checkbox_label" title="Master switch. On: the board instruction is sent so the AI writes a board on every reply. Off: Heart Status stops completely — no prompt is sent, no styled board is drawn, and the 💗 quick panel is hidden."><input type="checkbox" id="hst-enabled"><span>Enable</span></label>
             <hr>
-            <label class="checkbox_label" title="On: the board is shown styled with the theme. Off: the plain board text is shown as the AI wrote it. The prompt is still sent either way."><input type="checkbox" id="hst-card-enabled"><span>Enable Theme</span></label>
+            <label class="checkbox_label" title="On: the board is shown styled with the theme. Off: the plain board text is shown as the AI wrote it. The prompt is still sent either way."><input type="checkbox" id="hst-board-enabled"><span>Enable Theme</span></label>
             <div class="hst-row">
                 <label for="hst-theme">Theme</label>
                 <select id="hst-theme" class="text_pole">${themeOptions}</select>
@@ -225,14 +225,14 @@ export function setupUI() {
         $('#hst-enabled').on('change', function () {
             getSettings().isEnabled = this.checked;
             save();
-            if (!this.checked) removeCards();
+            if (!this.checked) removeBoards();
             syncUI();
             refreshAll();
         });
-        $('#hst-card-enabled').on('change', function () {
-            getSettings().cardEnabled = this.checked;
+        $('#hst-board-enabled').on('change', function () {
+            getSettings().boardEnabled = this.checked;
             save();
-            if (!this.checked) removeCards();
+            if (!this.checked) removeBoards();
             syncUI();
             refreshAll();
         });
