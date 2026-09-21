@@ -27,7 +27,7 @@ export function syncUI() {
     $('#hst-card-enabled').prop('checked', !!s.cardEnabled);
     $('#hst-theme').val(normalizeTheme(s.theme));
     $('#hst-open-mode').val(normalizeOpenMode(s.openMode));
-    $('#hst-compact').prop('checked', !!s.compactMode);
+    $('#hst-compact').val(s.compactMode ? 'on' : 'off');
 
     // Master off greys out everything below it and hides the quick-panel entry.
     // Card off also greys out the options that only shape the card itself.
@@ -181,14 +181,17 @@ export function setupUI() {
     </div>
     <div class="inline-drawer-content">
         <div class="hst-settings">
-            <label class="checkbox_label" title="Master switch. On: the board instruction is sent so the AI writes a board on every reply. Off: Heart Status stops completely — no prompt is sent, no card is drawn, and the 💗 quick panel is hidden."><input type="checkbox" id="hst-enabled"><span>Enable prompt</span></label>
+            <label class="checkbox_label" title="Master switch. On: the board instruction is sent so the AI writes a board on every reply. Off: Heart Status stops completely — no prompt is sent, no card is drawn, and the 💗 quick panel is hidden."><input type="checkbox" id="hst-enabled"><span>Enable</span></label>
             <hr>
-            <label class="checkbox_label" title="On: the board is shown as a card. Off: the plain board text is shown as the AI wrote it. The prompt is still sent either way."><input type="checkbox" id="hst-card-enabled"><span>Enable card</span></label>
+            <label class="checkbox_label" title="On: the board is shown as a card. Off: the plain board text is shown as the AI wrote it. The prompt is still sent either way."><input type="checkbox" id="hst-card-enabled"><span>Enable Theme</span></label>
             <div class="hst-row">
                 <label for="hst-theme">Theme</label>
                 <select id="hst-theme" class="text_pole">${themeOptions}</select>
             </div>
-            <label class="checkbox_label" title="Show a one-row mini card (small ring, name, inline stats) — tap it to expand location/thought/goal."><input type="checkbox" id="hst-compact"><span>Compact card</span></label>
+            <div class="hst-row" title="Show each card as a one-row mini board (small ring, name, inline stats) — tap it to expand location/thought/goal.">
+                <label for="hst-compact">Mini board</label>
+                <select id="hst-compact" class="text_pole"><option value="off">Off</option><option value="on">On</option></select>
+            </div>
             <div class="hst-row" title="Whether a card starts expanded or collapsed. You can still click any card's summary line to open/close it by hand either way.">
                 <label for="hst-open-mode">Card open state</label>
                 <select id="hst-open-mode" class="text_pole">${openModeOptions}</select>
@@ -239,7 +242,7 @@ export function setupUI() {
             save();
             refreshAll();
         });
-        $('#hst-compact').on('change', function () { getSettings().compactMode = this.checked; save(); refreshAll(); });
+        $('#hst-compact').on('change', function () { getSettings().compactMode = this.value === 'on'; save(); refreshAll(); });
 
         syncUI();
     } catch (error) {
