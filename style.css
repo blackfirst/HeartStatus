@@ -433,12 +433,15 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 }
 .hst-settings .checkbox_label > span { flex: 1 1 auto; }
 /* The host page styles checkboxes (grid, overflow:hidden, clip-path tick, filter, outline...) — reset all of it. */
-.hst-settings .checkbox_label input[type="checkbox"] {
+.hst-settings.hst-settings .checkbox_label input[type="checkbox"] {
   -webkit-appearance: none; -moz-appearance: none; appearance: none;
   display: block; position: relative; flex: 0 0 auto; margin: 0; padding: 0; cursor: pointer;
   width: var(--hst-sw-w); height: var(--hst-sw-h); min-width: var(--hst-sw-w);
   overflow: visible; transform: none; filter: none;
-  border: none; border-radius: 999px; outline: none; box-shadow: none;
+  border: none; outline: none; box-shadow: none; aspect-ratio: auto;
+  /* fixed radius = half the height -> flat top/bottom + semicircle ends (a stadium, never an ellipse);
+     !important so a theme's "border-radius: 50%" on checkboxes can't turn it into an oval */
+  border-radius: calc(var(--hst-sw-h) / 2) !important;
   background: var(--hst-sw-off);
   transition: background-color .2s ease;
 }
@@ -446,7 +449,7 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 .hst-settings .checkbox_label input[type="checkbox"]::before {
   content: ''; display: block; position: absolute; top: var(--hst-sw-pad); left: var(--hst-sw-pad);
   width: calc(var(--hst-sw-h) - var(--hst-sw-pad) * 2); height: calc(var(--hst-sw-h) - var(--hst-sw-pad) * 2);
-  border-radius: 50%; background: var(--hst-sw-knob); box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  border-radius: 50% !important; background: var(--hst-sw-knob); box-shadow: 0 1px 3px rgba(0,0,0,0.4);
   clip-path: none; transform-origin: center; transform: translateX(0);
   transition: transform .2s ease; margin: 0; border: none; opacity: 1;
 }
