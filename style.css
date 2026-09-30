@@ -418,6 +418,47 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 .hst-settings .checkbox_label:has(input:disabled),
 .hst-settings .hst-row:has(select:disabled) { opacity: .5; }
 
+/* ---- Toggle switches (pill track + white knob) for the settings checkboxes ---- */
+.hst-settings {
+  --hst-sw-on: var(--SmartThemeQuoteColor, currentColor);  /* track colour when ON: follows the SillyTavern theme */
+  --hst-sw-off: rgba(255,255,255,0.16);    /* track colour when OFF */
+  --hst-sw-knob: #ffffff;
+  --hst-sw-w: 52px;
+  --hst-sw-h: 30px;
+  --hst-sw-pad: 3px;
+}
+.hst-settings .checkbox_label {
+  display: flex; flex-direction: row-reverse; align-items: center; justify-content: space-between;
+  gap: 12px; width: 100%; cursor: pointer;
+}
+.hst-settings .checkbox_label > span { flex: 1 1 auto; }
+.hst-settings .checkbox_label input[type="checkbox"] {
+  -webkit-appearance: none; appearance: none;
+  position: relative; flex: 0 0 auto; margin: 0; padding: 0; cursor: pointer;
+  width: var(--hst-sw-w); height: var(--hst-sw-h); min-width: var(--hst-sw-w);
+  border: none; border-radius: 999px; outline: none;
+  background: var(--hst-sw-off); box-shadow: none;
+  transition: background-color .2s ease;
+}
+/* knob */
+.hst-settings .checkbox_label input[type="checkbox"]::before {
+  content: ''; display: block; position: absolute; top: var(--hst-sw-pad); left: var(--hst-sw-pad);
+  width: calc(var(--hst-sw-h) - var(--hst-sw-pad) * 2); height: calc(var(--hst-sw-h) - var(--hst-sw-pad) * 2);
+  border-radius: 50%; background: var(--hst-sw-knob); box-shadow: 0 1px 3px rgba(0,0,0,0.35);
+  transform: translateX(0); transition: transform .2s ease;
+  margin: 0; border: none; opacity: 1;
+}
+/* hide any built-in tick mark from the host theme */
+.hst-settings .checkbox_label input[type="checkbox"]::after { content: none; display: none; }
+.hst-settings .checkbox_label input[type="checkbox"]:checked { background: var(--hst-sw-on); }
+.hst-settings .checkbox_label input[type="checkbox"]:checked::before {
+  transform: translateX(calc(var(--hst-sw-w) - var(--hst-sw-h)));
+}
+.hst-settings .checkbox_label input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--hst-sw-on); outline-offset: 2px;
+}
+.hst-settings .checkbox_label input[type="checkbox"]:disabled { cursor: not-allowed; }
+
 /* ═══════════════════════════════════════════
    RACING THEMES — layout & decoration
    (applies to racing-dark and racing-light; palettes are above)
