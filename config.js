@@ -31,8 +31,8 @@ export const defaultSettings = {
 };
 
 export const OPEN_MODES = [
-    { id: 'always', label: 'Always open' },
-    { id: 'never', label: 'Always collapsed' },
+    { id: 'always', label: 'Open' },
+    { id: 'never', label: 'Collapsed' },
 ];
 
 export function normalizeOpenMode(id) {
@@ -51,6 +51,20 @@ export const THEMES = [
     { id: 'demons', label: 'Demons' },
     { id: 'gods', label: 'Gods' },
 ];
+
+// Colours used to draw each theme's preview tile in the settings drawer: [background 1, background 2, accent 1, accent 2].
+export const THEME_SWATCHES = {
+    'dark-red':      ['#170c0d', '#0b0b0c', '#ff3650', '#b061ff'],
+    'white-pink':    ['#fff6f8', '#ffffff', '#ff6f9c', '#ffd1e0'],
+    'racing-dark':   ['#14100a', '#0a0a0b', '#e10600', '#ffcc00'],
+    'racing-light':  ['#fff8f0', '#ffffff', '#e10600', '#ff9d00'],
+    'idol-night':    ['#1d1035', '#0b0716', '#ff4fa3', '#ffd84d'],
+    'idol-day':      ['#fff0f7', '#ffffff', '#e8388a', '#e9a400'],
+    'library-night': ['#2a2015', '#150f0a', '#c99a4a', '#e0b563'],
+    'library-day':   ['#fdf6e6', '#f4ead2', '#b5822b', '#d9a441'],
+    'demons':        ['#2a0508', '#050203', '#e0243f', '#ff6b6b'],
+    'gods':          ['#fffbee', '#ffffff', '#c8a03c', '#f3e2a4'],
+};
 
 const DEFAULT_THEME = 'dark-red';
 
