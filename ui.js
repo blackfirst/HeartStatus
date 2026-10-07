@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════
 
 import { saveSettingsDebounced } from '../../../../script.js';
-import { THEMES, THEME_SWATCHES, OPEN_MODES, normalizeTheme, normalizeOpenMode } from './config.js';
+import { THEMES, THEME_SIDES, THEME_SWATCHES, OPEN_MODES, normalizeTheme, normalizeOpenMode } from './config.js';
 import { getSettings } from './state.js';
 import { updatePromptInjection } from './prompts.js';
 import { renderAll } from './message-handler.js';
@@ -61,14 +61,19 @@ function refreshAll() {
 
 export function setupUI() {
     try {
-        const swatches = THEMES.map(t => {
+        const swatch = (t) => {
             const [bg1, bg2, c1, c2] = THEME_SWATCHES[t.id] || [];
             return `<button type="button" class="hst-swatch" role="radio" aria-checked="false" data-theme="${t.id}" title="${t.label}"
                 style="--sw-bg1:${bg1};--sw-bg2:${bg2};--sw-c1:${c1};--sw-c2:${c2};">
                 <span class="hst-swatch-tile"><i class="hst-swatch-ring"></i><i class="hst-swatch-bar"></i><i class="hst-swatch-bar short"></i></span>
-                <span class="hst-swatch-name">${t.label}</span>
+                <span class="hst-swatch-name">${t.short || t.label}</span>
             </button>`;
-        }).join('');
+        };
+        const swatches = THEME_SIDES.map(side => `
+            <div class="hst-theme-side" data-side="${side.id}">
+                <div class="hst-theme-side-label">${side.label}</div>
+                <div class="hst-themes-grid">${THEMES.filter(t => t.side === side.id).map(swatch).join('')}</div>
+            </div>`).join('');
         const seg = (items) => items.map(([value, label]) =>
             `<button type="button" class="hst-seg-btn" role="radio" aria-checked="false" data-value="${value}">${label}</button>`).join('');
         const html = `
@@ -99,7 +104,7 @@ export function setupUI() {
 
             <div class="hst-group hst-group-layout">
                 <div class="hst-field hst-field-inline" title="Show each board as a one-row mini version (small ring, name, inline stats). Tap it to expand location, thought and goal.">
-                    <div class="hst-field-label" id="hst-compact-label">Mini board</div>
+                    <div class="hst-field-label" id="hst-compact-label">Board</div>
                     <div class="hst-seg" id="hst-compact" role="radiogroup" aria-labelledby="hst-compact-label">${seg([['off', 'Full'], ['on', 'Mini']])}</div>
                 </div>
                 <div class="hst-field hst-field-inline" title="Whether a board starts expanded or collapsed. You can still click any board's summary line to open or close it by hand.">
@@ -146,7 +151,8 @@ export function setupUI() {
         $('#hst-themes, #hst-compact, #hst-open-mode').on('keydown', '[role="radio"]', function (e) {
             const keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
             if (!(e.key in keys)) return;
-            const items = $(this).parent().children('[role="radio"]:not(:disabled)').toArray();
+            const group = $(this).closest('[role="radiogroup"]');
+            const items = group.find('[role="radio"]:not(:disabled)').toArray();
             const next = items[(items.indexOf(this) + keys[e.key] + items.length) % items.length];
             if (!next) return;
             e.preventDefault();

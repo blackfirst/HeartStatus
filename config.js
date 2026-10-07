@@ -40,16 +40,22 @@ export function normalizeOpenMode(id) {
 }
 
 export const THEMES = [
-    { id: 'dark-red', label: 'Dark' },
-    { id: 'white-pink', label: 'Light' },
-    { id: 'racing-dark', label: 'Racing (Dark)' },
-    { id: 'racing-light', label: 'Racing (Light)' },
-    { id: 'idol-night', label: 'Idol Stage (Night)' },
-    { id: 'idol-day', label: 'Idol Stage (Day)' },
-    { id: 'library-night', label: 'Library (Night)' },
-    { id: 'library-day', label: 'Library (Day)' },
-    { id: 'demons', label: 'Demons' },
-    { id: 'gods', label: 'Gods' },
+    // Dark side and Light side are listed in the same order, so each column is an opposite pair.
+    { id: 'dark-red',      label: 'Dark',             short: 'Dark',       side: 'dark' },
+    { id: 'racing-dark',   label: 'Racing (Dark)',    short: 'Racing',     side: 'dark' },
+    { id: 'idol-night',    label: 'Idol Stage (Night)', short: 'Idol Stage', side: 'dark' },
+    { id: 'library-night', label: 'Library (Night)',  short: 'Library',    side: 'dark' },
+    { id: 'demons',        label: 'Demons',           short: 'Demons',     side: 'dark' },
+    { id: 'white-pink',    label: 'Light',            short: 'Light',      side: 'light' },
+    { id: 'racing-light',  label: 'Racing (Light)',   short: 'Racing',     side: 'light' },
+    { id: 'idol-day',      label: 'Idol Stage (Day)', short: 'Idol Stage', side: 'light' },
+    { id: 'library-day',   label: 'Library (Day)',    short: 'Library',    side: 'light' },
+    { id: 'gods',          label: 'Gods',             short: 'Gods',       side: 'light' },
+];
+
+export const THEME_SIDES = [
+    { id: 'dark',  label: 'Dark' },
+    { id: 'light', label: 'Light' },
 ];
 
 // Colours used to draw each theme's preview tile in the settings drawer: [background 1, background 2, accent 1, accent 2].

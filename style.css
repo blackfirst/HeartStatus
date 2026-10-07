@@ -434,10 +434,13 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 
 /* Theme picker */
 .hst-group-board { container-type: inline-size; }
-.hst-themes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 12px; }
-/* Ten themes: 5 per row whenever the drawer is wide enough, otherwise 2 per row. */
+.hst-themes { display: flex; flex-direction: column; gap: 16px; }
+.hst-theme-side { display: flex; flex-direction: column; gap: 10px; }
+.hst-theme-side-label { font-size: .78em; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .6; }
+.hst-themes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 12px; }
+/* Five themes per side: 5 in a row whenever the drawer is wide enough (each column is a Dark/Light pair), otherwise 2 per row. */
 @container (min-width: 290px) {
-  .hst-themes { grid-template-columns: repeat(5, 1fr); gap: 18px 10px; }
+  .hst-themes-grid { grid-template-columns: repeat(5, 1fr); gap: 18px 10px; }
   .hst-swatch-name { font-size: .74em; }
 }
 .hst-settings .hst-swatch {

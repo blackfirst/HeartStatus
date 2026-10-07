@@ -54,14 +54,14 @@ That's all: no need to clear old chats or re-import anything.
 | Setting | What it does |
 |---|---|
 | **Enable** | Master switch. On = the board instruction is sent and the model writes a board on every reply. Off = Heart Status stops completely: no prompt is sent, no styled board is drawn, and any board already in the chat is shown as plain text. The options below are greyed out while it's off. |
-| **Enable Theme** | On = the board is drawn styled with the theme. Off = the plain board is shown as the model wrote it. The prompt is still sent either way. Sits in the same group as Theme. When off, *Mini board* and *Board open state* are greyed out (they only shape the board). |
-| Theme | Dark / Light / Racing (Dark) / Racing (Light) / Idol Stage (Night) / Idol Stage (Day) / Library (Night) / Library (Day) / Demons / Gods. Applies to every board and is remembered. |
+| **Enable Theme** | On = the board is drawn styled with the theme. Off = the plain board is shown as the model wrote it. The prompt is still sent either way. Sits in the same group as Theme. When off, *Board* and *Board open state* are greyed out (they only shape the board). |
+| Theme | Split into a Dark side (Dark / Racing / Idol Stage Night / Library Night / Demons) and a Light side (Light / Racing / Idol Stage Day / Library Day / Gods). Each column pairs a theme with its opposite. Applies to every board and is remembered. |
 | **Board open state** | Always open (default) / Always collapsed. This only sets the *starting* state each time a board is drawn — you can still click any board's `💗 Name's Status` line to open or close it by hand regardless of this setting. |
-| **Mini board** | Off / On dropdown. On = each board collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full board. Off = the full board shows every time (default). See "Board details" below for how this looks per theme. |
+| **Board** | Full / Mini. On = each board collapses to a single row (small ring, name, relationship, inline Trust/Arousal/Jealousy). Tap the row to expand it in place and see Location/Thoughts/Goal, same as the full board. Off = the full board shows every time (default). See "Board details" below for how this looks per theme. |
 
 ### Board details
 
-- **Mini board**: collapses the board to a one-row summary (ring, name, inline stats); tap to expand/collapse.
+- **Board → Mini**: collapses the board to a one-row summary (ring, name, inline stats); tap to expand/collapse.
 - Missing fields are shown as "—" instead of breaking the board.
 - Ranges: Trust / Arousal / Jealousy `0–100`, Heart Score `-1000–1000`. The percentage is
   always `(score + 1000) / 20`, worked out from the Heart Score itself — a percentage the model writes in the board is ignored, so the "Affection" bar and label always match the number in the middle. The Heart Score ring itself is always drawn as a full circle.
