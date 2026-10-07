@@ -413,7 +413,7 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 /* ---- Settings drawer ----
    Follows the SillyTavern theme (body colour, quote colour) so it fits any UI skin. The one
    showpiece is the theme picker: each theme is drawn as a tiny board in its own colours. */
-.hst-settings { display: flex; flex-direction: column; gap: 16px; padding: 4px 0; }
+.hst-settings { display: flex; flex-direction: column; gap: 16px; padding: 4px 0 15px; }
 .hst-group {
   display: flex; flex-direction: column; gap: 22px; padding: 16px;
   border: 1px solid color-mix(in srgb, currentColor 14%, transparent);

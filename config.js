@@ -6,7 +6,7 @@ export const extensionName = 'heart-status';
 
 // Must match manifest.json's "version" — bump both together on release.
 // updater.js compares this against the live manifest.json to detect a stale page.
-export const EXTENSION_VERSION = '1.0.0';
+export const EXTENSION_VERSION = '1.0.1';
 
 export const defaultSettings = {
     // Master switch ("Enable prompt"). ON: the board instruction is injected so the AI
