@@ -413,9 +413,9 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 /* ---- Settings drawer ----
    Follows the SillyTavern theme (body colour, quote colour) so it fits any UI skin. The one
    showpiece is the theme picker: each theme is drawn as a tiny board in its own colours. */
-.hst-settings { display: flex; flex-direction: column; gap: 10px; padding: 2px 0; }
+.hst-settings { display: flex; flex-direction: column; gap: 16px; padding: 4px 0; }
 .hst-group {
-  display: flex; flex-direction: column; gap: 14px; padding: 12px;
+  display: flex; flex-direction: column; gap: 22px; padding: 16px;
   border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
   border-radius: 12px;
   background: color-mix(in srgb, currentColor 4%, transparent);
@@ -424,24 +424,24 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 .hst-group[data-off] { opacity: .45; }
 .hst-group[data-off] * { cursor: not-allowed; }
 
-.hst-switch-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.hst-switch-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .hst-switch-text b { font-weight: 600; }
 .hst-switch-text small { opacity: .65; line-height: 1.35; }
 
-.hst-field { display: flex; flex-direction: column; gap: 8px; }
+.hst-field { display: flex; flex-direction: column; gap: 12px; }
 .hst-field-label { font-weight: 600; }
-.hst-field-inline { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.hst-field-inline { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 14px; }
 
 /* Theme picker */
 .hst-group-board { container-type: inline-size; }
-.hst-themes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 8px; }
+.hst-themes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 12px; }
 /* Ten themes: 5 per row whenever the drawer is wide enough, otherwise 2 per row. */
 @container (min-width: 290px) {
-  .hst-themes { grid-template-columns: repeat(5, 1fr); gap: 10px 4px; }
+  .hst-themes { grid-template-columns: repeat(5, 1fr); gap: 18px 10px; }
   .hst-swatch-name { font-size: .74em; }
 }
 .hst-settings .hst-swatch {
-  all: unset; box-sizing: border-box; display: flex; flex-direction: column; gap: 5px;
+  all: unset; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px;
   cursor: pointer; border-radius: 10px; padding: 3px; text-align: center;
 }
 .hst-swatch-tile {
