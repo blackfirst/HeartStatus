@@ -135,7 +135,7 @@ export function buildBoardHtml(data, opts = {}) {
 
     const outerSummary = opts.compact
         ? `<summary class="hst-wrap-summary-none"></summary>`
-        : `<summary>💗 ${name ? `${name}'s Status` : 'Status'}</summary>`;
+        : `<summary><span class="hst-sum-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" focusable="false"><path class="hst-heart-body" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/><path class="hst-heart-shade" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-.5.06-1 .18-1.46C4 12 9 15 12 21.35z"/><path class="hst-heart-shine" d="M5.6 7.1c.7-1.5 2.2-2.3 3.7-1.9"/><circle class="hst-heart-dot" cx="8.9" cy="9.1" r="0.9"/></svg></span><span class="hst-sum-name">${name ? `${name}'s Status` : 'Status'}</span></summary>`;
     const outerOpen = opts.compact ? true : opts.open !== false;
 
     return `<details class="hst-wrap" data-hst-theme="${theme}"${outerOpen ? ' open' : ''}>

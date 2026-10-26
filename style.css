@@ -1,6 +1,6 @@
-/* ═══════════════════════════════════════════
-   HEART STATUS — board and settings styles
-   ═══════════════════════════════════════════ */
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
 
 @keyframes hst-glow-slow {
   0%, 100% { filter: drop-shadow(0 0 2px rgba(var(--hst-rgb),0.3)); }
@@ -14,8 +14,18 @@
   42% { transform: scale(1.035); }
   70% { transform: scale(1); }
 }
+@keyframes hst-heart-beat { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.14); } 24% { transform: scale(1); } 36% { transform: scale(1.08); } 50% { transform: scale(1); } }
+@keyframes hst-rc-flag { from { background-position: 0 0; } to { background-position: 16px 0; } }
+@keyframes hst-rc-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes hst-id-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes hst-id-twinkle { 0%, 100% { opacity: 0.95; } 50% { opacity: 0.45; } }
+@keyframes hst-id-eq { from { height: 4px; } to { height: 17px; } }
+@keyframes hst-t-rays { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* ---- Theme palettes (on the board wrapper) ---- */
+
+/* ============================================================
+   THEME PALETTES
+   ============================================================ */
 
 details.hst-wrap[data-hst-theme="dark-red"] {
   --hst-c1:#ff3650; --hst-c2:#b061ff; --hst-rgb:255,54,80;
@@ -26,7 +36,6 @@ details.hst-wrap[data-hst-theme="dark-red"] {
       --hst-pulse-bg1:#171313; --hst-pulse-bg2:#0d0d0d; --hst-ring-track:#241417;
       --hst-daytime-bg1:#1c1012; --hst-daytime-bg2:#0c0a0a;
 }
-
 details.hst-wrap[data-hst-theme="white-pink"] {
   --hst-c1:#ff6f9c; --hst-c2:#ffd1e0; --hst-rgb:255,111,156;
       --hst-bg1:#fff6f8; --hst-bg2:#ffffff; --hst-text:#4a2c33; --hst-eyebrow:#d6487a;
@@ -36,9 +45,6 @@ details.hst-wrap[data-hst-theme="white-pink"] {
       --hst-pulse-bg1:#ffffff; --hst-pulse-bg2:#fbeaf0; --hst-ring-track:#f7dbe4;
       --hst-daytime-bg1:#fff5f8; --hst-daytime-bg2:#ffffff;
 }
-
-/* ---- Library themes (warm parchment/candlelight palette, same layout as Dark/Light) ---- */
-
 details.hst-wrap[data-hst-theme="library-day"] {
   --hst-c1:#b5822b; --hst-c2:#d9a441; --hst-rgb:181,130,43;
       --hst-bg1:#fdf6e6; --hst-bg2:#f4ead2; --hst-text:#4a3418; --hst-eyebrow:#8a5a2b;
@@ -51,7 +57,6 @@ details.hst-wrap[data-hst-theme="library-day"] {
       --hst-lib-rule-red:#a3462b; --hst-lib-rule-blue:#3b5b8a; --hst-lib-tab:#e4cf9e;
       --hst-lib-spine-a:0.22; --hst-lib-shadow-a:0.12;
 }
-
 details.hst-wrap[data-hst-theme="library-night"] {
   --hst-c1:#c99a4a; --hst-c2:#e0b563; --hst-rgb:201,154,74;
       --hst-bg1:#2a2015; --hst-bg2:#150f0a; --hst-text:#f1e4c9; --hst-eyebrow:#d4a24d;
@@ -64,10 +69,6 @@ details.hst-wrap[data-hst-theme="library-night"] {
       --hst-lib-rule-red:#9c4a35; --hst-lib-rule-blue:#4d6f9c; --hst-lib-tab:#4a3826;
       --hst-lib-spine-a:0.45; --hst-lib-shadow-a:0.35;
 }
-
-
-/* ---- Racing themes (full-circle gauge, checkered-flag trim) ---- */
-
 details.hst-wrap[data-hst-theme="racing-dark"] {
   --hst-c1:#e10600; --hst-c2:#ffcc00; --hst-rgb:225,6,0;
       --hst-bg1:#14100a; --hst-bg2:#0a0a0b; --hst-text:#f0f0f0; --hst-eyebrow:#ffcc00;
@@ -80,7 +81,6 @@ details.hst-wrap[data-hst-theme="racing-dark"] {
       --hst-rc-flag-dark:#0d0d0d; --hst-rc-flag-light:#f2f2f2;
       --hst-rc-loc:#ff8a3d; --hst-rc-thought:#c99bff; --hst-rc-goal:#ffcc00;
 }
-
 details.hst-wrap[data-hst-theme="racing-light"] {
   --hst-c1:#e10600; --hst-c2:#ff9d00; --hst-rgb:225,6,0;
       --hst-bg1:#fff8f0; --hst-bg2:#ffffff; --hst-text:#2b2b2f; --hst-eyebrow:#c98a00;
@@ -93,10 +93,6 @@ details.hst-wrap[data-hst-theme="racing-light"] {
       --hst-rc-flag-dark:#0d0d0d; --hst-rc-flag-light:#f2f2f2;
       --hst-rc-loc:#e8701a; --hst-rc-thought:#9b5de5; --hst-rc-goal:#c98a00;
 }
-
-
-/* ---- Idol Stage themes (rainbow full-circle ring, light sticks, speech bubble) ---- */
-
 details.hst-wrap[data-hst-theme="idol-night"] {
   --hst-c1:#ff4fa3; --hst-c2:#ffd84d; --hst-rgb:255,79,163;
       --hst-bg1:#1d1035; --hst-bg2:#0b0716; --hst-text:#f5ecff; --hst-eyebrow:#ff7ac0;
@@ -111,7 +107,6 @@ details.hst-wrap[data-hst-theme="idol-night"] {
       --hst-idol-trust:#3ee0ff; --hst-idol-arousal:#ff4fa3; --hst-idol-jealousy:#ffd84d;
       --hst-idol-venue:#ffd84d; --hst-idol-glow:0.55;
 }
-
 details.hst-wrap[data-hst-theme="idol-day"] {
   --hst-c1:#e8388a; --hst-c2:#e9a400; --hst-rgb:232,56,138;
       --hst-bg1:#fff0f7; --hst-bg2:#ffffff; --hst-text:#3b1f4a; --hst-eyebrow:#d02f7c;
@@ -126,14 +121,9 @@ details.hst-wrap[data-hst-theme="idol-day"] {
       --hst-idol-trust:#12a9d6; --hst-idol-arousal:#e8388a; --hst-idol-jealousy:#e9a400;
       --hst-idol-venue:#c98a00; --hst-idol-glow:0.3;
 }
-
-
-/* ---- Demons (black & red) and Gods (white & gold): same cathedral layout, two skins (layout block at the end) ---- */
-
 details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) {
   --hst-t-serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
-
 details.hst-wrap[data-hst-theme="demons"] {
   --hst-c1:#e0243f; --hst-c2:#ff6b6b; --hst-rgb:224,36,63;
       --hst-bg1:#2a0508; --hst-bg2:#050203; --hst-text:#f4e6e6; --hst-eyebrow:#ff6b7a;
@@ -155,7 +145,6 @@ details.hst-wrap[data-hst-theme="demons"] {
       --hst-t-loc:#ff6b7a; --hst-t-thought:#d9a4b0; --hst-t-goal:#e0243f;
       --hst-t-eyebrow:'† Sinner'; --hst-t-foot:'†  ✦  †'; --hst-t-sep:'†'; --hst-t-pill-l:'† '; --hst-t-pill-r:' †';
 }
-
 details.hst-wrap[data-hst-theme="gods"] {
   --hst-c1:#c8a03c; --hst-c2:#f3e2a4; --hst-rgb:200,160,60;
       --hst-bg1:#fffbee; --hst-bg2:#ffffff; --hst-text:#4a4130; --hst-eyebrow:#b28a2a;
@@ -178,16 +167,18 @@ details.hst-wrap[data-hst-theme="gods"] {
       --hst-t-eyebrow:'✦ Blessed'; --hst-t-foot:'✧  ✦  ✧'; --hst-t-sep:'✦'; --hst-t-pill-l:'✧ '; --hst-t-pill-r:' ✧';
 }
 
-/* ---- Wrapper / summary ---- */
-.hst-slot { margin: 6px 0; container: hst / inline-size; }
 
+/* ============================================================
+   BOARD BASE
+   ============================================================ */
+
+.hst-slot { margin: 6px 0; container: hst / inline-size; }
 details.hst-wrap > summary {
   background: var(--hst-summary-bg); color: var(--hst-summary-text); padding: 12px;
   border-radius: 14px; border: 1px solid var(--hst-summary-border); cursor: pointer;
   transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
   list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 8px;
 }
-/* Replace the browser's default triangle with a thin minimal chevron. */
 details.hst-wrap > summary::-webkit-details-marker { display: none; }
 details.hst-wrap > summary::marker { content: ''; }
 details.hst-wrap > summary.hst-wrap-summary-none { display: none; padding: 0; margin: 0; border: none; }
@@ -199,8 +190,6 @@ details.hst-wrap > summary::after {
 }
 details.hst-wrap > summary:hover::after { opacity: 0.9; }
 details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top: 3px; }
-
-/* ---- Board ---- */
 .hst-board {
   width: 100%; max-width: none; margin: 10px 0; box-sizing: border-box;
   background: radial-gradient(ellipse at top, var(--hst-bg1) 0%, var(--hst-bg2) 65%);
@@ -221,8 +210,6 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
   border: 1px solid rgba(var(--hst-rgb),0.4); padding: 5px 12px; border-radius: 999px; font-size: 12px;
 }
 .hst-center { text-align: center; }
-
-/* ---- Ring + heartbeat ---- */
 .hst-ringbox { position: relative; width: 220px; height: 220px; margin: auto; }
 .hst-ringsvg { position: absolute; inset: 0; transform: rotate(-90deg); }
 .hst-ring-track { stroke: var(--hst-ring-track); }
@@ -245,8 +232,6 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-affbar { height: 6px; width: 100%; max-width: 260px; margin: 24px auto 0 auto; background: rgba(var(--hst-rgb),0.15); border-radius: 999px; overflow: hidden; }
 .hst-affbar-fill { height: 100%; background: linear-gradient(90deg,var(--hst-c1),var(--hst-c2)); }
 .hst-affbar-label { font-size: 10px; letter-spacing: 1.5px; color: var(--hst-muted); text-transform: uppercase; margin-top: 18px; }
-
-/* ---- Date / time tiles ---- */
 .hst-dt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
 .hst-dt {
   background: linear-gradient(135deg,var(--hst-daytime-bg1),var(--hst-daytime-bg2));
@@ -261,8 +246,6 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-dt-body { display: flex; flex-direction: column; min-width: 0; }
 .hst-dt-label { font-size: 9px; letter-spacing: 1.5px; color: var(--hst-muted); text-transform: uppercase; }
 .hst-dt-value { overflow-wrap: anywhere; font-size: 0.9em; color: var(--hst-text); line-height: 1.3; }
-
-/* ---- Stat tiles ---- */
 .hst-stats { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 10px; margin-bottom: 14px; }
 .hst-stat {
   background: var(--hst-stat-bg); border-radius: 12px; padding: 12px 6px; text-align: center;
@@ -277,8 +260,6 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 }
 .hst-stat-bar { height: 4px; width: 100%; background: var(--hst-track); border-radius: 999px; overflow: hidden; margin-top: 7px; }
 .hst-stat-bar-fill { height: 100%; border-radius: 999px; background: var(--sc); }
-
-/* ---- Info rows ---- */
 .hst-info { background: var(--hst-info-bg); border-left: 3px solid var(--ac); border-radius: 0 10px 10px 0; padding: 10px 14px; margin-bottom: 10px; }
 .hst-info:last-child { margin-bottom: 0; }
 .hst-info.loc { --ac: #ff7280; }
@@ -287,7 +268,128 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-info-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ac); margin-bottom: 3px; }
 .hst-info-value { overflow-wrap: anywhere; font-size: 0.92em; color: var(--hst-text); line-height: 1.4; }
 
-/* ---- Compact mode (mini row, tap to expand) ---- */
+
+/* ============================================================
+   SUMMARY BAR
+   ============================================================ */
+
+details.hst-wrap > summary { position: relative; overflow: hidden; outline: none; -webkit-tap-highlight-color: transparent; user-select: none; }
+details.hst-wrap > summary:focus-visible { box-shadow: 0 0 0 2px rgba(var(--hst-rgb),0.55); }
+details.hst-wrap > summary .hst-sum-ico {
+  --h1: var(--hst-c1); --h2: var(--hst-c2);
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 26px; height: 26px;
+  filter: drop-shadow(0 0 2px rgba(var(--hst-rgb),0.35)) drop-shadow(0 1px 1px rgba(0,0,0,0.35));
+  animation: hst-heart-beat 2.4s ease-in-out infinite; transform-origin: 50% 60%;
+}
+details.hst-wrap > summary .hst-sum-ico svg { display: block; overflow: visible; }
+.hst-heart-body  { fill: var(--h1); stroke: var(--h2); stroke-width: 0.9; stroke-linejoin: round; }
+.hst-heart-shade { fill: rgba(0,0,0,0.22); }
+.hst-heart-shine { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; opacity: 0.8; }
+.hst-heart-dot   { fill: #fff; opacity: 0.85; }
+@media (prefers-reduced-motion: reduce) { details.hst-wrap > summary .hst-sum-ico { animation: none; } }
+details.hst-wrap[data-hst-theme^="library-"] > summary .hst-sum-ico { --h1: #c8413b; }
+details.hst-wrap[data-hst-theme="white-pink"] > summary .hst-sum-ico { --h1: #ff6f9c; --h2: #fff; }
+details.hst-wrap[data-hst-theme^="racing-"] > summary .hst-sum-ico { --h1: #e10600; --h2: #ffcc00; }
+details.hst-wrap > summary { gap: 10px; }
+details.hst-wrap > summary .hst-sum-name { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
+details.hst-wrap > summary::after { margin-right: 4px; }
+details.hst-wrap[data-hst-theme="dark-red"] > summary {
+  padding: 13px 20px 13px 18px; border-radius: 16px; gap: 12px;
+  background:
+    radial-gradient(circle at 30px 50%, rgba(var(--hst-rgb),0.12), transparent 90px),
+    linear-gradient(180deg, #1f0a0d 0%, #0d0506 100%);
+  border: 1px solid rgba(var(--hst-rgb),0.38);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.65), 0 4px 12px rgba(var(--hst-rgb),0.08), inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+details.hst-wrap[data-hst-theme="dark-red"] > summary:hover { border-color: rgba(var(--hst-rgb),0.7); box-shadow: 0 0 0 1px rgba(0,0,0,0.65), 0 4px 14px rgba(var(--hst-rgb),0.16), inset 0 1px 0 rgba(255,255,255,0.1); }
+details.hst-wrap[data-hst-theme="dark-red"] > summary::before {
+  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,110,125,0.85), transparent);
+}
+details.hst-wrap[data-hst-theme="dark-red"] > summary .hst-sum-ico { --h1: #ff3650; --h2: #ffc2ca; width: 28px; height: 28px; }
+details.hst-wrap[data-hst-theme="dark-red"] > summary .hst-sum-ico svg { width: 24px; height: 24px; }
+details.hst-wrap[data-hst-theme="dark-red"] > summary .hst-sum-name {
+  font-weight: 600; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: #ffdfe3; text-shadow: 0 0 4px rgba(var(--hst-rgb),0.35);
+}
+details.hst-wrap[data-hst-theme="dark-red"] > summary::after { color: #ff7a8a; }
+details.hst-wrap[data-hst-theme="white-pink"] > summary {
+  padding: 13px 18px 13px 22px; border-radius: 999px;
+  background: linear-gradient(180deg, #fff 0%, var(--hst-summary-bg) 100%);
+  border: 1.5px solid var(--hst-summary-border);
+  box-shadow: 0 6px 16px rgba(255,111,156,0.18), inset 0 2px 0 #fff, inset 0 -3px 6px rgba(255,111,156,0.08);
+  transition: box-shadow .3s ease, transform .2s ease;
+}
+details.hst-wrap[data-hst-theme="white-pink"] > summary:hover { box-shadow: 0 8px 20px rgba(255,111,156,0.32), inset 0 2px 0 #fff, inset 0 -3px 6px rgba(255,111,156,0.1); transform: translateY(-1px); }
+details.hst-wrap[data-hst-theme="white-pink"] > summary .hst-sum-name { font-weight: 600; font-size: 15px; letter-spacing: 0.6px; gap: 9px; }
+details.hst-wrap[data-hst-theme^="racing-"] > summary {
+  padding: 13px 18px 13px 30px; border-radius: 4px; gap: 12px;
+  background:
+    repeating-linear-gradient(45deg, rgba(128,128,128,0.07) 0 2px, transparent 2px 4px),
+    var(--hst-summary-bg);
+  border: 1px solid rgba(var(--hst-rgb),0.35);
+  box-shadow: 0 4px 12px rgba(0,0,0,var(--hst-stat-shadow-a, 0.3));
+  transition: border-color .25s ease;
+}
+details.hst-wrap[data-hst-theme^="racing-"] > summary:hover { border-color: rgba(var(--hst-rgb),0.7); }
+details.hst-wrap[data-hst-theme^="racing-"] > summary::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 14px;
+  background: linear-gradient(90deg, var(--hst-c1) 0 7px, transparent 7px 9px, var(--hst-c2) 9px 12px, transparent 12px);
+}
+details.hst-wrap[data-hst-theme^="racing-"] > summary .hst-sum-ico { --h1: #e10600; --h2: #ffcc00; width: 28px; height: 28px; }
+details.hst-wrap[data-hst-theme^="racing-"] > summary .hst-sum-ico svg { width: 24px; height: 24px; }
+details.hst-wrap[data-hst-theme^="racing-"] > summary .hst-sum-name {
+  font-style: italic; font-weight: 800; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; color: var(--hst-text);
+}
+details.hst-wrap[data-hst-theme^="idol-"] > summary {
+  padding: 13px 18px 13px 22px; border-radius: 999px; border: 2px solid transparent;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(var(--hst-rgb),0.10), transparent 60%) padding-box,
+    linear-gradient(var(--hst-summary-bg), var(--hst-summary-bg)) padding-box,
+    linear-gradient(90deg, var(--hst-c1), var(--hst-c2), var(--hst-c1)) border-box;
+  box-shadow: 0 0 6px rgba(var(--hst-rgb),0.25);
+  transition: box-shadow .3s ease;
+}
+details.hst-wrap[data-hst-theme^="idol-"] > summary:hover { box-shadow: 0 0 10px rgba(var(--hst-rgb),0.4); }
+details.hst-wrap[data-hst-theme^="idol-"] > summary .hst-sum-name { font-weight: 800; font-size: 15px; letter-spacing: 1.5px; gap: 10px; }
+details.hst-wrap[data-hst-theme^="idol-"] > summary .hst-sum-name::after { content: '✧'; flex: 0 0 auto; font-size: 11px; color: var(--hst-c1); opacity: 0.9; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) > summary {
+  padding: 14px 18px; box-shadow: inset 0 0 0 3px var(--hst-t-inset), inset 0 0 0 4px var(--hst-t-line), 0 4px 16px var(--hst-t-glow);
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) > summary .hst-sum-name {
+  font-family: var(--hst-t-serif); font-variant: small-caps; font-size: 17px; letter-spacing: 3px; justify-content: center; gap: 14px; text-shadow: 0 0 4px var(--hst-t-name-glow);
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) > summary .hst-sum-name::before,
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) > summary .hst-sum-name::after { content: var(--hst-t-sep); flex: 0 0 auto; font-size: 11px; opacity: 0.75; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) > summary::after { position: absolute; right: 22px; }
+details.hst-wrap[data-hst-theme^="library-"] > summary {
+  padding: 15px 18px 15px 56px; border-radius: 8px;
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.05) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, rgba(255,255,255,0.07), transparent 40%, rgba(0,0,0,0.18)),
+    var(--hst-summary-bg);
+  border-color: var(--hst-lib-board-line);
+  box-shadow: inset 0 0 0 4px var(--hst-summary-bg), inset 0 0 0 5px rgba(var(--hst-rgb),0.45), 0 8px 18px rgba(0,0,0,var(--hst-lib-shadow-a));
+  transition: box-shadow .3s ease;
+}
+details.hst-wrap[data-hst-theme^="library-"] > summary:hover { box-shadow: inset 0 0 0 4px var(--hst-summary-bg), inset 0 0 0 5px rgba(var(--hst-rgb),0.8), 0 8px 20px rgba(0,0,0,var(--hst-lib-shadow-a)); }
+details.hst-wrap[data-hst-theme^="library-"] > summary::before {
+  content: ''; position: absolute; left: 22px; top: 0; width: 16px; height: 72%;
+  background: linear-gradient(90deg, rgba(0,0,0,0.25), transparent 30%, transparent 70%, rgba(0,0,0,0.25)), var(--hst-lib-rule-red);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));
+}
+details.hst-wrap[data-hst-theme^="library-"] > summary .hst-sum-name {
+  font-style: italic; font-variant: small-caps; font-size: 18px; letter-spacing: 2px; font-weight: 600; color: var(--hst-summary-text);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+}
+
+
+/* ============================================================
+   COMPACT MODE
+   ============================================================ */
+
 .hst-board.hst-compact { padding: 14px 16px; }
 .hst-mini { width: 100%; }
 .hst-mini > summary { list-style: none; cursor: pointer; }
@@ -315,14 +417,8 @@ details.hst-wrap[open] > summary::after { transform: rotate(225deg); margin-top:
 .hst-mini[open] .hst-mini-chev { transform: rotate(180deg); }
 .hst-mini-body { margin-top: 14px; }
 .hst-mini-body .hst-info:last-child { margin-bottom: 0; }
-
-/* ---- Compact mode theming (Racing / Idol Stage match their full-board look) ---- */
-
-/* Racing: italic, tabular-nums score + name, same touch as the full board */
 details.hst-wrap[data-hst-theme^="racing-"] .hst-mini-name { font-style: italic; letter-spacing: 0.3px; }
 details.hst-wrap[data-hst-theme^="racing-"] .hst-mini-score { font-style: italic; font-variant-numeric: tabular-nums; }
-
-/* Idol Stage: rainbow ring, bigger name, neon stat colors + framed panels in the expanded body */
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-name { font-size: 15px; }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-ring .hst-ring-track,
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-ring .hst-ring-rotate { stroke: transparent; filter: none; animation: none; }
@@ -333,7 +429,6 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-ring::before {
           mask: radial-gradient(circle farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px), #000 calc(100% - 1px), transparent 100%);
   animation: hst-id-spin 10s linear infinite;
 }
-
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat[data-stat="trust"] { --sc: var(--hst-idol-trust) !important; }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat[data-stat="arousal"] { --sc: var(--hst-idol-arousal) !important; }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat[data-stat="jealousy"] { --sc: var(--hst-idol-jealousy) !important; }
@@ -355,7 +450,6 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat-bar-fill {
 }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-badge { order: 3; width: 22px; height: 22px; margin: 0; font-size: 11px; }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-stat small { order: 4; font-size: 10px; letter-spacing: 0.3px; text-transform: none; }
-
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info {
   background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line); border-left: none; border-radius: 12px;
 }
@@ -363,12 +457,9 @@ details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info.loc { --ac: v
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info.thought { --ac: var(--hst-idol-bubble-line); }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info.goal { --ac: var(--hst-c1); }
 details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-body .hst-info.thought .hst-info-value { font-style: italic; }
-
 @media (prefers-reduced-motion: reduce) {
   details.hst-wrap[data-hst-theme^="idol-"] .hst-mini-ring::before { animation: none; }
 }
-
-/* Library: serif italic name/score, ribbon-colored stat icons, ruled-card info panels */
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-name,
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-score {
   font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif; font-style: italic;
@@ -396,8 +487,6 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.loc { --ac
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.thought { --ac: var(--hst-c2); }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.thought .hst-info-value { font-style: italic; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-body .hst-info.goal { --ac: var(--hst-lib-rule-red); }
-
-/* Compact shell itself: same paper board, corner radius and dashed ink-stamp ring as the full board */
 details.hst-wrap[data-hst-theme^="library-"] .hst-board.hst-compact {
   border-radius: 8px; border-color: var(--hst-lib-board-line);
   box-shadow: 0 10px 24px rgba(0,0,0,var(--hst-lib-shadow-a));
@@ -410,9 +499,482 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-ring::before {
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-score { font-variant-numeric: oldstyle-nums; }
 details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: italic; }
 
-/* ---- Settings drawer ----
-   Follows the SillyTavern theme (body colour, quote colour) so it fits any UI skin. The one
-   showpiece is the theme picker: each theme is drawn as a tiny board in its own colours. */
+
+/* ============================================================
+   RACING LAYOUT
+   ============================================================ */
+
+details.hst-wrap[data-hst-theme^="racing-"] .hst-board {
+  position: relative; overflow: hidden; border-radius: 16px; padding-top: 28px;
+  border-color: rgba(var(--hst-rgb),0.3);
+  box-shadow: 0 14px 30px rgba(0,0,0,var(--hst-shadow-a)), inset 0 0 40px rgba(var(--hst-rgb),0.04);
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-board.hst-compact { padding-top: 24px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-board::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px; pointer-events: none;
+  background: repeating-conic-gradient(var(--hst-rc-flag-dark) 0% 25%, var(--hst-rc-flag-light) 0% 50%) 0 0 / 8px 8px;
+  opacity: 0.9; animation: hst-rc-flag 3s linear infinite;
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-name { font-style: italic; letter-spacing: 0.3px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-pill {
+  background: linear-gradient(135deg, var(--hst-c1), #a30400); color: #fff; font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.25); border-radius: 5px; letter-spacing: 0.4px; max-width: 100%; text-align: center;
+  transform: skewX(-10deg); box-shadow: 0 0 10px rgba(var(--hst-rgb),0.45);
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-pill::before { content: '🏁 '; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::before {
+  content: ''; position: absolute; inset: 3px; border-radius: 50%; pointer-events: none;
+  border: 2px dotted rgba(var(--hst-rgb),0.4); animation: hst-rc-spin 7s linear infinite;
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::after {
+  content: ''; position: absolute; inset: -9px; border-radius: 50%; pointer-events: none;
+  background:
+    repeating-conic-gradient(from -1deg, var(--hst-c1) 0 2deg, transparent 2deg 30deg),
+    repeating-conic-gradient(from -0.5deg, rgba(var(--hst-rgb),0.35) 0 1deg, transparent 1deg 6deg);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-ring-rotate { animation: hst-glow-slow 2.2s ease-in-out infinite; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-pulse-wrap { animation: hst-glow-slow 2.2s ease-in-out infinite; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-score { font-style: italic; font-variant-numeric: tabular-nums; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-ecg-path { stroke: var(--hst-c2); animation-duration: 1.5s; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-affbar { position: relative; height: 7px; border-radius: 4px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-affbar::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.25) 0 2px, transparent 2px 10px);
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-affbar-fill { border-radius: 4px 0 0 4px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-dt {
+  border-left: 4px solid var(--hst-c1); border-radius: 4px 12px 12px 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,var(--hst-daytime-shadow-a));
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-stat {
+  border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,var(--hst-stat-shadow-a));
+}
+details.hst-wrap[data-hst-theme^="racing-"] .hst-stat-bar,
+details.hst-wrap[data-hst-theme^="racing-"] .hst-stat-bar-fill { border-radius: 2px; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-info { border-radius: 0 8px 8px 0; }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-info.loc { --ac: var(--hst-rc-loc); }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-info.thought { --ac: var(--hst-rc-thought); }
+details.hst-wrap[data-hst-theme^="racing-"] .hst-info.goal { --ac: var(--hst-rc-goal); }
+@media (prefers-reduced-motion: reduce) {
+  details.hst-wrap[data-hst-theme^="racing-"] .hst-board::before,
+  details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::before { animation: none; }
+}
+
+
+/* ============================================================
+   IDOL STAGE LAYOUT
+   ============================================================ */
+
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board {
+  border-radius: 20px; border-color: rgba(var(--hst-rgb),0.3);
+  box-shadow: 0 14px 30px rgba(0,0,0,var(--hst-shadow-a));
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 24px; align-items: center;
+  grid-template-areas: "head head" "bubble bubble" "ring sticks" "ticket ticket" "venue venue" "goal goal";
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-divider { display: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > div:first-child { grid-area: head; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-center { grid-area: ring; padding: 12px 10px 0; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-stats { grid-area: sticks; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-dt-grid { grid-area: ticket; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.loc { grid-area: venue; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought { grid-area: bubble; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eyebrow > span:first-child::after { content: '✦ On stage'; font-size: 10px; letter-spacing: 2.5px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-name { font-size: 1.25em; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-pill {
+  background: var(--hst-idol-panel); color: var(--hst-c1); border: 1px solid var(--hst-c1);
+  font-weight: 600; max-width: 100%; text-align: center; border-radius: 18px;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-pill::before { content: '★ '; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought {
+  position: relative; margin: 14px 0 6px; padding: 12px 16px; --ac: var(--hst-idol-bubble-line);
+  background: var(--hst-idol-bubble); border: 1px solid var(--hst-idol-bubble-line); border-radius: 16px;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought::before {
+  content: ''; position: absolute; top: -8px; left: 22px; width: 14px; height: 14px;
+  background: var(--hst-idol-bubble); border-top: 1px solid var(--hst-idol-bubble-line);
+  border-left: 1px solid var(--hst-idol-bubble-line); border-radius: 3px 0 0 0; transform: rotate(45deg);
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought .hst-info-value { font-style: italic; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox { width: 190px; height: 190px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox .hst-ringsvg { width: 100%; height: 100%; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox .hst-ring-track,
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox .hst-ring-rotate { stroke: transparent; filter: none; animation: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::before {
+  content: ''; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: conic-gradient(from 0deg, #ff4fa3, #ffd84d, #3ee0ff, #a66bff, #ff4fa3);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 14px), #000 calc(100% - 12.5px), #000 calc(100% - 1.5px), transparent 100%);
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 14px), #000 calc(100% - 12.5px), #000 calc(100% - 1.5px), transparent 100%);
+  animation: hst-id-spin 10s linear infinite;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::after {
+  content: ''; position: absolute; inset: -9px; border-radius: 50%; pointer-events: none;
+  background: repeating-conic-gradient(from -1.5deg, var(--hst-c2) 0 3deg, transparent 3deg 15deg);
+  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 5px), #000 calc(100% - 5px));
+          mask: radial-gradient(circle farthest-side, transparent calc(100% - 5px), #000 calc(100% - 5px));
+  animation: hst-id-twinkle 2.4s ease-in-out infinite;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-pulse-wrap {
+  top: 20px; left: 20px; right: 20px; bottom: 20px; border: 1px solid var(--hst-idol-line);
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-score { font-size: 42px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-ecg { display: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq { display: flex; align-items: flex-end; gap: 3px; height: 18px; margin-top: 8px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i { width: 3px; height: 4px; border-radius: 2px; background: var(--hst-c1); animation: hst-id-eq 0.9s ease-in-out infinite alternate; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(2) { animation-delay: 0.2s; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(3) { animation-delay: 0.45s; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(4) { animation-delay: 0.1s; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(5) { animation-delay: 0.35s; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-affbar { height: 7px; max-width: 190px; border: 1px solid var(--hst-idol-line); background: var(--hst-idol-panel); }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin: 0; min-width: 0; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"] { --sc: var(--hst-idol-trust) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"] { --sc: var(--hst-idol-arousal) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-idol-jealousy) !important; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  background: none; border: none; border-radius: 0; box-shadow: none; padding: 0; min-width: 44px;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat br { display: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat b { order: 1; font-size: 15px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat-bar {
+  order: 2; position: relative; width: 28px; height: 112px; margin: 0; overflow: hidden; border-radius: 14px;
+  background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--sc) calc(var(--hst-idol-glow) * 100%), transparent));
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat-bar-fill {
+  position: absolute; left: 0; right: 0; bottom: 0; width: 100% !important;
+  height: calc(var(--p, 0) * 1%); border-radius: 0; background: var(--sc);
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-badge { order: 3; width: 24px; height: 24px; margin: 0; font-size: 12px; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat small { order: 4; font-size: 11px; letter-spacing: 0.3px; text-transform: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-dt-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; margin: 16px 0 0; overflow: hidden;
+  border: 1px solid var(--hst-idol-line); border-radius: 14px; background: var(--hst-idol-panel);
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-dt { background: none; border: none; border-radius: 0; box-shadow: none; }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-dt + .hst-dt { border-left: 1.5px dashed var(--hst-idol-line); }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.loc,
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.goal {
+  margin: 14px 0 0; padding: 10px 14px;
+  background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line); border-radius: 12px;
+}
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.loc { --ac: var(--hst-idol-venue); }
+details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.goal { --ac: var(--hst-c1); }
+@media (prefers-reduced-motion: reduce) {
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::before,
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::after,
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i { animation: none; }
+}
+@container hst (max-width: 480px) {
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) {
+    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
+    grid-template-areas: "head" "bubble" "ring" "sticks" "ticket" "venue" "goal";
+  }
+}
+
+
+/* ============================================================
+   LIBRARY LAYOUT
+   ============================================================ */
+
+details.hst-wrap[data-hst-theme^="library-"] .hst-board {
+  border-radius: 8px; border-color: var(--hst-lib-board-line);
+  box-shadow: 0 10px 24px rgba(0,0,0,var(--hst-lib-shadow-a));
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board {
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) {
+  display: grid;
+  grid-template-columns: 1fr 22px 1fr; column-gap: 14px; row-gap: 16px;
+  grid-template-areas: "head head head" "ring gutter loc" "date gutter thought" "sticks gutter goal";
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-divider { display: none; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-center { grid-area: ring; align-self: start; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-dt-grid { grid-area: date; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.loc { grid-area: loc; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.thought { grid-area: thought; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact)::before {
+  content: ''; grid-area: gutter; align-self: stretch; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,var(--hst-lib-spine-a)) 45%, rgba(0,0,0,calc(var(--hst-lib-spine-a) * 1.4)) 50%, rgba(0,0,0,var(--hst-lib-spine-a)) 55%, transparent);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-stat small { color: var(--hst-text); opacity: 0.72; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-eyebrow > span:first-child::after { content: '📖 Card Catalog'; font-size: 10px; letter-spacing: 2.5px; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-name { font-style: italic; font-variant: small-caps; letter-spacing: 0.4px; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-pill {
+  background: var(--hst-lib-board-bg); color: var(--hst-c1); border: 1px dashed var(--hst-c1);
+  border-radius: 2px; font-style: italic; max-width: 100%; text-align: center;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-stats {
+  grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; align-self: start;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"],
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"],
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
+  --sc: var(--hst-c1) !important;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat {
+  position: relative; aspect-ratio: 1; margin-right: 0; clip-path: none; min-width: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-board-line); border-radius: 4px;
+  box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
+  transform: rotate(var(--hst-lib-tilt, 0deg));
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat::before {
+  content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+  width: 7px; height: 7px; border-radius: 50%; background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat small,
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat b {
+  overflow-wrap: anywhere; text-align: center;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat br { display: none; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat-bar { display: none; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-ringbox { position: relative; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-ringbox::before {
+  content: ''; position: absolute; inset: -7px; border-radius: 50%; pointer-events: none;
+  border: 1px dashed rgba(var(--hst-rgb),0.4);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-score { font-style: italic; font-variant-numeric: oldstyle-nums; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-dt-grid {
+  align-self: start; background: var(--hst-lib-board-bg); border: 1px solid var(--hst-lib-board-line);
+  border-radius: 4px; padding: 8px; margin: 0; grid-template-columns: 1fr; gap: 6px;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-dt { background: none; border: none; padding: 2px 4px; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-dt-icon { border-radius: 2px; background: none; border: 1px solid var(--hst-lib-board-line); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info {
+  position: relative; margin: 0; padding: 14px 14px 12px 32px;
+  background: var(--hst-lib-board-bg); border: 1px solid var(--hst-lib-board-line); border-left: none;
+  border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,var(--hst-lib-shadow-a));
+  background-image:
+    linear-gradient(var(--hst-lib-rule-red) 0 2px, transparent 2px) top / 100% 100% no-repeat,
+    repeating-linear-gradient(var(--hst-lib-board-line) 0 1px, transparent 1px 22px) left 0 top 24px / 100% calc(100% - 24px) no-repeat;
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info::before {
+  content: ''; position: absolute; left: 13px; top: 13px; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--hst-bg2); border: 1px solid var(--hst-lib-board-line); box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.loc { --ac: var(--hst-lib-rule-blue); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.thought { --ac: var(--hst-c2); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.thought .hst-info-value { font-style: italic; }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.goal { --ac: var(--hst-lib-rule-red); }
+details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-info-label { font-variant: small-caps; letter-spacing: 2px; }
+@media (max-width: 480px) {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) {
+    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
+    grid-template-areas: "head" "ring" "date" "sticks" "loc" "thought" "goal";
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact)::before { display: none; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-stats {
+    grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0;
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
+    --sc: var(--hst-c1) !important;
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat {
+    clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1; min-width: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-board-line); border-radius: 4px;
+    box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
+    transform: rotate(var(--hst-lib-tilt, 0deg));
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat::before {
+    content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat small,
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat b {
+    overflow-wrap: anywhere; text-align: center;
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
+}
+@container hst (max-width: 480px) {
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) {
+    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
+    grid-template-areas: "head" "ring" "date" "sticks" "loc" "thought" "goal";
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact)::before { display: none; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-stats {
+    grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0;
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"],
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
+    --sc: var(--hst-c1) !important;
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat {
+    clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1; min-width: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-board-line); border-radius: 4px;
+    box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
+    transform: rotate(var(--hst-lib-tilt, 0deg));
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat::before {
+    content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat small,
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat b {
+    overflow-wrap: anywhere; text-align: center;
+  }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
+  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
+}
+
+
+/* ============================================================
+   NARROW SCREENS
+   ============================================================ */
+
+@media (max-width: 480px) {
+  .hst-board { padding: 14px; border-radius: 18px; }
+  .hst-dt-grid { grid-template-columns: 1fr; }
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) {
+    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
+    grid-template-areas: "head" "bubble" "ring" "sticks" "ticket" "venue" "goal";
+  }
+  details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-dt-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+
+/* ============================================================
+   DEMONS AND GODS LAYOUT
+   ============================================================ */
+
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) > summary {
+  border-radius: 999px; border-color: var(--hst-t-line); background: var(--hst-t-summary);
+  font-family: var(--hst-t-serif); letter-spacing: 0.5px;
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board {
+  position: relative; overflow: hidden; border-radius: 110px 110px 26px 26px;
+  border: 1px solid var(--hst-t-line); background: var(--hst-t-board);
+  box-shadow: 0 10px 24px var(--hst-t-glow), inset 0 0 0 5px var(--hst-t-inset), inset 0 0 0 6px var(--hst-t-line);
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) {
+  display: flex; flex-direction: column; align-items: center; text-align: center; padding: 50px 24px 34px;
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact)::after {
+  content: var(--hst-t-foot); position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%); white-space: nowrap;
+  font-size: 10px; letter-spacing: 4px; color: rgba(var(--hst-rgb),0.7); pointer-events: none;
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-divider { display: none; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-center { display: contents; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) .hst-ringbox { order: 1; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > div:first-child { order: 2; width: 100%; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-dt-grid { order: 3; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) .hst-affbar-label { order: 4; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) .hst-affbar { order: 5; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-stats { order: 6; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-info.loc { order: 7; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-info.thought { order: 8; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-info.goal { order: 9; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ringbox { width: 176px; height: 176px; margin: 0 auto 26px; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ringbox .hst-ringsvg { width: 100%; height: 100%; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ring-track { stroke: var(--hst-ring-track); stroke-width: 5; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ring-rotate { stroke: var(--hst-c1); stroke-width: 5; filter: drop-shadow(0 0 5px rgba(var(--hst-rgb),0.65)); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ringbox::before {
+  content: ''; position: absolute; inset: -22px; border-radius: 50%; pointer-events: none;
+  background: repeating-conic-gradient(from -2deg, var(--hst-t-ray) 0 2deg, transparent 2deg 9deg);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 0 82%, #000 85%, rgba(0,0,0,0) 100%);
+          mask: radial-gradient(circle closest-side, transparent 0 82%, #000 85%, rgba(0,0,0,0) 100%);
+  animation: hst-t-rays 120s linear infinite;
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-pulse-wrap {
+  top: 14px; left: 14px; right: 14px; bottom: 14px; background: var(--hst-t-disc);
+  box-shadow: inset 0 0 0 1px var(--hst-t-disc-ring), inset 0 0 20px var(--hst-t-disc-glow);
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-score { font-family: var(--hst-t-serif); font-weight: 400; font-size: 40px; color: var(--hst-t-score); letter-spacing: 1px; text-shadow: 0 0 12px var(--hst-t-text-glow); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ring-label { color: var(--hst-eyebrow); letter-spacing: 3px; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ecg-path { stroke: var(--hst-c1); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-eyebrow { justify-content: center; margin-bottom: 4px; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-eyebrow > span:first-child::after { content: var(--hst-t-eyebrow); font-size: 9.5px; letter-spacing: 4px; color: var(--hst-eyebrow); opacity: 0.95; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-namerow { flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-name {
+  font-family: var(--hst-t-serif); font-weight: 400; font-variant: small-caps; letter-spacing: 2.5px; font-size: 1.5em;
+  text-shadow: 0 0 14px var(--hst-t-name-glow); overflow-wrap: anywhere;
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-pill {
+  background: var(--hst-t-pill-bg); color: var(--hst-t-pill-fg); border: 1px solid var(--hst-t-pill-border); border-radius: 999px;
+  letter-spacing: 0.6px; padding: 4px 14px; box-shadow: var(--hst-t-pill-shadow);
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-pill::before { content: var(--hst-t-pill-l); color: var(--hst-c1); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-pill::after { content: var(--hst-t-pill-r); color: var(--hst-c1); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 0; margin: 14px 0 0; width: 100%; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt { background: none; border: none; border-radius: 0; padding: 0; gap: 0; box-shadow: none; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt + .hst-dt::before { content: var(--hst-t-sep); margin: 0 12px; font-size: 9px; color: var(--hst-c1); align-self: center; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt-icon, details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt-label { display: none; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt-value { font-size: 0.8em; letter-spacing: 1px; color: var(--hst-muted); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-affbar-label { font-family: var(--hst-t-serif); font-variant: small-caps; font-size: 11px; letter-spacing: 3px; color: var(--hst-eyebrow); margin: 18px 0 7px; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-affbar { width: 100%; max-width: 420px; height: 3px; margin: 0; background: var(--hst-track); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-affbar-fill { background: var(--hst-t-affill); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stats { display: flex; justify-content: center; gap: 24px; margin: 24px 0 4px; width: 100%; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 62px;
+  background: none; border: none; border-radius: 0; padding: 0; box-shadow: none;
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat br, details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat .hst-stat-bar { display: none; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat .hst-badge {
+  order: 1; width: 54px; height: 54px; margin: 0; font-size: 18px; border: none;
+  background:
+    radial-gradient(circle closest-side, var(--hst-t-gauge-bg) 0 calc(100% - 5px), transparent calc(100% - 4px)),
+    conic-gradient(var(--sc) calc(var(--p, 0) * 1%), var(--hst-t-gauge-track) 0);
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--sc) var(--hst-t-gauge-glow), transparent));
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat b { order: 2; font-family: var(--hst-t-serif); font-weight: 400; font-size: 1.15em; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat small { order: 3; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--hst-stat-small); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat[data-stat="trust"] { --sc: var(--hst-t-trust) !important; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat[data-stat="arousal"] { --sc: var(--hst-t-arousal) !important; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-t-jealousy) !important; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info {
+  display: grid; grid-template-columns: 106px minmax(0, 1fr); column-gap: 10px; align-items: baseline; text-align: left;
+  width: 100%; max-width: 420px; margin: 0 auto; padding: 12px 0; background: none; border: none; border-radius: 0;
+  border-top: 1px solid var(--hst-t-line);
+}
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info:last-of-type { padding-bottom: 0; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stats + .hst-info { margin-top: 18px; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info-label { font-family: var(--hst-t-serif); font-variant: small-caps; font-size: 11px; letter-spacing: 2px; margin: 0; white-space: nowrap; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info.loc { --ac: var(--hst-t-loc); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info.thought { --ac: var(--hst-t-thought); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info.goal { --ac: var(--hst-t-goal); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info.thought .hst-info-value { font-family: var(--hst-t-serif); font-style: italic; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board.hst-compact { padding: 20px 22px; border-radius: 40px 40px 20px 20px; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-name { font-family: var(--hst-t-serif); font-variant: small-caps; letter-spacing: 1.5px; font-size: 15px; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-ring .hst-ring-track, details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-ring .hst-ring-rotate { stroke-width: 14; }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-score { font-family: var(--hst-t-serif); color: var(--hst-t-score); }
+details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-body .hst-stats { margin-top: 0; }
+@container hst (max-width: 400px) {
+  details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info { grid-template-columns: minmax(0, 1fr); row-gap: 4px; }
+  details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt-grid { flex-direction: column; }
+  details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt + .hst-dt::before { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ringbox::before { animation: none; }
+}
+
+
+/* ============================================================
+   SETTINGS DRAWER
+   ============================================================ */
+
 .hst-settings { display: flex; flex-direction: column; gap: 16px; padding: 4px 0 15px; }
 .hst-group {
   display: flex; flex-direction: column; gap: 22px; padding: 16px;
@@ -423,22 +985,17 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 }
 .hst-group[data-off] { opacity: .45; }
 .hst-group[data-off] * { cursor: not-allowed; }
-
 .hst-switch-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .hst-switch-text b { font-weight: 600; }
 .hst-switch-text small { opacity: .65; line-height: 1.35; }
-
 .hst-field { display: flex; flex-direction: column; gap: 12px; }
 .hst-field-label { font-weight: 600; }
 .hst-field-inline { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 14px; }
-
-/* Theme picker */
 .hst-group-board { container-type: inline-size; }
 .hst-themes { display: flex; flex-direction: column; gap: 16px; }
 .hst-theme-side { display: flex; flex-direction: column; gap: 10px; }
 .hst-theme-side-label { font-size: .78em; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .6; }
 .hst-themes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 12px; }
-/* Five themes per side: 5 in a row whenever the drawer is wide enough (each column is a Dark/Light pair), otherwise 2 per row. */
 @container (min-width: 290px) {
   .hst-themes-grid { grid-template-columns: repeat(5, 1fr); gap: 18px 10px; }
   .hst-swatch-name { font-size: .74em; }
@@ -477,8 +1034,6 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 .hst-settings .hst-swatch[aria-checked="true"] .hst-swatch-name { opacity: 1; }
 .hst-settings .hst-swatch:focus-visible { outline: 2px solid var(--SmartThemeQuoteColor, currentColor); outline-offset: 1px; }
 .hst-settings .hst-swatch:disabled { cursor: not-allowed; }
-
-/* Segmented choice (Full | Mini, Open | Collapsed) */
 .hst-seg {
   display: inline-flex; padding: 3px; gap: 2px; border-radius: 10px;
   background: color-mix(in srgb, currentColor 10%, transparent);
@@ -495,18 +1050,13 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
 }
 .hst-settings .hst-seg-btn:focus-visible { outline: 2px solid var(--SmartThemeQuoteColor, currentColor); outline-offset: 1px; }
 .hst-settings .hst-seg-btn:disabled { cursor: not-allowed; }
-
-/* Options that don't apply right now (extension or board switched off) look greyed out. */
 .hst-settings .checkbox_label:has(input:disabled) { opacity: .5; }
-
 @media (prefers-reduced-motion: reduce) {
   .hst-group, .hst-swatch-tile, .hst-seg-btn { transition: none; }
 }
-
-/* ---- Toggle switches (pill track + white knob) for the settings checkboxes ---- */
 .hst-settings {
-  --hst-sw-on: var(--SmartThemeQuoteColor, currentColor);  /* track colour when ON: follows the SillyTavern theme */
-  --hst-sw-off: rgba(255,255,255,0.18);    /* track colour when OFF */
+  --hst-sw-on: var(--SmartThemeQuoteColor, currentColor);  
+  --hst-sw-off: rgba(255,255,255,0.18);    
   --hst-sw-knob: #ffffff;
   --hst-sw-w: 44px;
   --hst-sw-h: 24px;
@@ -517,20 +1067,16 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
   gap: 12px; width: 100%; cursor: pointer;
 }
 .hst-settings .checkbox_label > span { flex: 1 1 auto; }
-/* The host page styles checkboxes (grid, overflow:hidden, clip-path tick, filter, outline...) — reset all of it. */
 .hst-settings.hst-settings .checkbox_label input[type="checkbox"] {
   -webkit-appearance: none; -moz-appearance: none; appearance: none;
   display: block; position: relative; flex: 0 0 auto; margin: 0; padding: 0; cursor: pointer;
   width: var(--hst-sw-w); height: var(--hst-sw-h); min-width: var(--hst-sw-w);
   overflow: visible; transform: none; filter: none;
   border: none; outline: none; box-shadow: none; aspect-ratio: auto;
-  /* fixed radius = half the height -> flat top/bottom + semicircle ends (a stadium, never an ellipse);
-     !important so a theme's "border-radius: 50%" on checkboxes can't turn it into an oval */
   border-radius: calc(var(--hst-sw-h) / 2) !important;
   background: var(--hst-sw-off);
   transition: background-color .2s ease;
 }
-/* knob */
 .hst-settings .checkbox_label input[type="checkbox"]::before {
   content: ''; display: block; position: absolute; top: var(--hst-sw-pad); left: var(--hst-sw-pad);
   width: calc(var(--hst-sw-h) - var(--hst-sw-pad) * 2); height: calc(var(--hst-sw-h) - var(--hst-sw-pad) * 2);
@@ -547,570 +1093,3 @@ details.hst-wrap[data-hst-theme^="library-"] .hst-mini-rel-label { font-style: i
   outline: 2px solid var(--hst-sw-on); outline-offset: 2px;
 }
 .hst-settings .checkbox_label input[type="checkbox"]:disabled { cursor: not-allowed; }
-
-/* ═══════════════════════════════════════════
-   RACING THEMES — layout & decoration
-   (applies to racing-dark and racing-light; palettes are above)
-   Every circle here is a COMPLETE 360° circle: the gauge ring never
-   shortens with the score, and the dashed ring and tick marks around
-   it are full rings too.
-   ═══════════════════════════════════════════ */
-
-@keyframes hst-rc-flag { from { background-position: 0 0; } to { background-position: 16px 0; } }
-@keyframes hst-rc-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-/* Board shell: sharper corners, checkered flag along the top edge */
-details.hst-wrap[data-hst-theme^="racing-"] .hst-board {
-  position: relative; overflow: hidden; border-radius: 16px; padding-top: 28px;
-  border-color: rgba(var(--hst-rgb),0.3);
-  box-shadow: 0 14px 30px rgba(0,0,0,var(--hst-shadow-a)), inset 0 0 40px rgba(var(--hst-rgb),0.04);
-}
-details.hst-wrap[data-hst-theme^="racing-"] .hst-board.hst-compact { padding-top: 24px; }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-board::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px; pointer-events: none;
-  background: repeating-conic-gradient(var(--hst-rc-flag-dark) 0% 25%, var(--hst-rc-flag-light) 0% 50%) 0 0 / 8px 8px;
-  opacity: 0.9; animation: hst-rc-flag 3s linear infinite;
-}
-
-/* Header: italic name + slanted position badge */
-details.hst-wrap[data-hst-theme^="racing-"] .hst-name { font-style: italic; letter-spacing: 0.3px; }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-pill {
-  background: linear-gradient(135deg, var(--hst-c1), #a30400); color: #fff; font-weight: 700;
-  border: 1px solid rgba(255,255,255,0.25); border-radius: 5px; letter-spacing: 0.4px; max-width: 100%; text-align: center;
-  transform: skewX(-10deg); box-shadow: 0 0 10px rgba(var(--hst-rgb),0.45);
-}
-details.hst-wrap[data-hst-theme^="racing-"] .hst-pill::before { content: '🏁 '; }
-
-/* Gauge: full solid ring + dotted spinning ring + tachometer tick marks */
-details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::before {
-  content: ''; position: absolute; inset: 3px; border-radius: 50%; pointer-events: none;
-  border: 2px dotted rgba(var(--hst-rgb),0.4); animation: hst-rc-spin 7s linear infinite;
-}
-details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::after {
-  content: ''; position: absolute; inset: -9px; border-radius: 50%; pointer-events: none;
-  background:
-    repeating-conic-gradient(from -1deg, var(--hst-c1) 0 2deg, transparent 2deg 30deg),
-    repeating-conic-gradient(from -0.5deg, rgba(var(--hst-rgb),0.35) 0 1deg, transparent 1deg 6deg);
-  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
-          mask: radial-gradient(circle farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
-}
-details.hst-wrap[data-hst-theme^="racing-"] .hst-ring-rotate { animation: hst-glow-slow 2.2s ease-in-out infinite; }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-pulse-wrap { animation: hst-glow-slow 2.2s ease-in-out infinite; }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-score { font-style: italic; font-variant-numeric: tabular-nums; }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-ecg-path { stroke: var(--hst-c2); animation-duration: 1.5s; }
-
-/* Affection bar → speed bar with tick marks */
-details.hst-wrap[data-hst-theme^="racing-"] .hst-affbar { position: relative; height: 7px; border-radius: 4px; }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-affbar::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.25) 0 2px, transparent 2px 10px);
-}
-details.hst-wrap[data-hst-theme^="racing-"] .hst-affbar-fill { border-radius: 4px 0 0 4px; }
-
-/* Tiles: slanted timing-tower edge on date/time, telemetry look on stats (badges stay full circles) */
-details.hst-wrap[data-hst-theme^="racing-"] .hst-dt {
-  border-left: 4px solid var(--hst-c1); border-radius: 4px 12px 12px 4px;
-  box-shadow: 0 2px 10px rgba(0,0,0,var(--hst-daytime-shadow-a));
-}
-details.hst-wrap[data-hst-theme^="racing-"] .hst-stat {
-  border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,var(--hst-stat-shadow-a));
-}
-details.hst-wrap[data-hst-theme^="racing-"] .hst-stat-bar,
-details.hst-wrap[data-hst-theme^="racing-"] .hst-stat-bar-fill { border-radius: 2px; }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-info { border-radius: 0 8px 8px 0; }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-info.loc { --ac: var(--hst-rc-loc); }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-info.thought { --ac: var(--hst-rc-thought); }
-details.hst-wrap[data-hst-theme^="racing-"] .hst-info.goal { --ac: var(--hst-rc-goal); }
-
-@media (prefers-reduced-motion: reduce) {
-  details.hst-wrap[data-hst-theme^="racing-"] .hst-board::before,
-  details.hst-wrap[data-hst-theme^="racing-"] .hst-ringbox::before { animation: none; }
-}
-
-/* ═══════════════════════════════════════════
-   IDOL STAGE THEMES — layout & decoration
-   (idol-night and idol-day; palettes are above)
-   Layout (full board): name → speech bubble → ring + light sticks → ticket → venue → goal.
-   The gauge is a COMPLETE 360° rainbow ring (it never shortens with the score); the
-   bulb ring around it is a full ring too. No spotlights.
-   ═══════════════════════════════════════════ */
-
-@keyframes hst-id-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes hst-id-twinkle { 0%, 100% { opacity: 0.95; } 50% { opacity: 0.45; } }
-@keyframes hst-id-eq { from { height: 4px; } to { height: 17px; } }
-
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board {
-  border-radius: 20px; border-color: rgba(var(--hst-rgb),0.3);
-  box-shadow: 0 14px 30px rgba(0,0,0,var(--hst-shadow-a));
-}
-
-/* Grid layout of the full board (each direct child gets its own area) */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) {
-  display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 24px; align-items: center;
-  grid-template-areas: "head head" "bubble bubble" "ring sticks" "ticket ticket" "venue venue" "goal goal";
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-divider { display: none; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > div:first-child { grid-area: head; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-center { grid-area: ring; padding: 12px 10px 0; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-stats { grid-area: sticks; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-dt-grid { grid-area: ticket; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.loc { grid-area: venue; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought { grid-area: bubble; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
-
-/* Header: "On stage" label, name, outlined pill with a star */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-eyebrow > span:first-child::after { content: '✦ On stage'; font-size: 10px; letter-spacing: 2.5px; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-name { font-size: 1.25em; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-pill {
-  background: var(--hst-idol-panel); color: var(--hst-c1); border: 1px solid var(--hst-c1);
-  font-weight: 600; max-width: 100%; text-align: center; border-radius: 18px;
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-pill::before { content: '★ '; }
-
-/* Speech bubble: one color for fill, outline and tail; the tail points up at the name */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought {
-  position: relative; margin: 14px 0 6px; padding: 12px 16px; --ac: var(--hst-idol-bubble-line);
-  background: var(--hst-idol-bubble); border: 1px solid var(--hst-idol-bubble-line); border-radius: 16px;
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought::before {
-  content: ''; position: absolute; top: -8px; left: 22px; width: 14px; height: 14px;
-  background: var(--hst-idol-bubble); border-top: 1px solid var(--hst-idol-bubble-line);
-  border-left: 1px solid var(--hst-idol-bubble-line); border-radius: 3px 0 0 0; transform: rotate(45deg);
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.thought .hst-info-value { font-style: italic; }
-
-/* Gauge: rainbow full ring (spins), bulb ring, equalizer inside */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox { width: 190px; height: 190px; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox .hst-ringsvg { width: 100%; height: 100%; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox .hst-ring-track,
-details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox .hst-ring-rotate { stroke: transparent; filter: none; animation: none; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::before {
-  content: ''; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
-  background: conic-gradient(from 0deg, #ff4fa3, #ffd84d, #3ee0ff, #a66bff, #ff4fa3);
-  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 14px), #000 calc(100% - 12.5px), #000 calc(100% - 1.5px), transparent 100%);
-          mask: radial-gradient(circle farthest-side, transparent calc(100% - 14px), #000 calc(100% - 12.5px), #000 calc(100% - 1.5px), transparent 100%);
-  animation: hst-id-spin 10s linear infinite;
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::after {
-  content: ''; position: absolute; inset: -9px; border-radius: 50%; pointer-events: none;
-  background: repeating-conic-gradient(from -1.5deg, var(--hst-c2) 0 3deg, transparent 3deg 15deg);
-  -webkit-mask: radial-gradient(circle farthest-side, transparent calc(100% - 5px), #000 calc(100% - 5px));
-          mask: radial-gradient(circle farthest-side, transparent calc(100% - 5px), #000 calc(100% - 5px));
-  animation: hst-id-twinkle 2.4s ease-in-out infinite;
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-pulse-wrap {
-  top: 20px; left: 20px; right: 20px; bottom: 20px; border: 1px solid var(--hst-idol-line);
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-score { font-size: 42px; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-ecg { display: none; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-eq { display: flex; align-items: flex-end; gap: 3px; height: 18px; margin-top: 8px; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i { width: 3px; height: 4px; border-radius: 2px; background: var(--hst-c1); animation: hst-id-eq 0.9s ease-in-out infinite alternate; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(2) { animation-delay: 0.2s; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(3) { animation-delay: 0.45s; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(4) { animation-delay: 0.1s; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i:nth-child(5) { animation-delay: 0.35s; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-affbar { height: 7px; max-width: 190px; border: 1px solid var(--hst-idol-line); background: var(--hst-idol-panel); }
-
-/* Stats → vertical light sticks (value on top, stick, icon, label) */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin: 0; min-width: 0; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"] { --sc: var(--hst-idol-trust) !important; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"] { --sc: var(--hst-idol-arousal) !important; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-idol-jealousy) !important; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat {
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  background: none; border: none; border-radius: 0; box-shadow: none; padding: 0; min-width: 44px;
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat br { display: none; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat b { order: 1; font-size: 15px; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat-bar {
-  order: 2; position: relative; width: 28px; height: 112px; margin: 0; overflow: hidden; border-radius: 14px;
-  background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line);
-  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--sc) calc(var(--hst-idol-glow) * 100%), transparent));
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat-bar-fill {
-  position: absolute; left: 0; right: 0; bottom: 0; width: 100% !important;
-  height: calc(var(--p, 0) * 1%); border-radius: 0; background: var(--sc);
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-badge { order: 3; width: 24px; height: 24px; margin: 0; font-size: 12px; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-stat small { order: 4; font-size: 11px; letter-spacing: 0.3px; text-transform: none; }
-
-/* Date / time → one ticket with a dashed tear line (no cut-outs, so every circle stays whole) */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-dt-grid {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; margin: 16px 0 0; overflow: hidden;
-  border: 1px solid var(--hst-idol-line); border-radius: 14px; background: var(--hst-idol-panel);
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-dt { background: none; border: none; border-radius: 0; box-shadow: none; }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) .hst-dt + .hst-dt { border-left: 1.5px dashed var(--hst-idol-line); }
-
-/* Venue and goal: same framed panel as the date/time ticket */
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.loc,
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.goal {
-  margin: 14px 0 0; padding: 10px 14px;
-  background: var(--hst-idol-panel); border: 1px solid var(--hst-idol-line); border-radius: 12px;
-}
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.loc { --ac: var(--hst-idol-venue); }
-details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-info.goal { --ac: var(--hst-c1); }
-
-@media (prefers-reduced-motion: reduce) {
-  details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::before,
-  details.hst-wrap[data-hst-theme^="idol-"] .hst-ringbox::after,
-  details.hst-wrap[data-hst-theme^="idol-"] .hst-eq i { animation: none; }
-}
-
-/* ═══════════════════════════════════════════
-   LIBRARY THEMES — layout & decoration
-   (library-night and library-day; palettes are above)
-   Layout (full board): an open book, as 4 real grid columns — left page, spine gutter,
-   right page, tab rail — so nothing ever overlaps regardless of content length. Left
-   page holds the ring + date/time stamp, right page holds Location/Thought/Goal as
-   ruled library-card-catalog entries, and the tab rail holds the three stats as
-   horizontal sticky-note flags down the fore-edge. The gauge stays a COMPLETE 360°
-   ring, same as every other theme.
-   ═══════════════════════════════════════════ */
-
-details.hst-wrap[data-hst-theme^="library-"] .hst-board {
-  border-radius: 8px; border-color: var(--hst-lib-board-line);
-  box-shadow: 0 10px 24px rgba(0,0,0,var(--hst-lib-shadow-a));
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-board {
-  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-}
-
-/* Grid layout of the full board: 3 real columns — left page, spine gutter, right page.
-   Left page stacks the ring, the date/time ticket, then the three stat notes right
-   underneath it; right page holds Location/Thought/Goal as ruled library-card-catalog
-   entries, one per row so nothing overlaps regardless of content length. */
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) {
-  display: grid;
-  grid-template-columns: 1fr 22px 1fr; column-gap: 14px; row-gap: 16px;
-  grid-template-areas: "head head head" "ring gutter loc" "date gutter thought" "sticks gutter goal";
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-divider { display: none; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > div:first-child { grid-area: head; align-self: end; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-center { grid-area: ring; align-self: start; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-dt-grid { grid-area: date; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.loc { grid-area: loc; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.thought { grid-area: thought; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.goal { grid-area: goal; }
-
-/* Spine: a shaded gutter column running down the middle, like an open book's binding.
-   It's a real grid item (the board's own ::before), not an overlay, so it always lands
-   exactly between the two pages regardless of board width. */
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact)::before {
-  content: ''; grid-area: gutter; align-self: stretch; pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgba(0,0,0,var(--hst-lib-spine-a)) 45%, rgba(0,0,0,calc(var(--hst-lib-spine-a) * 1.4)) 50%, rgba(0,0,0,var(--hst-lib-spine-a)) 55%, transparent);
-}
-
-/* Sticky-note label text: the old muted grey was tuned for a near-white stat
-   background and is too low-contrast against the tan/gold note colour used here
-   (worst in Library Day). Use the board's main text colour, just dimmed a touch,
-   in every place these notes appear (full board, compact expanded view, all sizes). */
-details.hst-wrap[data-hst-theme^="library-"] .hst-stat small { color: var(--hst-text); opacity: 0.72; }
-
-/* Header: small "card catalog" eyebrow label, serif italic name, dashed-stamp relationship pill */
-details.hst-wrap[data-hst-theme^="library-"] .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-eyebrow > span:first-child::after { content: '📖 Card Catalog'; font-size: 10px; letter-spacing: 2.5px; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-name { font-style: italic; font-variant: small-caps; letter-spacing: 0.4px; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-pill {
-  background: var(--hst-lib-board-bg); color: var(--hst-c1); border: 1px dashed var(--hst-c1);
-  border-radius: 2px; font-style: italic; max-width: 100%; text-align: center;
-}
-
-/* Stat notes: three square sticky notes sitting under the date ticket on the left
-   page, all in the same muted paper/tab tone (no separate bright colour per stat). */
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-stats {
-  grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; align-self: start;
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"],
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"],
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
-  --sc: var(--hst-c1) !important;
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat {
-  position: relative; aspect-ratio: 1; margin-right: 0; clip-path: none; min-width: 0;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-board-line); border-radius: 4px;
-  box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
-  transform: rotate(var(--hst-lib-tilt, 0deg));
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat::before {
-  content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
-  width: 7px; height: 7px; border-radius: 50%; background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat small,
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat b {
-  overflow-wrap: anywhere; text-align: center;
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat br { display: none; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat-bar { display: none; }
-
-/* Ring: a dashed ink-stamp ring around the gauge, italic old-style score */
-details.hst-wrap[data-hst-theme^="library-"] .hst-ringbox { position: relative; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-ringbox::before {
-  content: ''; position: absolute; inset: -7px; border-radius: 50%; pointer-events: none;
-  border: 1px dashed rgba(var(--hst-rgb),0.4);
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-score { font-style: italic; font-variant-numeric: oldstyle-nums; }
-
-/* Date/time → one stamped ticket, ruled like a due-date card */
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-dt-grid {
-  align-self: start; background: var(--hst-lib-board-bg); border: 1px solid var(--hst-lib-board-line);
-  border-radius: 4px; padding: 8px; margin: 0; grid-template-columns: 1fr; gap: 6px;
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-dt { background: none; border: none; padding: 2px 4px; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-dt-icon { border-radius: 2px; background: none; border: 1px solid var(--hst-lib-board-line); }
-
-/* Location / Thought / Goal → ruled library-card-catalog entries, with a punch hole and a red rule */
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info {
-  position: relative; margin: 0; padding: 14px 14px 12px 32px;
-  background: var(--hst-lib-board-bg); border: 1px solid var(--hst-lib-board-line); border-left: none;
-  border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,var(--hst-lib-shadow-a));
-  background-image:
-    linear-gradient(var(--hst-lib-rule-red) 0 2px, transparent 2px) top / 100% 100% no-repeat,
-    repeating-linear-gradient(var(--hst-lib-board-line) 0 1px, transparent 1px 22px) left 0 top 24px / 100% calc(100% - 24px) no-repeat;
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info::before {
-  content: ''; position: absolute; left: 13px; top: 13px; width: 8px; height: 8px; border-radius: 50%;
-  background: var(--hst-bg2); border: 1px solid var(--hst-lib-board-line); box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
-}
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.loc { --ac: var(--hst-lib-rule-blue); }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.thought { --ac: var(--hst-c2); }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.thought .hst-info-value { font-style: italic; }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-info.goal { --ac: var(--hst-lib-rule-red); }
-details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-info-label { font-variant: small-caps; letter-spacing: 2px; }
-
-/* Narrow board: stack the two pages, drop the spine, and bring the tabs back into normal
-   flow — now as three square sticky notes sitting in the gap right under the date
-   ticket, instead of a wrapped row of ribbon flags above the header. */
-@media (max-width: 480px) {
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) {
-    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
-    grid-template-areas: "head" "ring" "date" "sticks" "loc" "thought" "goal";
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact)::before { display: none; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-stats {
-    grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0;
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"],
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"],
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
-    --sc: var(--hst-c1) !important;
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat {
-    clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1; min-width: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-board-line); border-radius: 4px;
-    box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
-    transform: rotate(var(--hst-lib-tilt, 0deg));
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat::before {
-    content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat small,
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat b {
-    overflow-wrap: anywhere; text-align: center;
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
-}
-@container hst (max-width: 480px) {
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) {
-    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
-    grid-template-areas: "head" "ring" "date" "sticks" "loc" "thought" "goal";
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact)::before { display: none; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) > .hst-stats {
-    grid-area: sticks; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0;
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="trust"],
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="arousal"],
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat[data-stat="jealousy"] {
-    --sc: var(--hst-c1) !important;
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat {
-    clip-path: none; margin-right: 0; position: relative; aspect-ratio: 1; min-width: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: var(--hst-lib-tab); border: 1px solid var(--hst-lib-board-line); border-radius: 4px;
-    box-shadow: 1px 3px 7px rgba(0,0,0,var(--hst-lib-shadow-a));
-    transform: rotate(var(--hst-lib-tilt, 0deg));
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat::before {
-    content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--hst-c1); box-shadow: 0 1px 2px rgba(0,0,0,0.35);
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat small,
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat b {
-    overflow-wrap: anywhere; text-align: center;
-  }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(1) { --hst-lib-tilt: -1.5deg; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(2) { --hst-lib-tilt: 1deg; }
-  details.hst-wrap[data-hst-theme^="library-"] .hst-board:not(.hst-compact) .hst-stat:nth-of-type(3) { --hst-lib-tilt: -0.5deg; }
-}
-
-@media (max-width: 480px) {
-  .hst-board { padding: 14px; border-radius: 18px; }
-  .hst-dt-grid { grid-template-columns: 1fr; }
-  details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) {
-    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
-    grid-template-areas: "head" "bubble" "ring" "sticks" "ticket" "venue" "goal";
-  }
-  details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) > .hst-dt-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-}
-
-/* Narrow board (phone, or a slim chat column on desktop): stack the Idol Stage layout.
-   Uses the board's own container width, not the screen width. */
-@container hst (max-width: 480px) {
-  details.hst-wrap[data-hst-theme^="idol-"] .hst-board:not(.hst-compact) {
-    grid-template-columns: minmax(0, 1fr); row-gap: 14px;
-    grid-template-areas: "head" "bubble" "ring" "sticks" "ticket" "venue" "goal";
-  }
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   DEMONS (black & red) and GODS (white & gold) — cathedral layout
-   One layout, two skins (the colours live in the palettes above).
-   Arched window; the Heart Score medallion (always a full circle)
-   dead centre with a slow sunburst behind it; name, relationship and
-   date centred under it; the three stats as circular gauges; then
-   Location / Thoughts / Goal as straight rows sharing one label
-   column and one text edge.
-   ═══════════════════════════════════════════════════════════════ */
-
-@keyframes hst-t-rays { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) > summary {
-  border-radius: 999px; border-color: var(--hst-t-line); background: var(--hst-t-summary);
-  font-family: var(--hst-t-serif); letter-spacing: 0.5px;
-}
-
-/* arched window shell */
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board {
-  position: relative; overflow: hidden; border-radius: 110px 110px 26px 26px;
-  border: 1px solid var(--hst-t-line); background: var(--hst-t-board);
-  box-shadow: 0 10px 24px var(--hst-t-glow), inset 0 0 0 5px var(--hst-t-inset), inset 0 0 0 6px var(--hst-t-line);
-}
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) {
-  display: flex; flex-direction: column; align-items: center; text-align: center; padding: 50px 24px 34px;
-}
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact)::after {
-  content: var(--hst-t-foot); position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%); white-space: nowrap;
-  font-size: 10px; letter-spacing: 4px; color: rgba(var(--hst-rgb),0.7); pointer-events: none;
-}
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-divider { display: none; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-center { display: contents; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) .hst-ringbox { order: 1; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > div:first-child { order: 2; width: 100%; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-dt-grid { order: 3; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) .hst-affbar-label { order: 4; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) .hst-affbar { order: 5; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-stats { order: 6; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-info.loc { order: 7; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-info.thought { order: 8; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board:not(.hst-compact) > .hst-info.goal { order: 9; }
-
-/* medallion: thin full ring, glass disc, sunburst behind */
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ringbox { width: 176px; height: 176px; margin: 0 auto 26px; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ringbox .hst-ringsvg { width: 100%; height: 100%; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ring-track { stroke: var(--hst-ring-track); stroke-width: 5; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ring-rotate { stroke: var(--hst-c1); stroke-width: 5; filter: drop-shadow(0 0 5px rgba(var(--hst-rgb),0.65)); }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ringbox::before {
-  content: ''; position: absolute; inset: -22px; border-radius: 50%; pointer-events: none;
-  background: repeating-conic-gradient(from -2deg, var(--hst-t-ray) 0 2deg, transparent 2deg 9deg);
-  -webkit-mask: radial-gradient(circle closest-side, transparent 0 82%, #000 85%, rgba(0,0,0,0) 100%);
-          mask: radial-gradient(circle closest-side, transparent 0 82%, #000 85%, rgba(0,0,0,0) 100%);
-  animation: hst-t-rays 120s linear infinite;
-}
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-pulse-wrap {
-  top: 14px; left: 14px; right: 14px; bottom: 14px; background: var(--hst-t-disc);
-  box-shadow: inset 0 0 0 1px var(--hst-t-disc-ring), inset 0 0 20px var(--hst-t-disc-glow);
-}
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-score { font-family: var(--hst-t-serif); font-weight: 400; font-size: 40px; color: var(--hst-t-score); letter-spacing: 1px; text-shadow: 0 0 12px var(--hst-t-text-glow); }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ring-label { color: var(--hst-eyebrow); letter-spacing: 3px; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ecg-path { stroke: var(--hst-c1); }
-
-/* name + relationship */
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-eyebrow { justify-content: center; margin-bottom: 4px; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-eyebrow > span:first-child { font-size: 0; letter-spacing: 0; opacity: 1; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-eyebrow > span:first-child::after { content: var(--hst-t-eyebrow); font-size: 9.5px; letter-spacing: 4px; color: var(--hst-eyebrow); opacity: 0.95; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-namerow { flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-name {
-  font-family: var(--hst-t-serif); font-weight: 400; font-variant: small-caps; letter-spacing: 2.5px; font-size: 1.5em;
-  text-shadow: 0 0 14px var(--hst-t-name-glow); overflow-wrap: anywhere;
-}
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-pill {
-  background: var(--hst-t-pill-bg); color: var(--hst-t-pill-fg); border: 1px solid var(--hst-t-pill-border); border-radius: 999px;
-  letter-spacing: 0.6px; padding: 4px 14px; box-shadow: var(--hst-t-pill-shadow);
-}
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-pill::before { content: var(--hst-t-pill-l); color: var(--hst-c1); }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-pill::after { content: var(--hst-t-pill-r); color: var(--hst-c1); }
-
-/* date, affection: one centred column */
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 0; margin: 14px 0 0; width: 100%; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt { background: none; border: none; border-radius: 0; padding: 0; gap: 0; box-shadow: none; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt + .hst-dt::before { content: var(--hst-t-sep); margin: 0 12px; font-size: 9px; color: var(--hst-c1); align-self: center; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt-icon, details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt-label { display: none; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt-value { font-size: 0.8em; letter-spacing: 1px; color: var(--hst-muted); }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-affbar-label { font-family: var(--hst-t-serif); font-variant: small-caps; font-size: 11px; letter-spacing: 3px; color: var(--hst-eyebrow); margin: 18px 0 7px; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-affbar { width: 100%; max-width: 420px; height: 3px; margin: 0; background: var(--hst-track); }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-affbar-fill { background: var(--hst-t-affill); }
-
-/* stats: three circular gauges (the ring fills to the value) */
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stats { display: flex; justify-content: center; gap: 24px; margin: 24px 0 4px; width: 100%; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat {
-  display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 62px;
-  background: none; border: none; border-radius: 0; padding: 0; box-shadow: none;
-}
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat br, details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat .hst-stat-bar { display: none; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat .hst-badge {
-  order: 1; width: 54px; height: 54px; margin: 0; font-size: 18px; border: none;
-  background:
-    radial-gradient(circle closest-side, var(--hst-t-gauge-bg) 0 calc(100% - 5px), transparent calc(100% - 4px)),
-    conic-gradient(var(--sc) calc(var(--p, 0) * 1%), var(--hst-t-gauge-track) 0);
-  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--sc) var(--hst-t-gauge-glow), transparent));
-}
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat b { order: 2; font-family: var(--hst-t-serif); font-weight: 400; font-size: 1.15em; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat small { order: 3; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--hst-stat-small); }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat[data-stat="trust"] { --sc: var(--hst-t-trust) !important; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat[data-stat="arousal"] { --sc: var(--hst-t-arousal) !important; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stat[data-stat="jealousy"] { --sc: var(--hst-t-jealousy) !important; }
-
-/* Location / Thoughts / Goal: label | text, one shared column, a hairline above each row */
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info {
-  display: grid; grid-template-columns: 106px minmax(0, 1fr); column-gap: 10px; align-items: baseline; text-align: left;
-  width: 100%; max-width: 420px; margin: 0 auto; padding: 12px 0; background: none; border: none; border-radius: 0;
-  border-top: 1px solid var(--hst-t-line);
-}
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info:last-of-type { padding-bottom: 0; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-stats + .hst-info { margin-top: 18px; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info-label { font-family: var(--hst-t-serif); font-variant: small-caps; font-size: 11px; letter-spacing: 2px; margin: 0; white-space: nowrap; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info.loc { --ac: var(--hst-t-loc); }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info.thought { --ac: var(--hst-t-thought); }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info.goal { --ac: var(--hst-t-goal); }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info.thought .hst-info-value { font-family: var(--hst-t-serif); font-style: italic; }
-
-/* compact row */
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-board.hst-compact { padding: 20px 22px; border-radius: 40px 40px 20px 20px; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-name { font-family: var(--hst-t-serif); font-variant: small-caps; letter-spacing: 1.5px; font-size: 15px; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-ring .hst-ring-track, details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-ring .hst-ring-rotate { stroke-width: 14; }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-score { font-family: var(--hst-t-serif); color: var(--hst-t-score); }
-details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-mini-body .hst-stats { margin-top: 0; }
-
-/* very narrow columns: label above the text so the text keeps its width, and no dangling date separator */
-@container hst (max-width: 400px) {
-  details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-info { grid-template-columns: minmax(0, 1fr); row-gap: 4px; }
-  details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt-grid { flex-direction: column; }
-  details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-dt + .hst-dt::before { display: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  details.hst-wrap:is([data-hst-theme="demons"], [data-hst-theme="gods"]) .hst-ringbox::before { animation: none; }
-}
